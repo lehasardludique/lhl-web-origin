@@ -1,1 +1,124 @@
-body.waiting
+body.wip
+    position: relative
+    +bg_pattern
+
+    > aside
+        position: absolute
+        top: 0
+        right: 0
+        display: block
+        width: 160px
+        height: 127px
+        background-image: image_url("bg_flag.svg")
+        background-repeat: no-repeat
+        background-position: top right
+        text-transform: uppercase
+        text-align: right
+        padding: 14px 10px
+        line-height: 1.1
+
+    #page
+        max-width: 440px
+        margin: 0 auto
+        padding: 50px 0
+        text-align: center
+
+        > h1
+            font-size: 0
+            display: inline-block
+            width: 160px
+            height: 113px
+            background-image: image_url("logo_le-hasard-ludique.svg")
+            background-repeat: no-repeat
+            background-position: center
+            margin: 0
+
+        > article
+            background-image: image_url("bg_wip.svg")
+            background-repeat: no-repeat
+            background-position: center
+            background-size: cover
+            padding: 62px $margin-base
+            margin-top: -43px
+
+            > h2
+                font-size: 20px
+                font-weight: normal
+                margin: 0 0 $margin-base
+
+            > h3
+                text-transform: uppercase
+                font-size: inherit
+                font-weight: inherit
+                margin: 0 0 $margin-base
+
+            > div.event
+                margin-bottom: $margin-base
+
+                &:last-of-type
+                    margin-bottom: 0
+
+                > h4
+                    font-size: inherit
+                    margin: 0 0 5px
+
+                > p
+                    margin: 0 0 5px
+
+                > nav
+                    > a
+                        background-color: $lhl-black
+                        color: $lhl-yellow
+                        text-decoration: none
+                        display: inline-block
+                        padding: 0px 4px
+                        height: 20px
+                        line-height: 20px
+
+        > footer
+            background-image: image_url("bg_wip_footer.svg")
+            background-repeat: no-repeat
+            background-position: center right
+            background-size: cover
+            padding: 62px $margin-base
+            min-height: 310px
+
+            nav
+                font-size: 0
+                word-spacing: 2px
+                margin: $margin-base * 3/4
+
+                a
+                    background-image: image_url("bg_social.svg")
+                    background-repeat: no-repeat
+                    background-position: center
+                    display: inline-block
+                    width: 42px
+                    height: 40px
+                    line-height: 40px
+                    text-align: center
+                    font-size: $font-size-base
+                    color: $lhl-black
+                    margin-top: $margin-base / 4
+                    margin-bottom: $margin-base / 4
+
+                    &.lf
+                        font-size: 11px
+                        font-weight: 600
+                        width: 42px * 2
+                        background-position: left
+                        background-image: image_url("bg_flag.svg")
+                        background-size: contain
+                        margin-left: 10px
+
+            > span
+                display: block
+                    
+
+                    
+
+
+
+
+
+
