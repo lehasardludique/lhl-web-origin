@@ -75,11 +75,15 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
+
+staging:
+  url: <%= ENV['DATABASE_URL'] %>
+
 production:
-  <<: *default
-  database: lhl-web_production
-  username: lhl-web
-  password: <%= ENV['LHL-WEB_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+#
+# production:
+#   <<: *default
+#   database: lhl-web_production
+#   username: lhl-web
+#   password: <%= ENV['LHL-WEB_DATABASE_PASSWORD'] %>
