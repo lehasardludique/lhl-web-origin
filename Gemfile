@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.4.0'
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -10,8 +11,9 @@ end
 gem 'rails', '~> 5.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
-# Use Puma as the app server
-gem 'puma', '~> 3.0'
+# Set Server the app server
+# gem 'puma', '~> 3.0'
+gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
