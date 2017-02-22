@@ -15,7 +15,8 @@ gem 'pg', '~> 0.18'
 # gem 'puma', '~> 3.0'
 gem 'passenger', '>= 5.0.25', require: 'phusion_passenger/rack_handler'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+# gem 'sass-rails', '~> 5.0'
+gem 'sassc-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
