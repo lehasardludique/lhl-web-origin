@@ -1,4 +1,8 @@
 module ApplicationHelper
+  def session_path
+    session[:return_to] || root_path
+  end
+
   def body_classes(css = nil)
     @body_classes ||= []
     if css.present?
