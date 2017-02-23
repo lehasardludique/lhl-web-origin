@@ -10,9 +10,14 @@ noSpam = ->
         $(this).attr('href', href)
     return
 
+noLink = ->
+    $('a[href="#"]').off('click').click ->
+        false
+
 init = ->
     # Global
     noSpam()
+    noLink()
     return
 
 $(document).on 'turbolinks:load', init
