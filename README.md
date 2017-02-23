@@ -1,24 +1,80 @@
-# README
+# Le Hasard Ludique
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Current versions
 
-Things you may want to cover:
+* dev : v0.0
+* staging : v0.0
+* prod. : -
 
-* Ruby version
+---
 
-* System dependencies
+## Installation
 
-* Configuration
+### Ruby version
 
-* Database creation
+2.4.0
 
-* Database initialization
+### Rails version
 
-* How to run the test suite
+5.0.1
 
-* Services (job queues, cache servers, search engines, etc.)
+### Required environement variables
 
-* Deployment instructions
+`DATABASE_URL`
+`GA_UID` (Google Analytics)
+`SECRET_KEY_BASE`
 
-* ...
+_AWS_
+`AWS_ACCESS_KEY_ID`
+`AWS_SECRET_ACCESS_KEY`
+`AWS_REGION`
+`AWS_BUCKET`
+`AWS_ENDPOINT`
+
+### Running script (cf. Procfile)
+
+`web: bundle exec passenger start -p $PORT --max-pool-size 3`
+
+### Database creation & initialization
+
+In production & staging, please use `DATABASE_URL` env.
+
+```
+rake db:create
+rake db:migrate
+```
+
+## Gems
+
+### Noteworthy gems
+
+* gem 'passenger' (web server)
+* gem 'sorcery' (user authentication)
+<!-- * gem 'carrierwave' (image upload) -->
+
+#### SimpleForm with BootStrap
+
+```
+simple_form_for(@user, html: { class: 'form-horizontal' }) do |form|
+```
+See https://github.com/plataformatec/simple_form
+
+### Tasks
+
+...
+
+### Services 
+
+n/a
+
+---
+
+## Release notes
+
+### v0.0
+
+* App. creation
+* Waiting page integration
+
+
+
