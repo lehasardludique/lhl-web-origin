@@ -11,7 +11,7 @@ noSpam = ->
     return
 
 noLink = ->
-    $('a[href="#"]').off('click').click ->
+    $('a[href="#"]:not([data-mail])').off('click').click ->
         false
 
 init = ->
