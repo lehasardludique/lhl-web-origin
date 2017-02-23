@@ -1,0 +1,1 @@
+require "#{Rails.root}/lib/extensions/minimal_form_builder.rb"
