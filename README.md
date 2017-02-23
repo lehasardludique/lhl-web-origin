@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.0
-* staging : v0.0
-* prod. : -
+* dev : v0.1
+* staging : v0.1
+* prod. : v0.0
 
 ---
 
@@ -50,6 +50,7 @@ rake db:migrate
 
 * gem 'passenger' (web server)
 * gem 'sorcery' (user authentication)
+* gem 'cancancan' (abilities)
 <!-- * gem 'carrierwave' (image upload) -->
 
 #### SimpleForm with BootStrap
@@ -71,10 +72,19 @@ n/a
 
 ## Release notes
 
+### v0.1 (Users & B.O.)
+
+* create User Model
+* Front
+    * login page
+    * flash messages
+* Admin:
+    * base & style (inc. plugins DataTable, select2)
+    * users' list, show & forms
+    * flash messages
+    * abalities: base (all rights for adminstrators)
+
 ### v0.0
 
 * App. creation
 * Waiting page integration
-
-
-
