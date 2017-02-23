@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <title>Office | La Distillerie</title>
+  <meta name="turbolinks-cache-control" content="no-cache">
+  <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <%= stylesheet_link_tag 'admin', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', media: 'all' %>
+  <%= javascript_include_tag '//cdn.ckeditor.com/4.6.2/full/ckeditor.js', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
+</head>
+<body<%= body_classes %>>
+<div class="turbolinks-progress-bar"></div>
+<% if flash.any? %>
+<div id="flash">
+<% flash.each do |message| %>
+<p class="<%= message.first %>"><%= message.last %></p>
+<% end %>
+</div>
+<% end %>
+<%= render 'admin/menu' %>
+<div class="container">
+<%= yield %>
+</div>
+</body>
+</html>
