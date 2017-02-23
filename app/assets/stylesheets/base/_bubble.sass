@@ -1,0 +1,30 @@
+body.bubble
+    +bg_pattern
+
+    > #page
+        $height: 300px
+        $width: floor($height * 160/113)
+        text-align: center
+        padding: $height * 1/4
+        height: $height
+        width: $width 
+        min-height: $height
+        background-image: image_url('black_flag.svg')
+        background-repeat: no-repeat
+        background-size: contain
+        top: 50%
+        margin-top: - $height / 2
+        left: 50%
+        margin-left: - $width / 2
+        position: absolute
+
+        // login
+        form
+            color: white
+
+            input.form-control
+                // background-color: $ld-middle
+                text-align: center
+                font-size: inherit
+                +placeholder($lhl-black)
+                
