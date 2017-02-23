@@ -1,0 +1,70 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+fr:
+  # Common models & attributes
+  models: &models
+    user: Utilisateur
+    
+  attributes: &default_attributes
+    id: ID
+    name: Nom
+    title: Titre
+    subtitle: Sous-titre
+    rank: Priorité
+    description: Description
+    created_at: Date de création
+    updated_at: Mise à jour
+    status: Statut
+    statuses:
+      draft: Brouillon
+      published: Publié
+      restricted: Accès restreint
+    content: Contenu
+    slug: URL
+    user_id: Utilisateur
+    category: Catégorie
+    kind: Type
+    resource_id: Image
+    slug: URL relative
+
+  # User
+  user: &user
+    <<: *default_attributes
+    first_name: Prénom
+    last_name: Nom
+    password: Mot de passe
+    password_confirmation: Confirmation
+    role: Rôle
+    roles:
+      editor: Rédacteur
+      admin: Administrateur
+    statuses:
+      disabled: Désactivé
+      active: Actif
+
+  # Models
+  activerecord:
+    models: &models
+      <<: *models
+    attributes:
+      user:
+        <<: *user
