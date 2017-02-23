@@ -1,0 +1,16 @@
+<%= simple_form_for @user, url: url = (@user.new_record? ? admin_users_path : admin_user_path(@user)) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :email %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :role, collection: User.roles.collect { |s| [t("user.roles.#{s.first}"), s.first] }, include_blank: false if current_user.admin? %>
+    <%= f.input :status, collection: User.statuses.collect { |s| [t("user.statuses.#{s.first}"), s.first] }, include_blank: false if current_user.admin? %>
+  </div>
+
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit %>
+  </div>
+<% end %>
