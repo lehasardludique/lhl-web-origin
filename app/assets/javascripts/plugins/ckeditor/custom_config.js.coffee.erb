@@ -1,0 +1,253 @@
+root = exports ? this
+# http://docs.ckeditor.com/#!/api/CKEDITOR.config
+root.custom_config_article =
+    contentsCss: '<%= stylesheet_path 'application' %>'
+    stylesSet: [
+        {
+            name: 'Chapeau'
+            element: 'p'
+            attributes:
+                class: 'intro'
+        }
+        {
+            name: 'Image avec légende'
+            element: 'p'
+            attributes:
+                class: 'picture-with-legend'
+        }
+        {
+            name: 'Cinéma (iFrame)'
+            element: 'p'
+            attributes:
+                class: 'theater'
+        }
+        {
+            name: 'Centré'
+            element: 'p'
+            attributes:
+                class: 'tac'
+        }
+        {
+            name: 'En gros'
+            element: 'span'
+            attributes:
+                class: 'big'
+        }
+    ]
+    toolbarGroups: [
+        {
+          name: 'styles'
+          groups: [ 'styles' ]
+        }
+        {
+          name: 'clipboard'
+          groups: [
+            'clipboard'
+            'undo'
+          ]
+        }
+        {
+          name: 'editing'
+          groups: [
+            'spellchecker'
+          ]
+        }
+        {
+          name: 'basicstyles'
+          groups: [
+            'basicstyles'
+            'cleanup'
+          ]
+        }
+        {
+          name: 'paragraph'
+          groups: [
+            # 'align'
+            'paragraph'
+          ]
+        }
+        '/'
+        {
+          name: 'paragraph2'
+          groups: [
+            'blocks'
+            'list'
+            'indent'
+          ]
+        }
+        {
+          name: 'insert'
+          groups: [ 'insert' ]
+        }
+        {
+          name: 'links'
+          groups: [ 'links' ]
+        }
+        {
+          name: 'tools'
+          groups: [ 'tools' ]
+        }
+        {
+          name: 'document'
+          groups: [
+            'mode'
+          ]
+        }
+    ]
+    format_tags: 'p;h3;h4'
+    # removeButtons: 'Styles'
+    removeButtons: 'Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Smiley,SpecialChar,PageBreak,Font,FontSize'
+    removeDialogTabs: 'link:advanced'
+    uiColor: '#f2f2f2'
+    entities: false
+    extraAllowedContent: "blockquote[data-lang](twitter-tweet); p[lang, dir]"
+
+root.custom_config_page =
+    contentsCss: '<%= stylesheet_path 'application' %>'
+    stylesSet: [
+        {
+            name: 'Bouton'
+            element: 'a'
+            attributes:
+                class: 'btn btn-primary'
+        }
+        {
+            name: 'À gauche'
+            element: 'p'
+            attributes:
+                class: 'tal'
+        }
+        {
+            name: 'À droite'
+            element: 'p'
+            attributes:
+                class: 'tar'
+        }
+        {
+            name: 'Centré'
+            element: 'p'
+            attributes:
+                class: 'tac'
+        }
+    ]
+    toolbarGroups: [
+        {
+          name: 'styles'
+          groups: [ 'styles' ]
+        }
+        {
+          name: 'clipboard'
+          groups: [
+            'clipboard'
+            'undo'
+          ]
+        }
+        {
+          name: 'editing'
+          groups: [
+            'spellchecker'
+          ]
+        }
+        {
+          name: 'basicstyles'
+          groups: [
+            'basicstyles'
+            'cleanup'
+          ]
+        }
+        {
+          name: 'paragraph'
+          groups: [
+            'align'
+            'paragraph'
+          ]
+        }
+        '/'
+        {
+          name: 'paragraph2'
+          groups: [
+            'blocks'
+            'list'
+            'indent'
+          ]
+        }
+        {
+          name: 'insert'
+          groups: [ 'insert' ]
+        }
+        {
+          name: 'links'
+          groups: [ 'links' ]
+        }
+        {
+          name: 'tools'
+          groups: [ 'tools' ]
+        }
+        {
+          name: 'document'
+          groups: [
+            'mode'
+          ]
+        }
+    ]
+    format_tags: 'p;h3;h4'
+    # removeButtons: 'Styles'
+    removeButtons: 'Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Smiley,SpecialChar,PageBreak,Font,FontSize'
+    removeDialogTabs: 'link:advanced'
+    uiColor: '#f2f2f2'
+    entities: false
+
+root.standard_config = 
+    toolbarGroups: [
+        {
+            name: 'document'
+            groups: [
+                'mode'
+                'document'
+                'doctools'
+            ]
+        }
+        {
+            name: 'clipboard'
+            groups: [
+                'clipboard'
+                'undo'
+            ]
+        }
+        {
+            name: 'editing'
+            groups: [
+                'find'
+                'selection'
+                'spellchecker'
+            ]
+        }
+        { name: 'forms' }
+        {
+            name: 'basicstyles'
+            groups: [
+                'basicstyles'
+                'cleanup'
+            ]
+        }
+        {
+            name: 'paragraph'
+            groups: [
+                'list'
+                'indent'
+                'blocks'
+                'align'
+                'bidi'
+            ]
+        }
+        { name: 'links' }
+        { name: 'insert' }
+        { name: 'styles' }
+        { name: 'colors' }
+        { name: 'tools' }
+        { name: 'others' }
+        { name: 'about' }
+    ]
+    # removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript'
+    removeDialogTabs: 'link:advanced'
+    uiColor: '#DCAA6E'
