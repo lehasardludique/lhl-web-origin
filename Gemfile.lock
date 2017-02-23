@@ -146,6 +146,9 @@ GEM
       sprockets (> 2.11)
       sprockets-rails
       tilt
+    simple_form (3.4.0)
+      actionpack (> 4, < 5.1)
+      activemodel (> 4, < 5.1)
     sorcery (0.10.2)
       bcrypt (~> 3.1)
       oauth (~> 0.4, >= 0.4.4)
@@ -196,6 +199,7 @@ DEPENDENCIES
   pg (~> 0.18)
   rails (~> 5.0.1)
   sassc-rails
+  simple_form
   sorcery
   spring
   spring-watcher-listen (~> 2.0.0)
