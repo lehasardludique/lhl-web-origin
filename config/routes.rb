@@ -17,4 +17,7 @@ Rails.application.routes.draw do
     # resources :resources
     # resources :pages
   end
+
+  # Catch all/old pages
+  get '*slug' => 'pages#redirect', as: :redirect
 end
