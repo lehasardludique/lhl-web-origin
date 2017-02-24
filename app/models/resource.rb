@@ -10,7 +10,7 @@ class Resource < ApplicationRecord
   validates :handle, :presence => true
   validate :handle_size_validation
 
-  attr_reader :url, :title
+  attr_reader :url, :thumb_url, :title
 
   def title
     @title || get_title
@@ -18,6 +18,10 @@ class Resource < ApplicationRecord
 
   def url
     @url || get_url
+  end
+
+  def thumb_url
+    @thumb_url || get_version_url(:thumb)
   end
 
   private

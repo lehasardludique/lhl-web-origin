@@ -4,7 +4,6 @@
       <th>ID</th>
       <th>Aperu</th>
       <th>Nom/Légende</th>
-      <th><i class="fa fa-area-chart" aria-hidden="true"></i></th>
       <th>Fichier</th>
       <th>Url</th>
       <th>Date d'ajout</th>
@@ -29,9 +28,8 @@
         <% end %>
         </td>
         <td><%= r.name %></td>
-        <td><%= r.used_count %></td>
         <td><%= r.handle_identifier %></td>
-        <td><%= r.handle.url %></td>
+        <td><%= r.url %></td>
         <td><%= l r.created_at, format: :sortable %></td>
         <td><%= t("resource.categories.#{r.category}") %></td>
         <td><%= r.notes %></td>
