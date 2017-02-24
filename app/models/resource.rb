@@ -44,7 +44,7 @@ class Resource < ApplicationRecord
         self.handle.url
       else
         # file icon
-        # ActionController::Base.helpers.image_url 'file_icon.svg'
+        ActionController::Base.helpers.image_url 'file_icon.svg'
       end
     end
 end
