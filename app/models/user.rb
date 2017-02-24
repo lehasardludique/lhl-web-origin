@@ -14,6 +14,15 @@ class User < ApplicationRecord
 
   attr_accessor :remember, :form
 
+  def real_name(option = nil)
+    rn = []
+    rn << first_name if first_name.present?
+    rn << last_name if last_name.present?
+    rn << email if rn.blank?
+    rn << "(#{id})" if option == :with_id or rn.count == 1
+    rn.join " "
+  end
+
   private
     def password_change?
       form == 'password'
