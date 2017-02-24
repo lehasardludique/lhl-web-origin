@@ -62,6 +62,12 @@ LHL.scrollTo = (destination) ->
         $('html,body').animate { scrollTop: destinationPostion }, speed
     return
 
+LHL.formatWithPreview = (state) ->
+    if !state.id
+        return state.text
+    $state = $('<span><i style="background-image: url(' + $(state.element).data('img') + ')" class="preview"></i> ' + state.text + '</span>')
+    $state
+
 watchMenuLinks = ->
     $('nav a[href^="#"]:not([href="#"])').off('click').click ->
         LHL.scrollTo $(this).attr('href')
@@ -81,8 +87,12 @@ init = ->
             ), 300
 
     # Form: init select2 plugin
-    if $("select.select2").length
-        $("select.select2").select2()
+    if !!$('select.select2').length
+        $('select.select2').each ->
+            if $( this ).data('template') and $( this ).data('template') == 'image'
+                $( this ).select2 templateResult: LHL.formatWithPreview
+            else
+                $( this ).select2()
 
     # DataTable
     $('table.sortable').dataTable language:
