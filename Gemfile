@@ -42,6 +42,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'sorcery'
 gem 'simple_form'
 gem 'cancancan'
+gem 'fog-aws'
+gem 'mini_magick'
 gem 'carrierwave', '~> 1.0'
 
 group :development, :test do
