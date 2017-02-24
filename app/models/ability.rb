@@ -26,6 +26,12 @@ class Ability
         resource.user == user
       end
 
+    ## GALLERY
+      can [:read], Gallery unless user.new_record?
+      can [:create, :update, :delete], Gallery do |gallery|
+        resource.user == user
+      end
+
     end
     #
     # The first argument to `can` is the action you are giving the user

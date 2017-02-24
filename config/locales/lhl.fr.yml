@@ -71,6 +71,14 @@ fr:
       gallery: Galerie
       global: Général
 
+  # Gallery
+  gallery: &gallery
+    <<: *default_attributes
+    categories:
+      event: Évènement
+      article: Article
+      global: Général
+
   # Models
   activerecord:
     models: &models
@@ -80,3 +88,5 @@ fr:
         <<: *user
       resource:
         <<: *resource
+      gallery:
+        <<: *gallery

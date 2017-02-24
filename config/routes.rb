@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       patch 'password' => 'users#password_update'
     end
     resources :resources
+    resources :galleries
     # resources :pages
   end
 
