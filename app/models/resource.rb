@@ -12,6 +12,8 @@ class Resource < ApplicationRecord
 
   attr_reader :url, :thumb_url, :title
 
+  default_scope { order(updated_at: :desc) }
+
   def title
     @title || get_title
   end
