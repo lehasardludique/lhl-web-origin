@@ -10,8 +10,6 @@ class Resource < ApplicationRecord
 
   attr_reader :url, :title
 
-  before_save :set_size
-
   def title
     @title || get_title
   end
@@ -41,17 +39,6 @@ class Resource < ApplicationRecord
       else
         # file icon
         # ActionController::Base.helpers.image_url 'file_icon.svg'
-      end
-    end
-
-    def set_size
-      if File.exist? handle.path
-        image = MiniMagick::Image.open(handle.path)
-        self.width = image[:width]
-        self.height = image[:height]
-      elsif handle.width.present? and handle.height.present?
-        self.width = self.handle.width
-        self.height = self.handle.height
       end
     end
 end

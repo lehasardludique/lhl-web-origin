@@ -21,10 +21,10 @@ class Ability
       # can :manage, Page if user.admin?
 
     ## RESOURCE
-      # can [:create, :read], Resource unless user.new_record?
-      # can [:update, :delete], Resource do |resource|
-      #   resource.user == user
-      # end
+      can [:read], Resource unless user.new_record?
+      can [:create, :update, :delete], Resource do |resource|
+        resource.user == user
+      end
 
     end
     #

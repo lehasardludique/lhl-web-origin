@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get 'password' => 'users#password', as: :password
       patch 'password' => 'users#password_update'
     end
-    # resources :resources
+    resources :resources
     # resources :pages
   end
 
