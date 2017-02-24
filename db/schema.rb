@@ -10,10 +10,29 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224083618) do
+ActiveRecord::Schema.define(version: 20170224132849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "galleries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "name"
+    t.integer  "category",   default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+    t.index ["user_id"], name: "index_galleries_on_user_id", using: :btree
+  end
+
+  create_table "image_ships", force: :cascade do |t|
+    t.integer  "gallery_id"
+    t.integer  "resource_id"
+    t.integer  "rank",        default: 1
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["gallery_id"], name: "index_image_ships_on_gallery_id", using: :btree
+    t.index ["resource_id"], name: "index_image_ships_on_resource_id", using: :btree
+  end
 
   create_table "resources", force: :cascade do |t|
     t.integer  "user_id"
@@ -47,5 +66,8 @@ ActiveRecord::Schema.define(version: 20170224083618) do
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
   end
 
+  add_foreign_key "galleries", "users"
+  add_foreign_key "image_ships", "galleries"
+  add_foreign_key "image_ships", "resources"
   add_foreign_key "resources", "users"
 end

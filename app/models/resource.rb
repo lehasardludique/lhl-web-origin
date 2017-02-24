@@ -1,5 +1,7 @@
 class Resource < ApplicationRecord
   belongs_to :user
+  has_many :image_ships
+  has_many :galleries, through: :image_ships
 
   mount_uploader :handle, ResourceUploader
 
