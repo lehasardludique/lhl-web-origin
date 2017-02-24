@@ -43,6 +43,7 @@ class Admin::ResourcesController < AdminController
   end
 
   def destroy
+    authorize! :delete, @resource
     @resource.destroy
     redirect_to admin_resources_path, notice: 'Fichier supprimé avec succès.'
   end
