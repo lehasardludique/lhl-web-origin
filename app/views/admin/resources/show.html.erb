@@ -1,0 +1,25 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_resource_path(@resource), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_resources_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @resource.id %></span> Fichier <em><%= @resource.handle_identifier %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @resource.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "resource.#{k}" %></dt>
+    <dd><%= @resource.user.real_name %></dd>
+  <% elsif @resource.defined_enums? and k.in? @resource.defined_enums %>
+    <dt><%= t "resource.#{k}" %></dt>
+    <dd><%= t "resource.#{k.pluralize}.#{v}" %></dd>
+  <% else %>
+    <dt><%= t "resource.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+    <dt>Aperçu</dt>
+    <dd><%= image_tag @resource.handle.url, class: 'img-responsive' %></dd>
+    <dt>Url</dt>
+    <dd><%= @resource.url %></dd>
+</dl>

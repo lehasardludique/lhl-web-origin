@@ -23,6 +23,7 @@ fr:
   # Common models & attributes
   models: &models
     user: Utilisateur
+    resource: Fichier
     
   attributes: &default_attributes
     id: ID
@@ -61,6 +62,15 @@ fr:
       disabled: Désactivé
       active: Actif
 
+  # Resource
+  resource: &resource
+    <<: *default_attributes
+    notes: Notes
+    handle: Fichier
+    categories:
+      gallery: Galerie
+      global: Général
+
   # Models
   activerecord:
     models: &models
@@ -68,3 +78,5 @@ fr:
     attributes:
       user:
         <<: *user
+      resource:
+        <<: *resource

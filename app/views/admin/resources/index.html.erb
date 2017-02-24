@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_resource_path, title: 'Ajouter un nouveau fichier' %>
+  </nav>
+  Liste des fichiers/images
+</h2>
+
+<%= render 'list', resources: @resources %>
+
+<br>
