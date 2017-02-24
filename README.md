@@ -51,7 +51,7 @@ rake db:migrate
 * gem 'passenger' (web server)
 * gem 'sorcery' (user authentication)
 * gem 'cancancan' (abilities)
-<!-- * gem 'carrierwave' (image upload) -->
+* gem 'carrierwave' (image upload)
 
 #### SimpleForm with BootStrap
 
