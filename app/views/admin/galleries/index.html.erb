@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_gallery_path, title: 'Ajouter une nouvelle galerie' %>
+  </nav>
+  Liste des galeries
+</h2>
+
+<%= render 'list', galleries: @galleries %>
+
+<br>

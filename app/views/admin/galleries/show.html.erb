@@ -1,0 +1,21 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_gallery_path(@gallery), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_galleries_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @gallery.id %></span> Galerie <em><%= @gallery.name %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @gallery.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "gallery.#{k}" %></dt>
+    <dd><%= @gallery.user.real_name %></dd>
+  <% elsif @gallery.defined_enums? and k.in? @gallery.defined_enums %>
+    <dt><%= t "gallery.#{k}" %></dt>
+    <dd><%= t "gallery.#{k.pluralize}.#{v}" %></dd>
+  <% else %>
+    <dt><%= t "gallery.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+</dl>
