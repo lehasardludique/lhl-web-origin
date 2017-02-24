@@ -25,4 +25,16 @@ module ApplicationHelper
       title.join(' | ')
     end
   end
+
+  def current_path(*additional_params)
+    # path = Rails.application.routes.recognize_path request.original_fullpath
+    path = params.permit!
+    path.delete(:host)
+    if additional_params.present?
+      additional_params.each do |p|
+        path = path.merge p if p.class == Hash
+      end
+    end
+    url_for path.merge({only_path: true})
+  end
 end
