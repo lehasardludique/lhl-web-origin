@@ -6,7 +6,7 @@
     <%= f.input :name %>
     <%= f.input :category, collection: Gallery.categories.collect { |s| [t("gallery.categories.#{s.first}"), s.first] }, include_blank: false %>
   </div>
-
+  <hr />
   <div class="form-actions">
     <%= link_to 'Annuler', admin_galleries_path, class: 'btn btn-default' %>
     <%= f.button :submit, 'Enregistrer' %>

@@ -8,7 +8,7 @@
     <%= f.input :role, collection: User.roles.collect { |s| [t("user.roles.#{s.first}"), s.first] }, include_blank: false if current_user.admin? %>
     <%= f.input :status, collection: User.statuses.collect { |s| [t("user.statuses.#{s.first}"), s.first] }, include_blank: false if current_user.admin? %>
   </div>
-
+  <hr />
   <div class="form-actions">
     <%= link_to 'Annuler', url, class: 'btn btn-default' %>
     <%= f.button :submit %>

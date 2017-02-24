@@ -8,7 +8,7 @@
     <%= f.input :category, collection: Resource.categories.collect { |s| [t("resource.categories.#{s.first}"), s.first] }, include_blank: false %>
     <%= f.input :handle, required: @resource.new_record? ? true : false %>
   </div>
-
+  <hr />
   <div class="form-actions">
     <%= link_to 'Annuler', admin_resources_path, class: 'btn btn-default' %>
     <%= f.button :submit, 'Enregistrer' %>
