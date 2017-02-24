@@ -15,10 +15,14 @@ Rails.application.routes.draw do
       patch 'password' => 'users#password_update'
     end
     resources :resources
-    resources :galleries
+    resources :galleries do
+      get 'images' => 'galleries#images', as: :images
+      patch 'images' => 'galleries#images_update'
+      delete 'images/:resource_id' => 'galleries#images_delete'
+    end
     # resources :pages
   end
 
   # Catch all/old pages
-  get '*slug' => 'pages#redirect', as: :redirect
+  get '*slug' => 'pages#redirect', as: :redirect if Rails.env.production?
 end

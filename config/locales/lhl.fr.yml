@@ -78,6 +78,8 @@ fr:
       event: Évènement
       article: Article
       global: Général
+    new_resource_id: Ajouter une nouvelle image
+    new_resource_rank: Place
 
   # Models
   activerecord:

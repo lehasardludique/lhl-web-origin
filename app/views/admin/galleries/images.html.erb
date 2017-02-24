@@ -1,0 +1,61 @@
+<h2><span class="id"><%= @gallery.id %></span> Galerie <em><%= @gallery.name %></em></h2>
+
+<%= simple_form_for @gallery, url: admin_gallery_images_path(@gallery) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <table class="sortable" data-order='[[5  , "asc"]]'>
+      <thead>
+        <tr>
+          <th data-orderable="false">ID</th>
+          <th data-orderable="false">Aperu</th>
+          <th data-orderable="false">Nom</th>
+          <th data-orderable="false">Notes/Légende</th>
+          <th data-orderable="false">Fichier</th>
+          <th data-orderable="false">Place</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @gallery.image_ships.each do |image| %>
+        <tr>
+          <td><span class="badge"><%= image.resource.id %></span></td>
+          <td><span class="preview" style="background-image: url('<%= image.resource.thumb_url %>')"></span></td>
+          <td><%= image.resource.name %></td>
+          <td><%= image.resource.notes %></td>
+          <td><%= image.resource.handle_identifier %></td>
+          <td><%= image.rank %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <% if @resources.any? %>
+    <hr />
+    <div class="row">
+      <div class="col-sm-8">
+        <%= f.input :new_resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
+          <select class="form-control select optional select2" data-template="image" name="gallery[new_resource_id]" id="gallery_new_resource_id">
+            <option value=""></option>
+            <% @resources.each do |resource| %>
+              <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, data: {img: resource.thumb_url}} %>
+            <% end %>
+          </select>
+        <% end %>
+      </div>
+      <div class="col-sm-4">
+        <%= f.input :new_resource_rank, collection: (1..@max_rank), selected: @max_rank %>
+      </div>
+    </div>
+    <% end %>
+    <p class="text-right">
+      <%= link_to "Voir les images déjà utilisées dans d'autres galeries", current_path(scope: 'in_galleries') if @galleried_available %>
+    </p>
+  </div>
+  <hr />
+
+  <div class="form-actions">
+    <%= link_to 'Annuler', admin_galleries_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer et continuer' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>
