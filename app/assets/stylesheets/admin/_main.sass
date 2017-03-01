@@ -93,24 +93,29 @@ table
             content: '\f0dc'
             opacity: 0.5
 
-    td.action
-        padding-left: 0
-        padding-right: 0
-        text-align: right
-        width: 35px
+    td
+        &.action
+            padding-left: 0
+            padding-right: 0
+            text-align: right
+            width: 35px
 
-        > a 
-            padding-right: 5px
+            > a 
+                padding-right: 5px
 
-            > i.fa
-                width: 30px
-                height: 30px
-                line-height: 30px
-                font-size: 18px
-                background-color: $link-color
-                color: white
-                text-align: center
-                border-radius: $border-radius-base
+                > i.fa
+                    width: 30px
+                    height: 30px
+                    line-height: 30px
+                    font-size: 18px
+                    background-color: $link-color
+                    color: white
+                    text-align: center
+                    border-radius: $border-radius-base
+
+        .form-control
+            height: 30px
+            padding: 4px 12px
 
     .badge
         height: 30px

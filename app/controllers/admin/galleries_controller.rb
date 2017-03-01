@@ -1,5 +1,5 @@
 class Admin::GalleriesController < AdminController
-  before_action :set_gallery, only: [:show, :edit, :update, :images, :images_update, :images_delete, :destroy]
+  before_action :set_gallery, only: [:show, :edit, :update, :images, :images_update, :destroy]
   before_action :set_users, only: [:edit, :update]
 
   def index
@@ -64,6 +64,9 @@ class Admin::GalleriesController < AdminController
   end
 
   def images_delete
+    is = ImageShip.find params[:id]
+    is.delete
+    redirect_to admin_gallery_images_path(is.gallery), notice: 'Galerie mise à jour avec succès.'
   end
 
   def destroy

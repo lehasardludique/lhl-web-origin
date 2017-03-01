@@ -18,8 +18,8 @@ Rails.application.routes.draw do
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'
-      delete 'images/:resource_id' => 'galleries#images_delete'
     end
+    delete 'image_ships/:id' => 'galleries#images_delete', as: :image_ship_delete
     # resources :pages
   end
 
