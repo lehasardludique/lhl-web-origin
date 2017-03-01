@@ -51,11 +51,12 @@ class Admin::GalleriesController < AdminController
       if defined? params[:gallery][:resource_new_rank] and params[:gallery][:resource_new_rank].to_i > 0
         image_ship = ImageShip.find params[:gallery][:resource_new_rank]
         new_rank = params[:gallery][:resources][image_ship.id.to_s] if defined? params[:gallery][:resources][image_ship.id.to_s]
-        Rails.logger.info "----> ImageShip #{image_ship.id} new rank is #{ new_rank || '?'}."
         image_ship.update! rank: new_rank if new_rank
       end
       ImageShip.create!(new_resource_params) if defined? params[:gallery][:new_resource_id] and params[:gallery][:new_resource_id].to_i > 0
-      redirect_to admin_gallery_images_path(@gallery), notice: 'Galerie mise à jour avec succès.'
+      redirect_path = (params[:commit] == t('save_and_go')) ? admin_gallery_images_path(@gallery) : admin_gallery_path(@gallery)
+      Rails.logger.info "----> #{params[:commit]} vs. #{t('save_and_go')}"
+      redirect_to redirect_path, notice: 'Galerie mise à jour avec succès.'
     rescue
       flash.now[:error] = "Ooops"
       set_gallery_resources

@@ -20,6 +20,9 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 fr:
+  # Global
+  save_and_go: Enregistrer et continuer
+
   # Common models & attributes
   models: &models
     user: Utilisateur
