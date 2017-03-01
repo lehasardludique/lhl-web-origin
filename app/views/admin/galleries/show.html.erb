@@ -20,3 +20,16 @@
   <% end %>
 <% end %>
 </dl>
+<% if @gallery.resources.any? %>
+<hr />
+<h3><i class="fa fa-arrow-right" aria-hidden="true"></i> <%= @gallery.resources.count %> image(s)</h3>
+<div class="borderd-list">
+  <div class="row gallery">
+    <% @gallery.resources.each do |resource| %>
+    <div class="col-sm-4">
+      <figure style="background-image: url('<%= resource.url %>')" title="<%= resource.title %>"></figure>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>
