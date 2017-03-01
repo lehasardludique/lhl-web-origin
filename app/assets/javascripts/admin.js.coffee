@@ -68,6 +68,29 @@ LHL.formatWithPreview = (state) ->
     $state = $('<span><i style="background-image: url(' + $(state.element).data('img') + ')" class="preview"></i> ' + state.text + '</span>')
     $state
 
+LHL.progressBar = (event) ->
+    if(Turbolinks.supported)
+        if !Turbolinks.controller.adapter.progressBar.visible
+            Turbolinks.controller.adapter.progressBar.show()
+        $bar = $('div.turbolinks-progress-bar')
+        if event == 'start'
+            $bar.hide().width 0
+            LHL.progressBarTimer = setTimeout(( ->
+                $bar = $('div.turbolinks-progress-bar')
+                $bar.show()
+                Turbolinks.controller.adapter.progressBar.setValue 0
+                $bar.width 0
+                Turbolinks.controller.adapter.progressBar.startTrickling()
+                return
+            ), 100)
+        else if event == 'end'
+            if !!LHL.progressBarTimer
+                clearTimeout LHL.progressBarTimer
+                LHL.progressBarTimer = 0
+                Turbolinks.controller.adapter.progressBar.stopTrickling()
+                $bar.width '100%'
+                $bar.stop().delay(350).hide 0
+
 watchMenuLinks = ->
     $('nav a[href^="#"]:not([href="#"])').off('click').click ->
         LHL.scrollTo $(this).attr('href')
