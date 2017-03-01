@@ -1,6 +1,7 @@
 <h2><span class="id"><%= @gallery.id %></span> Galerie <em><%= @gallery.name %></em></h2>
 
 <%= simple_form_for @gallery, url: admin_gallery_images_path(@gallery) do |f| %>
+  <%= f.hidden_field :resource_new_rank %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -23,7 +24,7 @@
           <td><%= image.resource.name %></td>
           <td><%= image.resource.notes %></td>
           <td><%= image.resource.handle_identifier %></td>
-          <td><%= image.rank %></td>
+          <td><%= f.input "resources[#{image.id}]", collection: 1..@max_rank, selected: image.rank, wrapper: false, label: false, input_html: { data: { id: image.id }} %></td>
         </tr>
         <% end %>
       </tbody>
@@ -43,7 +44,7 @@
         <% end %>
       </div>
       <div class="col-sm-4">
-        <%= f.input :new_resource_rank, collection: (1..@max_rank), selected: @max_rank %>
+        <%= f.input :new_resource_rank, collection: 1..(@max_rank + 1), selected: (@max_rank + 1) %>
       </div>
     </div>
     <% end %>

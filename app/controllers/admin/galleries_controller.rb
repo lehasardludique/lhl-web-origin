@@ -47,9 +47,16 @@ class Admin::GalleriesController < AdminController
   end
 
   def images_update
-    if ImageShip.create(new_resource_params)
+    begin
+      if defined? params[:gallery][:resource_new_rank] and params[:gallery][:resource_new_rank].to_i > 0
+        image_ship = ImageShip.find params[:gallery][:resource_new_rank]
+        new_rank = params[:gallery][:resources][image_ship.id.to_s] if defined? params[:gallery][:resources][image_ship.id.to_s]
+        Rails.logger.info "----> ImageShip #{image_ship.id} new rank is #{ new_rank || '?'}."
+        image_ship.update! rank: new_rank if new_rank
+      end
+      ImageShip.create!(new_resource_params) if defined? params[:gallery][:new_resource_id] and params[:gallery][:new_resource_id].to_i > 0
       redirect_to admin_gallery_images_path(@gallery), notice: 'Galerie mise à jour avec succès.'
-    else
+    rescue
       flash.now[:error] = "Ooops"
       set_gallery_resources
       render :images
@@ -91,14 +98,14 @@ class Admin::GalleriesController < AdminController
 
     def set_gallery_resources
       @gallery.form = 'images'
-      galleried_resource_ids = ImageShip.select(:resource_id).distinct.pluck(:resource_id)
+      galleried_resource_ids = ImageShip.select(:resource_id).reorder(nil).distinct.pluck(:resource_id)
       @resources = Resource.gallery.where.not(id: galleried_resource_ids) unless params[:scope] == 'in_galleries'
       if @resources.nil? or @resources.blank?
         @resources = Resource.gallery.where(id: (galleried_resource_ids - @gallery.resource_ids))
       elsif galleried_resource_ids.any?
         @galleried_available = true
       end
-      @max_rank = ImageShip.select(:rank).where(gallery_id: @gallery.id).order(rank: :desc).pluck(:rank).first
-      @max_rank = @max_rank.to_i + 1
+      @max_rank = ImageShip.where(gallery_id: @gallery.id).count
+      @max_rank = @max_rank.to_i
     end
 end

@@ -5,5 +5,5 @@ class Gallery < ApplicationRecord
 
   enum category: { event: 0, article: 1, global: 2 }
 
-  attr_accessor :form, :new_resource_id, :new_resource_rank
+  attr_accessor :form, :new_resource_id, :new_resource_rank, :resource_new_rank
 end

@@ -142,6 +142,14 @@ init = ->
     $('textarea[data-ckeditor]').each ->
         CKEDITOR.replace $(this).attr('name'), eval $(this).data('ckeditor')
 
+    # Gallery edition
+    if !!$('form.edit_gallery').length
+        $('select[id^=gallery_resources]').off('change').change ->
+            LHL.progressBar 'start'
+            $('#gallery_resource_new_rank').val $(this).data('id')
+            $(this).closest('form').submit()
+            return
+
     # Global
     watchMenuLinks()
     return
