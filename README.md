@@ -2,8 +2,8 @@
 
 ## Current versions
 
-* dev : v0.1
-* staging : v0.1
+* dev : v0.2
+* staging : v0.2
 * prod. : v0.0
 
 ---
@@ -71,6 +71,25 @@ n/a
 ---
 
 ## Release notes
+
+### v0.2 (Images & galleries)
+
+* gems: carrierwave, fog-aws, mini_magick ; instal. & config.
+* Resource (image):
+    * create model, uplader, controller
+    * admin views: list form, details
+    * abilities
+* Galleries:
+    * create model, controller
+    * admin views: list form, details
+    * abilities
+* ImageShip (gallery <> resource link)
+    * create model
+    * validations
+* Admin:
+    * improve style
+    * progess bar (JS & style)
+
 
 ### v0.1 (Users & B.O.)
 
