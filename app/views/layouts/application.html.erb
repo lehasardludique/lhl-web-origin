@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Le Hasard Ludique</title>
+<title><%= meta_title %></title>
 <%= csrf_meta_tags %>
+<%= render_meta_og if @og %>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
 <%= stylesheet_link_tag '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css', media: 'all' %>

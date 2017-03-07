@@ -37,4 +37,22 @@ module ApplicationHelper
     end
     url_for path.merge({only_path: true})
   end
+
+  def render_header object
+    if object.is_a? Page
+      if object.main_gallery.present?
+        render_gallery object.main_gallery, :diaporama
+      elsif object.resource.present?
+        render 'partials/resource', resource: object.resource
+      end
+    end
+  end
+
+  def render_gallery gallery, type = :gallery
+    if gallery.is_a? Gallery
+      if type == :diaporama
+      elsif type == :gallery
+      end
+    end
+  end
 end
