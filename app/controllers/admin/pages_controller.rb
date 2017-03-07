@@ -59,7 +59,7 @@ class Admin::PagesController < AdminController
     end
 
     def page_params
-      permitted_params = [:main_gallery_id, :resource_id, :title, :subtitle, :content, :final_gallery_id, :exergue, :social_block, :slug, :status]
+      permitted_params = [:main_gallery_id, :resource_id, :title, :subtitle, :content, :final_gallery_id, :exergue, :aside_link_1_data, :aside_link_2_data, :aside_link_3_data, :event_link_data, :info_link_data, :social_block, :slug, :status]
       permitted_params << :user_id if current_user.admin?
       params.require(:page).permit(permitted_params)
     end

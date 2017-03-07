@@ -92,6 +92,11 @@ fr:
     final_gallery_id: Galerie de fin de page
     exergue: Exergue
     social_block: Activer les liens de partage
+    aside_link_1_data: Lien 1
+    aside_link_2_data: Lien 2
+    aside_link_3_data: Lien 3
+    event_link_data: Lien Calendrier
+    info_link_data: Lien Info
 
 
   # Models
