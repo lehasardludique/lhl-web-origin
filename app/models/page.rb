@@ -11,12 +11,11 @@ class Page < ApplicationRecord
   validates :title, presence: true
   validates :slug, uniqueness: true, presence: true
   validate :slug_is_reserved
-  link_format = /(\ >\ )((Page:\d)|(Article:\d)|(Fichier:\d)|(\/)|(http(s)?:\/\/))/
-  validates :aside_link_1_data, allow_blank: true, format: { with: link_format }
-  validates :aside_link_2_data, allow_blank: true, format: { with: link_format }
-  validates :aside_link_3_data, allow_blank: true, format: { with: link_format }
-  validates :event_link_data, allow_blank: true, format: { with: link_format }
-  validates :info_link_data, allow_blank: true, format: { with: link_format }
+  validates :aside_link_1_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
+  validates :aside_link_2_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
+  validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
+  validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
+  validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
