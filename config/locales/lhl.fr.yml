@@ -84,6 +84,16 @@ fr:
     new_resource_id: Ajouter une nouvelle image
     new_resource_rank: Place
 
+  # Page
+  page: &page
+    <<: *default_attributes
+    main_gallery_id: Galerie principale (header)
+    resource: Image principale
+    final_gallery_id: Galerie de fin de page
+    exergue: Exergue
+    social_block: Activer les liens de partage
+
+
   # Models
   activerecord:
     models: &models
@@ -95,3 +105,5 @@ fr:
         <<: *resource
       gallery:
         <<: *gallery
+      page:
+        <<: *page
