@@ -26,4 +26,5 @@ Rails.application.routes.draw do
 
   # Catch all/old pages
   get '*slug' => 'pages#redirect', as: :redirect if Rails.env.production?
+  get '*slug' => 'pages#show', as: :page
 end
