@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307093648) do
+ActiveRecord::Schema.define(version: 20170307193943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,15 +43,16 @@ ActiveRecord::Schema.define(version: 20170307093648) do
     t.text     "content"
     t.integer  "final_gallery_id"
     t.text     "exergue"
-    t.jsonb    "aside_link_1_data"
-    t.jsonb    "aside_link_2_data"
+    t.string   "aside_link_1_data"
+    t.string   "aside_link_2_data"
     t.boolean  "social_block"
-    t.jsonb    "event_link_data"
-    t.jsonb    "info_link_data"
+    t.string   "event_link_data"
+    t.string   "info_link_data"
     t.string   "slug"
     t.integer  "status"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "aside_link_3_data"
     t.index ["final_gallery_id"], name: "index_pages_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_pages_on_main_gallery_id", using: :btree
     t.index ["resource_id"], name: "index_pages_on_resource_id", using: :btree
