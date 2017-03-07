@@ -1,20 +1,8 @@
 root = exports ? this
 # http://docs.ckeditor.com/#!/api/CKEDITOR.config
 root.custom_config_article =
-    contentsCss: '<%= stylesheet_path 'application' %>'
+    contentsCss: '<%= stylesheet_path 'ckeditor_article' %>'
     stylesSet: [
-        {
-            name: 'Chapeau'
-            element: 'p'
-            attributes:
-                class: 'intro'
-        }
-        {
-            name: 'Image avec légende'
-            element: 'p'
-            attributes:
-                class: 'picture-with-legend'
-        }
         {
             name: 'Cinéma (iFrame)'
             element: 'p'
@@ -28,6 +16,12 @@ root.custom_config_article =
                 class: 'tac'
         }
         {
+            name: 'Légende'
+            element: 'span'
+            attributes:
+                class: 'legend'
+        }
+        {
             name: 'En gros'
             element: 'span'
             attributes:
@@ -36,74 +30,74 @@ root.custom_config_article =
     ]
     toolbarGroups: [
         {
-          name: 'styles'
-          groups: [ 'styles' ]
+            name: 'styles'
+            groups: [ 'styles' ]
         }
         {
-          name: 'clipboard'
-          groups: [
-            'clipboard'
-            'undo'
-          ]
+            name: 'clipboard'
+            groups: [
+                'clipboard'
+                'undo'
+            ]
         }
         {
-          name: 'editing'
-          groups: [
-            'spellchecker'
-          ]
+            name: 'editing'
+            groups: [
+                'spellchecker'
+            ]
         }
         {
-          name: 'basicstyles'
-          groups: [
-            'basicstyles'
-            'cleanup'
-          ]
+            name: 'basicstyles'
+            groups: [
+                'basicstyles'
+                'cleanup'
+            ]
         }
         {
-          name: 'paragraph'
-          groups: [
-            # 'align'
-            'paragraph'
-          ]
+            name: 'paragraph'
+            groups: [
+                # 'align'
+                'paragraph'
+            ]
         }
         '/'
         {
-          name: 'paragraph2'
-          groups: [
-            'blocks'
-            'list'
-            'indent'
-          ]
+            name: 'paragraph2'
+            groups: [
+                'blocks'
+                'list'
+                'indent'
+            ]
         }
         {
-          name: 'insert'
-          groups: [ 'insert' ]
+            name: 'insert'
+            groups: [ 'insert' ]
         }
         {
-          name: 'links'
-          groups: [ 'links' ]
+            name: 'links'
+            groups: [ 'links' ]
         }
         {
-          name: 'tools'
-          groups: [ 'tools' ]
+            name: 'tools'
+            groups: [ 'tools' ]
         }
         {
-          name: 'document'
-          groups: [
-            'mode'
-          ]
+            name: 'document'
+            groups: [
+                'mode'
+            ]
         }
     ]
     format_tags: 'p;h3;h4'
     # removeButtons: 'Styles'
     removeButtons: 'Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Smiley,SpecialChar,PageBreak,Font,FontSize'
     removeDialogTabs: 'link:advanced'
-    uiColor: '#f2f2f2'
+    uiColor: '#d9d9d9'
     entities: false
     extraAllowedContent: "blockquote[data-lang](twitter-tweet); p[lang, dir]"
 
 root.custom_config_page =
-    contentsCss: '<%= stylesheet_path 'application' %>'
+    contentsCss: '<%= stylesheet_path 'ckeditor_page' %>'
     stylesSet: [
         {
             name: 'Bouton'
@@ -132,80 +126,8 @@ root.custom_config_page =
     ]
     toolbarGroups: [
         {
-          name: 'styles'
-          groups: [ 'styles' ]
-        }
-        {
-          name: 'clipboard'
-          groups: [
-            'clipboard'
-            'undo'
-          ]
-        }
-        {
-          name: 'editing'
-          groups: [
-            'spellchecker'
-          ]
-        }
-        {
-          name: 'basicstyles'
-          groups: [
-            'basicstyles'
-            'cleanup'
-          ]
-        }
-        {
-          name: 'paragraph'
-          groups: [
-            'align'
-            'paragraph'
-          ]
-        }
-        '/'
-        {
-          name: 'paragraph2'
-          groups: [
-            'blocks'
-            'list'
-            'indent'
-          ]
-        }
-        {
-          name: 'insert'
-          groups: [ 'insert' ]
-        }
-        {
-          name: 'links'
-          groups: [ 'links' ]
-        }
-        {
-          name: 'tools'
-          groups: [ 'tools' ]
-        }
-        {
-          name: 'document'
-          groups: [
-            'mode'
-          ]
-        }
-    ]
-    format_tags: 'p;h3;h4'
-    # removeButtons: 'Styles'
-    removeButtons: 'Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Smiley,SpecialChar,PageBreak,Font,FontSize'
-    removeDialogTabs: 'link:advanced'
-    uiColor: '#f2f2f2'
-    entities: false
-
-root.standard_config = 
-    toolbarGroups: [
-        {
-            name: 'document'
-            groups: [
-                'mode'
-                'document'
-                'doctools'
-            ]
+            name: 'styles'
+            groups: [ 'styles' ]
         }
         {
             name: 'clipboard'
@@ -217,12 +139,16 @@ root.standard_config =
         {
             name: 'editing'
             groups: [
-                'find'
-                'selection'
+                # 'find'
+                # 'selection'
                 'spellchecker'
+                # 'editing'
             ]
         }
-        { name: 'forms' }
+        # {
+        #     name: 'forms'
+        #     groups: [ 'forms' ]
+        # }
         {
             name: 'basicstyles'
             groups: [
@@ -235,19 +161,133 @@ root.standard_config =
             groups: [
                 'list'
                 'indent'
-                'blocks'
-                'align'
-                'bidi'
+                # 'blocks'
+                # 'align'
+                # 'bidi'
+                'paragraph'
             ]
         }
-        { name: 'links' }
-        { name: 'insert' }
-        { name: 'styles' }
-        { name: 'colors' }
-        { name: 'tools' }
-        { name: 'others' }
-        { name: 'about' }
+        {
+            name: 'links'
+            groups: [ 'links' ]
+        }
+        {
+            name: 'insert'
+            groups: [ 'insert' ]
+        }
+        # {
+        #     name: 'colors'
+        #     groups: [ 'colors' ]
+        # }
+        {
+            name: 'document'
+            groups: [
+                'mode'
+                # 'document'
+                # 'doctools'
+            ]
+        }
+        {
+            name: 'tools'
+            groups: [ 'tools' ]
+        }
+        # {
+        #     name: 'others'
+        #     groups: [ 'others' ]
+        # }
+        # {
+        #     name: 'about'
+        #     groups: [ 'about' ]
+        # }
     ]
-    # removeButtons: 'Cut,Copy,Paste,Undo,Redo,Anchor,Underline,Strike,Subscript,Superscript'
+    format_tags: 'p;h3'
+    removeButtons: 'Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Font,FontSize' #',Templates,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Unlink,Styles,TextColor,BGColor,About'
+    # removeButtons: 'Save,NewPage,Preview,Print,Templates,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Unlink,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Styles,Font,FontSize,TextColor,BGColor,About,Anchor'
     removeDialogTabs: 'link:advanced'
-    uiColor: '#DCAA6E'
+    uiColor: '#d9d9d9'
+    entities: false
+
+root.custom_config_exergue =
+    contentsCss: '<%= stylesheet_path 'ckeditor_exergue' %>'
+    toolbarGroups: [
+        {
+            name: 'styles'
+            groups: [ 'styles' ]
+        }
+        {
+            name: 'clipboard'
+            groups: [
+                'clipboard'
+                'undo'
+            ]
+        }
+        {
+            name: 'editing'
+            groups: [
+                # 'find'
+                # 'selection'
+                'spellchecker'
+                # 'editing'
+            ]
+        }
+        # {
+        #     name: 'forms'
+        #     groups: [ 'forms' ]
+        # }
+        {
+            name: 'basicstyles'
+            groups: [
+                'basicstyles'
+                'cleanup'
+            ]
+        }
+        {
+            name: 'paragraph'
+            groups: [
+                'list'
+                'indent'
+                # 'blocks'
+                # 'align'
+                # 'bidi'
+                'paragraph'
+            ]
+        }
+        {
+            name: 'links'
+            groups: [ 'links' ]
+        }
+        # {
+        #     name: 'insert'
+        #     groups: [ 'insert' ]
+        # }
+        # {
+        #     name: 'colors'
+        #     groups: [ 'colors' ]
+        # }
+        {
+            name: 'document'
+            groups: [
+                'mode'
+                # 'document'
+                # 'doctools'
+            ]
+        }
+        {
+            name: 'tools'
+            groups: [ 'tools' ]
+        }
+        # {
+        #     name: 'others'
+        #     groups: [ 'others' ]
+        # }
+        # {
+        #     name: 'about'
+        #     groups: [ 'about' ]
+        # }
+    ]
+    format_tags: 'p;h4'
+    removeButtons: 'Styles,Save,NewPage,Preview,Print,CopyFormatting,Anchor,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Font,FontSize' #',Templates,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Unlink,Styles,TextColor,BGColor,About'
+    # removeButtons: 'Save,NewPage,Preview,Print,Templates,Find,Replace,SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,CopyFormatting,Blockquote,CreateDiv,JustifyLeft,JustifyCenter,JustifyRight,JustifyBlock,Language,BidiRtl,BidiLtr,Unlink,Flash,Table,HorizontalRule,Smiley,SpecialChar,PageBreak,Styles,Font,FontSize,TextColor,BGColor,About,Anchor'
+    removeDialogTabs: 'link:advanced'
+    uiColor: '#d9d9d9'
+    entities: false

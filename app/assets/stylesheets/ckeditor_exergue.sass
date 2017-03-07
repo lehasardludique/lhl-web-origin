@@ -1,7 +1,5 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
+ * Le Hasard Ludique | CKeditor Exergue Style
  */
 
 @import url('https://fonts.googleapis.com/css?family=Work+Sans')
@@ -10,8 +8,8 @@
 @import base/variables
 @import bootstrap-sprockets
 @import bootstrap
-@import ckeditor/page
-@import ckeditor/article
 @import ckeditor/exergue
-@import default/flashes
-@import base/imports
+
+body.cke_editable
+    padding: $margin-base
+    +ckeditor_exergue

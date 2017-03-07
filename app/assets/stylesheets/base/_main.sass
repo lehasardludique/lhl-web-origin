@@ -35,3 +35,34 @@ a[data-mail]
 
 .btn-white
     +button-variant($lhl-black, white, white)
+
+
+// ckeditor | Basic style
+
+html.cke_panel_container
+    width: inherit
+    height: inherit
+    overflow: hidden
+
+    > body
+        min-width: auto!important
+
+div.page_edited
+    +ckeditor_page
+
+div.article_edited
+    +ckeditor_article
+
+div.exergue_edited
+    +ckeditor_exergue
+
+// Loading progress bar
+
+.turbolinks-progress-bar
+    position: fixed
+    top: 0
+    left: 0
+    height: 2px
+    background-color: $lhl-yellow
+    box-shadow: 0 0 10px $lhl-yellow
+    z-index: 1000
