@@ -1,0 +1,20 @@
+//= MOBILE
+
+@media (max-width: $screen-xs-max)
+
+    h2 > .container
+        padding: 0
+
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+
+    .container
+        max-width: $container-max-width
+
+    h2
+        font-size: $font-size-h2-desk
+        padding: $margin-base * 1.5 0
+
+        small
+            font-size: $font-size-h2-small-desk

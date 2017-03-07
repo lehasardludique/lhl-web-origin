@@ -1,0 +1,48 @@
+body.page
+    > header
+        > div.resource
+            margin-top: 75px
+            height: 445px
+            width: 100%
+
+    > article
+
+        > h2
+            background-color: $lhl-yellow
+
+        > aside
+            background-image: image_url('bg_spotted.png')
+        
+            
+
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body.page
+
+        h2 > .container,
+        section > .container
+            width: calc(50% + #{$container-max-width / 2 - $aside-min-width})
+            margin-left: calc(50% - #{$container-max-width / 2})
+
+        > header
+            > div.resource
+                margin-top: 0
+                height: 520px
+
+        > article
+            position: relative
+
+            > h2
+
+            > aside
+                position: absolute
+                top: 0
+                right: 0
+                width: calc(50% - #{$container-max-width / 2})
+                min-width: $aside-min-width
+                height: 100%
+                background-image: image_url('bg_spotted.png')
+
+
+

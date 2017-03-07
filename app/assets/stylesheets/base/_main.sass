@@ -9,7 +9,6 @@ body
     -moz-osx-font-smoothing: grayscale
     position: relative
 
-
 // NoSpam
 
 a[data-mail]
@@ -25,6 +24,34 @@ a[data-mail]
         font-size: 80%
         padding: 0 .15rem
 
+// Typography
+
+h2
+    margin: 0
+    padding: $margin-base $grid-gutter-width / 2
+    text-transform: uppercase
+    font-weight: $extra-bold
+
+    small
+        display: block
+        color: inherit
+        font-size: 20px
+        text-transform: none
+        font-size: $font-size-h2-small
+
+// Image
+
+div.resource
+    background-repeat: no-repeat
+    background-position: center
+    background-size: cover
+    position: relative
+
+    > p
+        position: absolute
+        right: 0
+        bottom: 0
+        padding: $padding-base
 
 // Button
     
@@ -54,6 +81,7 @@ div.article_edited
     +ckeditor_article
 
 div.exergue_edited
+    padding: $margin-base
     +ckeditor_exergue
 
 // Loading progress bar
