@@ -9,7 +9,7 @@
       <select class="form-control select optional select2" data-template="image" name="page[resource_id]" id="page_resource_id">
         <option value="">À défaut de galerie principale, choisir une image</option>
         <% Resource.global.each do |resource| %>
-          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, data: {img: resource.thumb_url}} %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @page.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
         <% end %>
       </select>
     <% end %>
@@ -24,6 +24,7 @@
     <hr />
     <h3>Réglages</h3>
     <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
+    <%= f.input :slug %>
     <%= f.input :status, collection: Page.statuses.collect { |s| [t("page.statuses.#{s.first}"), s.first] }, include_blank: false %>
   </div>
   <hr />

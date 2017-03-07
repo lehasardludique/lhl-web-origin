@@ -3,10 +3,11 @@
     <tr>
       <th>ID</th>
       <th>Titre</th>
-      <th>Contenu</th>
+      <th>Résumé</th>
       <th>Illustration principale</th>
       <th>Url</th>
-      <th>Date d'ajout</th>
+      <th>Création</th>
+      <th>Mise à jour</th>
       <th>Utilisateur</th>
       <th>Statut</th>
       <th data-orderable="false"></th>
@@ -22,8 +23,9 @@
         <td><%= page.title %></td>
         <td><%= page.digest %></td>
         <td><span class="preview" style="background-image: url('<%= page.main_picture.thumb_url %>')"></span></td>
-        <td><%= page.slug %></td>
+        <td><%= link_to "/#{page.slug}", page_path(page.slug), target: :_blank %></td>
         <td><%= l page.created_at, format: :sortable %></td>
+        <td><%= l page.updated_at, format: :sortable %></td>
         <td><%= page.user.real_name %></td>
         <td><%= t("page.statuses.#{page.status}") %></td>
         <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, page, title: "Détails" if can? :read, page %></td>

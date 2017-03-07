@@ -22,6 +22,9 @@ fr:
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
+    placeholders:
+      defaults:
+        slug: 'Laisser vide pour une génération automatique.'
     #     password: 'No special characters, please.'
     # include_blanks:
     #   defaults:
