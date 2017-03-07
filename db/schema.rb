@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 20170307093648) do
     t.boolean  "social_block"
     t.jsonb    "event_link_data"
     t.jsonb    "info_link_data"
+    t.string   "slug"
     t.integer  "status"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false

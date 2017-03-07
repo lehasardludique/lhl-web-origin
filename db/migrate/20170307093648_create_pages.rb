@@ -14,6 +14,7 @@ class CreatePages < ActiveRecord::Migration[5.0]
       t.boolean :social_block
       t.jsonb :event_link_data
       t.jsonb :info_link_data
+      t.string :slug
       t.integer :status
 
       t.timestamps
