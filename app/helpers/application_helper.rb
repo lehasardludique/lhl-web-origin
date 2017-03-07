@@ -55,4 +55,44 @@ module ApplicationHelper
       end
     end
   end
+
+  def link_from(link_data, css = [])
+    if link_data =~ INTERNAL_LINK_FORMAT
+      link_data = link_data.split /\ >\ /
+      link_title = link_data.first
+      link_object = link_data.last
+      if /^(Article:\d|Fichier:\d|Page:\d)/.match link_object
+        link_object = link_object.split ':'
+        # dynamic_class = Object.const_get link_object.first
+        case link_object.first
+        when 'Article'
+          object = Artcile.find_by id: link_object.last.to_i
+          object_path = article.path object.slug
+        when 'Fichier'
+          object = Resource.find_by id: link_object.last.to_i
+          object_path = object.url
+          object_target = :_blank
+        when 'Page'
+          object = Page.find_by id: link_object.last.to_i
+          object_path = article.path object.slug
+        end
+        link_to link_title, object_path, target: object_target, class: (css.any? ? css.join(' ') : nil) if object
+      elsif /^\//.match link_object
+        link_to link_title, link_object, class: (css.any? ? css.join(' ') : nil)
+      elsif /^http/.match link_object
+        link_to link_title, link_object, target: '_blank', class: (css.any? ? css.join(' ') : nil)
+      elsif /^mailto:/.match link_object
+        if link_title  =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+          link_name = link_title.gsub(/\./, ' . ')
+          link_name = link_name.gsub(/@/, ' <i class="fa fa-at" aria-hidden="true"></i> ')
+        else
+          link_name = link_title
+          css << 'ntt'
+        end
+        link_destination = link_object.gsub(/^mailto:/, '')
+        link_destination = link_destination.split('@')
+        link_to link_name.html_safe, '#', data: {mail: link_destination[0], domain: link_destination[1] }, class: (css.any? ? css.join(' ') : nil)
+      end
+    end
+  end
 end
