@@ -2,22 +2,28 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
-    <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @page.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" }  %>
+    <h3>Contenu</h3>
+    <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @page.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
+    <%= content_tag :em, "Aucune galerie “Général“ n'est disponible.<br />Pour ajouter une galerie à une page, il faut au préalable la créer (choisir la catégorie “Géneral”).<br /><br />".html_safe  if Gallery.global.size == 0 %>
     <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
-          <select class="form-control select optional select2" data-template="image" name="page[resource_id]" id="page_resource_id">
-            <option value="">À défaut de galerie principale, choisir une image</option>
-            <% Resource.global.each do |resource| %>
-              <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, data: {img: resource.thumb_url}} %>
-            <% end %>
-          </select>
+      <select class="form-control select optional select2" data-template="image" name="page[resource_id]" id="page_resource_id">
+        <option value="">À défaut de galerie principale, choisir une image</option>
+        <% Resource.global.each do |resource| %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, data: {img: resource.thumb_url}} %>
         <% end %>
+      </select>
+    <% end %>
     <%= f.input :title %>
     <%= f.input :subtitle %>
-    <%= f.input :content %>
-    <%= f.input :final_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @page.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" }  %>
-    <%= f.input :exergue %>
+    <%= f.input :content, input_html: { data: { ckeditor: 'custom_config_page' }} %>
+    <%= f.input :final_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @page.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
+    <hr />
+    <h3>Infos. complémentaires</h3>
+    <%= f.input :exergue, input_html: { data: { ckeditor: 'custom_config_exergue' }} %>
     <%= f.input :social_block %>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
     <%= f.input :status, collection: Page.statuses.collect { |s| [t("page.statuses.#{s.first}"), s.first] }, include_blank: false %>
   </div>
   <hr />
