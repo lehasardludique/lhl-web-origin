@@ -1,0 +1,28 @@
+<header>
+    <%= render_header @page %>
+</header>
+<article>
+    <h2>
+        <div class="container">
+            <%= @page.title %>
+            <%= content_tag :small, @page.subtitle if @page.subtitle %>
+        </div>
+    </h2>
+    <aside>
+        <div>
+            <div class="exergue_edited">
+                <%= @page.exergue.html_safe %>
+            </div>
+        </div>
+    </aside>
+    <section class="content">
+        <div class="container">
+            <%= @page.content.html_safe %>
+        </div>
+    </section>
+    <% if @page.final_gallery.present? %>
+    <section class="gallery">
+        Ici la galerie <%= @page.gallery.name %>
+    </section>
+    <% end %>
+</article>

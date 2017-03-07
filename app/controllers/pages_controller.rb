@@ -6,4 +6,12 @@ class PagesController < ApplicationController
   def redirect
     redirect_to "//lafabrique.lehasardludique.paris/#{params[:slug]}", status: :moved_permanently
   end
+
+  def show
+    @page = Page.find_by! slug: params[:slug]
+    not_found! if @page.draft? and (not logged_in? or not @page.user == current_user)
+    not_found! if @page.restricted? and not logged_in?
+    meta_title @page.title
+    body_classes 'page'
+  end
 end
