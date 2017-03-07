@@ -26,6 +26,14 @@ class Ability
         resource.user == user
       end
 
+    ## PAGE
+      can [:read], Page do |page|
+        page.published? or page.user == user
+      end
+      can [:create, :update, :delete], Page do |page|
+        page.user == user
+      end
+
     ## GALLERY
       can [:read], Gallery unless user.new_record?
       can [:create, :update, :delete], Gallery do |gallery|

@@ -12,8 +12,8 @@ class Admin::ResourcesController < AdminController
   end
 
   def new
-    authorize! :create, @resource
     @resource = Resource.new(user: current_user)
+    authorize! :create, @resource
     set_users
   end
 

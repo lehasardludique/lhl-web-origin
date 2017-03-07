@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       patch 'password' => 'users#password_update'
     end
     resources :resources
+    resources :pages
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'
