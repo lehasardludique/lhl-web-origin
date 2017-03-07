@@ -11,8 +11,35 @@ body.page
             background-color: $lhl-yellow
 
         > aside
-            background-image: image_url('bg_spotted.png')
-        
+            background-image: image_url('bg_black_spotted.png')
+
+            nav
+                text-align: center
+                padding: $margin-base - 10px
+                
+                > a
+                    text-align: center
+                    display: block
+                    width: $aside-min-width - 2 * $margin-base
+                    height: 70px
+                    margin: 10px auto
+                    text-transform: uppercase
+                    text-decoration: none
+                    font-weight: $bold
+                    background-size: 100% 100%
+                    background-repeat: no-repeat
+                    line-height: 20px
+                    padding: 25px $padding-base
+                    
+                    &:hover
+                        text-decoration: none
+
+                    &:nth-child(odd)
+                        background-image: image_url('bg_aside_odd_link.svg')
+
+                    &:nth-child(even)
+                        background-image: image_url('bg_aside_even_link.svg')
+                        margin-bottom: 20px
             
 
 //= DESKTOP
@@ -42,7 +69,10 @@ body.page
                 width: calc(50% - #{$container-max-width / 2})
                 min-width: $aside-min-width
                 height: 100%
-                background-image: image_url('bg_spotted.png')
+
+                nav
+                    > a
+                        margin-left: $margin-base - 10px
 
 
 

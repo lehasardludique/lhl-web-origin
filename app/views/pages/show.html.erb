@@ -10,9 +10,18 @@
     </h2>
     <aside>
         <div>
+            <% if @page.exergue.present? %>
             <div class="exergue_edited">
                 <%= @page.exergue.html_safe %>
             </div>
+            <% end %>
+            <% if @page.aside_link_1_data.present? or @page.aside_link_2_data.present? or @page.aside_link_3_data.present? %>
+            <nav>
+                <%= link_from @page.aside_link_1_data if @page.aside_link_1_data.present? %>
+                <%= link_from @page.aside_link_2_data if @page.aside_link_2_data.present? %>
+                <%= link_from @page.aside_link_3_data if @page.aside_link_3_data.present? %>
+            </nav>
+            <% end %>
         </div>
     </aside>
     <section class="content">
