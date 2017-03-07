@@ -1,0 +1,1 @@
+LHL_URL = "#{ENV["PROTOCOL"]||"http://"}" + "#{ENV["HOST"]||"www.lehasardludique.paris"}"
