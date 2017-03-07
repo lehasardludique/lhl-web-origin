@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_page_path, title: 'Ajouter un nouveau fichier' %>
+  </nav>
+  Liste des pages
+</h2>
+
+<%= render 'list', pages: @pages %>
+
+<br>

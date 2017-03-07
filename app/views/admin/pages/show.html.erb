@@ -1,0 +1,21 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_page_path(@page), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_pages_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @page.id %></span> Page <em><%= @page.title %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @page.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "page.#{k}" %></dt>
+    <dd><%= @page.user.real_name %></dd>
+  <% elsif @page.defined_enums? and k.in? @page.defined_enums %>
+    <dt><%= t "page.#{k}" %></dt>
+    <dd><%= t "page.#{k.pluralize}.#{v}" %></dd>
+  <% else %>
+    <dt><%= t "page.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+</dl>
