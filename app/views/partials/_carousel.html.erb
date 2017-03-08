@@ -1,0 +1,23 @@
+<div id="main-gallery" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+  <% if gallery.resources.count > 1 %>
+  <ol class="carousel-indicators">
+    <% (0..(gallery.resources.count - 1)).each do |i| %>
+    <li data-target="#main-gallery" data-slide-to="<%= i %>"<%= ' class="active"'.html_safe if i == 0 %>></li>
+    <% end %>
+  </ol>
+  <% end %>
+
+  <!-- Wrapper for slides -->
+  <div class="carousel-inner" role="listbox">
+    <% gallery.resources.each_with_index do |resource, i| %>
+    <div class="item<%= ' active' if i == 0 %>" style="background-image: url('<%= resource.url %>')">
+      <% if resource.notes.present? %>
+      <div class="carousel-caption">
+        <%= resource.notes %>
+      </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</div>

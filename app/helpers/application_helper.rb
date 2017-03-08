@@ -51,6 +51,7 @@ module ApplicationHelper
   def render_gallery gallery, type = :gallery
     if gallery.is_a? Gallery
       if type == :diaporama
+        render 'partials/carousel', gallery: gallery
       elsif type == :gallery
       end
     end
@@ -61,6 +62,8 @@ module ApplicationHelper
       link_data = link_data.split /\ >\ /
       link_title = link_data.first
       link_object = link_data.last
+
+      # Link to Object
       if /^(Article:\d|Fichier:\d|Page:\d)/.match link_object
         link_object = link_object.split ':'
         # dynamic_class = Object.const_get link_object.first
@@ -77,10 +80,16 @@ module ApplicationHelper
           object_path = page_path object.slug
         end
         link_to link_title, object_path, target: object_target, class: (css.any? ? css.join(' ') : nil) if object
+      
+      # Link to internal path
       elsif /^\//.match link_object
         link_to link_title, link_object, class: (css.any? ? css.join(' ') : nil)
+      
+      # Link to external URI
       elsif /^http/.match link_object
         link_to link_title, link_object, target: '_blank', class: (css.any? ? css.join(' ') : nil)
+
+      # Mail to
       elsif /^mailto:/.match link_object
         if link_title  =~ /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
           link_name = link_title.gsub(/\./, ' . ')
