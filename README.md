@@ -2,8 +2,8 @@
 
 ## Current versions
 
-* dev : v0.2
-* staging : v0.2
+* dev : v0.3
+* staging : v0.3
 * prod. : v0.0
 
 ---
@@ -71,6 +71,30 @@ n/a
 ---
 
 ## Release notes
+
+### v0.3 (Basic pages)
+
+* Pages:
+    * create model, controllers & abilities
+    * model's methods (page_url, facebook_url, ect.)
+    * admin views (list, details, form)
+    * front integration
+* Sharing abalities (og, digest, url)
+* CKEditor:
+    * implementation, configuration & styles
+* Carousel integration
+* Gallery in modal integration
+* Global:
+    * helper methods:
+        * `render_header`
+        * `render_gallery`
+        * `render_og_meta`
+        * `link_from` (generate link from `xx > Object:id`, `xx > …`, etc.)
+    * gems update
+* recette:
+    * admin: catch error impossible deletion (linked resource)
+    * Gallery: images form, add link to get back new resources
+
 
 ### v0.2 (Images & galleries)
 
