@@ -22,6 +22,20 @@
                 <%= link_from @page.aside_link_3_data if @page.aside_link_3_data.present? %>
             </nav>
             <% end %>
+            <% if @page.social_block.present? or @page.event_link_data.present? or @page.info_link_data.present? %>
+            <ul class="infos">
+                <% if @page.social_block.present? %>
+                <li><a data-popup="LeHasardLudique_Share_connection/550/450" class="fbk" href="<%= @page.facebook_url %>" target="_blank">partager</a></li>
+                <li><a data-popup="LeHasardLudique_Share_connection/550/450" class="twt" href="<%= @page.twitter_url %>" target="_blank">partager</a></li>
+                <% end %>
+                <% if @page.event_link_data.present? %>
+                <li><%= link_from @page.event_link_data, 'evt' %></li>
+                <% end %>
+                <% if @page.info_link_data.present? %>
+                <li><%= link_from @page.info_link_data, 'inf' %></li>
+                <% end %>
+            </ul>
+            <% end %>
         </div>
     </aside>
     <section class="content">

@@ -64,6 +64,7 @@ module ApplicationHelper
       link_data = link_data.split /\ >\ /
       link_title = link_data.first
       link_object = link_data.last
+      css = css.split " " unless css.is_a? Array
 
       # Link to Object
       if /^(Article:\d|Fichier:\d|Page:\d)/.match link_object
