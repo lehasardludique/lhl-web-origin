@@ -54,6 +54,7 @@
     <% end %>
     <p class="text-right">
       <%= link_to "Voir les images déjà utilisées dans d'autres galeries", current_path(scope: 'in_galleries') if @galleried_available %>
+      <%= link_to "Voir les images libres (non associées à une galerie).", current_path(scope: nil) if @new_resources_available %>
     </p>
   </div>
   <hr />

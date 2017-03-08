@@ -103,13 +103,17 @@ class Admin::GalleriesController < AdminController
     def set_gallery_resources
       @gallery.form = 'images'
       galleried_resource_ids = ImageShip.select(:resource_id).reorder(nil).distinct.pluck(:resource_id)
-      @resources = Resource.gallery.where.not(id: galleried_resource_ids) unless params[:scope] == 'in_galleries'
+      if params[:scope] == 'in_galleries'
+        @new_resources_available = Resource.gallery.where.not(id: galleried_resource_ids).size.to_s.to_bool
+      else
+        @resources = Resource.gallery.where.not(id: galleried_resource_ids)
+      end
       if @resources.nil? or @resources.blank?
         @resources = Resource.gallery.where(id: (galleried_resource_ids - @gallery.resource_ids))
       elsif galleried_resource_ids.any?
         @galleried_available = true
       end
-      @max_rank = ImageShip.where(gallery_id: @gallery.id).count
+      @max_rank = ImageShip.where(gallery_id: @gallery.id).size
       @max_rank = @max_rank.to_i
     end
 end
