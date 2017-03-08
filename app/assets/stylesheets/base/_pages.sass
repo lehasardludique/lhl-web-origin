@@ -14,6 +14,7 @@ body.page
 
         > aside
             background-image: image_url('bg_black_spotted.png')
+            padding-bottom: $margin-base
 
             nav
                 text-align: center
@@ -22,7 +23,7 @@ body.page
                 > a
                     text-align: center
                     display: block
-                    width: $aside-min-width - 2 * $margin-base
+                    width: 240px
                     height: 70px
                     margin: 10px auto
                     text-transform: uppercase
@@ -43,13 +44,54 @@ body.page
                         background-image: image_url('bg_aside_even_link.svg')
                         margin-bottom: 20px
 
+            ul.infos
+                margin: 0
+                list-style: none
+                background-image: image_url('bg_social_block_h.svg')
+                background-size: 100% 100%
+                width: 240px
+                margin: 0 auto
+                padding: $margin-base * 1.5 $margin-base / 2
+                +clearfix
+
+                > li
+                    min-height: 30px
+                    line-height: 16px
+                    padding: 5px 0
+                    margin: 10px
+
+                    > a
+                        display: block
+                        text-align: center
+                        
+                        &::before
+                            +fa
+                            font-size: 30px
+                            display: inline-block
+                            width: 30px
+                            height: 30px
+                            text-align: center
+                            line-height: 30px
+                            vertical-align: sub
+                            margin-right: 5px
+
+                        &.fbk::before
+                            content: "\f09a"
+
+                        &.twt::before
+                            content: "\f099"
+
+                        &.evt::before
+                            content: "\f073"
+
+                        &.inf::before
+                            content: "\f129"
+
         > section.gray
             padding: 5px
             h3
                 font-weight: normal
                 margin: $margin-base 0
-
-            
 
 //= DESKTOP
 
@@ -83,6 +125,13 @@ body.page
                 nav
                     > a
                         margin-left: $margin-base - 10px
+                        width: $aside-min-width - 2 * $margin-base
+
+                ul.infos
+                    width: 200px
+                    background-image: image_url('bg_social_block_v.svg')
+                    padding: $margin-base $margin-base / 2
+                    margin: 0 $margin-base
 
 
 
