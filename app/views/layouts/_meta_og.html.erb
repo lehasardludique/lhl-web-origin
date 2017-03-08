@@ -1,0 +1,16 @@
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@Lehasardludique" />
+<meta name="twitter:creator" content="@Lehasardludique" />
+<% if @og[:url].present? %>
+<meta property="og:url" content="<%= @og[:url] %>" />
+<% end %>
+<meta property="og:type" content="website" />
+<% if @og[:title].present? %>
+<meta property="og:title" content="<%= @og[:title] %>" />
+<% end %>
+<% if @og[:description].present? %>
+<meta property="og:description" content="<%= @og[:description] %>" />
+<% end %>
+<% if @og[:image].present? %>
+<meta property="og:image" content="<%= @og[:image] %>" />
+<% end %>

@@ -12,6 +12,7 @@ class PagesController < ApplicationController
     not_found! if @page.draft? and (not logged_in? or not @page.user == current_user)
     not_found! if @page.restricted? and not logged_in?
     meta_title @page.title
+    set_meta_og @page
     body_classes 'page'
   end
 end

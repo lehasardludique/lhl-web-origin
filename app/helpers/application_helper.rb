@@ -38,6 +38,20 @@ module ApplicationHelper
     url_for path.merge({only_path: true})
   end
 
+  def render_meta_og
+    render 'layouts/meta_og' unless @og.blank?
+  end
+
+  def set_meta_og(object)
+    @og ||= {}
+    if object.is_a? Page
+      @og[:url] = object.full_url
+      @og[:title] = object.title
+      @og[:description] = object.digest
+      @og[:image] = object.main_picture.present? ? object.main_picture.url : ActionController::Base.helpers.image_url('logo_le-hasard-ludique_600.png', host: LHL_URL)
+    end
+  end
+
   def render_header object
     if object.is_a? Page
       if object.main_gallery.present?
