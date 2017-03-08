@@ -15,6 +15,7 @@
           <th data-orderable="false">Fichier</th>
           <th data-orderable="false">Place</th>
           <th data-orderable="false"></th>
+          <th data-orderable="false"></th>
         </tr>
       </thead>
       <tbody>
@@ -26,6 +27,7 @@
           <td><%= image.resource.notes %></td>
           <td><%= image.resource.handle_identifier %></td>
           <td><%= f.input "resources[#{image.id}]", collection: 1..@max_rank, selected: image.rank, wrapper: false, label: false, input_html: { data: { id: image.id }} %></td>
+          <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_resource_path(image.resource), title: "Éditer" if can? :edit, image.resource %></td>
           <td class="action"><%= link_to '<i class="fa fa-times"></i>'.html_safe, admin_image_ship_delete_path(image), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Retirer" if can? :edit, @gallery %></td>
         </tr>
         <% end %>
