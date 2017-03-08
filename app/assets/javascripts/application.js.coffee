@@ -188,6 +188,13 @@ init = ->
                 LHL.slideFlash()
             ), 300
 
+    # Galleries
+    if $('body').hasClass 'gallery'
+        $('button[data-slide-to][data-carousel]').off('click').click ->
+            $carousel = $ $(this).data 'carousel'
+            if !!$carousel.length
+                $carousel.carousel $(this).data('slide-to')
+
     # InfiniteScroll
     # if !!$('body.programmation').length
     #     LHL.infiniteScroll()

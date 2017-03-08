@@ -6,7 +6,7 @@ module ApplicationHelper
   def body_classes(css = nil)
     @body_classes ||= []
     if css.present?
-      @body_classes << css
+      @body_classes << css unless css.in? @body_classes
     else
       css = @body_classes
       # css << "old_browser" unless browser.modern?
@@ -53,6 +53,7 @@ module ApplicationHelper
       if type == :diaporama
         render 'partials/carousel', gallery: gallery
       elsif type == :gallery
+        body_classes 'gallery'
         render 'partials/gallery', gallery: gallery
       end
     end
