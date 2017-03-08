@@ -23,3 +23,33 @@ div.gallery
         .carousel-caption,
         .carousel-indicators
             font-size: $font-size-base
+        
+        .carousel-caption
+            bottom: - #{$line-height-computed + $margin-base}
+            padding: 7px 10px
+            opacity: .5
+
+        .carousel-indicators
+            margin: 7px 10px
+            bottom: 0
+            left: 0
+            text-align: left
+            opacity: .2
+
+            &:hover
+                opacity: .5
+
+            li
+                border-color: white
+
+            .active
+                background-color: white
+
+        .carousel-inner
+            padding-bottom: $line-height-computed + $margin-base
+
+            > .item
+                > img
+                    margin-left: auto
+                    margin-right: auto
+                    

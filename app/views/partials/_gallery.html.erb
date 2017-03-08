@@ -10,11 +10,10 @@
 
     <!-- Modal -->
     <div class="modal fade" id="<%= gallery_modal_id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= gallery_modal_id %>">
-      <div class="modal-dialog" role="document">
+      <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
-            <h4 class="modal-title" id="label_<%= gallery_modal_id %>"><%= gallery.name %></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
           </div>
           <div class="modal-body">
             <!-- START CAROUSEL -->
@@ -55,9 +54,9 @@
 
             <!-- END CAROUSEL -->
           </div>
-          <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> -->
+          <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
+          </div>
         </div>
       </div>
     </div>

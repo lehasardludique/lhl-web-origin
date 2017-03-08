@@ -1,23 +1,21 @@
 .modal
-    button.close,
-    button.close:hover
-        opacity: 1
-        color: white
-        font-size: 24px
-        margin: 10px
+    button.close
+        color: $lhl-black
+        font-size: 20px
+        margin: 7px 10px
+        background-image: image_url('bg_white_button.svg')
+        width: 32px
+        height: 30px
+        background-repeat: no-repeat
+        background-size: contain
+        text-align: center
+        line-height: 30px
 
     .modal-header,
     .modal-body,
     .modal-footer
         padding: 0
         color: white
-
-
-    .modal-header
-        h4
-            padding: $padding-base 0
-            font-weight: normal
-
 
     .modal-content
         border-radius: 0
