@@ -153,7 +153,7 @@ burgerMenu = ->
     return
 
 watchMenuLinks = ->
-    $('a[href^="#"]:not([href="#"])').off('click').click ->
+    $('a[href^="#"]:not(.carousel-control,[href="#"])').off('click').click ->
         LHL.scrollTo $(this).attr('href')
         false
 

@@ -53,6 +53,7 @@ module ApplicationHelper
       if type == :diaporama
         render 'partials/carousel', gallery: gallery
       elsif type == :gallery
+        render 'partials/gallery', gallery: gallery
       end
     end
   end

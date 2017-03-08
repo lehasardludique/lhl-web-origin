@@ -1,0 +1,66 @@
+<% if gallery.resources.any? %>
+<% gallery_modal_id = (id ||= nil).nil? ? "gallery_modal" : "gallery_modal_#{id}" %>
+<% gallery_carousel_id = (id ||= nil).nil? ? "gallery_carousel" : "gallery_carousel_#{id}" %>
+<div class="row gallery">
+    <% gallery.resources.each_with_index do |resource, i| %>
+        <div class="col-sm-4">
+            <button class="image" data-toggle="modal" data-target="#<%= gallery_modal_id %>" data-slide-to="<%= i %>" data-carousel="#<%= gallery_carousel_id %>" style="background-image: url('<%= resource.url %>')"></button>
+        </div>
+    <% end %>
+
+    <!-- Modal -->
+    <div class="modal fade" id="<%= gallery_modal_id %>" tabindex="-1" role="dialog" aria-labelledby="label_<%= gallery_modal_id %>">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-window-close" aria-hidden="true"></i></button>
+            <h4 class="modal-title" id="label_<%= gallery_modal_id %>"><%= gallery.name %></h4>
+          </div>
+          <div class="modal-body">
+            <!-- START CAROUSEL -->
+
+            <div id="<%= gallery_carousel_id %>" class="carousel slide" data-ride="carousel" data-interval="false">
+              <!-- Indicators -->
+              <% if gallery.resources.count > 1 %>
+              <ol class="carousel-indicators">
+                <% (0..(gallery.resources.count - 1)).each do |i| %>
+                <li data-target="#<%= gallery_carousel_id %>" data-slide-to="<%= i %>"<%= ' class="active"'.html_safe if i == 0 %>></li>
+                <% end %>
+              </ol>
+              <% end %>
+
+              <!-- Wrapper for slides -->
+              <div class="carousel-inner" role="listbox">
+                <% gallery.resources.each_with_index do |resource, i| %>
+                <div class="item<%= ' active' if i == 0 %>">
+                    <%= image_tag resource.url %>
+                  <% if resource.notes.present? %>
+                  <div class="carousel-caption">
+                    <%= resource.notes %>
+                  </div>
+                  <% end %>
+                </div>
+                <% end %>
+              </div>
+
+              <!-- Controls -->
+              <a class="left carousel-control" href="#<%= gallery_carousel_id %>" role="button" data-slide="prev">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+              </a>
+              <a class="right carousel-control" href="#<%= gallery_carousel_id %>" role="button" data-slide="next">
+                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              </a>
+            </div>
+
+
+            <!-- END CAROUSEL -->
+          </div>
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+</div>
+<% end %>

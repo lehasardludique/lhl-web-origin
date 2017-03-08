@@ -30,8 +30,11 @@
         </div>
     </section>
     <% if @page.final_gallery.present? %>
-    <section class="gallery">
-        Ici la galerie <%= @page.gallery.name %>
+    <section class="gray">
+        <div class="container">
+            <h3><%= @page.final_gallery.name %></h3>
+            <%= render_gallery @page.final_gallery%>
+        </div>
     </section>
     <% end %>
 </article>
