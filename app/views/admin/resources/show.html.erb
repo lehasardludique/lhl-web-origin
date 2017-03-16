@@ -23,3 +23,13 @@
     <dt>Url</dt>
     <dd><%= @resource.url %></dd>
 </dl>
+<% if @resource.galleries.any? %>
+<hr />
+<h3><i class="fa fa-arrow-right" aria-hidden="true"></i> <%= @resource.galleries.count %> galerie(s)</h3>
+<%= render 'admin/galleries/list', galleries: @resource.galleries %>
+<% end %>
+<% if @resource.pages.any? %>
+<hr />
+<h3><i class="fa fa-arrow-right" aria-hidden="true"></i> <%= @resource.pages.count %> galerie(s)</h3>
+<%= render 'admin/pages/list', pages: @resource.pages %>
+<% end %>
