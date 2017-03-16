@@ -11,6 +11,37 @@ body
     padding-top: 75px
     overflow-x: hidden
 
+// Social links
+
+.socials
+    font-size: 0
+
+    > a
+        display: inline-block
+        height: 30px
+        line-height: 30px
+        text-align: center
+        width: 32px
+        font-size: 20px
+        background-image: image_url('bg_social.svg')
+        background-size: 100% 100%
+        margin-right: 2px
+        vertical-align: top
+        color: $lhl-black
+
+        i.fa.fa-envelope-o
+            font-size: 80%
+            vertical-align: calc(50% - 0.4em)
+
+        &:last-of-type
+            margin-right: 0
+
+        &.la_fabrique
+            font-size: 11px
+            width: 70px
+            font-weight: $bold
+            text-transform: capitalize
+
 // NoSpam
 
 a[data-mail]

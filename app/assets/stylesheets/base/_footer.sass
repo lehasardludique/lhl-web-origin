@@ -1,0 +1,66 @@
+body > footer
+    background-color: $lhl-black
+    color: white
+    padding: $margin-base
+    line-height: 23px
+    text-transform: uppercase
+    text-align: center
+
+    a
+        display: block
+
+    .container-fluid
+        max-width: 960px
+        padding: 0
+
+    div.here
+        > div
+            display: inline-block
+            margin-left: auto
+            margin-right: auto
+            font-size: 11px
+            text-align: left
+            padding-left: 105px
+            background-image: image_url('footer_map.svg')
+            background-position: top left
+            background-repeat: no-repeat
+            line-height: 1
+            min-height: 70px
+
+            h5
+                font-weight: normal
+                font-size: $font-size-base
+                color: $lhl-yellow
+                margin: 0 0 10px
+
+//= MOBILE
+
+@media (max-width: $screen-xs-max)
+    body > footer
+        a.la_fabrique
+            display: block
+            margin-left: auto
+            margin-right: auto
+            margin-bottom: $padding-base
+
+        div.here
+            padding-top: $margin-base
+            padding-bottom: $margin-base
+            margin-top: $margin-base
+            margin-bottom: $margin-base
+            border-top: 1px solid
+            border-bottom: 1px solid
+
+        .link-2::before
+            display: block
+            content: "-"
+
+
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body > footer
+        height: 110px
+
+        div.socials
+            display: none

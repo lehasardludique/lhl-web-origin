@@ -57,31 +57,9 @@ body > menu
         top: 65px
         right: 10px
 
-    .socials
-        font-size: 0
-
-        > a
-            display: inline-block
-            height: 30px
-            line-height: 30px
-            text-align: center
-            width: 32px
-            font-size: 20px
-            background-image: image_url('bg_social.svg')
-            background-size: 100% 100%
-            margin-right: 2px
-            vertical-align: top
-
-            &:last-of-type
-                margin-right: 0
-
-            &.la_fabrique
-                font-size: 11px
-                width: 70px
-                font-weight: $bold
-
     > nav#slider
         background-color: white
+        margin-right: -210px
         
         > a
             display: block
@@ -97,9 +75,6 @@ body > menu
             &.active
                 color: $lhl-black
 
-
-
-
 //= MOBILE
 
 @media (max-width: $screen-xs-max)
@@ -109,7 +84,6 @@ body > menu
             position: fixed
             z-index: 100
             width: 210px
-            margin-right: -210px
             top: 0
             right: 0
             height: 100vh
