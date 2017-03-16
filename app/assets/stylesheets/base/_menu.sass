@@ -1,0 +1,140 @@
+body > menu
+    position: absolute
+    top: 0
+    left: 0
+    height: 155px
+    width: 100%
+    background-image: image_url('bg_menu.svg')
+    background-position: top left
+    background-repeat: no-repeat
+    padding: 10px
+    margin: 0
+    z-index: 1
+
+    h1
+        font-size: 0
+        text-indent: -9999px
+        width: 160px
+        height: 113px
+        background-image: image_url('logo_le-hasard-ludique.svg')
+        background-repeat: no-repeat
+        background-position: top left
+        margin: 0
+
+    > a#burger_menu
+        font-size: 40px
+        display: block
+        position: fixed
+        top: 10px
+        right: 10px
+        height: 65px
+        width: 70px
+        line-height: 65px
+        text-align: center
+        background-image: image_url('bg_social.svg')
+        background-size: 100% 100%
+        background-repeat: no-repeat
+        z-index: 2
+
+    > nav.socials
+        display: none
+
+    > div#opening
+        background-image: image_url('opening_black.svg')
+        padding: 10px 2px
+        width: 70px
+        height: 85px
+        color: white
+        text-align: center
+        line-height: 1.1
+        position: absolute
+        top: 65px
+        right: 10px
+
+    .socials
+        font-size: 0
+
+        > a
+            display: inline-block
+            height: 30px
+            line-height: 30px
+            text-align: center
+            width: 32px
+            font-size: 20px
+            background-image: image_url('bg_social.svg')
+            background-size: 100% 100%
+            margin-right: 2px
+            vertical-align: top
+
+            &:last-of-type
+                margin-right: 0
+
+            &.la_fabrique
+                font-size: 11px
+                width: 70px
+                font-weight: $bold
+
+
+//= MOBILE
+
+@media (max-width: $screen-xs-max)
+    body > menu
+        > nav#slider
+            padding-top: $margin-base - 5px
+            background-color: white
+            position: fixed
+            z-index: 100
+            width: 0
+            width: 200px
+            top: 0
+            right: 0
+            height: 100vh
+            text-align: center
+            box-shadow: $box-shadow-base
+
+            > a
+                display: block
+                height: 25px
+                line-height: 15px
+                text-transform: uppercase
+                color: $lhl-gray
+                font-weight: $bold
+                padding: 5px $margin-base
+
+            > div.socials
+                margin: #{$margin-base - 5px} 16px $margin-base
+                border-top: 1px solid
+                padding-top: $margin-base
+                text-align: center
+
+                > a.la_fabrique
+                        display: block
+                        margin-left: auto
+                        margin-right: auto
+                        margin-bottom: $padding-base
+        
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body > menu
+        height: auto
+        background-image: image_url('bg_menu_desk.svg')
+
+        > a#burger_menu
+            display: none
+
+        > nav.socials
+            display: block
+            position: absolute
+            top: 10px
+            right: 82px
+            
+        > nav#slider
+
+            div.socials
+                display: none
+
+        > div#opening
+            background-image: image_url('opening.svg')
+            color: $lhl-black
+            top: 10px
