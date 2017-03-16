@@ -9,7 +9,7 @@ if !root.LHL
     root.LHL = {}
 
 LHL.flashTime = 5000
-LHL.menuSelector = '#menu'
+LHL.menuSelector = '#slider'
 
 LHL.slideFlash = (closing, callback) ->
     $flashContainer = $('#flash')
@@ -128,28 +128,22 @@ LHL.progressBar = (event) ->
 
 burgerMenu = ->
     $(window).resize ->
-        if $(window).width() >= 768 and $(LHL.menuSelector).attr('style')
-            $(LHL.menuSelector).stop().removeAttr 'style'
+        if $(window).width() >= 768 and $(LHL.menuSelector).hasClass 'open'
+            $(LHL.menuSelector).removeClass 'open'
             $(document).off('click').off('swiperight')
-        else if $(window).width() < 768 and !$(LHL.menuSelector).attr('style')
-            $(LHL.menuSelector).stop().css width: 0
         return
 
-    $('a#burger-menu').off('click').click ->
+    $('a#burger_menu').off('click').click ->
         $menu = $(LHL.menuSelector)
-        if $menu.width() == 0
-            $menu.stop().animate { width: 210 }, ->
-                $(document).on 'swiperight', ->
-                    $(document).off('click')
-                    $menu.stop().animate width: 0, 200
-                    return
-                $(document).one 'click', ->
-                    $(document).off('swiperight')
-                    $menu.stop().animate width: 0
-                    return
-                return
-        return
-
+        if !$menu.hasClass 'open'
+            $menu.addClass 'open'
+            $(document).on 'swiperight', ->
+                $(document).off('click')
+                $menu.removeClass 'open'
+            $(document).one 'click', ->
+                $(document).off('swiperight')
+                $menu.removeClass 'open'
+        return false
     return
 
 watchMenuLinks = ->

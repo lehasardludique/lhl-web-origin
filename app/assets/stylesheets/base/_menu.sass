@@ -27,6 +27,7 @@ body > menu
             height: 100%
 
     > a#burger_menu
+        cursor: pointer
         font-size: 40px
         display: block
         position: fixed
@@ -107,13 +108,17 @@ body > menu
             padding-top: $margin-base - 5px
             position: fixed
             z-index: 100
-            width: 0
-            width: 200px
+            width: 210px
+            margin-right: -210px
             top: 0
             right: 0
             height: 100vh
             text-align: center
             box-shadow: $box-shadow-base
+            +transition(margin-right 300ms ease)
+
+            &.open
+                margin-right: 0
 
             > div.socials
                 margin: #{$margin-base - 5px} 16px $margin-base
