@@ -3,6 +3,7 @@ class UserSessionsController < ApplicationController
   
   def new
     @no_menu = true
+    @no_footer = true
     @user = User.new
     meta_title 'Connexion'
     body_classes 'bubble'
@@ -13,6 +14,7 @@ class UserSessionsController < ApplicationController
       redirect_back_or_to session_path, notice: 'Bienvenue ! Connexion réussie'
     else
       @no_menu = true
+      @no_footer = true
       @user = User.new(email: user_params[:email], password: user_params[:password])
       flash.now[:error] = 'Impossible de se connecter, merci de vérifier vos identifiant et mot de passe.'
       meta_title 'Connexion'
