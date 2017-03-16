@@ -1,5 +1,6 @@
 class Resource < ApplicationRecord
   belongs_to :user
+  has_many :pages
   has_many :image_ships
   has_many :galleries, through: :image_ships
 

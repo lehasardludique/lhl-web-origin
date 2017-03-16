@@ -10,6 +10,7 @@ body
     position: relative
     padding-bottom: 60px
     font-weight: 200
+    overflow: hidden
     
 .btn
     line-height: 18px
@@ -98,6 +99,9 @@ table
             opacity: 0.5
 
     td
+        &.breakable
+            word-break: break-all
+        
         &.action
             padding-left: 0
             padding-right: 0
@@ -188,6 +192,8 @@ div.gallery
     > div.row
         > div.col-sm-12
             overflow: auto
+            max-height: calc(100vh - 300px)
+            min-height: 150px
 
 //= Extra classes
 
