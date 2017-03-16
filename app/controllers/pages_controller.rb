@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
     body_classes 'wip'
+    @no_menu = true
   end
 
   def redirect
