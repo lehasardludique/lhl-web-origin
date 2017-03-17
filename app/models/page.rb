@@ -24,7 +24,7 @@ class Page < ApplicationRecord
   attr_reader :full_url, :main_picture, :digest
 
   def full_url
-    @full_url ||= Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL)
+    @full_url ||= Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL) if self.slug.present?
   end
 
   def main_picture
@@ -64,7 +64,7 @@ class Page < ApplicationRecord
 
     def check_slug
       if self.title_changed? and (not self.slug_changed? or not self.slug.present?)
-        self.slug = self.title.urlize
+        self.slug = self.title.urlize.gsub(/[^a-z0-9]*$/, "")
       elsif self.slug_changed?
         self.slug = self.slug.split('/').map(&:urlize).join("/")
       end
