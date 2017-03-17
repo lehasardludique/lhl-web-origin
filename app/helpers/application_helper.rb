@@ -53,7 +53,7 @@ module ApplicationHelper
   end
 
   def render_header object
-    if object.is_a? Page
+    if object.is_a? Page or object.is_a? Article
       if object.main_gallery.present?
         render_gallery object.main_gallery, :diaporama
       elsif object.resource.present?

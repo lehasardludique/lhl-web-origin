@@ -35,6 +35,7 @@ fr:
     subtitle: Sous-titre
     rank: Priorité
     description: Description
+    published_at: Date de publication
     created_at: Date de création
     updated_at: Mise à jour
     status: Statut
@@ -49,6 +50,17 @@ fr:
     kind: Type
     resource_id: Image
     slug: URL relative
+  pages_articles_attributes: &pages_articles_attributes
+    main_gallery_id: Galerie principale (header)
+    resource: Image principale
+    final_gallery_id: Galerie de fin de page
+    exergue: Exergue
+    social_block: Activer les liens de partage
+    aside_link_1_data: Lien 1
+    aside_link_2_data: Lien 2
+    aside_link_3_data: Lien 3
+    event_link_data: Lien Calendrier
+    info_link_data: Lien Info
 
   # User
   user: &user
@@ -87,16 +99,21 @@ fr:
   # Page
   page: &page
     <<: *default_attributes
-    main_gallery_id: Galerie principale (header)
-    resource: Image principale
-    final_gallery_id: Galerie de fin de page
-    exergue: Exergue
-    social_block: Activer les liens de partage
-    aside_link_1_data: Lien 1
-    aside_link_2_data: Lien 2
-    aside_link_3_data: Lien 3
-    event_link_data: Lien Calendrier
-    info_link_data: Lien Info
+    <<: *pages_articles_attributes
+
+  # Article
+  article: &article
+    <<: *default_attributes
+    <<: *pages_articles_attributes
+    title_slug: URL relative (partie Titre)
+    date_slug: URL relative (partie Date)
+    topic: Tag (thème principal)
+    media_link_fbk: Page FaceBook
+    media_link_twt: Page Twitter
+    media_link_isg: Page Instagram
+    media_link_msk: Page Musique
+    media_link_vid: Page Vidéo
+    media_link_www: Page Web
 
 
   # Models
@@ -112,3 +129,5 @@ fr:
         <<: *gallery
       page:
         <<: *page
+      article:
+        <<: *article

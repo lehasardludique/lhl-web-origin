@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     end
     resources :resources
     resources :pages
+    resources :articles
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'

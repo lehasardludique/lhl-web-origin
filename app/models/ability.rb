@@ -34,6 +34,14 @@ class Ability
         page.user == user
       end
 
+    ## ARTICLE
+      can [:read], Article do |article|
+        article.published? or article.user == user
+      end
+      can [:create, :update, :delete], Article do |article|
+        article.user == user
+      end
+
     ## GALLERY
       can [:read], Gallery unless user.new_record?
       can [:create, :update, :delete], Gallery do |gallery|
