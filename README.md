@@ -2,8 +2,8 @@
 
 ## Current versions
 
-* dev : v0.3
-* staging : v0.3
+* dev : v0.4
+* staging : v0.4
 * prod. : v0.0
 
 ---
@@ -71,6 +71,26 @@ n/a
 ---
 
 ## Release notes
+
+### v0.4 (Articles)
+
+* Articles
+    * create model, controllers & abilities
+    * model's methods (page_url, facebook_url, ect.)
+    * admin views (list, details, form)
+    * front integration
+* MediaLinks
+* Menu & Footer:
+    * integration
+    * responsive menu (mobile burger/slider vs. desktop fixe one)
+    * slide/swipe animation
+    * patch bootstrap/swipe conflict with JS `reInitBootStrap()`
+* Admin:
+    * Resources details page: add galleries & pages association
+* Recette:
+    * Pages: admin: index, fix details & delete link
+    * SVG: add stretching abilities
+    * Admin: table view improvements
 
 ### v0.3 (Basic pages)
 
