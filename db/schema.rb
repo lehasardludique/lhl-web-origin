@@ -10,10 +10,46 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307193943) do
+ActiveRecord::Schema.define(version: 20170317093437) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "articles", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "topic"
+    t.integer  "main_gallery_id"
+    t.integer  "resource_id"
+    t.string   "title"
+    t.string   "subtitle"
+    t.text     "content"
+    t.integer  "final_gallery_id"
+    t.text     "exergue"
+    t.string   "aside_link_1_data"
+    t.string   "aside_link_2_data"
+    t.string   "aside_link_3_data"
+    t.boolean  "social_block"
+    t.string   "event_link_data"
+    t.string   "info_link_data"
+    t.string   "media_link_fbk"
+    t.string   "media_link_isg"
+    t.string   "media_link_twt"
+    t.string   "media_link_msk"
+    t.string   "media_link_vid"
+    t.string   "media_link_www"
+    t.datetime "published_at"
+    t.string   "title_slug"
+    t.string   "date_slug"
+    t.integer  "status"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["date_slug"], name: "index_articles_on_date_slug", using: :btree
+    t.index ["final_gallery_id"], name: "index_articles_on_final_gallery_id", using: :btree
+    t.index ["main_gallery_id"], name: "index_articles_on_main_gallery_id", using: :btree
+    t.index ["resource_id"], name: "index_articles_on_resource_id", using: :btree
+    t.index ["title_slug"], name: "index_articles_on_title_slug", using: :btree
+    t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
 
   create_table "galleries", force: :cascade do |t|
     t.integer  "user_id"
@@ -56,6 +92,7 @@ ActiveRecord::Schema.define(version: 20170307193943) do
     t.index ["final_gallery_id"], name: "index_pages_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_pages_on_main_gallery_id", using: :btree
     t.index ["resource_id"], name: "index_pages_on_resource_id", using: :btree
+    t.index ["slug"], name: "index_pages_on_slug", using: :btree
     t.index ["user_id"], name: "index_pages_on_user_id", using: :btree
   end
 
@@ -91,6 +128,10 @@ ActiveRecord::Schema.define(version: 20170307193943) do
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
   end
 
+  add_foreign_key "articles", "galleries", column: "final_gallery_id"
+  add_foreign_key "articles", "galleries", column: "main_gallery_id"
+  add_foreign_key "articles", "resources"
+  add_foreign_key "articles", "users"
   add_foreign_key "galleries", "users"
   add_foreign_key "image_ships", "galleries"
   add_foreign_key "image_ships", "resources"
