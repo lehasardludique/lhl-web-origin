@@ -31,7 +31,7 @@ class Article < ApplicationRecord
   end
   
   def slug
-    @slug ||= Rails.application.routes.url_helpers.article_path(date: self.date_slug, slug: self.title_slug)
+    @slug ||= Rails.application.routes.url_helpers.article_path(date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
   end
 
   def full_url
@@ -78,8 +78,8 @@ class Article < ApplicationRecord
         self.date_slug = I18n.l(self.published_at, format: :url).urlize
       end
       if self.title_changed? and (not self.title_slug_changed? or not self.title_slug.present?)
-        self.title_slug = self.title.urlize
-      elsif self.slug_changed?
+        self.title_slug = self.title.urlize.gsub(/[^a-z0-9]*$/, "")
+      elsif self.title_slug_changed?
         self.title_slug = self.title_slug.split('/').map(&:urlize).join("/")
       end
     end
