@@ -51,4 +51,11 @@
         </div>
     </section>
     <% end %>
+    <% if @article.media_links? %>
+    <section class="yellow">
+        <div class="container">
+            <%= render 'partials/media_links', object: @article %>
+        </div>
+    </section>
+    <% end %>
 </article>

@@ -29,6 +29,10 @@ class Article < ApplicationRecord
   def visible?
     published? and published_at <= Time.now
   end
+
+  def media_links?
+    media_link_fbk.present? or media_link_isg.present? or media_link_twt.present? or media_link_msk.present? or media_link_vid.present? or media_link_www.present?
+  end
   
   def slug
     @slug ||= Rails.application.routes.url_helpers.article_path(date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
