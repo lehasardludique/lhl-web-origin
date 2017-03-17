@@ -151,8 +151,7 @@ reInitBootStrap = ->
     # Disable existant functions
     $(document).off('.data-api')
     $('[data-toggle="modal"][data-target]').off('click')
-    $('[data-slide-to][data-carousel]').off('click')
-    $('[data-slide-to][data-target]').off('click')
+    $('[data-slide-to]').off('click')
     $('a.carousel-control[data-slide]').off('click')
 
     # Re-enable BootStrap functions
@@ -160,13 +159,8 @@ reInitBootStrap = ->
         $modal = $($(this).data 'target')
         if !!$modal.length
             $modal.modal()
-    $('[data-slide-to][data-carousel]').click ->
-        $carousel = $($(this).data 'carousel')
-        if !!$carousel.length
-            $carousel.carousel()
-            $carousel.carousel $(this).data('slide-to')
-    $('[data-slide-to][data-target]:not([data-carousel])').click ->
-        $carousel = $($(this).data 'target')
+    $('[data-slide-to]').click ->
+        $carousel = $($(this).data('carousel') || $(this).data('target'))
         if !!$carousel.length
             $carousel.carousel()
             $carousel.carousel $(this).data('slide-to')
