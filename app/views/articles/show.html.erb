@@ -1,0 +1,54 @@
+<header>
+    <%= render_header @article %>
+</header>
+<article>
+    <h2>
+        <div class="container">
+            <%= @article.title %>
+            <%= content_tag :small, @article.subtitle if @article.subtitle %>
+        </div>
+    </h2>
+    <aside>
+        <div>
+            <% if @article.exergue.present? %>
+            <div class="exergue_edited">
+                <%= @article.exergue.html_safe %>
+            </div>
+            <% end %>
+            <% if @article.aside_link_1_data.present? or @article.aside_link_2_data.present? or @article.aside_link_3_data.present? %>
+            <nav>
+                <%= link_from @article.aside_link_1_data if @article.aside_link_1_data.present? %>
+                <%= link_from @article.aside_link_2_data if @article.aside_link_2_data.present? %>
+                <%= link_from @article.aside_link_3_data if @article.aside_link_3_data.present? %>
+            </nav>
+            <% end %>
+            <% if @article.social_block.present? or @article.event_link_data.present? or @article.info_link_data.present? %>
+            <ul class="infos">
+                <% if @article.social_block.present? %>
+                <li><a data-popup="LeHasardLudique_Share_connection/550/450" class="fbk" href="<%= @article.facebook_url %>" target="_blank">partager</a></li>
+                <li><a data-popup="LeHasardLudique_Share_connection/550/450" class="twt" href="<%= @article.twitter_url %>" target="_blank">partager</a></li>
+                <% end %>
+                <% if @article.event_link_data.present? %>
+                <li><%= link_from @article.event_link_data, 'evt' %></li>
+                <% end %>
+                <% if @article.info_link_data.present? %>
+                <li><%= link_from @article.info_link_data, 'inf' %></li>
+                <% end %>
+            </ul>
+            <% end %>
+        </div>
+    </aside>
+    <section class="content">
+        <div class="container page_edited">
+            <%= @article.content.html_safe %>
+        </div>
+    </section>
+    <% if @article.final_gallery.present? %>
+    <section class="gray">
+        <div class="container">
+            <h3><%= @article.final_gallery.name %></h3>
+            <%= render_gallery @article.final_gallery%>
+        </div>
+    </section>
+    <% end %>
+</article>
