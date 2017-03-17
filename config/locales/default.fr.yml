@@ -206,4 +206,5 @@ fr:
       long: "%A %d %B %Y %Hh%M"
       short: "%d %b %Hh%M"
       sortable: "%Y/%m/%d - %Hh%M"
+      url: "%Y-%m-%d"
     pm: pm

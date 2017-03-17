@@ -44,7 +44,7 @@ module ApplicationHelper
 
   def set_meta_og(object)
     @og ||= {}
-    if object.is_a? Page
+    if object.is_a? Page or object.is_a? Article
       @og[:url] = object.full_url
       @og[:title] = object.title
       @og[:description] = object.digest
