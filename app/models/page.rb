@@ -24,7 +24,7 @@ class Page < ApplicationRecord
   attr_reader :full_url, :main_picture, :digest
 
   def full_url
-    @full_url || get_full_url
+    @full_url ||= Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL)
   end
 
   def main_picture
@@ -54,10 +54,6 @@ class Page < ApplicationRecord
   end
 
   private
-    def get_full_url
-      Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL)
-    end
-
     def get_main_picture
       if self.main_gallery.present?
         self.main_gallery.resources.first
