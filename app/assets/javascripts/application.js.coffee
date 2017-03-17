@@ -137,14 +137,44 @@ burgerMenu = ->
         $menu = $(LHL.menuSelector)
         if !$menu.hasClass 'open'
             $menu.addClass 'open'
-            $(document).on 'swiperight', ->
+            $(document).one 'swiperight', ->
                 $(document).off('click')
                 $menu.removeClass 'open'
+                reInitBootStrap()
             $(document).one 'click', ->
                 $(document).off('swiperight')
                 $menu.removeClass 'open'
         return false
     return
+
+reInitBootStrap = ->
+    # Disable existant functions
+    $(document).off('.data-api')
+    $('[data-toggle="modal"][data-target]').off('click')
+    $('[data-slide-to][data-carousel]').off('click')
+    $('[data-slide-to][data-target]').off('click')
+    $('a.carousel-control[data-slide]').off('click')
+
+    # Re-enable BootStrap functions
+    $('[data-toggle="modal"][data-target]').click ->
+        $modal = $($(this).data 'target')
+        if !!$modal.length
+            $modal.modal()
+    $('[data-slide-to][data-carousel]').click ->
+        $carousel = $($(this).data 'carousel')
+        if !!$carousel.length
+            $carousel.carousel()
+            $carousel.carousel $(this).data('slide-to')
+    $('[data-slide-to][data-target]:not([data-carousel])').click ->
+        $carousel = $($(this).data 'target')
+        if !!$carousel.length
+            $carousel.carousel()
+            $carousel.carousel $(this).data('slide-to')
+    $('a.carousel-control[data-slide]').click ->
+        $carousel = $(this).closest('[data-ride="carousel"]')
+        if !!$carousel.length
+            $carousel.carousel $(this).data('slide')     
+        return false
 
 watchMenuLinks = ->
     $('a[href^="#"]:not(.carousel-control,[href="#"])').off('click').click ->
@@ -163,7 +193,6 @@ noSpam = ->
         href = 'mailto:' + $(this).data('mail') + '@' + $(this).data('domain')
         $(this).attr('href', href)
     return
-
 
 noLink = ->
     $('a[href="#"]:not([data-mail])').off('click').click ->
@@ -199,6 +228,7 @@ init = ->
     watchPopUpLinks()
     noSpam()
     noLink()
+    reInitBootStrap()
     return
 
 $(document).on 'turbolinks:load', init
