@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_article_path, title: 'Ajouter un nouveau article' %>
+  </nav>
+  Liste des articles
+</h2>
+
+<%= render 'list', articles: @articles %>
+
+<br>

@@ -1,0 +1,37 @@
+<table class="sortable" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Résumé</th>
+      <th>Illustration<br />principale</th>
+      <th>Url</th>
+      <th>Création</th>
+      <th>Mise à jour</th>
+      <th>Utilisateur</th>
+      <th>Statut</th>
+      <th data-orderable="false"></th>
+      <th data-orderable="false"></th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% articles.each do |article| %>
+      <tr>
+        <td><span class="badge"><%= article.id %></span></td>
+        <td><%= article.title %></td>
+        <td><%= article.digest %></td>
+        <td><span class="preview" style="background-image: url('<%= article.main_picture.thumb_url %>')"></span></td>
+        <td><%= link_to article.slug, article.slug, target: :_blank %></td>
+        <td><%= l article.created_at, format: :sortable %></td>
+        <td><%= l article.updated_at, format: :sortable %></td>
+        <td><%= article.user.real_name %></td>
+        <td><%= t("article.statuses.#{article.status}") %></td>
+        <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_article_path(article), title: "Détails" if can? :read, article %></td>
+        <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_article_path(article), title: "Éditer" if can? :edit, article %></td>
+        <td class="action"><%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_article_path(article), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, article %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

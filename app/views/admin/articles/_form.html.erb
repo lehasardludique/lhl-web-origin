@@ -1,0 +1,62 @@
+<%= simple_form_for @article, url: url = (@article.new_record?) ? admin_articles_path : admin_article_path(@article) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <h3>Contenu</h3>
+    <%= f.input :main_gallery_id, collection: Gallery.article.collect { |s| [s.name, s.id] }, selected: @article.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.article.size > 0  %>
+    <%= content_tag :em, "Aucune galerie “Article“ n'est disponible.<br />Pour ajouter une galerie à un article, il faut au préalable la créer (choisir la catégorie “Article”).<br /><br />".html_safe  if Gallery.article.size == 0 %>
+    <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
+      <select class="form-control select optional select2" data-template="image" name="article[resource_id]" id="article_resource_id">
+        <option value="">À défaut de galerie principale, choisir une image</option>
+        <% Resource.global.each do |resource| %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @article.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
+        <% end %>
+      </select>
+    <% end %>
+    <%= f.input :topic %>
+    <%= f.input :title %>
+    <%= f.input :subtitle %>
+    <%= f.input :content, input_html: { data: { ckeditor: 'custom_config_page' }} %>
+    <%= f.input :final_gallery_id, collection: Gallery.article.collect { |s| [s.name, s.id] }, selected: @article.final_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.article.size > 0  %>
+    <hr />
+    <h3>Infos. complémentaires</h3>
+    <%= f.input :exergue, input_html: { data: { ckeditor: 'custom_config_exergue' }} %>
+    <h4>Liens Complémentaires</h4>
+    <p class="help">
+      <em>Pour les liens, il faut préciser le titre du lien et son objet séparé d'un “>”. Par exemple :</em>
+<pre>Mentions légales > Page:4
+Le menu > Fichier:8
+Les news d'avril > Article:45
+Une page fixe > /url-de-ma-page
+La Villette > https://lavillette.com/</pre>
+    </p>
+    <%= f.input :aside_link_1_data %>
+    <%= f.input :aside_link_2_data %>
+    <%= f.input :aside_link_3_data %>
+    <h4>Bloc de partage</h4>
+    <%= f.input :social_block %>
+    <%= f.input :event_link_data %>
+    <%= f.input :info_link_data %>
+    <hr />
+    <h3>URL des pages/liens média</h3>
+    <em>Pour les liens, il faut uniquement mettre l'url du lien (avec le protocol: http/https)'. Par exemple :</em>
+    <pre>https://twitter.com/pethrol</pre>
+    <%= f.input :media_link_fbk %>
+    <%= f.input :media_link_twt %>
+    <%= f.input :media_link_isg %>
+    <%= f.input :media_link_msk %>
+    <%= f.input :media_link_vid %>
+    <%= f.input :media_link_www %>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
+    <%= f.input :title_slug, hint: "La partie Date est générée et mise à jour automatiquement à partir de la date de publication, selon le format “2017-12-31”." %>
+    <%= f.input :published_at %>
+    <%= f.input :status, collection: Article.statuses.collect { |s| [t("article.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>
