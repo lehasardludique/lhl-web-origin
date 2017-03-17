@@ -1,0 +1,8 @@
+<div class="media_links">
+    <%= link_to '<i class="fa fa-facebook" aria-hidden="true"></i>'.html_safe, object.media_link_fbk, target: :_blank if defined? object.media_link_fbk and object.media_link_fbk.present? %>
+    <%= link_to '<i class="fa fa-instagram" aria-hidden="true"></i>'.html_safe, object.media_link_isg, target: :_blank if defined? object.media_link_isg and object.media_link_isg.present? %>
+    <%= link_to '<i class="fa fa-twitter" aria-hidden="true"></i>'.html_safe, object.media_link_twt, target: :_blank if defined? object.media_link_twt and object.media_link_twt.present? %>
+    <%= link_to '<i class="fa fa-music" aria-hidden="true"></i>'.html_safe, object.media_link_msk, target: :_blank if defined? object.media_link_msk and object.media_link_msk.present? %>
+    <%= link_to '<i class="fa fa-youtube-play" aria-hidden="true"></i>'.html_safe, object.media_link_vid, target: :_blank if defined? object.media_link_vid and object.media_link_vid.present? %>
+    <%= link_to 'www', object.media_link_www, target: :_blank, class: 'www' if defined? object.media_link_www and object.media_link_www.present? %>
+</div>

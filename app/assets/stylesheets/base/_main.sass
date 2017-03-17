@@ -43,6 +43,30 @@ body
             font-weight: $bold
             text-transform: capitalize
 
+// Media Links
+
+.media_links
+    font-size: 0
+    line-height: 30px
+    color: inherit
+    word-spacing: 20px
+
+    a
+        font-size: 16px
+        display: inline-block
+        height: 30px
+        width: 30px
+        border-radius: 50%
+        border: 1px solid
+        color: inherit
+        text-align: center
+        vertical-align: middle
+
+        &.www
+            font-size: 10px
+            letter-spacing: -0.15em
+            line-height: 28px
+
 // NoSpam
 
 a[data-mail]
@@ -63,6 +87,9 @@ a[data-mail]
 section
     &.gray
         background-color: $lhl-lightgray
+
+    &.yellow
+        background-color: $lhl-yellow
 
 // Typography
 
