@@ -1,52 +1,26 @@
-<aside>Site en construction</aside>
-<section id="page">
-    <h1>Le Hasard Ludique</h1>
-    <article>
-        <h2>Le Hasard Ludique ouvre ses portes pendant 4 weekends du 29 avril au 21 mai 2017&nbsp;!</h2>
-        <h3>CONCERTS +&nbsp;DJ SETS +&nbsp;PERFORMANCES +&nbsp;WORKSHOPS +&nbsp;BRUNCH +&nbsp;SURPRISES</h3>
-        <div class="event">
-            <h4>Weekend #1 – 29/30 avril</h4>
-            <p>Vaudou Game, Fulgeance, Around the world, …</p>
-            <nav>
-                <a href="https://www.weezevent.com/weekend-1" target="_blank">Billetterie</a>
-                <a href="https://www.facebook.com/events/1445309702170613/" target="_blank">Participer</a>
-            </nav>
-        </div>
-        <div class="event">
-            <h4>Weekend #2 – 06/07 mai</h4>
-            <p>Cléa Vincent, Corine, Jean Tonique, …</p>
-            <nav>
-                <a href="https://www.weezevent.com/weekend-2-inauguration" target="_blank">Billetterie</a>
-                <a href="https://www.facebook.com/events/1913610455549420/" target="_blank">Participer</a>
-            </nav>
-        </div>
-        <div class="event">
-            <h4>Weekend #3  - 13/14 mai</h4>
-            <p>Mo Laudi, Pomrad, Freez, …</p>
-            <nav>
-                <a href="https://www.weezevent.com/weekend-3-inauguration" target="_blank">Billetterie</a>
-                <a href="https://www.facebook.com/events/1435214629905000/" target="_blank">Participer</a>
-            </nav>
-        </div>
-        <div class="event">
-            <h4>Weekend #4 – 20/21 mai</h4>
-            <p>Elbi, Mawimbi, Les Yeux Oranges, …</p>
-            <nav>
-                <a href="https://www.weezevent.com/weekend-4-inauguration" target="_blank">Billetterie</a>
-                <a href="https://www.facebook.com/events/390258851354691/" target="_blank">Participer</a>
-            </nav>
-        </div>
-    </article>
-    <footer>
-        <p>Le Hasard Ludique proposera sa vision d’un lieu culturel hybride où cohabiteront une salle de spectacles riche d’une programmation plurielle, un atelier de pratique artistique collective et un bistrot gourmand.</p>
-        <nav class="socials">
-            <a class="fb" href="https://www.facebook.com/LeHasardLudique/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-            <a class="ig" href="https://www.instagram.com/lehasardludique/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-            <a class="tw" href="https://twitter.com/Lehasardludique" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-            <a class="nl" href="http://facebook.us6.list-manage1.com/subscribe?u=b3a692d96340f437820c48197&id=f48e82baf0" target="_blank"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-            <a class="lf" href="http://lafabrique.lehasardludique.paris/la-fabrique" target="_blank">La Fabrique</a>
-        </nav>
-        <span><a href="#" data-mail="coucou" data-domain="lehasardludique.fr">coucou&nbsp;<i class="fa fa-at"></i>&nbsp;lehasardludique&nbsp;.&nbsp;fr</a></span>
-        <span>Tél.&nbsp;: <a href="tel://+33983906755">09 83 90 67 55</a></span>
-    </footer>
-</section>
+<header>
+    <div id="main-gallery" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <% if @news.size > 1 %>
+      <ol class="carousel-indicators">
+        <% (0..(@news.size - 1)).each do |i| %>
+        <li data-target="#main-gallery" data-slide-to="<%= i %>"<%= ' class="active"'.html_safe if i == 0 %>></li>
+        <% end %>
+      </ol>
+      <% end %>
+
+      <!-- Wrapper for slides -->
+      <div class="carousel-inner" role="listbox">
+        <% @news.each_with_index do |news, i| %>
+        <a href="<%= news.slug %>" class="item<%= ' active' if i == 0 %>">
+            <div class="image" style="background-image: url('<%= news.main_picture.url %>')">
+            </div>
+            <div class="title">
+                <%= content_tag :h2, "<span>#{news.title}</span>".html_safe if news.title.present? %>
+                <%= content_tag :h3, "<span>#{news.subtitle}</span>".html_safe if news.subtitle.present? %>
+            </div>
+        </a>
+        <% end %>
+      </div>
+    </div>
+</header>

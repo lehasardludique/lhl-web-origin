@@ -150,6 +150,9 @@ burgerMenu = ->
 reInitBootStrap = ->
     # Disable existant functions
     $(document).off('.data-api')
+    if !!$('.carousel').length
+        $('.carousel').each ->
+            $(this).carousel pause: null
     $('[data-toggle="modal"][data-target]').off('click')
     $('[data-slide-to]').off('click')
     $('a.carousel-control[data-slide]').off('click')

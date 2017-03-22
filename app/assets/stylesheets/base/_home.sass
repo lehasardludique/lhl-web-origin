@@ -1,0 +1,79 @@
+body.home
+    > header
+        > div.carousel
+            height: 445px
+            width: 100%
+            background-color: $lhl-gray
+
+            a.item
+                text-align: left
+                
+                div.image
+                    background-size: cover
+                    background-position: center
+                    +grayscale
+                    width: 100%
+                    height: 100%
+
+                &::after
+                    position: absolute
+                    left: 0
+                    top: 0
+                    width: 100%
+                    height: 100%
+                    content: " "
+                    background-image: image_url("bg_spotted.png")
+                    background-color: rgba(0,0,0,0.3)
+
+                div.title
+                    position: absolute
+                    left: 0
+                    bottom: 0
+                    width: 100%
+                    z-index: 1
+
+                    > h2,
+                    > h3
+                        width: auto
+                        color: $lhl-black
+                        margin: 10px 0 0
+                        padding: 0
+
+                        > span
+                            background-color: white
+                            padding: 0 5px
+
+//= MOBILE
+
+@media (max-width: $screen-xs-max)
+    body.home
+
+        > header
+            > div.carousel
+                .carousel-indicators
+                    top: 100px
+                    bottom: auto
+                    width: 100%
+                    margin: 0
+                    text-align: center
+
+                a.item
+                    div.title
+                        h3
+                            font-size: $font-size-h2-small
+
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body.home
+
+        > header
+            > div.carousel
+                min-height: 520px
+                height: calc(100vh - 110px)
+
+                a.item
+                    text-align: center
+                    
+                    div.title
+                        bottom: 60px

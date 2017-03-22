@@ -1,7 +1,9 @@
 class PagesController < ApplicationController
   def home
-    body_classes 'wip'
-    @no_menu = true
+    # TMP
+    @news = Article.visible
+
+    body_classes 'home'
   end
 
   def redirect
