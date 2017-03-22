@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from PG::ForeignKeyViolation, with: :ooops!
 
+  before_action :set_opening_time
   after_action :store_location
 
   def not_found!
@@ -23,5 +24,14 @@ class ApplicationController < ActionController::Base
   private
     def store_location
       session[:return_to] = request.fullpath unless request.fullpath =~ /^\/api\//
+    end
+
+    def set_opening_time
+      remaing_days = (DateTime.parse('2017/04/29') - DateTime.now.midnight).to_i
+      @opening = <<~OPENING
+        <br />
+        <small>Ouverture</small><br />
+        <strong>J-#{remaing_days}</strong>
+      OPENING
     end
 end
