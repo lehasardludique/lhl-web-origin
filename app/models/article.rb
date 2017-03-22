@@ -82,7 +82,7 @@ class Article < ApplicationRecord
         self.date_slug = I18n.l(self.published_at, format: :url).urlize
       end
       if self.title_changed? and (not self.title_slug_changed? or not self.title_slug.present?)
-        self.title_slug = self.title.urlize.gsub(/[^a-z0-9]*$/, "")
+        self.title_slug = self.title.urlize.gsub(/-+/, "-").gsub(/[^a-z0-9]*$/, "")
       elsif self.title_slug_changed?
         self.title_slug = self.title_slug.split('/').map(&:urlize).join("/")
       end

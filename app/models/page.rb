@@ -64,7 +64,7 @@ class Page < ApplicationRecord
 
     def check_slug
       if self.title_changed? and (not self.slug_changed? or not self.slug.present?)
-        self.slug = self.title.urlize.gsub(/[^a-z0-9]*$/, "")
+        self.slug = self.title.urlize.gsub(/-+/, "-").gsub(/[^a-z0-9]*$/, "")
       elsif self.slug_changed?
         self.slug = self.slug.split('/').map(&:urlize).join("/")
       end
