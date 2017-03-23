@@ -3,17 +3,19 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper
 
   rescue_from PG::ForeignKeyViolation, with: :ooops!
+  rescue_from ActiveRecord::RecordNotFound , with: :not_found!
 
   before_action :set_opening_time
   after_action :store_location
 
   def not_found!
     @no_menu = true
+    @no_footer = true
     body_classes 'bubble'
     meta_title t('errors.not_found.meta')
     @title = t 'errors.not_found.title'
-    @text = t 'errors.not_found.text'
-    render :error, status: :not_found and return
+    @text = t'errors.not_found.text'
+    render 'layouts/error', status: :not_found and return
   end
 
   def ooops!

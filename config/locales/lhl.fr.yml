@@ -23,6 +23,13 @@ fr:
   # Global
   save_and_go: Enregistrer et continuer
 
+  # Errors
+  errors:
+    not_found:
+      meta: Page non trouvée
+      title: Ooops !
+      text: "Désolé, mais il n'y a (plus) rien ici !<br />Alors qu'<a href=\"/\">ici</a>..." 
+
   # Common models & attributes
   models: &models
     user: Utilisateur
