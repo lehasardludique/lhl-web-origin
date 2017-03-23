@@ -1,0 +1,18 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_home_carousel_link_path(@home_carousel_link), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, new_admin_home_carousel_link_path, title: "Retour à la page d'édition" %>
+  </nav>
+  <span class="id"><%= @home_carousel_link.rank %></span> Slide <em><%= @home_carousel_link.final_title %></em>
+</h2>
+<div class="borderd-list">
+    <div class="home_carousel_preview">
+        <a class="item">
+            <div class="image" style="background-image: url('<%= @home_carousel_link.final_resource.url %>')"></div>
+            <div class="title">
+                <%= content_tag :h2, "<span>#{@home_carousel_link.final_title}</span>".html_safe if @home_carousel_link.final_title.present? %>
+                <%= content_tag :h3, "<span>#{@home_carousel_link.final_subtitle}</span>".html_safe if @home_carousel_link.final_subtitle.present? %>
+            </div>
+        </a>
+    </div>
+</div>
