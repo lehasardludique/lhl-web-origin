@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  root 'pages#home'
+  root 'pages#wip'
+  get 'home' => 'pages#home'
   
   # UserSessions
   get 'connexion' => 'user_sessions#new', as: :login
@@ -27,8 +28,19 @@ Rails.application.routes.draw do
     # resources :pages
   end
 
-  # Catch all/old pages
+  # Articles
   get 'articles/:date/*slug' => 'articles#show', as: :article
-  get '*slug' => 'pages#redirect', as: :redirect if Rails.env.production?
+
+  # La-Fabrique redirection
+  get '/la-fabrique' => 'pages#redirect'
+  get '/le-bureau-de-tendances' => 'pages#redirect'
+  get '/le-laboratoire-d-idees' => 'pages#redirect'
+  get '/le-laboratoire-d-idees/:id/*' => 'pages#redirect'
+  get '/l-atelier' => 'pages#redirect'
+  get '/l-atelier/:id/*' => 'pages#redirect'
+  get '/la-cagnotte' => 'pages#redirect'
+  get '/profil' => 'pages#redirect'
+
+  # Pages
   get '*slug' => 'pages#show', as: :page
 end

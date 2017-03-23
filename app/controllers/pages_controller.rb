@@ -6,8 +6,13 @@ class PagesController < ApplicationController
     body_classes 'home'
   end
 
+  def wip
+    @no_menu = true
+    body_classes 'wip'
+  end
+
   def redirect
-    redirect_to "//lafabrique.lehasardludique.paris/#{params[:slug]}", status: :moved_permanently
+    redirect_to "http://lafabrique.lehasardludique.paris#{request.fullpath}", status: :moved_permanently
   end
 
   def show
