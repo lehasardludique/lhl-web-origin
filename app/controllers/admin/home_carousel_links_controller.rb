@@ -1,9 +1,9 @@
 class Admin::HomeCarouselLinksController < AdminController
   before_action :set_home_carousel_link, only: [:show, :edit, :update, :destroy]
+  before_action :set_list_and_max_range, only: [:index, :new, :edit]
 
   def index
     authorize! :read, HomeCarouselLink.new
-    @home_carousel_links = HomeCarouselLink.all
   end
 
   def show
@@ -11,8 +11,6 @@ class Admin::HomeCarouselLinksController < AdminController
   end
 
   def new
-    @max_rank = HomeCarouselLink.all.size
-    @home_carousel_links = HomeCarouselLink.all
     @home_carousel_link = HomeCarouselLink.new
     authorize! :create, @home_carousel_link
   end
@@ -29,8 +27,7 @@ class Admin::HomeCarouselLinksController < AdminController
       redirect_to new_admin_home_carousel_link_path, notice: 'Lien ajouté avec succès.'
     else
       flash.now[:error] = "Impossible d'enregistrer ce lien."
-      @max_rank = HomeCarouselLink.all.size
-      @home_carousel_links = HomeCarouselLink.all
+      set_list_and_max_range
       render :new
     end
   end
@@ -46,8 +43,7 @@ class Admin::HomeCarouselLinksController < AdminController
       end
     else
       flash.now[:error] = "Impossible de mettre à jour ce lien."
-      @max_rank = HomeCarouselLink.all.size
-      @home_carousel_links = HomeCarouselLink.all
+      set_list_and_max_range
       render :edit
     end
   end
@@ -62,6 +58,11 @@ class Admin::HomeCarouselLinksController < AdminController
     def set_home_carousel_link
       @home_carousel_link = HomeCarouselLink.find(params[:id])
       authorize! :read, @home_carousel_link
+    end
+
+    def set_list_and_max_range
+      @max_rank = HomeCarouselLink.all.size
+      @home_carousel_links = HomeCarouselLink.all
     end
 
     def home_carousel_link_params

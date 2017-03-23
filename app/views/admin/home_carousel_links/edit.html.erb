@@ -1,0 +1,31 @@
+<h2>
+    <span class="id"><%= @home_carousel_link.rank %></span> Édition du slide <em><%= @home_carousel_link.final_title %></em>
+</h2>
+
+<%= simple_form_for @home_carousel_link, url: admin_home_carousel_link_path(@home_carousel_link) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :subtitle %>
+    <%= f.input :rank %>
+    <%= f.input :home_linkable_type, collection: HomeCarouselLink.types %>
+    <% HomeCarouselLink.types.each do |link_class| %>
+    <%= f.input :home_linkable_id, collection: link_class.visible.collect { |n| [n.title, n.id] }, include_blank: true, input_html: { multiple: false, class: "select2", disabled: (@home_carousel_link.home_linkable_type == link_class.to_s ? false : true ) }, wrapper_html: { class: link_class, style: "display: #{@home_carousel_link.home_linkable_type == link_class.to_s ? 'block' : 'none'}" }, required: false %>
+    <% end %>
+    <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
+      <select class="form-control select optional select2" data-template="image" name="home_carousel_link[resource_id]" id="home_carousel_link_resource_id">
+        <option value="">Laisser vide pour prendre l'image principale de l'objet du lien</option>
+        <% Resource.global.each do |resource| %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @home_carousel_link.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
+        <% end %>
+      </select>
+    <% end %>
+    <%= f.input :status, collection: HomeCarouselLink.statuses.collect { |s| [t("home_carousel_link.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', admin_home_carousel_links_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>
