@@ -1,9 +1,9 @@
 <header>
     <div id="main-gallery" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
-      <% if @news.size > 1 %>
+      <% if @home_carousels_links.size > 1 %>
       <ol class="carousel-indicators">
-        <% (0..(@news.size - 1)).each do |i| %>
+        <% (0..(@home_carousels_links.size - 1)).each do |i| %>
         <li data-target="#main-gallery" data-slide-to="<%= i %>"<%= ' class="active"'.html_safe if i == 0 %>></li>
         <% end %>
       </ol>
@@ -11,13 +11,13 @@
 
       <!-- Wrapper for slides -->
       <div class="carousel-inner" role="listbox">
-        <% @news.each_with_index do |news, i| %>
+        <% @home_carousels_links.each_with_index do |news, i| %>
         <a href="<%= news.slug %>" class="item<%= ' active' if i == 0 %>">
-            <div class="image" style="background-image: url('<%= news.main_picture.url %>')">
+            <div class="image" style="background-image: url('<%= news.final_resource.url %>')">
             </div>
             <div class="title">
-                <%= content_tag :h2, "<span>#{news.title}</span>".html_safe if news.title.present? %>
-                <%= content_tag :h3, "<span>#{news.subtitle}</span>".html_safe if news.subtitle.present? %>
+                <%= content_tag :h2, "<span>#{news.final_title}</span>".html_safe if news.final_title.present? %>
+                <%= content_tag :h3, "<span>#{news.final_subtitle}</span>".html_safe if news.final_subtitle.present? %>
             </div>
         </a>
         <% end %>

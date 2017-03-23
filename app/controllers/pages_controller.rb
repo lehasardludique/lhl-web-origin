@@ -1,8 +1,6 @@
 class PagesController < ApplicationController
   def home
-    # TMP
-    @news = Article.visible
-
+    @home_carousels_links = HomeCarouselLink.published
     body_classes 'home'
   end
 

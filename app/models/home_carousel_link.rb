@@ -4,7 +4,7 @@ class HomeCarouselLink < ApplicationRecord
 
   enum status: { draft: 0, published: 1 }
 
-  attr_reader :final_title, :final_subtitle, :final_resource
+  attr_reader :final_title, :final_subtitle, :final_resource, :slug
 
   validates :home_linkable_type, presence: true
   validates :home_linkable_id, presence: true, numericality: { only_integer: true }
@@ -25,6 +25,10 @@ class HomeCarouselLink < ApplicationRecord
 
   def final_resource
     @final_resource ||= get_final_resource()
+  end
+
+  def slug
+    @slug ||= get_final_slug()
   end
 
   private
@@ -50,5 +54,9 @@ class HomeCarouselLink < ApplicationRecord
       else
        (defined? self.home_linkable.main_picture) ? self.home_linkable.main_picture : nil
       end
+    end
+
+    def get_final_slug
+     (defined? self.home_linkable.slug) ? self.home_linkable.slug : '#'
     end
 end
