@@ -3,7 +3,7 @@ class CreateHomeCarouselLinks < ActiveRecord::Migration[5.0]
     create_table :home_carousel_links do |t|
       t.integer :home_linkable_id
       t.string  :home_linkable_type
-      t.integer :rank
+      t.integer :rank, default: 1
       t.string  :title
       t.string  :subtitle
       t.belongs_to :resource, index: true, foreign_key: true

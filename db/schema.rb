@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 20170323091113) do
   create_table "home_carousel_links", force: :cascade do |t|
     t.integer  "home_linkable_id"
     t.string   "home_linkable_type"
-    t.integer  "rank"
+    t.integer  "rank",               default: 1
     t.string   "title"
     t.string   "subtitle"
     t.integer  "resource_id"
