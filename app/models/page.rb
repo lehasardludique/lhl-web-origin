@@ -24,6 +24,8 @@ class Page < ApplicationRecord
 
   attr_reader :full_url, :main_picture, :digest
 
+  scope :visible, -> { published }
+
   def full_url
     @full_url ||= Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL) if self.slug.present?
   end
