@@ -1,0 +1,24 @@
+<h2>Édition du carousel galerie</h2>
+
+<%= render 'list', links: @home_carousel_links, editable: true %>
+
+<h3>Ajout d'un nouveau slide</h3>
+
+<%= simple_form_for @home_carousel_link, url: admin_home_carousel_links_path do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :title %>
+    <%= f.input :subtitle %>
+    <%= f.input :rank, input_html: { value: HomeCarouselLink.all.size + 1 } %>
+    <%= f.input :home_linkable_type, collection: HomeCarouselLink.types %>
+    <% HomeCarouselLink.types.each do |link_class| %>
+    <%= f.input :home_linkable_id, collection: link_class.visible.collect { |n| [n.title, n.id] }, include_blank: true, input_html: { multiple: false, class: "select2", disabled: (@home_carousel_link.home_linkable_type == link_class.to_s ? false : true ) }, wrapper_html: { class: link_class, style: "display: #{@home_carousel_link.home_linkable_type == link_class.to_s ? 'block' : 'none'}" }, required: false %>
+    <% end %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', admin_home_carousel_links_path, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>

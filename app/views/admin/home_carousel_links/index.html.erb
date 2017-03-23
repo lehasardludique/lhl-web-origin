@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe, new_admin_home_carousel_link_path, title: 'Éditer le carousel' %>
+  </nav>
+  Actualité : liste des slides
+</h2>
+
+<%= render 'list', links: @home_carousel_links, editable: false %>
+
+<br>

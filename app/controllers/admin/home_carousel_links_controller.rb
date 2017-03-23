@@ -28,6 +28,7 @@ class Admin::HomeCarouselLinksController < AdminController
       redirect_to new_admin_home_carousel_link_path, notice: 'Lien ajouté avec succès.'
     else
       flash.now[:error] = "Impossible d'enregistrer ce lien."
+      @home_carousel_links = HomeCarouselLink.all
       render :new
     end
   end
@@ -38,6 +39,7 @@ class Admin::HomeCarouselLinksController < AdminController
       redirect_to admin_home_carousel_link_path(@home_carousel_link), notice: 'Lien mis à jour avec succès.'
     else
       flash.now[:error] = "Impossible de mettre à jour ce lien."
+      @home_carousel_links = HomeCarouselLink.all
       render :edit
     end
   end
