@@ -103,8 +103,8 @@ fr:
 
   # Article
   article: &article
-    <<: *default_attributes
     <<: *pages_articles_attributes
+    <<: *default_attributes
     title_slug: URL relative (partie Titre)
     date_slug: URL relative (partie Date)
     topic: Tag (thème principal)
@@ -115,6 +115,11 @@ fr:
     media_link_vid: Page Vidéo
     media_link_www: Page Web
 
+  # HomeCarouselLink
+  home_carousel_link: &home_carousel_link
+    <<: *default_attributes
+    home_linkable_type: Lien vers (type d'objet)
+    home_linkable_id: Titre de l'objet
 
   # Models
   activerecord:
@@ -131,3 +136,5 @@ fr:
         <<: *page
       article:
         <<: *article
+      home_carousel_link:
+        <<: *home_carousel_link

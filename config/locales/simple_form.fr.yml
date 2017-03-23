@@ -25,6 +25,8 @@ fr:
     placeholders:
       defaults:
         slug: 'Laisser vide pour une génération automatique.'
+      home_carousel_link:
+        title: "Laisser vide pour une récupération automatique du titre (et sous-titre) de l'objet cible."
     #     password: 'No special characters, please.'
     # include_blanks:
     #   defaults:
