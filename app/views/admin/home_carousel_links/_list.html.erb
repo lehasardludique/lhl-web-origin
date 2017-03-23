@@ -7,6 +7,7 @@
       <th data-orderable="false">Titre</th>
       <th data-orderable="false">Sous-titre</th>
       <th data-orderable="false">Liens vers</th>
+      <th data-orderable="false">Statut</th>
       <th data-orderable="false"></th>
       <% if editable %>
       <th data-orderable="false"></th>
@@ -23,6 +24,7 @@
         <td><%= link.final_title %></td>
         <td><%= link.final_subtitle %></td>
         <td><%= "#{link.home_linkable_type}:#{link.home_linkable_id}" %></td>
+        <td><%= t("home_carousel_link.statuses.#{link.status}") %></td>
         <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_home_carousel_link_path(link), title: "Aperçu" if can? :read, link %></td>
         <% if editable %>
         <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_home_carousel_link_path(link), title: "Éditer" if can? :edit, link %></td>
