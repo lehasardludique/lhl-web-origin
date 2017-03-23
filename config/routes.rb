@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       get 'password' => 'users#password', as: :password
       patch 'password' => 'users#password_update'
     end
+    # get 'home' => 'home_carousel_links#home', as: :home
+    resources :home_carousel_links
     resources :resources
     resources :pages
     resources :articles
