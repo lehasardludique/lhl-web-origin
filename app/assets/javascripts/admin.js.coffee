@@ -150,6 +150,13 @@ init = ->
             $(this).closest('form').submit()
             return
 
+    # AutoSubmission Select
+    if !!$('select[data-auto-submission="true"]').length
+        $('select[data-auto-submission="true"]').off('change').change ->
+            LHL.progressBar 'start'
+            $(this).closest('form').submit()
+            return
+
     # Home edition
     if !!$('form#new_home_carousel_link').length
         $('select#home_carousel_link_home_linkable_type').off('change').change ->

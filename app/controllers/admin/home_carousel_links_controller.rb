@@ -11,6 +11,7 @@ class Admin::HomeCarouselLinksController < AdminController
   end
 
   def new
+    @max_rank = HomeCarouselLink.all.size
     @home_carousel_links = HomeCarouselLink.all
     @home_carousel_link = HomeCarouselLink.new
     authorize! :create, @home_carousel_link
@@ -28,6 +29,7 @@ class Admin::HomeCarouselLinksController < AdminController
       redirect_to new_admin_home_carousel_link_path, notice: 'Lien ajouté avec succès.'
     else
       flash.now[:error] = "Impossible d'enregistrer ce lien."
+      @max_rank = HomeCarouselLink.all.size
       @home_carousel_links = HomeCarouselLink.all
       render :new
     end
@@ -36,9 +38,15 @@ class Admin::HomeCarouselLinksController < AdminController
   def update
     authorize! :update, @home_carousel_link
     if @home_carousel_link.update(home_carousel_link_params)
-      redirect_to admin_home_carousel_link_path(@home_carousel_link), notice: 'Lien mis à jour avec succès.'
+      flash.notice = 'Lien mis à jour avec succès.'
+      if @home_carousel_link.form == "list"
+        redirect_to new_admin_home_carousel_link_path
+      else
+        redirect_to admin_home_carousel_link_path(@home_carousel_link)
+      end
     else
       flash.now[:error] = "Impossible de mettre à jour ce lien."
+      @max_rank = HomeCarouselLink.all.size
       @home_carousel_links = HomeCarouselLink.all
       render :edit
     end
@@ -57,7 +65,7 @@ class Admin::HomeCarouselLinksController < AdminController
     end
 
     def home_carousel_link_params
-      permitted_params = [:home_linkable_id, :home_linkable_type, :rank, :title, :subtitle, :resource_id, :status]
+      permitted_params = [:home_linkable_id, :home_linkable_type, :rank, :form, :title, :subtitle, :resource_id, :status]
       params.require(:home_carousel_link).permit(permitted_params)
     end
 end

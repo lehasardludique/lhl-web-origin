@@ -19,7 +19,17 @@
   <tbody>
     <% links.each do |link| %>
       <tr>
+        <% if editable %>
+        <td>
+          <%= form_for link, url: admin_home_carousel_link_path(link) do |f| %>
+            <%= f.hidden_field :id %>
+            <%= f.hidden_field :form, value: 'list' %>
+            <%= f.select :rank, options_for_select(1..@max_rank, link.rank), {}, { class: 'form-control select optional', data: { auto_submission: true } } %>
+          <% end %>
+        </td>
+        <% else %>
         <td><span class="badge"><%= link.rank %></span></td>
+        <% end %>
         <td><span class="preview" style="background-image: url('<%= link.final_resource.thumb_url if link.final_resource.present? %>')"></span></td>
         <td><%= link.final_title %></td>
         <td><%= link.final_subtitle %></td>
