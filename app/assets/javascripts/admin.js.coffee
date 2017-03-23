@@ -150,6 +150,26 @@ init = ->
             $(this).closest('form').submit()
             return
 
+    # Home edition
+    if !!$('form#new_home_carousel_link').length
+        $('select#home_carousel_link_home_linkable_type').off('change').change ->
+            type = $(this).val()
+            $('div.home_carousel_link_home_linkable_id.active')
+                .removeClass('active')
+                .stop()
+                .slideUp()
+            $('div.home_carousel_link_home_linkable_id select')
+                .val(null)
+                .trigger('change')
+                .prop('disabled', true)
+            if !!type
+                $('div.home_carousel_link_home_linkable_id.' + type + ' select')
+                    .prop('disabled', false)
+                $('div.home_carousel_link_home_linkable_id.' + type)
+                    .addClass('active')
+                    .stop()
+                    .slideDown()
+
     # Global
     watchMenuLinks()
     return
