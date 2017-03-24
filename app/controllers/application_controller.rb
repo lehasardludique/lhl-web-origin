@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from PG::ForeignKeyViolation, with: :ooops!
   rescue_from ActiveRecord::RecordNotFound , with: :not_found!
 
-  before_action :set_opening_time
+  before_action :set_opening_time, :set_menu_and_footer
   after_action :store_location
 
   def not_found!
@@ -35,5 +35,18 @@ class ApplicationController < ActionController::Base
         <small>Ouverture</small><br />
         <strong>J-#{remaing_days}</strong>
       OPENING
+    end
+
+    def set_menu_and_footer
+      @menu_links = {
+        "Billetterie" => "/billetterie",
+        "Infos pratiques" => "/infos-pratiques"
+      }
+      @footer_1_links = {
+        "Mentions légales" => "/mentions-legales"
+      }
+      @footer_2_links = {
+        "Privatisation" => "/privatiser-le-hasard-ludique"
+      }
     end
 end
