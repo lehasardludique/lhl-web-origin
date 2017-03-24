@@ -38,5 +38,11 @@
 
 </script>
 <% end %>
+<% if Rails.env.production? %>
+<div class="trade-spotting">
+    <img src="https://secure.adnxs.com/px?id=813635&seg=7844239&t=2" />
+    <%= image_tag "https://secure.adnxs.com/seg?add=#{@retargeting_pixel_id}&t=2".html_safe, alt: nil if @retargeting_pixel_id.present? %>
+</div>
+<% end %>
 </body>
 </html>
