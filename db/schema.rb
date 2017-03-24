@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170323091113) do
+ActiveRecord::Schema.define(version: 20170324164535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(version: 20170323091113) do
     t.string   "title_slug"
     t.string   "date_slug"
     t.integer  "status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "retargeting_pixel_id"
     t.index ["date_slug"], name: "index_articles_on_date_slug", using: :btree
     t.index ["final_gallery_id"], name: "index_articles_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_articles_on_main_gallery_id", using: :btree
@@ -100,9 +101,10 @@ ActiveRecord::Schema.define(version: 20170323091113) do
     t.string   "info_link_data"
     t.string   "slug"
     t.integer  "status"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
     t.string   "aside_link_3_data"
+    t.integer  "retargeting_pixel_id"
     t.index ["final_gallery_id"], name: "index_pages_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_pages_on_main_gallery_id", using: :btree
     t.index ["resource_id"], name: "index_pages_on_resource_id", using: :btree
