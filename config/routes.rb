@@ -35,9 +35,9 @@ Rails.application.routes.draw do
   get '/la-fabrique' => 'pages#redirect'
   get '/le-bureau-de-tendances' => 'pages#redirect'
   get '/le-laboratoire-d-idees' => 'pages#redirect'
-  get '/le-laboratoire-d-idees/:id/*' => 'pages#redirect'
+  get '/le-laboratoire-d-idees/:id/*slug' => 'pages#redirect'
   get '/l-atelier' => 'pages#redirect'
-  get '/l-atelier/:id/*' => 'pages#redirect'
+  get '/l-atelier/:id/*slug' => 'pages#redirect'
   get '/la-cagnotte' => 'pages#redirect'
   get '/profil' => 'pages#redirect'
 
