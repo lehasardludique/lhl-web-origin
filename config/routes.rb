@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   # La-Fabrique redirection
   get '/la-fabrique' => 'pages#redirect'
+  get '/articles/:id' => 'pages#redirect'
   get '/le-bureau-de-tendances' => 'pages#redirect'
   get '/le-laboratoire-d-idees' => 'pages#redirect'
   get '/le-laboratoire-d-idees/:id/*slug' => 'pages#redirect'
