@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.4
-* staging : v0.4
-* prod. : v0.0
+* dev : v0.5
+* staging : v0.5
+* prod. : v0.5
 
 ---
 
@@ -71,6 +71,26 @@ n/a
 ---
 
 ## Release notes
+
+### v0.5 (Home)
+
+* Home:
+    * integration (carousel)
+    * create `HomeCarouselLink` model
+    * admin: home & carousel links managements (to Page or Article for now)
+    * admin: carousel slide preview
+* Page/Article:
+    * improve URL generation
+    * style improvements (break too long word, URL)
+    * add article tag
+* ImageShip (gallries): improve auto-ranking consistency
+* Menu & Footer:
+    * add countdown (to 2017/04/29)
+    * add Ⓜ in footer
+* Global:
+    * basic 404 page
+    * Style: hide horizontal overflow (mobile contained view)
+* SSL (https) : generate Lets Encryot certificate (Heroku), and active protocol
 
 ### v0.4 (Articles)
 
