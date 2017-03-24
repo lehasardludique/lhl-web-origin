@@ -19,14 +19,10 @@
                 </div>
             </div>
             <div class="col-xs-12 col-sm-4 col-sm-pull-4 link-1">
-                <a href="#">L'équipe</a>
-                <a href="#">Les partenaires</a>
-                <a href="#">Mentions légales</a>
+                <%= render 'layouts/active_links', links: @footer_1_links %>
             </div>
             <div class="col-xs-12 col-sm-4 col-sm-pull-4 link-2">
-                <a href="#">Privatisation</a>
-                <a href="#">Info techniques</a>
-                <a href="#">Médias</a>
+                <%= render 'layouts/active_links', links: @footer_2_links %>
             </div>
         </div>
     </div>

@@ -1,0 +1,5 @@
+<% if links.is_a? Hash and links.any? %>
+    <% links.each do |link| %>
+        <%= active_link_to link.first, link.last %>
+    <% end %>
+<% end %>
