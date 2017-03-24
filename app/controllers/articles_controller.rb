@@ -9,6 +9,7 @@ class ArticlesController < ApplicationController
     end
     meta_title @article.title
     set_meta_og @article
+    @retargeting_pixel_id = @article.retargeting_pixel_id
     body_classes 'page'
   end
 end

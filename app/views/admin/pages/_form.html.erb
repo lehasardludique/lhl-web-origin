@@ -38,6 +38,7 @@ La Villette > https://lavillette.com/</pre>
     <%= f.input :info_link_data %>
     <hr />
     <h3>Réglages</h3>
+    <%= f.input :retargeting_pixel_id %>
     <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
     <%= f.input :slug %>
     <%= f.input :status, collection: Page.statuses.collect { |s| [t("page.statuses.#{s.first}"), s.first] }, include_blank: false %>

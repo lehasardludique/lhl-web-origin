@@ -49,6 +49,7 @@ La Villette > https://lavillette.com/</pre>
     <%= f.input :media_link_www %>
     <hr />
     <h3>Réglages</h3>
+    <%= f.input :retargeting_pixel_id %>
     <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
     <%= f.input :title_slug, hint: "La partie Date est générée et mise à jour automatiquement à partir de la date de publication, selon le format “2017-12-31”." %>
     <%= f.input :published_at %>

@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   def home
     @home_carousels_links = HomeCarouselLink.published
+    @retargeting_pixel_id = 8147450
     body_classes 'home'
   end
 
@@ -19,6 +20,7 @@ class PagesController < ApplicationController
     not_found! if @page.restricted? and not logged_in?
     meta_title @page.title
     set_meta_og @page
+    @retargeting_pixel_id = @page.retargeting_pixel_id
     body_classes 'page'
   end
 end

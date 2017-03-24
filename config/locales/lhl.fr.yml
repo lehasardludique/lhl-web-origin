@@ -57,6 +57,7 @@ fr:
     kind: Type
     resource_id: Image
     slug: URL relative
+    retargeting_pixel_id: ID du pixel de “retargeting”
   pages_articles_attributes: &pages_articles_attributes
     main_gallery_id: Galerie principale (header)
     resource: Image principale
