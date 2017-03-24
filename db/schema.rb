@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 20170324164535) do
     t.integer  "status"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
-    t.integer  "retargeting_pixel_id"
+    t.bigint   "retargeting_pixel_id"
     t.index ["date_slug"], name: "index_articles_on_date_slug", using: :btree
     t.index ["final_gallery_id"], name: "index_articles_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_articles_on_main_gallery_id", using: :btree
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(version: 20170324164535) do
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
     t.string   "aside_link_3_data"
-    t.integer  "retargeting_pixel_id"
+    t.bigint   "retargeting_pixel_id"
     t.index ["final_gallery_id"], name: "index_pages_on_final_gallery_id", using: :btree
     t.index ["main_gallery_id"], name: "index_pages_on_main_gallery_id", using: :btree
     t.index ["resource_id"], name: "index_pages_on_resource_id", using: :btree
