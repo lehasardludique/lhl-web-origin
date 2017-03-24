@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @home_carousels_links = HomeCarouselLink.published
-    @retargeting_pixel_id = 8020083
+    @retargeting_pixel_id = 8147450
     body_classes 'home'
   end
 
