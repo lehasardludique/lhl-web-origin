@@ -17,6 +17,7 @@ class Page < ApplicationRecord
   validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
+  validates :retargeting_pixel_id, numericality: { only_integer: true }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
