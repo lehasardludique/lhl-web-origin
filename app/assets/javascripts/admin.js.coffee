@@ -74,6 +74,7 @@ LHL.progressBar = (event) ->
             Turbolinks.controller.adapter.progressBar.show()
         $bar = $('div.turbolinks-progress-bar')
         if event == 'start'
+            Turbolinks.controller.adapter.progressBar.setValue 0
             $bar.hide().width 0
             LHL.progressBarTimer = setTimeout(( ->
                 $bar = $('div.turbolinks-progress-bar')
@@ -90,6 +91,9 @@ LHL.progressBar = (event) ->
                 Turbolinks.controller.adapter.progressBar.stopTrickling()
                 $bar.width '100%'
                 $bar.stop().delay(350).hide 0
+            else
+                clearTimeout LHL.progressBarTimer
+                LHL.progressBarTimer = 0
 
 watchMenuLinks = ->
     $('nav a[href^="#"]:not([href="#"])').off('click').click ->
@@ -97,6 +101,11 @@ watchMenuLinks = ->
         false
 
 init = ->
+    # Reload
+    if $('body').data('reload')
+        LHL.progressBar 'start'
+        location.href = $('body').data('reload')
+
     # Flash Message
     if $('#flash').length
         if $('body').hasClass 'iframe'
