@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170324164535) do
+ActiveRecord::Schema.define(version: 20170329135419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -142,6 +142,16 @@ ActiveRecord::Schema.define(version: 20170324164535) do
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["last_logout_at", "last_activity_at"], name: "index_users_on_last_logout_at_and_last_activity_at", using: :btree
     t.index ["remember_me_token"], name: "index_users_on_remember_me_token", using: :btree
+  end
+
+  create_table "weez_events", force: :cascade do |t|
+    t.bigint   "wid"
+    t.string   "title"
+    t.string   "image"
+    t.jsonb    "data"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["wid"], name: "index_weez_events_on_wid", using: :btree
   end
 
   add_foreign_key "articles", "galleries", column: "final_gallery_id"

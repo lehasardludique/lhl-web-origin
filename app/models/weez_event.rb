@@ -1,0 +1,2 @@
+class WeezEvent < ApplicationRecord
+end
