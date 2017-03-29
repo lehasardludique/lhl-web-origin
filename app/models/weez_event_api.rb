@@ -1,5 +1,5 @@
 class WeezEventApi
-  attr_accessor :username, :password, :api_key, :we_uri, :access_token
+  attr_accessor :username, :password, :api_key, :we_uri, :access_token, :error
 
   def initialize(*attributes)
     super
@@ -7,7 +7,15 @@ class WeezEventApi
     @assword      ||= ENV['WE_PASSWORD']
     @api_key      ||= ENV['WE_API_KEY']
     @we_uri       ||= "https://api.weezevent.com"
-    @access_token ||= get_access_token
+    begin
+      @access_token ||= get_access_token
+    rescue RestClient::Forbidden
+      @error = :forbidden
+    end
+  end
+
+  def connected?
+    self.access_token.present?
   end
 
   private

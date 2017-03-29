@@ -4,10 +4,19 @@ class Admin::WeezEventsController < AdminController
   end
 
   def index
-    begin
-      we_api = WeezEventApi.new
-    rescue RestClient::Forbidden
-      flash.now[:error] = 'Impossible de se connecter à WeezEvent'
+    we_api = WeezEventApi.new
+
+    # Let's go !
+    if we_api.connected?
+
+    # Errors
+    else
+      case we_api.error
+      when :forbidden
+        flash.now[:error] = 'Impossible de se connecter à WeezEvent (Accès refusé).'
+      else
+        flash.now[:error] = 'Impossible de se connecter à WeezEvent (Erreur inconnue).'
+      end
     end
   end
 end
