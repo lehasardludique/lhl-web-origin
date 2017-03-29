@@ -14,6 +14,23 @@ module ApplicationHelper
     end
   end
 
+  def body_data(data = nil)
+    @body_data ||= []
+    if data.class.in? [Hash, Array]
+      data.each do |d|
+        html_attribute = "data-#{d.first}=\"#{d.last}\""
+        @body_data << html_attribute unless html_attribute.in? @body_data
+      end
+    elsif data.nil?
+      data = @body_data
+      if data.any?
+        " #{data.join(' ')}".html_safe
+      else
+        ""
+      end
+    end
+  end
+
   def meta_title(title = false)
     @meta_title ||= []
     if title.present?

@@ -10,7 +10,7 @@
   <%= javascript_include_tag '//cdn.ckeditor.com/4.6.2/full/ckeditor.js', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'admin', 'data-turbolinks-track': 'reload' %>
 </head>
-<body<%= body_classes %>>
+<body<%= (body_classes + body_data).html_safe %>>
 <div class="turbolinks-progress-bar"></div>
 <% if flash.any? %>
 <div id="flash">
