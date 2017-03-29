@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.5
-* staging : v0.5
-* prod. : v0.5
+* dev : v0.5.1
+* staging : v0.5.1
+* prod. : v0.5.1
 
 ---
 
@@ -71,6 +71,22 @@ n/a
 ---
 
 ## Release notes
+
+### v0.5.1 (RC)
+
+* RC:
+    * active home
+    * improve routes redirections
+* TradeSpotting:
+    * add pixels to app layout & styles
+    * admin pixel management
+    * page & article validations
+* Helper: `active_links_to` method
+    * Menu/Footer: implement active_links
+* Recette:
+    * fix carousel indicators vs. menu z-index
+* Global Style:
+    * menu: doesn't break links
 
 ### v0.5 (Home)
 
