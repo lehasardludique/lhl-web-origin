@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       patch 'images' => 'galleries#images_update'
     end
     delete 'image_ships/:id' => 'galleries#images_delete', as: :image_ship_delete
+    get 'get_weezevents' => 'weez_events#get_items', as: :get_weezevents
     # resources :pages
   end
 
@@ -43,5 +44,5 @@ Rails.application.routes.draw do
   get '/profil' => 'pages#redirect'
 
   # Pages
-  get '*slug' => 'pages#show', as: :page
+  get '*slug' => 'pages#show', as: :page unless Rails.env.development?
 end
