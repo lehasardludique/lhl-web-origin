@@ -106,6 +106,9 @@ init = ->
         LHL.progressBar 'start'
         location.href = $('body').data('reload')
 
+    $('a[data-method]').off('click').click ->
+        LHL.progressBar 'start'
+
     # Flash Message
     if $('#flash').length
         if $('body').hasClass 'iframe'

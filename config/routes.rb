@@ -27,6 +27,8 @@ Rails.application.routes.draw do
     delete 'image_ships/:id' => 'galleries#images_delete', as: :image_ship_delete
     get 'get_weezevents' => 'weez_events#get_items', as: :get_weezevents
     get 'weezevents' => 'weez_events#index', as: :weezevents
+    post 'weezevents' => 'weez_events#index', update: :forced
+    delete 'weezevent/:id' => 'weez_events#delete', as: :weez_event
     # resources :pages
   end
 

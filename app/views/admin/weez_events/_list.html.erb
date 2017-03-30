@@ -1,0 +1,27 @@
+<table class="sortable" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Illustration</th>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Mini-Site<br />WeezEvent</th>
+      <th>BO<br />WeezEvent</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% weez_events.each do |weez_event| %>
+      <tr>
+        <td><span class="badge"><%= weez_event.wid %></span></td>
+        <td><span class="preview" style="background-image: url('<%= weez_event.image %>')"></span></td>
+        <td><%= weez_event.title %></td>
+        <td><%= l weez_event.date, format: :sortable %></td>
+        <td><%= link_to "<i class=\"fa fa-ticket\" aria-hidden=\"true\"></i>".html_safe, weez_event.mini_site, target: :_blank %></td>
+        <td><%= link_to "<i class=\"fa fa-sliders\" aria-hidden=\"true\"></i>".html_safe, "https://www.weezevent.com/bo/tableau_bord_accueil.php?id_evenement=#{weez_event.wid}", target: :_blank %></td>
+        <td class="action"><%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_weez_event_path(weez_event), method: :delete, data: { confirm: "Si l'évènement est toujours présent chez WeezEvent\nIl sera réimporté au prochain chargement…" }, title: "Supprimer" if can? :delete, weez_event %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
