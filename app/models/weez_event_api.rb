@@ -39,6 +39,7 @@ class WeezEventApi
 
       end
     end
+    weez_events['events'].present? ? weez_events['events'].size : false
   end
 
   private

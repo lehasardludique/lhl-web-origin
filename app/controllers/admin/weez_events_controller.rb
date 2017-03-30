@@ -9,7 +9,8 @@ class Admin::WeezEventsController < AdminController
 
       # Let's go !
       if we_api.connected?
-        we_api.update_events!(params[:update] == :forced) if params[:update].in? [:forced, 'normal']
+        updated = we_api.update_events!(params[:update] == :forced) if params[:update].in? [:forced, 'normal']
+        flash.now[:notice] = 'Liste WeezEvent mise à jour avec succès.' if updated
       # Errors
       else
         case we_api.error
