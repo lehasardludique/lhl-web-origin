@@ -16,9 +16,9 @@ class Ability
       #   event.user == user
       # end
 
-    ## PAGE
+    ## FOCUS
     
-      # can :manage, Page if user.admin?
+      # can :manage, Focus if user.admin?
 
     ## RESOURCE
       can [:read], Resource unless user.new_record?
