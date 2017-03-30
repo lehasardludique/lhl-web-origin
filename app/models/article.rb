@@ -4,6 +4,7 @@ class Article < ApplicationRecord
   belongs_to :resource
   belongs_to :final_gallery, class_name: 'Gallery'
   has_one :home_carousel_link, as: :home_linkable
+  has_many :focuses, class_name: 'Focus'
 
   enum status: { draft: 0, published: 1, restricted: 2 }
 

@@ -19,3 +19,8 @@
   <% end %>
 <% end %>
 </dl>
+<% if @article.focuses.any? %>
+<hr />
+<h3><i class="fa fa-arrow-right" aria-hidden="true"></i> Focus</h3>
+  <%= render 'admin/focus/list', focuses: @article.focuses, hide_sorting_tools: true %>
+<% end %>
