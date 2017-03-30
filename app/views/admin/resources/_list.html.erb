@@ -11,8 +11,6 @@
       <th>Notes</th>
       <th>Utilisateur</th>
       <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
     </tr>
   </thead>
 
@@ -34,9 +32,11 @@
         <td><%= t("resource.categories.#{r.category}") %></td>
         <td><%= truncate(r.notes, length: 90, separator: ' ') %></td>
         <td><%= r.user.real_name %></td>
-        <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_resource_path(r), title: "Détails" if can? :read, r %></td>
-        <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_resource_path(r), title: "Éditer" if can? :edit, r %></td>
-        <td class="action"><%= link_to '<i class="fa fa-trash"></i>'.html_safe, admin_resource_path(r), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, r %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_resource_path(r), title: "Détails" if can? :read, r %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_resource_path(r), title: "Éditer" if can? :edit, r %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe, admin_resource_path(r), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, r %>
+        </td>
       </tr>
     <% end %>
   </tbody>

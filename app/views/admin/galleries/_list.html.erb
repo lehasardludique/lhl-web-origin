@@ -8,9 +8,6 @@
       <th>Date de création</th>
       <th>Utilisateur</th>
       <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
     </tr>
   </thead>
 
@@ -23,10 +20,12 @@
         <td><%= t("gallery.categories.#{ gallery.category }") %></td>
         <td><%= l gallery.created_at, format: :sortable %></td>
         <td><%= gallery.user.real_name %></td>
-        <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_gallery_path(gallery), title: "Détails" if can? :read, gallery %></td>
-        <td class="action"><%= link_to '<i class="fa fa-picture-o"></i>'.html_safe, admin_gallery_images_path(gallery), title: "Images" if can? :read, gallery %></td>
-        <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_gallery_path(gallery), title: "Éditer" if can? :edit, gallery %></td>
-        <td class="action"><%= link_to '<i class="fa fa-trash"></i>'.html_safe, admin_gallery_path(gallery), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, gallery %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_gallery_path(gallery), title: "Détails" if can? :read, gallery %>
+          <%= link_to '<i class="fa fa-picture-o"></i>'.html_safe, admin_gallery_images_path(gallery), title: "Images" if can? :read, gallery %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_gallery_path(gallery), title: "Éditer" if can? :edit, gallery %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe, admin_gallery_path(gallery), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, gallery %>
+        </td>
       </tr>
     <% end %>
   </tbody>

@@ -11,8 +11,6 @@
       <th>Utilisateur</th>
       <th>Statut</th>
       <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
-      <th data-orderable="false"></th>
     </tr>
   </thead>
 
@@ -28,9 +26,11 @@
         <td><%= l page.updated_at, format: :sortable %></td>
         <td><%= page.user.real_name %></td>
         <td><%= t("page.statuses.#{page.status}") %></td>
-        <td class="action"><%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_page_path(page), title: "Détails" if can? :read, page %></td>
-        <td class="action"><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_page_path(page), title: "Éditer" if can? :edit, page %></td>
-        <td class="action"><%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_page_path(page), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, page %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_page_path(page), title: "Détails" if can? :read, page %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_page_path(page), title: "Éditer" if can? :edit, page %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_page_path(page), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, page %>
+        </td>
       </tr>
     <% end %>
   </tbody>

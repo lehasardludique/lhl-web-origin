@@ -48,5 +48,5 @@ Rails.application.routes.draw do
   get '/profil' => 'pages#redirect'
 
   # Pages
-  get '*slug' => 'pages#show', as: :page unless Rails.env.development?
+  get '*slug' => 'pages#show', as: :page
 end
