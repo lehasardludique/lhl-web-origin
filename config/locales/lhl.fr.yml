@@ -34,6 +34,10 @@ fr:
   models: &models
     user: Utilisateur
     resource: Fichier
+    gallery: Galerie
+    page: Page
+    article: Article
+    focus: Focus
     
   attributes: &default_attributes
     id: ID
@@ -129,6 +133,13 @@ fr:
     home_linkable_type: Lien vers (type d'objet)
     home_linkable_id: Titre de l'objet
 
+  # Focus
+  focus: &focus
+    <<: *default_attributes
+    start: Date de début
+    end: Date de fin
+    article_id: Article lié
+
   # Models
   activerecord:
     models: &models
@@ -146,3 +157,5 @@ fr:
         <<: *article
       home_carousel_link:
         <<: *home_carousel_link
+      focus:
+        <<: *focus

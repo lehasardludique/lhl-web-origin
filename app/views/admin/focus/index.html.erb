@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_focus_path, title: 'Ajouter un nouveau focus' %>
+  </nav>
+  Liste des focus
+</h2>
+
+<%= render 'list', focuses: @focuses %>
+
+<br>

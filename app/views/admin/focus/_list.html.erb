@@ -1,0 +1,31 @@
+<table class="sortable" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Article<br />lié</th>
+      <th>Statut</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% focuses.each do |focus| %>
+      <tr>
+        <td><span class="badge"><%= focus.id %></span></td>
+        <td><%= focus.title %></td>
+        <td><%= l focus.start, format: :sortable %></td>
+        <td><%= l focus.end, format: :sortable %></td>
+        <td><%= link_to focus.article.title, admin_article_path(focus.article) if focus.article.present? %></td>
+        <td><%= t("focus.statuses.#{focus.status}") %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_focus_path(focus), title: "Détails" if can? :read, focus %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_focus_path(focus), title: "Éditer" if can? :edit, focus %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_focus_path(focus), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, focus %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

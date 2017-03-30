@@ -1,0 +1,19 @@
+<%= simple_form_for @focus, url: url = (@focus.new_record?) ? admin_focus_path : admin_focus_path(@focus) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <h3>Contenu</h3>
+    <%= f.input :title  %>
+    <%= f.input :article_id, collection: Article.all.collect { |s| [s.title, s.id] }, selected: @focus.article_id, include_blank: true, input_html: { multiple: false, class: "select2" } %>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :start  %>
+    <%= f.input :end  %>
+    <%= f.input :status, collection: Focus.statuses.collect { |s| [t("focus.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>

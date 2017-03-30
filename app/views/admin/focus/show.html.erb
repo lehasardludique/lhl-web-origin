@@ -1,0 +1,21 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_focus_path(@focus), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_focus_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @focus.id %></span> Focus <em><%= @focus.title %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @focus.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "focus.#{k}" %></dt>
+    <dd><%= @focus.user.real_name %></dd>
+  <% elsif @focus.defined_enums? and k.in? @focus.defined_enums %>
+    <dt><%= t "focus.#{k}" %></dt>
+    <dd><%= t "focus.#{k.pluralize}.#{v}" %></dd>
+  <% else %>
+    <dt><%= t "focus.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+</dl>
