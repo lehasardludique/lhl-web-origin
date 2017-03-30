@@ -42,7 +42,7 @@ class Admin::FocusController < AdminController
   def destroy
     authorize! :delete, @focus
     @focus.destroy
-    redirect_to admin_focuses_path, notice: 'Focus supprimé avec succès.'
+    redirect_to admin_focus_path, notice: 'Focus supprimé avec succès.'
   end
 
   private
