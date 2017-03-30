@@ -7,10 +7,11 @@ class Admin::WeezEventsController < AdminController
     we_api = WeezEventApi.new
 
     # Let's go !
-    if we_api.connected?
+    we_api.update_events! if we_api.connected?
+    @weez_events = WeezEvent.all
 
     # Errors
-    else
+    if not we_api.connected?
       case we_api.error
       when :forbidden
         flash.now[:error] = 'Impossible de se connecter à WeezEvent (Accès refusé).'
