@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329135419) do
+ActiveRecord::Schema.define(version: 20170330124704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,8 @@ ActiveRecord::Schema.define(version: 20170329135419) do
     t.jsonb    "data"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "date"
+    t.string   "mini_site"
     t.index ["wid"], name: "index_weez_events_on_wid", using: :btree
   end
 
