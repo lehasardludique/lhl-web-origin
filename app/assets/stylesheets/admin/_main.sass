@@ -35,7 +35,27 @@ hr
 pre
     background-color: rgba(white, 0.2)
     font-size: 70%
-    
+
+form.collapsable
+
+    h3[data-toggle="collapse"]
+        cursor: pointer
+
+        &::before
+            +fa
+            content: "\f061"
+            padding-right: 10px
+
+        &::after
+            +fa
+            float: right
+            content: "\f0d8"
+            display: inline-block
+
+        &.collapsed
+            &::after
+                content: "\f0d7"
+
 //= NavBar
 
 body > nav.navbar
@@ -54,7 +74,6 @@ body > nav.navbar
         a > i.fa
             padding-right: 7px
             opacity: 0.5
-
 
 //= Page & title
 
@@ -81,8 +100,6 @@ div.info_card
         position: absolute
         top: 50%
         width: 100%
-
-
 
 //= Table
 

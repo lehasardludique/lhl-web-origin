@@ -189,6 +189,16 @@ init = ->
                     .stop()
                     .slideDown()
 
+    # Collapsable form
+    if !!$('form.collapsable').length
+        if !!$('.has-error').length
+            $('.has-error').each ->
+                $collapse = $(this).closest('.collapse')
+                if !$collapse.hasClass 'in'
+                    $collapse.collapse 'show'
+        else
+            $('form.collapsable .collapse').first().collapse 'show'
+
     # Global
     watchMenuLinks()
     return
