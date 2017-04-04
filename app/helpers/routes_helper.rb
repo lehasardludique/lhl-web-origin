@@ -16,7 +16,7 @@ module RoutesHelper
   end
 
   def event_path(event, *additional_params)
-    event_params = { category: event.category_slug, date: event.date_slug, title: event.title_slug }
+    event_params = { category: event.category_slug, date: event.date_slug, slug: event.title_slug }
     event_params.merge( additional_params ) if additional_params.present? and additional_params.is_a? Hash
     super(event_params) if event.is_a? Event
   end
