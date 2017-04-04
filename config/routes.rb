@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     resources :pages
     resources :articles
     resources :focus
+    resources :events
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'
