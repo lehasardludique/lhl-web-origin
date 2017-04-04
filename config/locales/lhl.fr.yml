@@ -74,6 +74,9 @@ fr:
     aside_link_3_data: Lien 3
     event_link_data: Lien Calendrier
     info_link_data: Lien Info
+    title_slug: URL relative (partie Titre)
+    date_slug: URL relative (partie Date)
+    topic: Tag (thème principal)
 
   # User
   user: &user
@@ -97,7 +100,7 @@ fr:
     handle: Fichier
     categories:
       gallery: Galerie
-      global: Général
+      global: Indépendante
 
   # Gallery
   gallery: &gallery
@@ -118,9 +121,6 @@ fr:
   article: &article
     <<: *pages_articles_attributes
     <<: *default_attributes
-    title_slug: URL relative (partie Titre)
-    date_slug: URL relative (partie Date)
-    topic: Tag (thème principal)
     media_link_fbk: Page FaceBook
     media_link_twt: Page Twitter
     media_link_isg: Page Instagram
@@ -144,10 +144,11 @@ fr:
   # Event
   event: &event
     <<: *default_attributes
+    <<: *pages_articles_attributes
     display_date: Date affichée
     start_time: Date/Heure de début
     end_time: Date/Heure de fin
-    topic: Tag (thème principal)
+    weez_event_id: WeezEvent
     categories:
       family: Famille
       concert: Concert

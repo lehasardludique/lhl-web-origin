@@ -16,7 +16,7 @@
                 <%= @event.exergue.html_safe %>
             </div>
             <% end %>
-            <% if @event.aside_link_1_data.present? or @event.aside_link_2_data.present? or @event.aside_link_3_data.present? %>
+            <% if @event.aside_link_1_data.present? or @event.aside_link_2_data.present? %>
             <nav>
                 <%= link_from @event.aside_link_1_data if @event.aside_link_1_data.present? %>
                 <%= link_from @event.aside_link_2_data if @event.aside_link_2_data.present? %>

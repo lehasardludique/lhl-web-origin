@@ -20,7 +20,7 @@ class Event < ApplicationRecord
   validates :aside_link_2_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :retargeting_pixel_id, numericality: { only_integer: true }
+  validates :retargeting_pixel_id, allow_blank: true, numericality: { only_integer: true }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
@@ -31,6 +31,10 @@ class Event < ApplicationRecord
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   default_scope { order(published_at: :desc) }
 
+  def self.categories_urlized
+    @@categories_urlized ||= self.categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
+  end
+
   def visible?
     published? and published_at <= Time.now
   end
@@ -40,7 +44,7 @@ class Event < ApplicationRecord
   end
   
   def slug
-    @slug ||= Rails.application.routes.url_helpers.article_path(category: self.soirée_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
+    @slug ||= Rails.application.routes.url_helpers.event_path(category: self.category_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
   end
 
   def category_slug
@@ -48,7 +52,7 @@ class Event < ApplicationRecord
   end
 
   def full_url
-    @full_url ||= Rails.application.routes.url_helpers.article_url(category: self.soirée_slug, date: self.date_slug, slug: self.title_slug, host: LHL_URL)
+    @full_url ||= Rails.application.routes.url_helpers.event_url(category: self.category_slug, date: self.date_slug, slug: self.title_slug, host: LHL_URL)
   end
 
   def main_picture
