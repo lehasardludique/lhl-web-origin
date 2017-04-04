@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_event_path, title: 'Ajouter un nouvel évènement' %>
+  </nav>
+  Liste des évènements
+</h2>
+
+<%= render 'list', events: @events %>
+
+<br>
