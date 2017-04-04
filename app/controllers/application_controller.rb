@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   include ApplicationHelper
+  include RoutesHelper
 
   rescue_from PG::ForeignKeyViolation, with: :ooops!
   rescue_from ActiveRecord::RecordNotFound , with: :not_found!
