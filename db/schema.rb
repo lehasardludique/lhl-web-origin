@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330143906) do
+ActiveRecord::Schema.define(version: 20170404133338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,44 @@ ActiveRecord::Schema.define(version: 20170330143906) do
     t.index ["resource_id"], name: "index_articles_on_resource_id", using: :btree
     t.index ["title_slug"], name: "index_articles_on_title_slug", using: :btree
     t.index ["user_id"], name: "index_articles_on_user_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "focus_id"
+    t.integer  "category"
+    t.integer  "weez_event_id"
+    t.string   "display_date"
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.string   "topic"
+    t.integer  "main_gallery_id"
+    t.integer  "resource_id"
+    t.string   "title"
+    t.string   "subtitle"
+    t.text     "content"
+    t.integer  "final_gallery_id"
+    t.text     "exergue"
+    t.string   "aside_link_1_data"
+    t.string   "aside_link_2_data"
+    t.boolean  "social_block"
+    t.string   "event_link_data"
+    t.string   "info_link_data"
+    t.datetime "published_at"
+    t.string   "title_slug"
+    t.string   "date_slug"
+    t.bigint   "retargeting_pixel_id"
+    t.integer  "status"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["date_slug"], name: "index_events_on_date_slug", using: :btree
+    t.index ["final_gallery_id"], name: "index_events_on_final_gallery_id", using: :btree
+    t.index ["focus_id"], name: "index_events_on_focus_id", using: :btree
+    t.index ["main_gallery_id"], name: "index_events_on_main_gallery_id", using: :btree
+    t.index ["resource_id"], name: "index_events_on_resource_id", using: :btree
+    t.index ["title_slug"], name: "index_events_on_title_slug", using: :btree
+    t.index ["user_id"], name: "index_events_on_user_id", using: :btree
+    t.index ["weez_event_id"], name: "index_events_on_weez_event_id", using: :btree
   end
 
   create_table "focus", force: :cascade do |t|
@@ -171,6 +209,12 @@ ActiveRecord::Schema.define(version: 20170330143906) do
   add_foreign_key "articles", "galleries", column: "main_gallery_id"
   add_foreign_key "articles", "resources"
   add_foreign_key "articles", "users"
+  add_foreign_key "events", "focus", column: "focus_id"
+  add_foreign_key "events", "galleries", column: "final_gallery_id"
+  add_foreign_key "events", "galleries", column: "main_gallery_id"
+  add_foreign_key "events", "resources"
+  add_foreign_key "events", "users"
+  add_foreign_key "events", "weez_events"
   add_foreign_key "focus", "articles"
   add_foreign_key "galleries", "users"
   add_foreign_key "home_carousel_links", "resources"
