@@ -38,6 +38,7 @@ fr:
     page: Page
     article: Article
     focus: Focus
+    event: Évènement
     
   attributes: &default_attributes
     id: ID
@@ -140,6 +141,20 @@ fr:
     end: Date de fin
     article_id: Article lié
 
+  # Event
+  event: &event
+    <<: *default_attributes
+    display_date: Date affichée
+    start_time: Date/Heure de début
+    end_time: Date/Heure de fin
+    topic: Tag (thème principal)
+    categories:
+      family: Famille
+      concert: Concert
+      animations: Animations
+      show: Soirée
+      other: Autre
+
   # Models
   activerecord:
     models: &models
@@ -159,3 +174,5 @@ fr:
         <<: *home_carousel_link
       focus:
         <<: *focus
+      event:
+        <<: *event

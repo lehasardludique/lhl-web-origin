@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
   # Articles
   get 'articles/:date/*slug' => 'articles#show', as: :article
+  get ':category/:date/*slug' => 'events#show', constraints: lambda { |request| request.params[:category].in? EVENT_CATEGORIES_URLIZE }, as: :event
 
   # La-Fabrique redirection
   get '/la-fabrique' => 'pages#redirect'
