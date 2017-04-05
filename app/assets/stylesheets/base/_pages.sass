@@ -13,11 +13,24 @@ body.page
         > h2
             background-color: $lhl-yellow
 
-            span
-                display: block
-                font-size: $font-size-base
-                text-transform: lowercase
-                font-weight: $bold
+            > div.container
+                > div
+                    font-size: 0
+
+                    span
+                        font-size: $font-size-base
+                        text-transform: lowercase
+                        font-weight: $bold
+
+                    a.focus
+                        display: inline-block
+                        width: 32px
+                        height: 30px
+                        background-image: image_url("focus.svg")
+                        margin-right: 10px
+                        vertical-align: middle
+                        text-indent: -9999px
+                        margin-top: -10px
 
         > aside
             background-image: image_url('bg_black_spotted.png')

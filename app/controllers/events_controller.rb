@@ -12,6 +12,6 @@ class EventsController < ApplicationController
     set_meta_og @event
     @retargeting_pixel_id = @event.retargeting_pixel_id
     body_classes 'page'
-    body_classes @event.category_slug
+    body_classes @event.category
   end
 end

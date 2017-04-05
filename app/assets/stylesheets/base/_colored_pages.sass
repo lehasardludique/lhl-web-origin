@@ -1,0 +1,45 @@
+body.page
+
+    &.family
+
+        .socials > a
+            background-image: svg_to_data('bg_social', $lhl-green)
+
+
+        > menu
+            background-image: svg_to_data('bg_menu', $lhl-green)
+
+            > a#burger_menu
+                background-image: svg_to_data('bg_social', $lhl-green)
+            
+
+        > article
+
+            > h2
+                background-color: white
+                color: $lhl-green
+                padding-bottom: 10px
+
+            > aside
+                ul.infos
+                    background-image: svg_to_data('bg_social_block_h', $lhl-green)
+                    color: white
+
+        
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body.page
+
+        &.family
+
+            > menu
+                background-image: svg_to_data('bg_menu_desk', $lhl-green)
+    
+                > div#opening
+                    background-image: svg_to_data('opening', $lhl-green)
+
+            > article
+                > aside
+                    ul.infos
+                        background-image: svg_to_data('bg_social_block_v', $lhl-green)

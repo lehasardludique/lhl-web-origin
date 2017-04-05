@@ -4,7 +4,10 @@
 <article>
     <h2>
         <div class="container">
-            <%= content_tag :span, "##{@event.topic}" if @event.topic.present? %>
+            <div>
+                <%= link_to "Focus", @event.focus.article.slug, class: 'focus' if @event.focus.present? and @event.focus.article.present? %>
+                <%= content_tag :span, "##{@event.topic}" if @event.topic.present? %>
+            </div>
             <%= @event.title %>
             <%= content_tag :small, @event.subtitle if @event.subtitle.present? %>
         </div>

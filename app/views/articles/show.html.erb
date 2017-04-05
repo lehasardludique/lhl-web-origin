@@ -4,7 +4,9 @@
 <article>
     <h2>
         <div class="container">
-            <%= content_tag :span, "##{@article.topic}" if @article.topic.present? %>
+            <div>
+                <%= content_tag :span, "##{@article.topic}" if @article.topic.present? %>
+            </div>
             <%= @article.title %>
             <%= content_tag :small, @article.subtitle if @article.subtitle.present? %>
         </div>
