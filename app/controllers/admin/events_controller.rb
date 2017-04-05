@@ -13,6 +13,10 @@ class Admin::EventsController < AdminController
 
   def new
     @event = Event.new(user: current_user)
+    if params[:weez_event].present? and params[:weez_event].to_i > 0
+      weez_event = WeezEvent.find params[:weez_event]
+      @event.exchange_data weez_event
+    end
     authorize! :create, @event
     set_users
   end

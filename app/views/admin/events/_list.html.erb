@@ -11,7 +11,8 @@
       <th>Mise à jour</th>
       <th>Utilisateur</th>
       <th>Statut</th>
-      <th data-orderable="false"></th>
+      <th data-orderable="false" class="action">WeezEvent</th>
+      <th data-orderable="false" class="action"></th>
     </tr>
   </thead>
 
@@ -27,6 +28,13 @@
         <td><%= l event.updated_at, format: :sortable %></td>
         <td><%= event.user.real_name %></td>
         <td><%= t("event.statuses.#{event.status}") %></td>
+        <td class="action">
+        <% if event.weez_event.present? %>
+          <%= link_to "<i class=\"fa fa-ticket\" aria-hidden=\"true\"></i>".html_safe, event.weez_event.mini_site, target: :_blank, title: "Mini-Site WeezEvent" %>
+          <%= link_to "<i class=\"fa fa-sliders\" aria-hidden=\"true\"></i>".html_safe, "https://www.weezevent.com/bo/tableau_bord_accueil.php?id_evenement=#{event.weez_event.wid}", target: :_blank, title: "Back Office WeezEvent" %>
+        <% end %>
+          &nbsp;
+        </td>
         <td class="action">
           <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_event_path(event), title: "Détails" if can? :read, event %>
           <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_event_path(event), title: "Éditer" if can? :edit, event %>
