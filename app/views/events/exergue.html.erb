@@ -1,0 +1,14 @@
+<p>
+    <strong>DATE</strong><br />
+    <%= l exergue_data[:start], format: "%A %d %B %Y" if exergue_data[:start].present? %><br />
+    <%= l exergue_data[:start], format: "%Hh%M" if exergue_data[:start].present? %>
+</p>
+<p>
+    <strong>LIEU</strong><br />
+    <%= exergue_data[:place] %>
+</p>
+<p>
+    <strong>TARIFS</strong><br />
+    tarif plein&nbsp;: <%= exergue_data[:full_price] %> €<br />
+    tarif réduit&nbsp;: <%= exergue_data[:reduced_price] %> €
+</p>

@@ -207,4 +207,5 @@ fr:
       short: "%d %b %Hh%M"
       sortable: "%Y/%m/%d - %Hh%M"
       url: "%Y-%m-%d"
+      display: "%d.%m.%Y"
     pm: pm

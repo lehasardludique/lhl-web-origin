@@ -35,6 +35,23 @@ class Event < ApplicationRecord
     @@categories_urlized ||= self.categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
   end
 
+  def exchange_data weez_event
+    if weez_event.is_a? WeezEvent
+      self.weez_event_id = weez_event.id
+      if weez_event.data['period'].present? and weez_event.data['period']['timezone'].present?
+        zone = ActiveSupport::TimeZone[weez_event.data['period']['timezone']]
+        weez_event.data['period']
+        self.start_time = "#{weez_event.data['period']['start']} #{zone.formatted_offset(false)}"
+        self.end_time = "#{weez_event.data['period']['end']} #{zone.formatted_offset(false)}"
+        self.display_date = I18n.l self.start_time, format: :display
+      end
+      self.title = weez_event.data['title'] if weez_event.data['title'].present?
+      # self.subtitle =
+      self.content = weez_event.data['description'] if weez_event.data['description'].present?
+      self.exergue = set_exergue_from weez_event
+    end
+  end
+
   def visible?
     published? and published_at <= Time.now
   end
@@ -116,5 +133,15 @@ class Event < ApplicationRecord
 
     def main_gallery_present?
       self.main_gallery.present?
+    end
+
+    def set_exergue_from weez_event
+      if weez_event.is_a? WeezEvent and weez_event.data.present?
+        exergue_data = { start: self.start_time, place: nil, full_price: nil, reduced_price: nil }
+        exergue_data[:place] = weez_event.data['venue']['name'] if defined? weez_event.data['venue']['name']
+        exergue_data[:full_price] = weez_event.data['price']['max'].gsub(/\./, ',') if defined? weez_event.data['price']['max']
+        exergue_data[:reduced_price] = weez_event.data['price']['min'].gsub(/\./, ',') if defined? weez_event.data['price']['min']
+        ApplicationController.new.render_to_string "events/exergue", layout: false, locals: { exergue_data: exergue_data }
+      end
     end
 end
