@@ -1,5 +1,6 @@
 <h2>
   <nav>
+    <%= link_to '<i class="fa fa-eye-slash"></i>'.html_safe, @event.slug, target: :_blank, title: "Voir la page en ligne" %>
     <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_event_path(@event), title: "Éditer" %>
     <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_events_path, title: "Retour à la liste" %>
   </nav>
