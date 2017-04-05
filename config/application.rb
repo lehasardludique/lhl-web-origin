@@ -18,5 +18,9 @@ module LhlWeb
     # I18n
     config.i18n.available_locales = [:fr]
     config.i18n.default_locale = :fr
+
+    if config.respond_to?(:sass)
+      require "#{config.root}/lib/assets/sass_functions.rb"
+    end
   end
 end
