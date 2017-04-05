@@ -1,29 +1,51 @@
+//= Mixins
+
+=colored_page_to($color: $lhl-yellow)
+    .socials > a
+        background-image: svg_to_data('bg_social', $color)
+    > menu
+        background-image: svg_to_data('bg_menu', $color)
+        > a#burger_menu
+            background-image: svg_to_data('bg_social', $color)
+    > article
+        > h2
+            background-color: white
+            color: $color
+            padding-bottom: 10px
+        > aside
+            ul.infos
+                background-image: svg_to_data('bg_social_block_h', $color)
+                color: white
+
+=colored_desk_page_to($color: $lhl-yellow)
+    > menu
+        background-image: svg_to_data('bg_menu_desk', $color)
+        > div#opening
+            background-image: svg_to_data('opening', $color)
+    > article
+        > aside
+            ul.infos
+                background-image: svg_to_data('bg_social_block_v', $color)
+
+//= Page
+
 body.page
 
     &.family
+        +colored_page_to($lhl-green)
 
-        .socials > a
-            background-image: svg_to_data('bg_social', $lhl-green)
+    &.show
+        +colored_page_to($lhl-purple)
 
+    &.animations
+        +colored_page_to($lhl-orange)
 
-        > menu
-            background-image: svg_to_data('bg_menu', $lhl-green)
+    &.concert
+        +colored_page_to($lhl-blue)
 
-            > a#burger_menu
-                background-image: svg_to_data('bg_social', $lhl-green)
-            
+    &.other
+        +colored_page_to($lhl-pink)
 
-        > article
-
-            > h2
-                background-color: white
-                color: $lhl-green
-                padding-bottom: 10px
-
-            > aside
-                ul.infos
-                    background-image: svg_to_data('bg_social_block_h', $lhl-green)
-                    color: white
 
         
 //= DESKTOP
@@ -32,14 +54,17 @@ body.page
     body.page
 
         &.family
+            +colored_desk_page_to($lhl-green)
 
-            > menu
-                background-image: svg_to_data('bg_menu_desk', $lhl-green)
-    
-                > div#opening
-                    background-image: svg_to_data('opening', $lhl-green)
+        &.show
+            +colored_desk_page_to($lhl-purple)
 
-            > article
-                > aside
-                    ul.infos
-                        background-image: svg_to_data('bg_social_block_v', $lhl-green)
+        &.animations
+            +colored_desk_page_to($lhl-orange)
+
+        &.concert
+            +colored_desk_page_to($lhl-blue)
+
+        &.other
+            +colored_desk_page_to($lhl-pink)
+
