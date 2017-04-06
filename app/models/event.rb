@@ -98,6 +98,12 @@ class Event < ApplicationRecord
     "https://twitter.com/intent/tweet?#{URI.encode_www_form(data)}"
   end
 
+  def booking_iframe_url
+    if self.weez_event.present?
+      "https://www.weezevent.com/widget_billeterie.php?id_evenement=#{self.weez_event.wid}&lg_billetterie=1&width_auto=1&color_primary=#{get_primary_color}".html_safe
+    end
+  end
+
   private
     def get_main_picture
       if self.main_gallery.present?
@@ -142,6 +148,21 @@ class Event < ApplicationRecord
         exergue_data[:full_price] = weez_event.data['price']['max'].gsub(/\./, ',') if defined? weez_event.data['price']['max']
         exergue_data[:reduced_price] = weez_event.data['price']['min'].gsub(/\./, ',') if defined? weez_event.data['price']['min']
         ApplicationController.new.render_to_string "events/exergue", layout: false, locals: { exergue_data: exergue_data }
+      end
+    end
+
+    def get_primary_color
+      case self.category
+      when "family"
+        "6bbfa3"
+      when "concert"
+        "0067b1"
+      when "animations"
+        "ee7444"
+      when "show"
+        "8865c2"
+      else
+        "c1657d"
       end
     end
 end
