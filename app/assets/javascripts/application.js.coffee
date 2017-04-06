@@ -55,7 +55,7 @@ LHL.scrollTo = (destination) ->
     if $target.length
         currentPosition = $(document).scrollTop()
         destinationPostion = $target.offset().top
-        speed = Math.floor(Math.abs(currentPosition - destinationPostion) / 2)
+        speed = Math.floor(Math.abs(currentPosition - destinationPostion) / 3)
         $('html,body').animate { scrollTop: destinationPostion }, speed
     return
 

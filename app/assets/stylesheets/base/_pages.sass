@@ -114,14 +114,29 @@ body.page
                             border-radius: 50%
                             font-size: 20px
 
-        > section.gray
-            padding: 5px 0
-            h3
-                font-weight: normal
-                margin: $margin-base 0
+        > section
+            &:not(.content)
+                h3
+                    font-weight: normal
+                    margin: $margin-base 0
 
-        > section.yellow
-            padding: $margin-base 0
+            &.gray
+                padding: 5px 0
+
+            &.yellow
+                padding: $margin-base 0
+
+            &.more
+                margin-top: $margin-base
+
+            &#reservation
+                background-color: $lhl-darkgray
+                color: white
+
+                iframe
+                    height: 650px
+                    background-color: transparent
+                    border-top: 5px solid
 
 //= DESKTOP
 

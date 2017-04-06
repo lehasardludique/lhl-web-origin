@@ -19,8 +19,9 @@
                 <%= @event.exergue.html_safe %>
             </div>
             <% end %>
-            <% if @event.aside_link_1_data.present? or @event.aside_link_2_data.present? %>
+            <% if @event.weez_event.present? or @event.aside_link_1_data.present? or @event.aside_link_2_data.present? %>
             <nav>
+                <%= link_to "Réserver", "#reservation" if @event.weez_event.present? %>
                 <%= link_from @event.aside_link_1_data if @event.aside_link_1_data.present? %>
                 <%= link_from @event.aside_link_2_data if @event.aside_link_2_data.present? %>
             </nav>
@@ -51,6 +52,14 @@
         <div class="container">
             <h3><%= @event.final_gallery.name %></h3>
             <%= render_gallery @event.final_gallery%>
+        </div>
+    </section>
+    <% end %>
+    <% if @event.weez_event.present? %>
+    <section id="reservation" class="more">
+        <div class="container">
+            <h3>Réservation</h3>
+            <iframe src="<%= @event.booking_iframe_url %>"></iframe>
         </div>
     </section>
     <% end %>
