@@ -77,6 +77,13 @@ fr:
     title_slug: URL relative (partie Titre)
     date_slug: URL relative (partie Date)
     topic: Tag (thème principal)
+  media_links: &media_links
+    media_link_fbk: Page FaceBook
+    media_link_twt: Page Twitter
+    media_link_isg: Page Instagram
+    media_link_msk: Page Musique
+    media_link_vid: Page Vidéo
+    media_link_www: Page Web
 
   # User
   user: &user
@@ -121,12 +128,13 @@ fr:
   article: &article
     <<: *pages_articles_attributes
     <<: *default_attributes
-    media_link_fbk: Page FaceBook
-    media_link_twt: Page Twitter
-    media_link_isg: Page Instagram
-    media_link_msk: Page Musique
-    media_link_vid: Page Vidéo
-    media_link_www: Page Web
+    <<: *media_links
+
+  # Artist
+  artist: &artist
+    <<: *pages_articles_attributes
+    <<: *default_attributes
+    <<: *media_links
 
   # HomeCarouselLink
   home_carousel_link: &home_carousel_link
@@ -171,6 +179,8 @@ fr:
         <<: *page
       article:
         <<: *article
+      artist:
+        <<: *artist
       home_carousel_link:
         <<: *home_carousel_link
       focus:
