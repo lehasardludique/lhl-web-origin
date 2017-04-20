@@ -104,7 +104,7 @@ class Admin::GalleriesController < AdminController
       @gallery.form = 'images'
       galleried_resource_ids = ImageShip.select(:resource_id).reorder(nil).distinct.pluck(:resource_id)
       if params[:scope] == 'in_galleries'
-        @new_resources_available = Resource.gallery.where.not(id: galleried_resource_ids).size.to_s.to_bool
+        @new_resources_available = (Resource.gallery.where.not(id: galleried_resource_ids).size > 0)
       else
         @resources = Resource.gallery.where.not(id: galleried_resource_ids)
       end
