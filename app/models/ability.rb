@@ -42,6 +42,14 @@ class Ability
         article.user == user
       end
 
+    ## ARTIST
+      can [:read], Artist do |artist|
+        artist.published? or artist.user == user
+      end
+      can [:create, :update, :delete], Artist do |artist|
+        artist.user == user
+      end
+
     ## GALLERY
       can [:read], Gallery unless user.new_record?
       can [:create, :update, :delete], Gallery do |gallery|

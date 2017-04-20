@@ -16,19 +16,20 @@
       <ul class="nav navbar-nav">
         <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
         <!-- <li><a href="#">Link</a></li> -->
-        <!-- CONTENU -->
+        <!-- EVENTS -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Évènements & Activités <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="<%= admin_events_path %>"><i class="fa fa-th-list"></i>Les événements</a></li>
             <li><a href="<%= admin_focus_path %>"><i class="fa fa-th-list"></i>Les focus</a></li>
+            <li><a href="<%= admin_artists_path %>"><i class="fa fa-th-list"></i>Les artistes</a></li>
             <li><a href="<%= admin_get_weezevents_path %>"><i class="fa fa-cloud-download"></i>Récupérer les nouveaux WeezEvents</a></li>
             <li role="separator" class="divider"></li>
-            <li><a href="<%= '#' %>"><i class="fa fa-plus-circle"></i>Ajouter un événement</a></li>
+            <li><a href="<%= new_admin_event_path %>"><i class="fa fa-plus-circle"></i>Ajouter un événement</a></li>
             <li><a href="<%= new_admin_focus_path %>"><i class="fa fa-plus-circle"></i>Ajouter un focus</a></li>
           </ul>
         </li>
-        <!-- CONTENU -->
+        <!-- CONTENT -->
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Contenu <span class="caret"></span></a>
           <ul class="dropdown-menu">
