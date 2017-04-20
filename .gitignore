@@ -21,3 +21,5 @@ server.sh
 *.pid
 
 passenger.3000.pid.lock
+
+public/uploads/tmp/*

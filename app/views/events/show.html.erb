@@ -55,6 +55,11 @@
         </div>
     </section>
     <% end %>
+    <% if @event.artists.any? %>
+    <section id="artists" class="more">
+        <%= render 'artists/list', artists: @event.artists %>
+    </section>
+    <% end %>
     <% if @event.weez_event.present? %>
     <section id="reservation" class="more">
         <div class="container">

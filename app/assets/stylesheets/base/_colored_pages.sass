@@ -18,6 +18,20 @@
                 color: white
 
         > section
+            &#artists
+                background-color: $color
+                color: white
+
+                div.artist
+                    &.artist-0 .mask
+                        background-image: svg_to_data('artist_mask_0', $color)
+                    &.artist-1 .mask
+                        background-image: svg_to_data('artist_mask_1', $color)
+                    &.artist-2 .mask
+                        background-image: svg_to_data('artist_mask_2', $color)
+                    &.artist-3 .mask
+                        background-image: svg_to_data('artist_mask_3', $color)
+
             &#reservation
                 iframe
                     border-color: $color

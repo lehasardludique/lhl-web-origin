@@ -1,0 +1,42 @@
+<% if artists.respond_to? :any? and artists.any? %>
+    <% if artists.size == 1 %>
+        <div class="container">
+            <div class="artists">
+                <h3>artists.first.name</h3>
+                <div class="row">
+                    <% if artists.first.resource.present? %>
+                    <div class="col-sm-4 artist artist-<%= rand(4) %>">
+                        <div class="image">
+                            <div class="mask"></div>
+                            <div style="background-image: url('<%= artists.first.resource.url %>')"></div>
+                        </div>
+                    </div>
+                    <% end %>
+                    <div class="col-sm-8">
+                        <%= simple_format artists.first.content %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% else %>
+        <div class="container">
+            <div class="artists ">
+                <h3>Artistes</h3>
+                <div class="row">
+                <% artists.each_with_index do |artist,i| %>
+                    <div class="col-sm-4 artist artist-<%= i % 4 %>">
+                        <% if artist.resource.present? %>
+                        <div class="image">
+                            <div class="mask"></div>
+                            <div style="background-image: url('<%= artist.resource.url %>')"></div>
+                        </div>
+                        <% end %>
+                        <h4><%= artist.name %></h4>
+                        <button data-action="slide" data-target="#artist-<%= i %>">+ d'info</button>
+                    </div>
+                <% end %>
+                </div>
+            </div>
+        </div>
+    <% end %>
+<% end %>

@@ -129,6 +129,38 @@ body.page
             &.more
                 margin-top: $margin-base
 
+            &#artists
+                background-color: $lhl-yellow
+                // color: white
+
+                button
+                    background-color: transparent
+                    border: none
+                    color: inherit
+                    text-decoration: underline
+
+                .artists
+                    .artist
+                        text-align: center
+                        padding-bottom: $margin-base
+
+                        div.image
+                            height: 0
+                            padding-bottom: 95%
+                            position: relative
+                            
+                            > div
+                                position: absolute
+                                width: 100%
+                                height: 100%
+
+                                &.mask
+                                    background-size: 100%
+                                    z-index: 1
+
+                                    &+div
+                                        background-size: cover
+
             &#reservation
                 background-color: $lhl-darkgray
                 color: white
