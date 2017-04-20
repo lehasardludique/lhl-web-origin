@@ -22,7 +22,7 @@
         <td><span class="badge"><%= event.id %></span></td>
         <td><%= event.title %></td>
         <td><%= event.digest %></td>
-        <td><span class="preview" style="background-image: url('<%= event.main_picture.thumb_url %>')"></span></td>
+        <td><% if event.main_picture.present? %><span class="preview" style="background-image: url('<%= event.main_picture.thumb_url %>')"></span><% end %></td>
         <td><%= link_to event.slug, event.slug, target: :_blank %></td>
         <td><%= l event.created_at, format: :sortable %></td>
         <td><%= l event.updated_at, format: :sortable %></td>
