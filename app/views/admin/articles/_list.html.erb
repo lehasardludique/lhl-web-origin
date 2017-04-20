@@ -1,4 +1,4 @@
-<% hide_sorting_tools ||= false %>
+<% hide_sorting_tools ||= false; undeletable ||= false %>
 <table class="<%= hide_sorting_tools ? '' : 'sortable' %>" data-order='[[3  , "desc"]]'>
   <thead>
     <tr>
@@ -30,7 +30,7 @@
         <td class="action">
           <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_article_path(article), title: "Détails" if can? :read, article %>
           <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_article_path(article), title: "Éditer" if can? :edit, article %>
-          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_article_path(article), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, article %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_article_path(article), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if not undeletable and can? :delete, article %>
         </td>
       </tr>
     <% end %>

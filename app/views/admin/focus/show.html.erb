@@ -22,5 +22,5 @@
 <% if @focus.article.present? %>
 <hr />
 <h3><i class="fa fa-arrow-right" aria-hidden="true"></i> Article lié</h3>
-  <%= render 'admin/articles/list', articles: [ @focus.article ], hide_sorting_tools: true %>
+  <%= render 'admin/articles/list', articles: [ @focus.article ], hide_sorting_tools: true, undeletable: true %>
 <% end %>

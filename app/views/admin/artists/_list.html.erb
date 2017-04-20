@@ -1,4 +1,4 @@
-<% hide_sorting_tools ||= false %>
+<% hide_sorting_tools ||= false; undeletable ||= false %>
 <table class="<%= hide_sorting_tools ? '' : 'sortable' %>" data-order='[[3  , "desc"]]'>
   <thead>
     <tr>
@@ -21,14 +21,14 @@
         <td><% if artist.resource.present? %><span class="preview" style="background-image: url('<%= artist.resource.thumb_url %>')"></span><% end %></td>
         <td><%= artist.name %></td>
         <td><%= artist.content %></td>
-        <td><%= link_to artist.slug, artist.slug, target: :_blank %></td>
         <td><%= l artist.created_at, format: :sortable %></td>
         <td><%= l artist.updated_at, format: :sortable %></td>
+        <td><%= artist.user.real_name %></td>
         <td><%= t("artist.statuses.#{artist.status}") %></td>
         <td class="action">
           <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_artist_path(artist), title: "Détails" if can? :read, artist %>
           <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_artist_path(artist), title: "Éditer" if can? :edit, artist %>
-          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_artist_path(artist), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, artist %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_artist_path(artist), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if not undeletable and can? :delete, artist %>
         </td>
       </tr>
     <% end %>
