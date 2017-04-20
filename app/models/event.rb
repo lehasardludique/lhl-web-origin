@@ -7,11 +7,13 @@ class Event < ApplicationRecord
   belongs_to :final_gallery, class_name: 'Gallery'
   has_one :home_carousel_link, as: :home_linkable
   has_many :focuses, class_name: 'Focus'
+  has_many :artist_event_links
+  has_many :artists, -> { reorder(name: :asc) }, through: :artist_event_links
 
   enum category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
-  before_validation :check_slug
+  before_validation :check_slug, :check_artist_ids
 
   validates :title, presence: true
   validates :title_slug, uniqueness: { scope: :date_slug}, presence: true
@@ -22,11 +24,14 @@ class Event < ApplicationRecord
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :retargeting_pixel_id, allow_blank: true, numericality: { only_integer: true }
 
+  after_save :set_artists
+
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
   attr_reader :slug, :full_url, :main_picture, :digest, :category_slug
+  attr_accessor :new_artist_ids
 
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   default_scope { order(published_at: :desc) }
@@ -163,6 +168,17 @@ class Event < ApplicationRecord
         "8865c2"
       else
         "c1657d"
+      end
+    end
+
+    def check_artist_ids
+      self.new_artist_ids = (self.new_artist_ids - [""]).uniq
+      self.new_artist_ids = nil if self.new_artist_ids - self.artist_ids == self.artist_ids - self.new_artist_ids
+    end
+
+    def set_artists
+      if self.new_artist_ids.is_a? Array
+        self.artists = Artist.where(id: self.new_artist_ids)
       end
     end
 end

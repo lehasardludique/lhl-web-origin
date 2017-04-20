@@ -26,6 +26,7 @@
         <%= f.input :focus_id, collection: Focus.all.collect { |s| [s.title, s.id] }, selected: @event.focus_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Focus.all.size > 0  %>
         <%= f.input :category, collection: Event.categories.collect { |s| [t("event.categories.#{s.first}"), s.first] }, include_blank: false %>
         <%= f.input :weez_event_id, collection: WeezEvent.all.collect { |s| [s.title, s.id] }, selected: @event.weez_event_id, include_blank: true, input_html: { multiple: false, class: "select2" } if WeezEvent.all.size > 0  %>
+        <%= f.input :new_artist_ids, collection: Artist.all.collect { |s| [s.name, s.id] }, selected: @event.artist_ids, include_blank: false, input_html: { multiple: true, class: "select2" } if Artist.all.size > 0  %>
     </div>
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#aside_info">Infos. complémentaires</h3>

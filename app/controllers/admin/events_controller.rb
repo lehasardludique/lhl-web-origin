@@ -63,7 +63,7 @@ class Admin::EventsController < AdminController
     end
 
     def event_params
-      permitted_params = [:focus_id, :category, :weez_event_id, :display_date, :start_time, :end_time, :main_gallery_id, :resource_id, :topic, :title, :subtitle, :content, :final_gallery_id, :exergue, :aside_link_1_data, :aside_link_2_data, :event_link_data, :info_link_data, :social_block, :title_slug, :published_at, :status, :retargeting_pixel_id]
+      permitted_params = [:focus_id, :category, :weez_event_id, :display_date, :start_time, :end_time, :main_gallery_id, :resource_id, :topic, :title, :subtitle, :content, :final_gallery_id, :exergue, :aside_link_1_data, :aside_link_2_data, :event_link_data, :info_link_data, :social_block, :title_slug, :published_at, :status, :retargeting_pixel_id, { :new_artist_ids => [] }]
       permitted_params << :user_id if current_user.admin?
       params.require(:event).permit(permitted_params)
     end
