@@ -1,0 +1,36 @@
+<%= simple_form_for @artist, url: url = (@artist.new_record?) ? admin_artists_path : admin_artist_path(@artist) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <h3>Contenu</h3>
+    <%= f.input :name  %>
+    <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
+      <select class="form-control select optional select2" data-template="image" name="artist[resource_id]" id="artist_resource_id">
+        <option value=""></option>
+        <% Resource.global.each do |resource| %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @artist.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
+        <% end %>
+      </select>
+    <% end %>
+    <%= f.input :content %>
+    <hr />
+    <h3>URL des pages/liens média</h3>
+    <em>Pour les liens, il faut uniquement mettre l'url du lien (avec le protocol: http/https)'. Par exemple :</em>
+    <pre>https://twitter.com/pethrol</pre>
+    <%= f.input :media_link_fbk %>
+    <%= f.input :media_link_twt %>
+    <%= f.input :media_link_isg %>
+    <%= f.input :media_link_msk %>
+    <%= f.input :media_link_vid %>
+    <%= f.input :media_link_www %>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
+    <%= f.input :status, collection: Artist.statuses.collect { |s| [t("artist.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>

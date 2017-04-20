@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_artist_path, title: 'Ajouter un nouvel artiste' %>
+  </nav>
+  Liste des artistes
+</h2>
+
+<%= render 'list', artists: @artists %>
+
+<br>
