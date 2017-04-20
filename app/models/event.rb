@@ -172,7 +172,9 @@ class Event < ApplicationRecord
     end
 
     def check_artist_ids
+      self.new_artist_ids ||= []
       self.new_artist_ids = (self.new_artist_ids - [""]).uniq
+      self.artist_ids ||= []
       self.new_artist_ids = nil if self.new_artist_ids - self.artist_ids == self.artist_ids - self.new_artist_ids
     end
 
