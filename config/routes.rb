@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :focus
     resources :events
+    resources :partners
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'
