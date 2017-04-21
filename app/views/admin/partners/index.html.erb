@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_partner_path, title: 'Ajouter un nouveau partenaire' %>
+  </nav>
+  Liste des partenaires
+</h2>
+
+<%= render 'list', partners: @partners %>
+
+<br>

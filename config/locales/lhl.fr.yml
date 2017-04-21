@@ -39,6 +39,8 @@ fr:
     article: Article
     focus: Focus
     event: Évènement
+    artist: Artiste
+    partner: Partenaire
     
   attributes: &default_attributes
     id: ID
@@ -165,6 +167,13 @@ fr:
       show: Soirée
       other: Autre
 
+  # Partner
+  partner: &partner
+    <<: *default_attributes
+    categories:
+      unspecified_category: Non spécifiée
+    link: Url
+
   # Models
   activerecord:
     models: &models
@@ -188,3 +197,5 @@ fr:
         <<: *focus
       event:
         <<: *event
+      partner:
+        <<: *partner

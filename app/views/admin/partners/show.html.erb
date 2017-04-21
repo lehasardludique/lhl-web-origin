@@ -1,0 +1,21 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_partner_path(@partner), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_partners_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @partner.id %></span> Partenaire <em><%= @partner.name %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @partner.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "partner.#{k}" %></dt>
+    <dd><%= @partner.user.real_name %></dd>
+  <% elsif @partner.defined_enums? and k.in? @partner.defined_enums %>
+    <dt><%= t "partner.#{k}" %></dt>
+    <dd><%= t "partner.#{k.pluralize}.#{v}" %></dd>
+  <% else %>
+    <dt><%= t "partner.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+</dl>
