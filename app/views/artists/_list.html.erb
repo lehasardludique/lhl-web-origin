@@ -1,18 +1,18 @@
 <% if artists.respond_to? :any? and artists.any? %>
     <% if artists.size == 1 %>
         <div class="container">
-            <div class="artists">
-                <h3>artists.first.name</h3>
-                <div class="row">
-                    <% if artists.first.resource.present? %>
-                    <div class="col-sm-4 artist artist-<%= rand(4) %>">
-                        <div class="image">
-                            <div class="mask"></div>
-                            <div style="background-image: url('<%= artists.first.resource.url %>')"></div>
-                        </div>
+            <h3>artists.first.name</h3>
+            <div class="row">
+                <% if artists.first.resource.present? %>
+                <div class="col-sm-4 artist artist-<%= rand(4) %>">
+                    <div class="image">
+                        <div class="mask"></div>
+                        <div style="background-image: url('<%= artists.first.resource.url %>')"></div>
                     </div>
-                    <% end %>
-                    <div class="col-sm-8">
+                </div>
+                <% end %>
+                <div class="col-sm-8">
+                    <div>
                         <%= simple_format artists.first.content %>
                     </div>
                 </div>
@@ -20,23 +20,75 @@
         </div>
     <% else %>
         <div class="container">
-            <div class="artists ">
-                <h3>Artistes</h3>
+            <h3>Artistes</h3>
+            <div class="row">
+            <% artists.each_with_index do |artist,i| %>
+                <div class="col-sm-4 artist artist-<%= i % 4 %> center">
+                    <% if artist.resource.present? %>
+                    <div class="image">
+                        <div class="mask"></div>
+                        <div style="background-image: url('<%= artist.resource.url %>')"></div>
+                    </div>
+                    <% end %>
+                    <h4><%= artist.name %></h4>
+                    <button class="hidden-xs" data-action="slide" data-target="#artist-<%= i %>">+ d'info</button>
+                    <button class="visible-xs-inline" data-toggle="modal" data-target="#artist-modal-<%= i %>">+ d'info</button>
+                </div>
+            <% end %>
+            </div>
+            <% artists.each_with_index do |artist,i| %>
+            <div class="artist_card" id="artist-<%= i %>">
+                <button type="button" data-close="slide" data-target="#artist-<%= i %>" class="close" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <h3><%= artist.name %></h3>
                 <div class="row">
-                <% artists.each_with_index do |artist,i| %>
+                    <% if artist.resource.present? %>
                     <div class="col-sm-4 artist artist-<%= i % 4 %>">
-                        <% if artist.resource.present? %>
                         <div class="image">
                             <div class="mask"></div>
                             <div style="background-image: url('<%= artist.resource.url %>')"></div>
                         </div>
-                        <% end %>
-                        <h4><%= artist.name %></h4>
-                        <button data-action="slide" data-target="#artist-<%= i %>">+ d'info</button>
                     </div>
-                <% end %>
+                    <% end %>
+                    <div class="col-sm-8">
+                        <div>
+                            <div class="description">
+                                <%= simple_format artist.content %>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <% end %>
         </div>
+        <% artists.each_with_index do |artist,i| %>
+        <!-- Modal -->
+        <div class="modal fade padded" id="artist-modal-<%= i %>" tabindex="-1" role="dialog" aria-labelledby="artist-modal-<%= i %>-label">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+                <h4 class="modal-title" id="artist-modal-<%= i %>-label"><%= artist.name %></h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                    <% if artist.resource.present? %>
+                    <div class="col-sm-4 artist artist-<%= i % 4 %>">
+                        <div class="image">
+                            <div class="dark-mask"></div>
+                            <div style="background-image: url('<%= artist.resource.url %>')"></div>
+                        </div>
+                    </div>
+                    <% end %>
+                    <div class="col-sm-8">
+                        <div>
+                            <%= simple_format artist.content %>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <% end %>
     <% end %>
 <% end %>

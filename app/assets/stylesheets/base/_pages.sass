@@ -131,35 +131,84 @@ body.page
 
             &#artists
                 background-color: $lhl-yellow
+                overflow: hidden
                 // color: white
 
-                button
-                    background-color: transparent
-                    border: none
-                    color: inherit
-                    text-decoration: underline
+                .artist
+                    padding-bottom: $margin-base
 
-                .artists
-                    .artist
-                        text-align: center
-                        padding-bottom: $margin-base
+                    button
+                        background-color: transparent
+                        border: none
+                        color: inherit
+                        text-decoration: underline
 
-                        div.image
-                            height: 0
-                            padding-bottom: 95%
-                            position: relative
-                            
-                            > div
-                                position: absolute
-                                width: 100%
-                                height: 100%
+                    &.artist-0 .dark-mask
+                        background-image: svg_to_data('artist_mask_0', $lhl-black)
+                    &.artist-1 .dark-mask
+                        background-image: svg_to_data('artist_mask_1', $lhl-black)
+                    &.artist-2 .dark-mask
+                        background-image: svg_to_data('artist_mask_2', $lhl-black)
+                    &.artist-3 .dark-mask
+                        background-image: svg_to_data('artist_mask_3', $lhl-black)
 
-                                &.mask
-                                    background-size: 100%
-                                    z-index: 1
+                    div.image
+                        height: 0
+                        padding-bottom: 95%
+                        position: relative
+                        
+                        > div
+                            position: absolute
+                            width: 100%
+                            height: 100%
 
-                                    &+div
-                                        background-size: cover
+                            &.mask,
+                            &.dark-mask
+                                background-size: 100%
+                                z-index: 1
+
+                                &+div
+                                    background-size: cover
+
+                > .container
+                    position: relative
+
+                    .col-sm-8
+                        position: relative
+                        height: 0
+                        padding-top: 30%
+                        padding-bottom: 52px
+
+                        > div
+                            position: absolute
+                            left: 0
+                            top: 0
+                            padding-left: $margin-base - $grid-gutter-width
+                            width: 100%
+                            height: 100%
+
+                            > div.description
+                                max-height: calc(100% - 52px)
+                                overflow: auto
+
+                    > .artist_card
+                        padding: 0 $margin-base
+                        position: absolute
+                        top: 0
+                        right: -100%
+                        width: 100%
+                        height: 100%
+                        z-index: 2
+                        margin-right: - $margin-base
+                        box-shadow: $box-shadow-base
+                        +transition(right 500ms ease, margin-right 500ms ease)
+
+                        button.close
+                            margin-top: $margin-base
+
+                        &.open
+                            right: 0
+                            margin-right: 0
 
             &#reservation
                 background-color: $lhl-darkgray
@@ -199,6 +248,7 @@ body.page
                 width: calc(50% - #{$container-max-width / 2})
                 min-width: $aside-min-width
                 height: 100%
+                z-index: 3
 
                 nav
                     > a
@@ -210,6 +260,5 @@ body.page
                     background-image: image_url('bg_social_block_v.svg')
                     padding: $margin-base $margin-base / 2
                     margin: 0 $margin-base
-
 
 

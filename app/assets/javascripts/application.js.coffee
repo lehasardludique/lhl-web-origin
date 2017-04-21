@@ -219,6 +219,16 @@ init = ->
     # if !!$('body.programmation').length
     #     LHL.infiniteScroll()
 
+    if !!$('button[data-action="slide"]').length
+        $('button[data-action="slide"]').off('click').click ->
+            $target = $ $(this).data('target')
+            if !!$target.length
+                $target.addClass 'open'
+        $('button[data-close="slide"]').off('click').click ->
+            $target = $ $(this).data('target')
+            if !!$target.length
+                $target.removeClass 'open'
+
     # Global
     burgerMenu()
     watchMenuLinks()
