@@ -9,11 +9,13 @@ class Event < ApplicationRecord
   has_many :focuses, class_name: 'Focus'
   has_many :artist_event_links
   has_many :artists, -> { reorder(name: :asc) }, through: :artist_event_links
+  has_many :event_partner_links
+  has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
 
   enum category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
-  before_validation :check_slug, :check_artist_ids
+  before_validation :check_slug, :check_artist_ids, :check_partner_ids
 
   validates :title, presence: true
   validates :title_slug, uniqueness: { scope: :date_slug}, presence: true
@@ -24,14 +26,14 @@ class Event < ApplicationRecord
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :retargeting_pixel_id, allow_blank: true, numericality: { only_integer: true }
 
-  after_save :set_artists
+  after_save :set_artists, :set_partners
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
   attr_reader :slug, :full_url, :main_picture, :digest, :category_slug
-  attr_accessor :new_artist_ids
+  attr_accessor :new_artist_ids, :new_partner_ids
 
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   default_scope { order(published_at: :desc) }
@@ -178,9 +180,22 @@ class Event < ApplicationRecord
       self.new_artist_ids = nil if self.new_artist_ids - self.artist_ids == self.artist_ids - self.new_artist_ids
     end
 
+    def check_partner_ids
+      self.new_partner_ids ||= []
+      self.new_partner_ids = (self.new_partner_ids - [""]).uniq
+      self.partner_ids ||= []
+      self.new_partner_ids = nil if self.new_partner_ids - self.partner_ids == self.partner_ids - self.new_partner_ids
+    end
+
     def set_artists
       if self.new_artist_ids.is_a? Array
         self.artists = Artist.where(id: self.new_artist_ids)
+      end
+    end
+
+    def set_partners
+      if self.new_partner_ids.is_a? Array
+        self.partners = Partner.where(id: self.new_partner_ids)
       end
     end
 end

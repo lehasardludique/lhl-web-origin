@@ -160,6 +160,7 @@ fr:
     end_time: Date/Heure de fin
     weez_event_id: WeezEvent
     new_artist_ids: Artistes
+    new_partner_ids: Partenaires
     categories:
       family: Famille
       concert: Concert
