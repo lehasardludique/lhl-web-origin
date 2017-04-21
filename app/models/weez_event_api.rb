@@ -20,7 +20,7 @@ class WeezEventApi
   end
 
   def update_events!(forced = false)
-    weez_events = get '/events', {include_not_published: true}
+    weez_events = get '/events', {include_not_published: true, include_without_sales: true}
     if weez_events['events'].present? and weez_events['events'].any?
       weez_events['events'].each do |event|
         wid = event['id'].to_i
