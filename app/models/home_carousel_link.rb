@@ -15,7 +15,7 @@ class HomeCarouselLink < ApplicationRecord
   after_save :check_rank_consistency
 
   def self.types
-    [ Article, Page ]
+    [ Article, Page, Event ]
   end
 
   def final_title
@@ -65,7 +65,7 @@ class HomeCarouselLink < ApplicationRecord
 
     def check_rank_consistency
       if self.rank_changed? and not self.form == :callback
-        order_direction = self.rank > self.rank_was ? :asc : :desc
+        order_direction = self.rank > self.rank_was.to_i ? :asc : :desc
         HomeCarouselLink.all.reorder(rank: :asc, updated_at: order_direction).each_with_index do |hcl, i|
           hcl.form = :callback
           hcl.update(rank: i + 1) unless hcl.rank == i + 1
