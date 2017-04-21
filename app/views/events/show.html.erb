@@ -60,6 +60,14 @@
         <%= render 'artists/list', artists: @event.artists %>
     </section>
     <% end %>
+    <% if @event.weez_event.present? %>
+    <section id="reservation" class="more">
+        <div class="container">
+            <h3>Réservation</h3>
+            <iframe src="<%= @event.booking_iframe_url %>"></iframe>
+        </div>
+    </section>
+    <% end %>
     <% if @event.partners.any? %>
     <section id="partners" class="more">
         <div class="container">
@@ -69,14 +77,6 @@
                 <li title="<%= partner.name %>" style="background-image: url('<%= partner.resource.url %>')"></li>
             <% end %>
             </ul>
-        </div>
-    </section>
-    <% end %>
-    <% if @event.weez_event.present? %>
-    <section id="reservation" class="more">
-        <div class="container">
-            <h3>Réservation</h3>
-            <iframe src="<%= @event.booking_iframe_url %>"></iframe>
         </div>
     </section>
     <% end %>
