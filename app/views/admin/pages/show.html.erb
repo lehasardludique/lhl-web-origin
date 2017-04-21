@@ -13,9 +13,13 @@
   <% elsif @page.defined_enums? and k.in? @page.defined_enums %>
     <dt><%= t "page.#{k}" %></dt>
     <dd><%= t "page.#{k.pluralize}.#{v}" %></dd>
+  <% elsif v.class.in? [ NilClass, TrueClass, FalseClass] %>
+    <% fa_css = case v; when NilClass then 'ban'; when TrueClass then 'check-square-o'; when FalseClass then 'square-o'; end %>
+    <dt><%= t "event.#{k}" %></dt>
+    <dd><i class="fa fa-<%= fa_css %>" aria-hidden="true"></i></dd>
   <% else %>
     <dt><%= t "page.#{k}" %></dt>
-    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+    <dd><%= (v.is_a? Time) ? l(v) : v.to_s.html_safe %></dd>
   <% end %>
 <% end %>
 </dl>

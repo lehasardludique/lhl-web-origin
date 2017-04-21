@@ -14,9 +14,13 @@
   <% elsif @event.defined_enums? and k.in? @event.defined_enums %>
     <dt><%= t "event.#{k}" %></dt>
     <dd><%= t "event.#{k.pluralize}.#{v}" %></dd>
+  <% elsif v.class.in? [ NilClass, TrueClass, FalseClass] %>
+    <% fa_css = case v; when NilClass then 'ban'; when TrueClass then 'check-square-o'; when FalseClass then 'square-o'; end %>
+    <dt><%= t "event.#{k}" %></dt>
+    <dd><i class="fa fa-<%= fa_css %>" aria-hidden="true"></i></dd>
   <% else %>
     <dt><%= t "event.#{k}" %></dt>
-    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+    <dd><%= (v.is_a? Time) ? l(v) : v.to_s.html_safe %></dd>
   <% end %>
 <% end %>
 </dl>
@@ -29,4 +33,9 @@
 <hr />
 <h3><i class="fa fa-arrow-right" aria-hidden="true"></i> Artistes</h3>
   <%= render 'admin/artists/list', artists: @event.artists, hide_sorting_tools: true, undeletable: true %>
+<% end %>
+<% if @event.partners.any? %>
+<hr />
+<h3><i class="fa fa-arrow-right" aria-hidden="true"></i> Partenaires</h3>
+  <%= render 'admin/partners/list', partners: @event.partners, hide_sorting_tools: true, undeletable: true %>
 <% end %>
