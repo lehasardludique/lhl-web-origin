@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421153257) do
+ActiveRecord::Schema.define(version: 20170421163245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,14 @@ ActiveRecord::Schema.define(version: 20170421153257) do
     t.datetime "updated_at",     null: false
     t.index ["resource_id"], name: "index_artists_on_resource_id", using: :btree
     t.index ["user_id"], name: "index_artists_on_user_id", using: :btree
+  end
+
+  create_table "event_partner_links", force: :cascade do |t|
+    t.integer "event_id"
+    t.integer "partner_id"
+    t.integer "rank",       default: 0
+    t.index ["event_id"], name: "index_event_partner_links_on_event_id", using: :btree
+    t.index ["partner_id"], name: "index_event_partner_links_on_partner_id", using: :btree
   end
 
   create_table "events", force: :cascade do |t|
@@ -252,6 +260,8 @@ ActiveRecord::Schema.define(version: 20170421153257) do
   add_foreign_key "artist_event_links", "events"
   add_foreign_key "artists", "resources"
   add_foreign_key "artists", "users"
+  add_foreign_key "event_partner_links", "events"
+  add_foreign_key "event_partner_links", "partners"
   add_foreign_key "events", "focus", column: "focus_id"
   add_foreign_key "events", "galleries", column: "final_gallery_id"
   add_foreign_key "events", "galleries", column: "main_gallery_id"
