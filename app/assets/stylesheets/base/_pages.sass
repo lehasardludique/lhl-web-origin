@@ -170,45 +170,17 @@ body.page
                                 &+div
                                     background-size: cover
 
-                > .container
-                    position: relative
+                .artist_card
+                    display: none
 
-                    .col-sm-8
-                        position: relative
-                        height: 0
-                        padding-top: 30%
-                        padding-bottom: 52px
+                .description
+                    margin-bottom: $margin-base
+                    
+                    > *:last-child
+                        margin-bottom: 0
 
-                        > div
-                            position: absolute
-                            left: 0
-                            top: 0
-                            padding-left: $margin-base - $grid-gutter-width
-                            width: 100%
-                            height: 100%
-
-                            > div.description
-                                max-height: calc(100% - 52px)
-                                overflow: auto
-
-                    > .artist_card
-                        padding: 0 $margin-base
-                        position: absolute
-                        top: 0
-                        right: -100%
-                        width: 100%
-                        height: 100%
-                        z-index: 2
-                        margin-right: - $margin-base
-                        box-shadow: $box-shadow-base
-                        +transition(right 500ms ease, margin-right 500ms ease)
-
-                        button.close
-                            margin-top: $margin-base
-
-                        &.open
-                            right: 0
-                            margin-right: 0
+                .media_links
+                    margin-bottom: $margin-base
 
             &#reservation
                 background-color: $lhl-darkgray
@@ -261,4 +233,53 @@ body.page
                     padding: $margin-base $margin-base / 2
                     margin: 0 $margin-base
 
+            > section
+                &#artists
+
+                    > .container
+                        position: relative
+
+                    .single_artist_card
+                        .col-sm-8
+                            > div
+                                padding-left: $margin-base - $grid-gutter-width
+
+                    .artist_card
+                        display: block
+                        padding: 0 $margin-base
+                        position: absolute
+                        top: 0
+                        right: -100%
+                        width: 100%
+                        height: 100%
+                        z-index: 2
+                        margin-right: - $margin-base
+                        box-shadow: $box-shadow-base
+                        +transition(right 500ms ease, margin-right 500ms ease)
+
+                        .col-sm-8
+                            position: relative
+                            height: 0
+                            padding-top: 30%
+                            padding-bottom: 52px
+
+                            > div
+                                position: absolute
+                                left: 0
+                                top: 0
+                                padding-left: $margin-base - $grid-gutter-width / 2
+                                padding-right: $grid-gutter-width / 2
+                                width: 100%
+                                height: 100%
+
+                                > div.description
+                                    max-height: calc(100% - 52px)
+                                    overflow: auto
+
+                        button.close
+                            margin-top: $margin-base
+
+                        &.open
+                            right: 0
+                            margin-right: 0
 

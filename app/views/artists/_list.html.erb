@@ -1,7 +1,7 @@
 <% if artists.respond_to? :any? and artists.any? %>
     <% if artists.size == 1 %>
-        <div class="container">
-            <h3>artists.first.name</h3>
+        <div class="container single_artist_card">
+            <h3><%= artists.first.name %></h3>
             <div class="row">
                 <% if artists.first.resource.present? %>
                 <div class="col-sm-4 artist artist-<%= rand(4) %>">
@@ -12,9 +12,10 @@
                 </div>
                 <% end %>
                 <div class="col-sm-8">
-                    <div>
+                    <div class="description">
                         <%= simple_format artists.first.content %>
                     </div>
+                    <%= render 'partials/media_links', object: artists.first if artists.first.media_links? %>
                 </div>
             </div>
         </div>
@@ -54,6 +55,7 @@
                             <div class="description">
                                 <%= simple_format artist.content %>
                             </div>
+                            <%= render 'partials/media_links', object: artist if artist.media_links? %>
                         </div>
                     </div>
                 </div>
@@ -80,9 +82,10 @@
                     </div>
                     <% end %>
                     <div class="col-sm-8">
-                        <div>
+                        <div class="description">
                             <%= simple_format artist.content %>
                         </div>
+                        <%= render 'partials/media_links', object: artist if artist.media_links? %>
                     </div>
                 </div>
               </div>
