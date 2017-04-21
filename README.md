@@ -12,11 +12,11 @@
 
 ### Ruby version
 
-2.4.0
+2.4.1
 
 ### Rails version
 
-5.0.1
+5.0.2
 
 ### Required environement variables
 
@@ -71,6 +71,50 @@ n/a
 ---
 
 ## Release notes
+
+### v0.9 (WeezEvent, Focus, Event, Artist, Partner)
+
+* WeezEvent
+    * create model, controllers & abilities
+    * controller, list & delete (views & methods)
+    * waitting/getting page
+    * API connection & endpoints implementation
+    * iframe genration
+* Focus
+    * create model, controllers & abilities
+    * admin views (list, details & forms pages)
+    * Focus <> Article association link
+* Event
+    * create model, controllers & abilities
+    * admin views (list, details & forms pages)
+    * Front page integration
+    * auto-load from WeezEvent
+    * colored pages (inc. picture mask)
+    * artists management
+    * partners management
+* Artist
+    * create model, controllers & abilities
+    * admin views (list, details & forms pages)
+    * Artist<>Event link
+    * Event's section integration (inc. modal & slider)
+* Partner
+    * create model, controllers & abilities
+    * admin views (list, details & forms pages)
+    * Partner<>Event link
+* Home
+    * ability to add Event to carrousel
+* Admin:
+    * menu reorganization
+    * links to WeezEvents site
+    * collapsable form (style & JS)
+    * Associations: remove delete links on details pages
+* ApplicationHelper:
+    * `body_data` method
+* Global:
+    * update to Ruby 2.4.1
+    * update to Rails 5.0.2
+    * SVG to data method (for CSS inclusion)
+    * Klox migration
 
 ### v0.5.1 (RC)
 
