@@ -7,7 +7,7 @@ class EventsController < ApplicationController
   end
 
   def api_events
-    meta = { offset: @offset, next: @meta_next, count: @events_count }
+    meta = { offset: @offset, limit: @limit, next: @meta_next, count: @events_count }
     events = @events.map{ |e| render_to_string partial: "events/wrapped_event_card", locals: { event: e }}
     render json: { meta: meta, items: events }
   end
@@ -31,11 +31,12 @@ class EventsController < ApplicationController
   private
     def get_current_focus
       @focus = Focus.current
+      @offset = 0
     end
 
     def get_events
       @categories = Event.categories.keys.map(&:to_sym)
-      @offset = (params[:offset].present? and params[:offset].to_i > 0) ? params[:offset].to_i : 0
+      @offset ||= (params[:offset].present? and params[:offset].to_i > 0) ? params[:offset].to_i : 0
       @limit = (params[:limit].present? and params[:limit].to_i > 0) ? params[:limit].to_i : 3
       
       scope = Event.next
@@ -64,6 +65,6 @@ class EventsController < ApplicationController
       @events_count = scope.count
       @meta_next = ((@offset+@limit+1) >= @events_count) ? nil : "offset=#{@offset+@limit}&limit=#{@limit}"
 
-      @events = scope.reorder(start_time: :asc).limit(@limit)
+      @events = scope.reorder(start_time: :asc).offset(@offset).limit(@limit)
     end
 end

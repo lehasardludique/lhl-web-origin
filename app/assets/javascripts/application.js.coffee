@@ -74,14 +74,18 @@ LHL.openPopUp = (url, title, popWidth, popHeight) ->
 
 LHL.infiniteScroll = ->
     $container = $('#is_container')
-    if !!$container.data('next') and !!$container.data('api')
+    if !!$container.data('limit') and !!$container.data('api')
         LHL.pastRequest =  null
-        $(window).scroll ->
+        $(window).off('scroll').scroll ->
             if $(window).scrollTop() + $(window).height() > $(document).height() - $('body > footer').height()
-                nextRequest = $container.data('next')
-                apiUrl = $container.data('api')
-                if !!nextRequest and nextRequest != LHL.pastRequest
-                    LHL.getApiItems apiUrl, nextRequest
+                if $container.children().length < parseInt($container.data('count'))
+                    apiUrl = $container.data('api')
+                    LHL.filtersRequest =
+                        'offset': $container.children().length
+                        'limit': $container.data('limit')
+                    nextRequest = $.param(LHL.filtersRequest)
+                    if !!nextRequest and nextRequest != LHL.pastRequest
+                        LHL.getApiItems apiUrl, nextRequest
             return
 
 LHL.getApiItems = (apiUrl, encodedParams) ->
@@ -99,7 +103,9 @@ LHL.getApiItems = (apiUrl, encodedParams) ->
                 $container.html htmlResult
             else
                 $container.append htmlResult
-            $container.data('next', data.meta.next)
+            $container
+                .data('limit', data.meta.limit)
+                .data('count', data.meta.count)
             $container.removeClass 'loading'
             return
 
