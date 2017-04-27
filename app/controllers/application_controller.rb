@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
 
     def set_menu_and_footer
       @menu_links = {
-        # "Programation" => events_path,
+        "Programation" => events_path,
         "Billetterie" => "/billetterie",
         "Infos pratiques" => "/infos-pratiques"
       }
