@@ -52,11 +52,11 @@ class Event < ApplicationRecord
     if weez_event.is_a? WeezEvent
       self.weez_event_id = weez_event.id
       if weez_event.data['period'].present? and weez_event.data['period']['timezone'].present?
-        zone = ActiveSupport::TimeZone[weez_event.data['period']['timezone']]
-        weez_event.data['period']
-        self.start_time = "#{weez_event.data['period']['start']} #{zone.formatted_offset(false)}"
-        self.end_time = "#{weez_event.data['period']['end']} #{zone.formatted_offset(false)}"
+        Time.zone = weez_event.data['period']['timezone']
+        self.start_time = Time.zone.parse(weez_event.data['period']['start'])
+        self.end_time = Time.zone.parse(weez_event.data['period']['end'])
         self.display_date = I18n.l self.start_time, format: :display
+        self.place = get_place_from weez_event.data['venue']['name'] if defined? weez_event.data['venue']['name']
       end
       self.title = weez_event.data['title'] if weez_event.data['title'].present?
       # self.subtitle =
@@ -176,6 +176,18 @@ class Event < ApplicationRecord
         "8865c2"
       else
         "c1657d"
+      end
+    end
+
+    def get_place_from place_name
+      case place_name
+      when /gare/i then :station
+      when /atelier/i then :studio
+      when /quai/i then :dock
+      when /le\ hasard\ ludique/i then :station
+      when /^cancelled/i then :cancelled_payment
+      when nil then nil
+      else :outside
       end
     end
 
