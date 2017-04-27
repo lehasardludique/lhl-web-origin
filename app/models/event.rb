@@ -13,7 +13,7 @@ class Event < ApplicationRecord
   has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
 
   enum category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
-  enum place: { station: 1, studio: 2, dock: 3, outside: 0 }
+  enum place: { station: 1, hall: 4, studio: 2, dock: 3, outside: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
@@ -182,7 +182,7 @@ class Event < ApplicationRecord
 
     def get_place_from place_name
       case place_name
-      when /gare/i then :station
+      when /la\ salle/i then :hall
       when /atelier/i then :studio
       when /quai/i then :dock
       when /le\ hasard\ ludique/i then :station
