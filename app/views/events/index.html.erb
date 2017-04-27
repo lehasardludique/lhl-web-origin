@@ -17,7 +17,7 @@
     </div>
     <div class="container events">
     <% if @events.any? %>
-        <div class="row">
+        <div class="large-row">
         <% @events.each do |event| %>
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <%= render 'event_card', event: event %>
