@@ -32,8 +32,11 @@ class WeezEventApi
           we.data = event_data['events'] if event_data['events'].present?
           we.title = event['name']
           we.image = event_data['events']['image'] if event_data['events'].present?
-          we.date = event['date']['start'] if event['date'].present?
-          we.mini_site = event_data['events']['extras']['minisite_url'] if event_data['events'].present? and event_data['events']['extras'].present?
+          if we.data['period'].present?
+            Time.zone = we.data['period']['timezone']
+            we.date = Time.zone.parse(we.data['period']['start']) if defined? we.data['period']['start']
+          end
+          we.mini_site = we.data['extras']['minisite_url'] if we.data.present? and we.data['extras'].present?
           we.save!
         end
 
