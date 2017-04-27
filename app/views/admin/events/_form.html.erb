@@ -23,6 +23,7 @@
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#editorial_params">Paramètres éditoraux</h3>
     <div class="collapse" id="editorial_params">
+        <%= f.input :place, collection: Event.places.collect { |s| [t("event.places.#{s.first}"), s.first] }, include_blank: false %>
         <%= f.input :focus_id, collection: Focus.all.collect { |s| [s.title, s.id] }, selected: @event.focus_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Focus.all.size > 0  %>
         <%= f.input :category, collection: Event.categories.collect { |s| [t("event.categories.#{s.first}"), s.first] }, include_blank: false %>
         <%= f.input :weez_event_id, collection: WeezEvent.all.collect { |s| [s.title, s.id] }, selected: @event.weez_event_id, include_blank: true, input_html: { multiple: false, class: "select2" } if WeezEvent.all.size > 0  %>
@@ -52,6 +53,8 @@ La Villette > https://lavillette.com/</pre>
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#settings">Réglages</h3>
     <div class="collapse" id="settings">
+        <%= f.input :start_time %>
+        <%= f.input :end_time %>
         <%= f.input :retargeting_pixel_id %>
         <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
         <%= f.input :title_slug, hint: "La partie Date est générée et mise à jour automatiquement à partir de la date/heure de début, selon le format “2017-12-31”." %>
