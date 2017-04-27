@@ -9,7 +9,7 @@ class EventsController < ApplicationController
   def api_events
     meta = { offset: @offset, next: @meta_next, count: @events_count }
     events = @events.map{ |e| render_to_string partial: "events/wrapped_event_card", locals: { event: e }}
-    render json: { meta: meta, events: events }
+    render json: { meta: meta, items: events }
   end
 
   def show

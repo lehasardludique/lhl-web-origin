@@ -73,7 +73,7 @@ LHL.openPopUp = (url, title, popWidth, popHeight) ->
     return
 
 LHL.infiniteScroll = ->
-    $container = $('#articles')
+    $container = $('#is_container')
     if !!$container.data('next') and !!$container.data('api')
         LHL.pastRequest =  null
         $(window).scroll ->
@@ -85,7 +85,7 @@ LHL.infiniteScroll = ->
             return
 
 LHL.getApiItems = (apiUrl, encodedParams) ->
-    $container = $('#articles')
+    $container = $('#is_container')
     $container.addClass 'loading'
     LHL.progressBar('start')
     LHL.pastRequest = encodedParams
@@ -216,8 +216,8 @@ init = ->
                 $carousel.carousel $(this).data('slide-to')
 
     # InfiniteScroll
-    # if !!$('body.programmation').length
-    #     LHL.infiniteScroll()
+    if !!$('#is_container').length
+        LHL.infiniteScroll()
 
     if !!$('button[data-action="slide"]').length
         $('button[data-action="slide"]').off('click').click ->

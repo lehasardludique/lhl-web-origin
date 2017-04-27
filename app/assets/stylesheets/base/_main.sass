@@ -1,3 +1,5 @@
+//= Global skeleton
+
 html
     background-color: $lhl-black
     height: 100%
@@ -28,9 +30,31 @@ body
             height: 1px
             vertical-align: top
 
+//= Global Class
+
 .center
     text-align: center
     
+// Infinite Scoll
+
+#is_container
+    &::after
+        height: 0
+        +transition(height 300ms ease)
+        color: $lhl-black
+
+    &.loading::after
+        +fa
+        +spin
+        display: block
+        content: '\f1ce'
+        text-align: center
+        font-size: $input-height-base
+        line-height: $input-height-base
+        width: $input-height-base
+        height: $input-height-base
+        margin: 35px auto $margin-base
+
 // Focus
 
 a.focus,
@@ -122,18 +146,15 @@ section
     &.yellow
         background-color: $lhl-yellow
 
-// Typography
-
-.container
-    iframe
-        width: 100%
-        border: none
-
-// Typography
+// COntainer & iframe
 
 .container
     padding-left: $margin-base
     padding-right: $margin-base
+
+    iframe
+        width: 100%
+        border: none
 
 // Typography
 

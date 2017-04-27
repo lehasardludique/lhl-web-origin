@@ -17,7 +17,7 @@
     </div>
     <div class="container events">
     <% if @events.any? %>
-        <div class="large-row">
+        <div id="is_container" class="large-row" data-api="<%= api_events_path %>" data-next="<%= @meta_next %>">
         <% @events.each do |event| %>
             <%= render 'wrapped_event_card', event: event %>
         <% end %>
