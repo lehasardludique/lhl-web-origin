@@ -13,6 +13,7 @@ class Event < ApplicationRecord
   has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
 
   enum category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
+  enum place: { station: 1, studio: 2, dock: 3, outside: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
