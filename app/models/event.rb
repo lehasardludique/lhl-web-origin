@@ -27,6 +27,7 @@ class Event < ApplicationRecord
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :retargeting_pixel_id, allow_blank: true, numericality: { only_integer: true }
 
+  before_save :set_display_date
   after_save :set_artists, :set_partners
 
   with_options :unless => :main_gallery_present? do |u|
@@ -203,6 +204,10 @@ class Event < ApplicationRecord
       self.new_partner_ids = (self.new_partner_ids - [""]).uniq
       self.partner_ids ||= []
       self.new_partner_ids = nil if self.new_partner_ids - self.partner_ids == self.partner_ids - self.new_partner_ids
+    end
+
+    def set_display_date
+      self.display_date = I18n.l(self.start_time, format: :display) if self.display_date.blank? and self.start_time.present?
     end
 
     def set_artists

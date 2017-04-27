@@ -28,6 +28,8 @@ fr:
         title_slug: 'Laisser vide pour une génération automatique.'
       home_carousel_link:
         title: "Laisser vide pour une récupération automatique du titre (et sous-titre) de l'objet cible."
+      event:
+        display_date: "Laisser vide pour une génération automatique à partir de la date de l'évènement (voir “Réglages”)."
     #     password: 'No special characters, please.'
     # include_blanks:
     #   defaults:

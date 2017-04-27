@@ -6,7 +6,7 @@
             <%= content_tag :span, "##{event.topic}" if event.topic.present? %>
             <h3><%= event.title %></h3>
             <p>
-                <strong><%= l event.start_time, format: :display if event.start_time.present? %></strong>
+                <strong><%= event.display_date if event.display_date.present? %></strong>
                 <span class="place"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= t("event.places.#{event.place}") %></span>
             </p>
         </div>
