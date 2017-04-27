@@ -1,5 +1,6 @@
 class Focus < ApplicationRecord
   belongs_to :article
+  has_many :events
 
   enum status: { draft: 0, published: 1 }
 
@@ -11,4 +12,8 @@ class Focus < ApplicationRecord
   end
 
   default_scope { order(end: :desc) }
+
+  def self.current
+    published.where("focus.end >= ?", Time.now).reorder(end: :asc).first
+  end
 end
