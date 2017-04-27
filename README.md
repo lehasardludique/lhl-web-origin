@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.5.1
-* staging : v0.5.1
-* prod. : v0.5.1
+* dev : v0.9+
+* staging : v0.9+
+* prod. : v0.9+
 
 ---
 
@@ -71,6 +71,10 @@ n/a
 ---
 
 ## Release notes
+
+### v0.9+
+
+Temporary prod. deployment waiting v0.10
 
 ### v0.9 (WeezEvent, Focus, Event, Artist, Partner)
 
