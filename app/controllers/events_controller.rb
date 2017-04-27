@@ -1,4 +1,34 @@
 class EventsController < ApplicationController
+  def index
+    @categories = Event.categories.keys.map(&:to_sym)
+    @focus = Focus.current
+    scope = Event.next
+
+    if params[:focus].present?
+      @focus = Focus.published.find_by(id: params[:focus].to_i) if params[:focus].to_s.to_i > 0
+      if @focus.present?
+        @active_focus = true
+        scope = @focus.events.visible
+      end
+    end
+
+    # categories
+    unless params[:categories].blank?
+      @active_categories = (params[:categories].split & Event.categories.keys).map(&:to_sym)
+      scope = scope.where(category: @active_categories)
+    else
+      @active_categories = @categories
+    end
+
+    # date
+    if params[:mois] and params[:mois].to_i > 0
+      scope = scope.in_months(params[:mois].to_i)
+    end
+
+    @events = scope.reorder(start_time: :asc)
+    body_classes 'events'
+  end
+
   def show
     @event = Event.find_by! date_slug: params[:date], title_slug: params[:slug]
     if
