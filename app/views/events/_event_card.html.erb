@@ -1,0 +1,11 @@
+<a class="event_card <%= event.category %><%= " focused" if event.focus.present? and event.focus = @focus %>" style="background-image: url('<%= event.main_picture.url %>')" href="<%= event.slug %>">
+    <div>
+        <%= content_tag :span, "Focus", class: 'focus' if event.focus.present? and event.focus = @focus %>
+        <%= content_tag :span, "##{event.topic}" if event.topic.present? %>
+        <h3><%= event.title %></h3>
+        <p>
+            <strong><%= l event.start_time, format: :display if event.start_time.is_a? DateTime %></strong>
+            <span class="place"><%= "La Gare" %></span>
+        </p>
+    </div>
+</a>

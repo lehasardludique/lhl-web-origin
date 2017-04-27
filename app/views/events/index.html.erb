@@ -1,0 +1,31 @@
+<section>
+    <div class="container header">
+        <div class="filters categories">
+        <% @categories.each do |category| %>
+            <button data-category="<%= category %>" class="<%= category %><%= " active" if category.in? @active_categories %>"><%= t "event.categories.#{category}" %></button>
+        <% end %>
+        </div>
+        <% if @focus.present? %>
+        <div class="filters focus">
+            <button data-focus="<%= @focus.id %>" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus du moment</button>
+            <p>
+                <%= @focus.title %>
+                <%= link_to "+ d'info", @focus.article.slug if @focus.article.visible? %>
+            </p>
+        </div>
+        <% end %>
+    </div>
+    <div class="container events">
+    <% if @events.any? %>
+        <div class="row">
+        <% @events.each do |event| %>
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <%= render 'event_card', event: event %>
+            </div>
+        <% end %>
+        </div>
+    <% else %>
+        <p>Les évènements sont en cours de saisie. Revenez très vite !</p>
+    <% end %>
+    </div>
+</section>

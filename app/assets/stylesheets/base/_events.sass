@@ -1,0 +1,82 @@
+body.events
+    > section
+        background-color: white
+        background-image: image_url('bg_gray_spotted.png')
+        background-position: top center
+        padding-top: 100px
+        text-align: center
+
+        .container
+            max-width: 940px
+
+        > .header
+            button
+                border: 0
+                padding: 0 0 9px
+                margin: 0 10px 10px
+                background-color: transparent
+                font-size: 20px
+
+                &.active
+                    padding-bottom: 5px
+                    border-bottom: 4px solid
+
+                &.family
+                    border-color: $lhl-green
+                &.concert
+                    border-color: $lhl-blue
+                &.animations
+                    border-color: $lhl-orange
+                &.show
+                    border-color: $lhl-purple
+                    display: inline-block !important
+                &.other
+                    border-color: $lhl-pink
+
+            > .focus
+                position: relative
+                width: 280px
+                margin: 0 auto
+
+                > button
+                    margin: 0
+                    padding: 0
+                    border: 0
+
+                    &.active + p
+                        opacity: 1
+                
+                > p
+                    color: white
+                    width: 280px
+                    background-image: image_url('bg_event_focus_filter.svg')
+                    padding: 10px 20px
+                    margin-bottom: 20px
+                    background-size: cover
+                    background-position: bottom center
+                    opacity: 0
+
+                    > a
+                        display: block
+
+a.event_card
+    display: block
+    height: 370px
+    background-size: cover
+    background-position: center
+    
+
+//= DESKTOP
+
+@media (min-width: $screen-sm-min)
+    body.events
+        > section
+            padding-top: 350px
+
+            > .header
+                position: absolute
+                top: 140px
+                left: 50%
+                transform: translateX(-50%)
+                z-index: 22
+                max-width: calc(100% - 360px)
