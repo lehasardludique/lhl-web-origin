@@ -1,0 +1,48 @@
+// Grid with double gutter-width
+$grid-gutter-width: $grid-gutter-width * 2
+
+.large-row
+    +make-row($grid-gutter-width)
+
+    // Columns
+    //
+    // Common styles for small and large grid columns
+
+    +make-grid-columns
+
+    // Extra small grid
+    //
+    // Columns, offsets, pushes, and pulls for extra small devices like
+    // smartphones.
+
+    +make-grid(xs)
+
+    // Small grid
+    //
+    // Columns, offsets, pushes, and pulls for the small device range, from phones
+    // to tablets.
+
+@media (min-width: $screen-sm-min)
+    .large-row
+        +make-grid(sm)
+
+// Medium grid
+//
+// Columns, offsets, pushes, and pulls for the desktop device range.
+
+@media (min-width: $screen-md-min)
+    .large-row
+        +make-grid(md)
+
+// Large grid
+//
+// Columns, offsets, pushes, and pulls for the large desktop device range.
+
+@media (min-width: $screen-lg-min)
+    .large-row
+        +make-grid(lg)
+
+
+// Restore original gutter width
+
+$grid-gutter-width: $grid-gutter-width / 2
