@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root 'pages#home'
   # get 'home' => 'pages#home'
   
+  # API
+  scope 'api', as: :api do
+    get 'events' => 'events#api_events', as: :events
+  end
+
   # UserSessions
   get 'connexion' => 'user_sessions#new', as: :login
   post 'connexion' => 'user_sessions#create'
