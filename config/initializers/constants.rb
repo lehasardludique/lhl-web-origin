@@ -1,2 +1,9 @@
 LHL_URL = "#{ENV["PROTOCOL"]||"http://"}" + "#{ENV["HOST"]||"www.lehasardludique.paris"}"
 INTERNAL_LINK_FORMAT = /(\ >\ )((Page:\d)|(Article:\d)|(Fichier:\d)|(\/)|(http(s)?:\/\/))/
+OPENING_MSG_MONDAY = "#{ENV["OPENING_MSG_MONDAY"] || "FERMÉ <i>Aujourd’hui</i>"}"
+OPENING_MSG_TUESDAY = "#{ENV["OPENING_MSG_TUESDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>00H00"}"
+OPENING_MSG_WEDNESDAY = "#{ENV["OPENING_MSG_WEDNESDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>00H00"}"
+OPENING_MSG_THURSDAY = "#{ENV["OPENING_MSG_THURSDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>00H00"}"
+OPENING_MSG_FRIDAY = "#{ENV["OPENING_MSG_FRIDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>02H00"}"
+OPENING_MSG_SATURDAY = "#{ENV["OPENING_MSG_SATURDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />11H00<br />-<br>02H00"}"
+OPENING_MSG_SUNDAY = "#{ENV["OPENING_MSG_SUNDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />11H00<br />-<br>00H00"}"

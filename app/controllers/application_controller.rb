@@ -30,12 +30,26 @@ class ApplicationController < ActionController::Base
     end
 
     def set_opening_time
-      remaing_days = (DateTime.parse('2017/04/29') - DateTime.now.midnight).to_i
-      @opening = <<~OPENING
-        <br />
-        <small>Ouverture</small><br />
-        <strong>J-#{remaing_days}</strong>
-      OPENING
+      if DateTime.now.midnight < DateTime.parse('2017/04/28')
+        remaing_days = (DateTime.parse('2017/04/29') - DateTime.now.midnight).to_i
+        @opening = <<~OPENING
+          <br />
+          <br />
+          Ouverture<br />
+          <strong>J-#{remaing_days}</strong>
+        OPENING
+      else
+        opening_messages = [
+          OPENING_MSG_MONDAY,
+          OPENING_MSG_TUESDAY,
+          OPENING_MSG_WEDNESDAY,
+          OPENING_MSG_THURSDAY,
+          OPENING_MSG_FRIDAY,
+          OPENING_MSG_SATURDAY,
+          OPENING_MSG_SUNDAY
+        ]
+        @opening = opening_messages[Time.now.wday].html_safe
+      end
     end
 
     def set_menu_and_footer
