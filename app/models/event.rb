@@ -45,7 +45,7 @@ class Event < ApplicationRecord
     @@categories_urlized ||= self.categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
   end
 
-  def self.in_months number
+  def self.in_month number
     where("start_time >= ?", (Time.now + number.months).at_beginning_of_month).where("start_time <= ?", (Time.now + number.months).at_end_of_month)
   end
 

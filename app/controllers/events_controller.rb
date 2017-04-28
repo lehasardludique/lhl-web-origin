@@ -3,6 +3,10 @@ class EventsController < ApplicationController
   before_action :get_events, only: [:index, :api_events]
 
   def index
+    @months_list = ['par mois']
+    for i in 1..3
+      @months_list << l(Time.now.at_beginning_of_month + i.month, format: "%B")
+    end
     body_classes 'events'
   end
 
@@ -10,7 +14,7 @@ class EventsController < ApplicationController
     meta = { offset: @offset, limit: @limit, next: @meta_next, count: @events_count }
     events = @events.map{ |e| render_to_string partial: "events/wrapped_event_card", locals: { event: e }}
     response = { meta: meta, items: events }
-    response['message'] = '<p class="no-event-message"><span>Humm… :/ Aucun évènement avec ces critères n\'est actuellement programmé.</p>'.html_safe if @events_count == 0
+    response['message'] = '<p class="no-event-message"><span>Aucun événement prévu pour le moment, revenez bientôt !</span></p>'.html_safe if @events_count == 0
     render json: response
   end
 
@@ -60,8 +64,11 @@ class EventsController < ApplicationController
       end
 
       # date
-      if params[:months] and params[:months].to_i > 0
-        scope = scope.in_months(params[:months].to_i)
+      if params[:month] and params[:month].to_i > 0
+        @month = params[:month].to_i
+        scope = scope.in_month(@month)
+      else
+        @month = 0
       end
 
       @events_count = scope.count

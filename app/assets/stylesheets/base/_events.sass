@@ -10,6 +10,12 @@ body.events
             max-width: 940px
 
         > .header
+
+            .all-active > button,
+            button.active
+                padding-bottom: 5px
+                border-bottom: 4px solid
+            
             button
                 border: 0
                 padding: 0 0 9px
@@ -21,10 +27,6 @@ body.events
                 &:focus,
                 &:active
                     outline: none
-
-                &.active
-                    padding-bottom: 5px
-                    border-bottom: 4px solid
 
                 &.family
                     border-color: $lhl-green
@@ -57,13 +59,55 @@ body.events
                     width: 280px
                     background-image: image_url('bg_event_focus_filter.svg')
                     padding: 10px 20px
-                    margin-bottom: 20px
+                    margin-bottom: 10px
                     background-size: cover
                     background-position: bottom center
                     opacity: 0
 
                     > a
                         display: block
+
+            > .months
+                #month_selector
+                    color: white
+                    display: inline-block
+                    width: 150px
+                    height: 50px
+                    position: relative
+                    font-size: 20px
+                    background-image: image_url('bg_black_hexa.svg')
+                    background-size: 100% 100%
+                    margin-bottom: 20px
+
+                    > button
+                        position: absolute
+                        top: 0
+                        height: 100%
+                        width: 50%
+                        padding: 13px 10px
+                        margin: 0
+                        z-index: 1
+                    
+                        &.previous
+                            text-align: left
+                            left: 0
+                    
+                        &.next
+                            text-align: right
+                            right: 0
+
+                        &[disabled]
+                            opacity: .5
+
+                    > .display
+                        padding: 12px
+                        display: inline-block
+                        width: 100%
+                        height: 100%
+                        opacity: .5
+
+                    &.active > .display
+                        opacity: 1
 
         > .events
             a.event_card
@@ -175,7 +219,7 @@ a.event_card
 
             > .header
                 position: absolute
-                top: 140px
+                top: 135px
                 left: 50%
                 transform: translateX(-50%)
                 z-index: 22

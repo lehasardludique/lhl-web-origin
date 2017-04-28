@@ -1,8 +1,8 @@
 <section>
     <div class="container header">
-        <div class="filters categories">
+        <div class="filters categories all-active">
         <% @categories.each do |category| %>
-            <button data-filter="category" data-category="<%= category %>" data-target="#is_container" class="<%= category %><%= " active" if category.in? @active_categories %>"><%= t "event.categories.#{category}" %></button>
+            <button data-filter="category" data-category="<%= category %>" data-target="#is_container" class="<%= category %><%= " active" if false and category.in? @active_categories %>"><%= t "event.categories.#{category}" %></button>
         <% end %>
         </div>
         <% if @focus.present? %>
@@ -14,6 +14,13 @@
             </p>
         </div>
         <% end %>
+        <div class="filters months">
+            <div id="month_selector" class="<%= 'active' if @month > 0 %>" data-value="<%= @month %>" data-options="<%= @months_list %>">
+                <button<%= ' disabled="disabled"'.html_safe if @month < 1 %> data-filter="month" data-month="-1" data-target="#is_container" class="previous"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
+                <button<%= ' disabled="disabled"'.html_safe if @month >= @months_list.size + 1 %> data-filter="month" data-month="+1" data-target="#is_container" class="next"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
+                <span class="display"><%= @months_list[@month] %></span>
+            </div>
+        </div>
     </div>
     <div class="container events">
         <div id="is_container" class="large-row" data-api="<%= api_events_path %>" data-limit="<%= @limit %>" data-count="<%= @events_count %>">
@@ -23,7 +30,7 @@
             <% end %>
         <% else %>
             <p class="no-event-message">
-                <span>Les évènements sont en cours de saisie. Revenez très vite !</span>
+                <span>Aucun événement prévu pour le moment, revenez bientôt !</span>
             </p>
         <% end %>
         </div>

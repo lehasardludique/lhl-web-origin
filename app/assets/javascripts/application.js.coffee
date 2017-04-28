@@ -114,19 +114,44 @@ LHL.getApiItems = (apiUrl, encodedParams) ->
 LHL.setEventsFilters = ->
     categories = []
     focus = null
-    months = null
+    month = null
     $('button.active[data-category]').each ->
         categories.push $(this).data 'category'
     $('button.active[data-focus]').each ->
         focus = $(this).data 'focus'
-    if !!$('#months_selector.active').length
-        months = $('#months_selector').data 'months'
+    if !!$('#month_selector.active').length
+        month = $('#month_selector').data 'value'
     LHL.filtersRequest['offset'] = 0
     LHL.filtersRequest['categories'] = categories
     LHL.filtersRequest['focus'] = focus
-    LHL.filtersRequest['months'] = months
+    LHL.filtersRequest['month'] = month
     encodedParams = $.param(LHL.filtersRequest)
-    LHL.getApiItems LHL.apiUrl, encodedParams, true
+    LHL.getApiItems LHL.apiUrl, encodedParams
+
+LHL.checkActivationFor = ($button) ->
+    if !!$button.data('category')
+        if !!$('button.active[data-category]').length
+            $button.parent('.categories.all-active').removeClass 'all-active'
+        else
+            $button.parent('.categories').addClass 'all-active'
+    else if !!$button.data('month')
+        $selector = $('#month_selector')
+        options = $selector.data 'options'
+        currentMonth = parseInt $selector.data('value')
+        if currentMonth > 0 and currentMonth < options.length - 1
+            $('button:disabled[data-month]').prop 'disabled', false
+            if !$selector.hasClass('active')
+                $selector.addClass 'active'
+        else if currentMonth < 1
+            currentMonth = 0
+            $selector.data 'value', currentMonth
+            $button.prop 'disabled', true
+            $selector.removeClass 'active'
+        else if currentMonth > options.length - 2
+            currentMonth = options.length - 1
+            $selector.data 'value', currentMonth
+            $button.prop 'disabled', true
+        $selector.children('.display').html options[currentMonth]
 
 LHL.progressBar = (event) ->
     if(Turbolinks.supported)
@@ -247,10 +272,29 @@ init = ->
         LHL.infiniteScroll()
 
     # Buttons
-    if !!$('button[data-filter]').length
-        $('button[data-filter]').off('click').click ->
+    if $('body').hasClass 'events'
+        $('button[data-focus]').off('click').click ->
             $(this).toggleClass 'active'
-            if $('body').hasClass 'events'
+            LHL.setEventsFilters()
+        $('button[data-category]').off('click').click ->
+            $button = $(this)
+            $activeButtons = $('button.active[data-category]')
+            if $button.hasClass 'active'
+                $activeButtons.removeClass 'active'
+            else
+                $activeButtons.removeClass 'active'
+                $button.addClass 'active'
+            LHL.checkActivationFor $button
+            LHL.setEventsFilters()
+        $('button[data-month]').off('click').click ->
+            $button = $(this)
+            $selector = $('#month_selector')
+            if !$button.prop('disabled')
+                options = $selector.data 'options'
+                currentMonth = $selector.data 'value'
+                step = parseInt $button.data('month')
+                $selector.data('value', currentMonth + step)
+                LHL.checkActivationFor $button
                 LHL.setEventsFilters()
 
     if !!$('button[data-action="slide"]').length
