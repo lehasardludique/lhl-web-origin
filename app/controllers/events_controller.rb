@@ -1,5 +1,5 @@
 class EventsController < ApplicationController
-  before_action :get_current_focus, only: [:index]
+  before_action :init_index, only: [:index]
   before_action :get_events, only: [:index, :api_events]
 
   def index
@@ -35,12 +35,12 @@ class EventsController < ApplicationController
   end
 
   private
-    def get_current_focus
-      @focus = Focus.current
+    def init_index
       @offset = 0
     end
 
     def get_events
+      @focus = Focus.current
       @categories = Event.categories.keys.map(&:to_sym)
       @offset ||= (params[:offset].present? and params[:offset].to_i > 0) ? params[:offset].to_i : 0
       @limit = (params[:limit].present? and params[:limit].to_i > 0) ? params[:limit].to_i : 12
