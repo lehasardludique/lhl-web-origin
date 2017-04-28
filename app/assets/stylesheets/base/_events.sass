@@ -16,6 +16,11 @@ body.events
                 margin: 0 10px 10px
                 background-color: transparent
                 font-size: 20px
+                outline: none
+
+                &:focus,
+                &:active
+                    outline: none
 
                 &.active
                     padding-bottom: 5px
@@ -43,6 +48,7 @@ body.events
                     padding: 0
                     border: 0
 
+
                     &.active + p
                         opacity: 1
                 
@@ -62,6 +68,21 @@ body.events
         > .events
             a.event_card
                 margin-bottom: $margin-base
+
+            p.no-event-message
+                font-size: 20px
+                height: 370px
+                padding-top: 50px
+
+                > span
+                    background-image: image_url('bg_social.svg')
+                    background-size: 100% 100%
+                    background-repeat: no-repeat
+                    display: inline-block
+                    width: 300px
+                    min-height: 220px
+                    padding: 60px 40px
+
 
 a.event_card
     display: block

@@ -16,4 +16,8 @@ class Focus < ApplicationRecord
   def self.current
     published.where("focus.end >= ?", Time.now).reorder(end: :asc).first
   end
+
+  def current?
+    self == Focus.current
+  end
 end

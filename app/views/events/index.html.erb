@@ -7,23 +7,25 @@
         </div>
         <% if @focus.present? %>
         <div class="filters focus">
-            <button data-filter="focus" data-focus="<%= @focus.id %>" data-target="#is_container" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus du moment</button>
+            <button data-filter="focus" data-focus="<%= @focus.id %>" data-target="#is_container" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus<%= " du moment" if @focus.current? %></button>
             <p>
                 <%= @focus.title %>
-                <%= link_to "+ d'info", @focus.article.slug if @focus.article.visible? %>
+                <%= link_to "+ d'info", @focus.article.slug if @focus.article.present? and @focus.article.visible? %>
             </p>
         </div>
         <% end %>
     </div>
     <div class="container events">
-    <% if @events.any? %>
         <div id="is_container" class="large-row" data-api="<%= api_events_path %>" data-limit="<%= @limit %>" data-count="<%= @events_count %>">
-        <% @events.each do |event| %>
+        <% if @events.any? %>
+            <% @events.each do |event| %>
             <%= render 'wrapped_event_card', event: event %>
+            <% end %>
+        <% else %>
+            <p class="no-event-message">
+                <span>Les évènements sont en cours de saisie. Revenez très vite !</span>
+            </p>
         <% end %>
         </div>
-    <% else %>
-        <p>Les évènements sont en cours de saisie. Revenez très vite !</p>
-    <% end %>
     </div>
 </section>

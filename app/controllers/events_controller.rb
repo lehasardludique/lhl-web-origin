@@ -9,7 +9,9 @@ class EventsController < ApplicationController
   def api_events
     meta = { offset: @offset, limit: @limit, next: @meta_next, count: @events_count }
     events = @events.map{ |e| render_to_string partial: "events/wrapped_event_card", locals: { event: e }}
-    render json: { meta: meta, items: events }
+    response = { meta: meta, items: events }
+    response['message'] = '<p class="no-event-message"><span>Humm… :/ Aucun évènement avec ces critères n\'est actuellement programmé.</p>'.html_safe if @events_count == 0
+    render json: response
   end
 
   def show
@@ -37,12 +39,11 @@ class EventsController < ApplicationController
     def get_events
       @categories = Event.categories.keys.map(&:to_sym)
       @offset ||= (params[:offset].present? and params[:offset].to_i > 0) ? params[:offset].to_i : 0
-      @limit = (params[:limit].present? and params[:limit].to_i > 0) ? params[:limit].to_i : 3
+      @limit = (params[:limit].present? and params[:limit].to_i > 0) ? params[:limit].to_i : 12
       
       scope = Event.next
 
       if params[:focus].present?
-        Rails.logger.info "----> focus present => #{params[:focus]}"
         @focus = Focus.published.find_by(id: params[:focus].to_i) if params[:focus].to_s.to_i > 0
         if @focus.present?
           @active_focus = true
@@ -52,7 +53,6 @@ class EventsController < ApplicationController
 
       # categories
       unless params[:categories].blank?
-        Rails.logger.info "----> categories present => #{params[:categories]}"
         @active_categories = (params[:categories] & Event.categories.keys).map(&:to_sym)
         scope = scope.where(category: @active_categories)
       else
@@ -61,7 +61,6 @@ class EventsController < ApplicationController
 
       # date
       if params[:months] and params[:months].to_i > 0
-        Rails.logger.info "----> months present => #{params[:months]}"
         scope = scope.in_months(params[:months].to_i)
       end
 

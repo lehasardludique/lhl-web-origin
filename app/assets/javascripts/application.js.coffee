@@ -94,9 +94,13 @@ LHL.getApiItems = (apiUrl, encodedParams) ->
     $.get(apiUrl + '?' + encodedParams)
         .done (data) ->
             LHL.progressBar('end')
-            htmlResult = ''
-            for i of data.items
-                htmlResult += data.items[i]
+            if data.meta.count == 0 and !!data.message
+                htmlResult = data.message
+                console.log '----> No events !'
+            else
+                htmlResult = ''
+                for i of data.items
+                    htmlResult += data.items[i]
             if data.meta.offset == 0
                 $container.html htmlResult
             else
