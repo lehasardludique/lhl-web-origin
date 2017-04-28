@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.9+
-* staging : v0.9+
-* prod. : v0.9+
+* dev : v0.10
+* staging : v0.10
+* prod. : v0.10
 
 ---
 
@@ -71,6 +71,23 @@ n/a
 ---
 
 ## Release notes
+
+### v0.10 (Events gallery)
+
+* EventsGallery: 
+    * routes & controller
+    * gallery & event_card integration
+    * API: `GET /api/events` for async. loading/filters
+    * InfiniteScroll: implementation (12/page)
+    * filters by category/month/focus
+* Focus: current method
+* Event:
+    * in_month method
+    * add `place` attribute
+    * `display_date` management
+* WeezEvent:
+    * improve date definition
+    * admin: improve menu & links
 
 ### v0.9+
 
