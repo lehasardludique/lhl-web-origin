@@ -30,8 +30,8 @@ class ApplicationController < ActionController::Base
     end
 
     def set_opening_time
-      if DateTime.now.midnight < DateTime.parse('2017/04/28')
-        remaing_days = (DateTime.parse('2017/04/29') - DateTime.now.midnight).to_i
+      if Time.now.midnight < Time.parse('2017/04/29')
+        remaing_days = (Time.parse('2017/04/29') - Time.now.midnight).to_i / (24*60*60)
         @opening = <<~OPENING
           <br />
           <br />
