@@ -42,6 +42,7 @@ class EventsController < ApplicationController
       scope = Event.next
 
       if params[:focus].present?
+        Rails.logger.info "----> focus present => #{params[:focus]}"
         @focus = Focus.published.find_by(id: params[:focus].to_i) if params[:focus].to_s.to_i > 0
         if @focus.present?
           @active_focus = true
@@ -51,15 +52,17 @@ class EventsController < ApplicationController
 
       # categories
       unless params[:categories].blank?
-        @active_categories = (params[:categories].split & Event.categories.keys).map(&:to_sym)
+        Rails.logger.info "----> categories present => #{params[:categories]}"
+        @active_categories = (params[:categories] & Event.categories.keys).map(&:to_sym)
         scope = scope.where(category: @active_categories)
       else
         @active_categories = @categories
       end
 
       # date
-      if params[:mois] and params[:mois].to_i > 0
-        scope = scope.in_months(params[:mois].to_i)
+      if params[:months] and params[:months].to_i > 0
+        Rails.logger.info "----> months present => #{params[:months]}"
+        scope = scope.in_months(params[:months].to_i)
       end
 
       @events_count = scope.count

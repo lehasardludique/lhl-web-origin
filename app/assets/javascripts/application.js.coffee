@@ -79,13 +79,11 @@ LHL.infiniteScroll = ->
         $(window).off('scroll').scroll ->
             if $(window).scrollTop() + $(window).height() > $(document).height() - $('body > footer').height()
                 if $container.children().length < parseInt($container.data('count'))
-                    apiUrl = $container.data('api')
-                    LHL.filtersRequest =
-                        'offset': $container.children().length
-                        'limit': $container.data('limit')
+                    LHL.filtersRequest['offset'] = $container.children().length
+                    LHL.filtersRequest['limit'] = $container.data('limit')
                     nextRequest = $.param(LHL.filtersRequest)
                     if !!nextRequest and nextRequest != LHL.pastRequest
-                        LHL.getApiItems apiUrl, nextRequest
+                        LHL.getApiItems LHL.apiUrl, nextRequest
             return
 
 LHL.getApiItems = (apiUrl, encodedParams) ->
@@ -108,6 +106,23 @@ LHL.getApiItems = (apiUrl, encodedParams) ->
                 .data('count', data.meta.count)
             $container.removeClass 'loading'
             return
+
+LHL.setEventsFilters = ->
+    categories = []
+    focus = null
+    months = null
+    $('button.active[data-category]').each ->
+        categories.push $(this).data 'category'
+    $('button.active[data-focus]').each ->
+        focus = $(this).data 'focus'
+    if !!$('#months_selector.active').length
+        months = $('#months_selector').data 'months'
+    LHL.filtersRequest['offset'] = 0
+    LHL.filtersRequest['categories'] = categories
+    LHL.filtersRequest['focus'] = focus
+    LHL.filtersRequest['months'] = months
+    encodedParams = $.param(LHL.filtersRequest)
+    LHL.getApiItems LHL.apiUrl, encodedParams, true
 
 LHL.progressBar = (event) ->
     if(Turbolinks.supported)
@@ -222,8 +237,17 @@ init = ->
                 $carousel.carousel $(this).data('slide-to')
 
     # InfiniteScroll
-    if !!$('#is_container').length
+    if !!$('#is_container[data-api]').length
+        LHL.apiUrl = $('#is_container').data('api')
+        LHL.filtersRequest = 'limit': $('#is_container').data('limit')
         LHL.infiniteScroll()
+
+    # Buttons
+    if !!$('button[data-filter]').length
+        $('button[data-filter]').off('click').click ->
+            $(this).toggleClass 'active'
+            if $('body').hasClass 'events'
+                LHL.setEventsFilters()
 
     if !!$('button[data-action="slide"]').length
         $('button[data-action="slide"]').off('click').click ->

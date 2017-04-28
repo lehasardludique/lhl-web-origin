@@ -2,12 +2,12 @@
     <div class="container header">
         <div class="filters categories">
         <% @categories.each do |category| %>
-            <button data-category="<%= category %>" class="<%= category %><%= " active" if category.in? @active_categories %>"><%= t "event.categories.#{category}" %></button>
+            <button data-filter="category" data-category="<%= category %>" data-target="#is_container" class="<%= category %><%= " active" if category.in? @active_categories %>"><%= t "event.categories.#{category}" %></button>
         <% end %>
         </div>
         <% if @focus.present? %>
         <div class="filters focus">
-            <button data-focus="<%= @focus.id %>" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus du moment</button>
+            <button data-filter="focus" data-focus="<%= @focus.id %>" data-target="#is_container" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus du moment</button>
             <p>
                 <%= @focus.title %>
                 <%= link_to "+ d'info", @focus.article.slug if @focus.article.visible? %>
