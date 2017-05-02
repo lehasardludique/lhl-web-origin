@@ -13,7 +13,7 @@
       <div class="carousel-inner" role="listbox">
         <% @home_carousels_links.each_with_index do |news, i| %>
         <a href="<%= news.slug %>" class="item<%= ' active' if i == 0 %>">
-            <div class="image" style="background-image: url('<%= news.final_resource.url %>')">
+            <div class="image" style="background-image: url('<%= news.final_resource.url if defined? news.final_resource.url %>')">
             </div>
             <div class="title">
                 <%= content_tag :h2, "<span>#{news.final_title}</span>".html_safe if news.final_title.present? %>
