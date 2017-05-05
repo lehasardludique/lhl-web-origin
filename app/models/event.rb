@@ -38,7 +38,7 @@ class Event < ApplicationRecord
   attr_accessor :new_artist_ids, :new_partner_ids
 
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
-  scope :next, -> { visible.where("start_time >= ?", Time.now) }
+  scope :next, -> { visible.where("end_time >= ?", Time.now) }
   default_scope { order(published_at: :desc) }
 
   def self.categories_urlized
@@ -46,7 +46,7 @@ class Event < ApplicationRecord
   end
 
   def self.in_month number
-    where("start_time >= ?", (Time.now + number.months).at_beginning_of_month).where("start_time <= ?", (Time.now + number.months).at_end_of_month)
+    where("end_time >= ?", (Time.now + number.months).at_beginning_of_month).where("end_time <= ?", (Time.now + number.months).at_end_of_month)
   end
 
   def exchange_data weez_event
