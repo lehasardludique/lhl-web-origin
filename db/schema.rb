@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427110232) do
+ActiveRecord::Schema.define(version: 20170511124814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20170427110232) do
   create_table "events", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "focus_id"
-    t.integer  "category"
+    t.integer  "pure_category"
     t.integer  "weez_event_id"
     t.string   "display_date"
     t.datetime "start_time"
@@ -112,9 +112,12 @@ ActiveRecord::Schema.define(version: 20170427110232) do
     t.string   "date_slug"
     t.bigint   "retargeting_pixel_id"
     t.integer  "status"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "place"
+    t.boolean  "workshop",             default: false
+    t.integer  "workshop_category"
+    t.integer  "workshop_rank",        default: 10
     t.index ["date_slug"], name: "index_events_on_date_slug", using: :btree
     t.index ["final_gallery_id"], name: "index_events_on_final_gallery_id", using: :btree
     t.index ["focus_id"], name: "index_events_on_focus_id", using: :btree
