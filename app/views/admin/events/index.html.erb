@@ -1,8 +1,8 @@
 <h2>
   <nav>
-    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_event_path, title: 'Ajouter un nouvel évènement' %>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_event_path, title: "Ajouter un nouvel #{@workshop ? 'atelier' : 'évènement'}" %>
   </nav>
-  Liste des évènements
+  Liste des <%= "#{@workshop ? 'ateliers' : 'évènements'}" %>
 </h2>
 
 <%= render 'list', events: @events %>

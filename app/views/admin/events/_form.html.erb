@@ -1,4 +1,4 @@
-<%= simple_form_for @event, url: url = (@event.new_record?) ? admin_events_path : admin_event_path(@event), html: { class: 'collapsable' } do |f| %>
+<%= simple_form_for @event, url: @event.form_path, html: { class: 'collapsable' } do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -54,18 +54,19 @@ La Villette > https://lavillette.com/</pre>
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#settings">Réglages</h3>
     <div class="collapse" id="settings">
+        <%= f.input :workshop_rank, hint: "Les ateliers sont classés par priorité croissante puis par ordre alphabétique (pour une même priorité)." if @workshop %>
         <%= f.input :start_time %>
         <%= f.input :end_time %>
         <%= f.input :retargeting_pixel_id %>
         <%= f.input :user_id, collection: @users.collect { |u| [u.real_name, u.id] }, include_blank: false if @users.present? %>
-        <%= f.input :title_slug, hint: "La partie Date est générée et mise à jour automatiquement à partir de la date/heure de début, selon le format “2017-12-31”." %>
+        <%= f.input :title_slug, hint: @event.workshop? ? nil : "La partie Date est générée et mise à jour automatiquement à partir de la date/heure de début, selon le format “2017-12-31”." %>
         <%= f.input :published_at %>
         <%= f.input :status, collection: Event.statuses.collect { |s| [t("event.statuses.#{s.first}"), s.first] }, include_blank: false %>
     </div>
   </div>
   <hr />
   <div class="form-actions">
-    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= link_to 'Annuler', @event.form_path, class: 'btn btn-default' %>
     <%= f.button :submit, 'Enregistrer' %>
   </div>
 <% end %>

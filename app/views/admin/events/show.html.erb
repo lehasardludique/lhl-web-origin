@@ -4,7 +4,7 @@
     <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_event_path(@event), title: "Éditer" %>
     <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_events_path, title: "Retour à la liste" %>
   </nav>
-  <span class="id"><%= @event.id %></span> Évènement <em><%= @event.title %></em>
+  <span class="id"><%= @event.id %></span> <%= "#{@workshop ? 'Atelier' : 'Évènement'}" %> <em><%= @event.title %></em>
 </h2>
 <dl class="dl-horizontal borderd-list">
 <% @event.attributes.each do |k,v| %>
