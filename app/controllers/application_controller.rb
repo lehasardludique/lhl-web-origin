@@ -1,10 +1,15 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  include ExtendedErrors
   include ApplicationHelper
   include RoutesHelper
 
   rescue_from PG::ForeignKeyViolation, with: :ooops!
   rescue_from ActiveRecord::RecordNotFound , with: :not_found!
+  rescue_from ExtendedErrors::DependencyDestructionError do |exception|
+    flash[:error] = exception.to_s
+    redirect_back fallback_location: admin_root_path
+  end
 
   before_action :set_opening_time, :set_menu_and_footer
   after_action :store_location

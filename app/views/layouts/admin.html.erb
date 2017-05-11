@@ -15,7 +15,7 @@
 <% if flash.any? %>
 <div id="flash">
 <% flash.each do |message| %>
-<p class="<%= message.first %>"><%= message.last %></p>
+<p class="<%= message.first %>"><%= message.last.html_safe %></p>
 <% end %>
 </div>
 <% end %>
