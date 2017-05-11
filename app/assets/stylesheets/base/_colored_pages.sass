@@ -56,19 +56,24 @@
 
 body.page
 
-    &.family
+    &.family,
+    &.take_care
         +colored_page_to($lhl-green)
 
-    &.show
+    &.show,
+    &.connect
         +colored_page_to($lhl-purple)
 
-    &.animations
+    &.animations,
+    &.creative
         +colored_page_to($lhl-orange)
 
-    &.concert
+    &.concert,
+    &.diy
         +colored_page_to($lhl-blue)
 
-    &.other
+    &.other,
+    &.brain
         +colored_page_to($lhl-pink)
 
 
@@ -78,18 +83,23 @@ body.page
 @media (min-width: $screen-sm-min)
     body.page
 
-        &.family
+        &.family,
+        &.take_care
             +colored_desk_page_to($lhl-green)
 
-        &.show
+        &.show,
+        &.connect
             +colored_desk_page_to($lhl-purple)
 
-        &.animations
+        &.animations,
+        &.creative
             +colored_desk_page_to($lhl-orange)
 
-        &.concert
+        &.concert,
+        &.diy
             +colored_desk_page_to($lhl-blue)
 
-        &.other
+        &.other,
+        &.brain
             +colored_desk_page_to($lhl-pink)
 
