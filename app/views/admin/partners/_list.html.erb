@@ -17,7 +17,7 @@
     <% partners.each do |partner| %>
       <tr>
         <td><span class="badge"><%= partner.id %></span></td>
-        <td><% if partner.resource.present? %><span class="preview" style="background-image: url('<%= partner.resource.thumb_url %>')"></span><% end %></td>
+        <td><% if partner.resource.present? %><span class="preview" style="background-image: url('<%= partner.resource.thumb_url if defined? partner.resource.thumb_url %>')"></span><% end %></td>
         <td><%= partner.name %></td>
         <td><%= partner.notes %></td>
         <td><%= l partner.created_at, format: :sortable %></td>

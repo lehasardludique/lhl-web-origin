@@ -20,9 +20,9 @@
         <td><span class="badge"><%= r.id %></span></td>
         <td>
         <% if can? :read, r %>
-          <a href="<%= admin_resource_path(r) %>"><span class="preview" style="background-image: url('<%= r.thumb_url %>')"></span></a>
+          <a href="<%= admin_resource_path(r) %>"><span class="preview" style="background-image: url('<%= r.thumb_url if defined? r.thumb_url %>')"></span></a>
         <% else %>
-          <span class="preview" style="background-image: url('<%= r.thumb_url %>')"></span>
+          <span class="preview" style="background-image: url('<%= r.thumb_url if defined? r.thumb_url %>')"></span>
         <% end %>
         </td>
         <td><%= r.name %></td>

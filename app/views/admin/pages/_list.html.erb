@@ -20,7 +20,7 @@
         <td><span class="badge"><%= page.id %></span></td>
         <td><%= page.title %></td>
         <td><%= page.digest %></td>
-        <td><span class="preview" style="background-image: url('<%= page.main_picture.thumb_url %>')"></span></td>
+        <td><span class="preview" style="background-image: url('<%= page.main_picture.thumb_url if defined? page.main_picture.thumb_url %>')"></span></td>
         <td><%= link_to "/#{page.slug}", page_path(page.slug), target: :_blank %></td>
         <td><%= l page.created_at, format: :sortable %></td>
         <td><%= l page.updated_at, format: :sortable %></td>
