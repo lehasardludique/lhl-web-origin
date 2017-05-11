@@ -20,7 +20,8 @@ class Event < ApplicationRecord
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
 
   validates :title, presence: true
-  validates :title_slug, uniqueness: { scope: :date_slug}, presence: true
+  validates :title_slug, uniqueness: { scope: :workshop}, presence: true, if: :workshop?
+  validates :title_slug, uniqueness: { scope: :date_slug}, presence: true, unless: :workshop?
   validate :slug_is_reserved
   validates :aside_link_1_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :aside_link_2_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
@@ -35,7 +36,7 @@ class Event < ApplicationRecord
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :slug, :full_url, :main_picture, :digest, :category_slug, :categories
+  attr_reader :slug, :full_url, :main_picture, :digest, :category_slug, :categories, :form_path
   attr_accessor :new_artist_ids, :new_partner_ids, :category
 
   default_scope { where.not(workshop: true).order(published_at: :desc) }
@@ -103,9 +104,17 @@ class Event < ApplicationRecord
   def media_links?
     media_link_fbk.present? or media_link_isg.present? or media_link_twt.present? or media_link_msk.present? or media_link_vid.present? or media_link_www.present?
   end
+
+  def form_path
+    @form_path ||= get_form_path
+  end
   
   def slug
-    @slug ||= Rails.application.routes.url_helpers.event_path(category: self.category_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
+    if self.workshop?
+      @slug ||= Rails.application.routes.url_helpers.workshop_path(category: self.category_slug, slug: self.title_slug) if self.title_slug.present?
+    else
+      @slug ||= Rails.application.routes.url_helpers.event_path(category: self.category_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
+    end
   end
 
   def category_slug
@@ -249,6 +258,14 @@ class Event < ApplicationRecord
     def set_partners
       if self.new_partner_ids.is_a? Array
         self.partners = Partner.where(id: self.new_partner_ids)
+      end
+    end
+
+    def get_form_path
+      if self.workshop?
+        self.new_record? ? Rails.application.routes.url_helpers.admin_workshops_path : Rails.application.routes.url_helpers.admin_workshop_path(self)
+      else
+        self.new_record? ? Rails.application.routes.url_helpers.admin_events_path : Rails.application.routes.url_helpers.admin_event_path(self)
       end
     end
 end

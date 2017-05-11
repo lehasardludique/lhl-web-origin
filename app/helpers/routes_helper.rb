@@ -20,4 +20,36 @@ module RoutesHelper
     event_params.merge( additional_params ) if additional_params.present? and additional_params.is_a? Hash
     super(event_params) if event.is_a? Event
   end
+
+  def admin_event_path(event)
+    if event.workshop?
+      admin_workshop_path(event)
+    else
+      super
+    end
+  end
+
+  def admin_events_path
+    if @workshop
+      admin_workshops_path
+    else
+      super
+    end
+  end
+
+  def edit_admin_event_path(event)
+    if event.workshop?
+      edit_admin_workshop_path event
+    else
+      super
+    end
+  end
+
+  def new_admin_event_path
+    if @workshop
+      new_admin_workshop_path
+    else
+      super
+    end
+  end
 end

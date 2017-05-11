@@ -1,4 +1,5 @@
 class EventsController < ApplicationController
+  before_action :is_it_worshop?
   before_action :init_index, only: [:index]
   before_action :get_events, only: [:index, :api_events]
 
@@ -19,7 +20,11 @@ class EventsController < ApplicationController
   end
 
   def show
-    @event = Event.find_by! date_slug: params[:date], title_slug: params[:slug]
+    if @workshop
+      @event = Event.workshop.find_by! title_slug: params[:slug]
+    else
+      @event = Event.find_by! date_slug: params[:date], title_slug: params[:slug]
+    end
     if
     (not @event.visible? and not logged_in?) or
     (@event.draft? and (not logged_in? or not @event.user == current_user)) or
@@ -35,6 +40,10 @@ class EventsController < ApplicationController
   end
 
   private
+    def is_it_worshop?
+      @workshop = !!params[:workshop]
+    end
+
     def init_index
       @offset = 0
     end
