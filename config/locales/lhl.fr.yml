@@ -167,6 +167,11 @@ fr:
       animations: Animations
       show: Soirée
       other: Autre
+      take_care: Prends soin de toi
+      connect: Connecte-toi
+      creative: Sois Créatif
+      diy: Fais-le toi même
+      brain: Chauffe ton cerveau
     place: Lieu
     places:
       outside: Hors les murs
@@ -174,6 +179,8 @@ fr:
       hall: La Salle
       studio: "L'Atelier"
       dock: Le Quai
+    workshop: Atelier
+    workshop_rank: Priorité
 
   # Partner
   partner: &partner

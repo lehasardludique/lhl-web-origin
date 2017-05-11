@@ -12,7 +12,8 @@ class Event < ApplicationRecord
   has_many :event_partner_links
   has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
 
-  enum category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
+  enum pure_category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
+  enum workshop_category: { take_care: 1, connect: 2, creative: 3, diy: 4, brain: 0 }
   enum place: { station: 1, hall: 4, studio: 2, dock: 3, outside: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
@@ -34,19 +35,32 @@ class Event < ApplicationRecord
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :slug, :full_url, :main_picture, :digest, :category_slug
-  attr_accessor :new_artist_ids, :new_partner_ids
+  attr_reader :slug, :full_url, :main_picture, :digest, :category_slug, :categories
+  attr_accessor :new_artist_ids, :new_partner_ids, :category
 
+  default_scope { where.not(workshop: true).order(published_at: :desc) }
+  scope :workshop, -> { unscoped.where(workshop: true).order(workshop_rank: :asc, title: :asc ) }
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   scope :next, -> { visible.where("end_time >= ?", Time.now) }
-  default_scope { order(published_at: :desc) }
 
-  def self.categories_urlized
-    @@categories_urlized ||= self.categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
+  def self.categories_urlized(kind = :pure)
+    if kind == :pure
+      @@pure_categories_urlized ||= self.pure_categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
+    elsif kind == :workshop
+      @@workshop_categories_urlized ||= self.workshop_categories.keys.map{ |c| I18n.t( 'event.categories.' + c ).urlize }
+    end
   end
 
   def self.in_month number
     where("end_time >= ?", (Time.now + number.months).at_beginning_of_month).where("end_time <= ?", (Time.now + number.months).at_end_of_month)
+  end
+
+  def categories
+    if self.workshop?
+      Event.workshop_categories
+    else
+      Event.pure_categories
+    end
   end
 
   def exchange_data weez_event
@@ -68,6 +82,22 @@ class Event < ApplicationRecord
 
   def visible?
     published? and published_at <= Time.now
+  end
+
+  def workshop?
+    self.workshop || false
+  end
+
+  def category
+    self.workshop? ? self.workshop_category : self.pure_category
+  end
+
+  def category= c
+    if self.workshop?
+      self.workshop_category = c
+    else
+      self.pure_category = c
+    end
   end
 
   def media_links?

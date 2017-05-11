@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     resources :articles
     resources :focus
     resources :events
+    resources :events, path: :workshops, as: :workshops, workshop: true
     resources :partners
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
