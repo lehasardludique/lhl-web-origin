@@ -4,9 +4,11 @@ class EventsController < ApplicationController
   before_action :get_events, only: [:index, :api_events]
 
   def index
-    @months_list = ['par mois']
-    for i in 1..3
-      @months_list << l(Time.now.at_beginning_of_month + i.month, format: "%B")
+    unless @workshop
+      @months_list = ['par mois']
+      for i in 1..3
+        @months_list << l(Time.now.at_beginning_of_month + i.month, format: "%B")
+      end
     end
     body_classes 'events'
   end
@@ -50,39 +52,45 @@ class EventsController < ApplicationController
 
     def get_events
       @focus = Focus.current
-      @categories = Event.categories.keys.map(&:to_sym)
+      @categories = @workshop ? Event.workshop_categories.keys.map(&:to_sym) : Event.pure_categories.keys.map(&:to_sym)
       @offset ||= (params[:offset].present? and params[:offset].to_i > 0) ? params[:offset].to_i : 0
       @limit = (params[:limit].present? and params[:limit].to_i > 0) ? params[:limit].to_i : 12
       
-      scope = Event.next
+      scope = @workshop ? Event.workshop.next : Event.next
 
       if params[:focus].present?
         @focus = Focus.published.find_by(id: params[:focus].to_i) if params[:focus].to_s.to_i > 0
         if @focus.present?
           @active_focus = true
-          scope = @focus.events.visible
+          scope = @workshop ? @focus.events.workshop.visible : @focus.events.visible
         end
       end
 
       # categories
       unless params[:categories].blank?
-        @active_categories = (params[:categories] & Event.categories.keys).map(&:to_sym)
-        scope = scope.where(category: @active_categories)
+        @active_categories = params[:categories].map(&:to_sym) & @categories
+        scope = @workshop ? scope.where(workshop_category: @active_categories) : scope.where(pure_category: @active_categories)
       else
         @active_categories = @categories
       end
 
-      # date
-      if params[:month] and params[:month].to_i > 0
-        @month = params[:month].to_i
-        scope = scope.in_month(@month)
-      else
-        @month = 0
+      unless @workshop
+        # date
+        if params[:month] and params[:month].to_i > 0
+          @month = params[:month].to_i
+          scope = scope.in_month(@month)
+        else
+          @month = 0
+        end
       end
 
       @events_count = scope.count
       @meta_next = ((@offset+@limit+1) >= @events_count) ? nil : "offset=#{@offset+@limit}&limit=#{@limit}"
 
-      @events = scope.reorder(start_time: :asc).offset(@offset).limit(@limit)
+      # order
+      scope.reorder(workshop_rank: :asc, title: :asc) if @workshop
+      scope.reorder(start_time: :asc) unless @workshop
+
+      @events = scope.offset(@offset).limit(@limit)
     end
 end
