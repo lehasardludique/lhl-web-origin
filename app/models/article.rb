@@ -1,4 +1,6 @@
 class Article < ApplicationRecord
+  include ExtendedErrors
+  
   belongs_to :user
   belongs_to :main_gallery, class_name: 'Gallery'
   belongs_to :resource
@@ -9,6 +11,7 @@ class Article < ApplicationRecord
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   before_validation :check_slug
+  before_destroy :check_dependencies
 
   validates :title, presence: true
   validates :title_slug, uniqueness: { scope: :date_slug}, presence: true
@@ -106,5 +109,11 @@ class Article < ApplicationRecord
 
     def main_gallery_present?
       self.main_gallery.present?
+    end
+
+    def check_dependencies
+      if self.home_carousel_link.present?
+        raise DependencyDestructionError.new "Cet article est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
+      end
     end
 end

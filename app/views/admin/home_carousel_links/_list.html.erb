@@ -29,7 +29,7 @@
         <td><span class="preview" style="background-image: url('<%= link.final_resource.thumb_url if link.final_resource.present? %>')"></span></td>
         <td><%= link.final_title %></td>
         <td><%= link.final_subtitle %></td>
-        <td><%= "#{link.home_linkable_type}:#{link.home_linkable_id}" %></td>
+        <td><%= link_to "#{link.home_linkable_type}:#{link.home_linkable_id}", admin_path(link.home_linkable) %></td>
         <td><%= t("home_carousel_link.statuses.#{link.status}") %></td>
         <td class="action">
           <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_home_carousel_link_path(link), title: "Aperçu" if can? :read, link %>

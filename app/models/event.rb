@@ -1,4 +1,6 @@
 class Event < ApplicationRecord
+  include ExtendedErrors
+  
   belongs_to :user
   belongs_to :focus
   belongs_to :weez_event
@@ -18,6 +20,7 @@ class Event < ApplicationRecord
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
+  before_destroy :check_dependencies
 
   validates :title, presence: true
   validates :title_slug, uniqueness: { scope: :workshop}, presence: true, if: :workshop?
@@ -266,6 +269,12 @@ class Event < ApplicationRecord
         self.new_record? ? Rails.application.routes.url_helpers.admin_workshops_path : Rails.application.routes.url_helpers.admin_workshop_path(self)
       else
         self.new_record? ? Rails.application.routes.url_helpers.admin_events_path : Rails.application.routes.url_helpers.admin_event_path(self)
+      end
+    end
+
+    def check_dependencies
+      if self.home_carousel_link.present?
+        raise DependencyDestructionError.new "Cet évènement est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
       end
     end
 end

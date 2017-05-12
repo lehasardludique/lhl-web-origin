@@ -29,6 +29,14 @@ module RoutesHelper
     end
   end
 
+  def admin_path object
+    case object
+    when Article then admin_article_path object
+    when Page then admin_page_path object
+    when Event then admin_event_path object
+    end
+  end
+
   def admin_events_path
     if @workshop
       admin_workshops_path
