@@ -63,7 +63,7 @@ class EventsController < ApplicationController
         @focus = Focus.published.find_by(id: params[:focus].to_i) if params[:focus].to_s.to_i > 0
         if @focus.present?
           @active_focus = true
-          scope = @workshop ? @focus.events.workshop.visible : @focus.events.visible
+          scope = @workshop ? Event.where(focus_id: @focus.id).workshop.visible : Event.where(focus_id: @focus.id).visible
         end
       end
 
@@ -89,8 +89,11 @@ class EventsController < ApplicationController
       @meta_next = ((@offset+@limit+1) >= @events_count) ? nil : "offset=#{@offset+@limit}&limit=#{@limit}"
 
       # order
-      scope.reorder(workshop_rank: :asc, title: :asc) if @workshop
-      scope.reorder(start_time: :asc) unless @workshop
+      if @workshop
+        scope = scope.reorder(workshop_rank: :asc, title: :asc)
+      else
+        scope = scope.reorder(end_time: :asc)
+      end
 
       @events = scope.offset(@offset).limit(@limit)
     end
