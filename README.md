@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.10
-* staging : v0.10
-* prod. : v0.10
+* dev : v0.13
+* staging : v0.13
+* prod. : v0.11
 
 ---
 
@@ -71,6 +71,33 @@ n/a
 ---
 
 ## Release notes
+
+### v0.13 (WorkShop)
+
+* Workshops:
+    * Event: pure/workshop differentiation (model, form, local.)
+    * routes & controller, admin views
+    * Front style (event variation)
+    * API/front index scope selection
+* Events:
+    * Gallery: change filter scope (:end_at instead of :start_time)
+* Admin:
+    * Resource: error on destruction (item with dependencies)
+    * Article, Page, Event: error on destruction (item linked to a home slide)
+* Recette:
+    * fix admin list imageless preview item
+
+### v0.11 (Fixed Openning messages)
+
+* OpeningMessages:
+    * active default day message
+    * day of the Week & TimeZone
+* Event:
+    * Front event page: style, center artist image in mask
+    * Gallery: [R] change `#month_selector` marge & svg preserveAspectRatio attribute
+* Recette:
+    * fix home with imageless news
+
 
 ### v0.10 (Events gallery)
 
