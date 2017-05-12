@@ -52,6 +52,7 @@ class ApplicationController < ActionController::Base
       @menu_links = {
         "Programmation" => events_path,
         "Billetterie" => "/billetterie",
+        "Activités" => workshops_path,
         "Infos pratiques" => "/infos-pratiques"
       }
       @footer_1_links = {

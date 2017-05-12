@@ -11,6 +11,7 @@ class EventsController < ApplicationController
       end
     end
     body_classes 'events'
+    body_classes 'workshop' if @workshop
   end
 
   def api_events

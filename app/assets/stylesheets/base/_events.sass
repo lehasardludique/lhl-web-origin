@@ -28,16 +28,21 @@ body.events
                 &:active
                     outline: none
 
-                &.family
+                &.family,
+                &.take_care
                     border-color: $lhl-green
-                &.concert
+                &.concert,
+                &.diy
                     border-color: $lhl-blue
-                &.animations
+                &.animations,
+                &.creative
                     border-color: $lhl-orange
-                &.show
+                &.show,
+                &.connect
                     border-color: $lhl-purple
                     display: inline-block !important
-                &.other
+                &.other,
+                &.brain
                     border-color: $lhl-pink
 
             > .focus
@@ -189,23 +194,28 @@ a.event_card
                 background-position: top center
                 content: " "
 
-    &.family
+    &.family,
+    &.take_care
         > div.content
             +vertical_gradient_to($lhl-green)
 
-    &.show
+    &.show,
+    &.connect
         > div.content
             +vertical_gradient_to($lhl-purple)
 
-    &.animations
+    &.animations,
+    &.creative
         > div.content
             +vertical_gradient_to($lhl-orange)
 
-    &.concert
+    &.concert,
+    &.diy
         > div.content
             +vertical_gradient_to($lhl-blue)
 
-    &.other
+    &.other,
+    &.brain
         > div.content
             +vertical_gradient_to($lhl-pink)
 

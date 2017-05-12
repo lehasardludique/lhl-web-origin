@@ -14,6 +14,7 @@
             </p>
         </div>
         <% end %>
+        <% if @months_list and @month %>
         <div class="filters months">
             <div id="month_selector" class="<%= 'active' if @month > 0 %>" data-value="<%= @month %>" data-options="<%= @months_list %>">
                 <button<%= ' disabled="disabled"'.html_safe if @month < 1 %> data-filter="month" data-month="-1" data-target="#is_container" class="previous"><i class="fa fa-caret-left" aria-hidden="true"></i></button>
@@ -21,9 +22,10 @@
                 <span class="display"><%= @months_list[@month] %></span>
             </div>
         </div>
+        <% end %>
     </div>
     <div class="container events">
-        <div id="is_container" class="large-row" data-api="<%= api_events_path %>" data-limit="<%= @limit %>" data-count="<%= @events_count %>">
+        <div id="is_container" class="large-row" data-api="<%= @workshop ? api_workshops_path : api_events_path %>" data-limit="<%= @limit %>" data-count="<%= @events_count %>">
         <% if @events.any? %>
             <% @events.each do |event| %>
             <%= render 'wrapped_event_card', event: event %>

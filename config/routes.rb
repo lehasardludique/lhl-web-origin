@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # API
   scope 'api', as: :api do
     get 'events' => 'events#api_events', as: :events
+    get 'workshops' => 'events#api_events', as: :workshops, workshop: true
   end
 
   # UserSessions
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
 
   # Front
   get 'programmation' => 'events#index', as: :events
+  get 'activites' => 'events#index', as: :workshops, workshop: true
   get 'articles/:date/*slug' => 'articles#show', as: :article
   get ':category/:date/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized }, as: :event
   get ':category/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized(:workshop) }, as: :workshop, workshop: true
