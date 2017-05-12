@@ -53,9 +53,9 @@ module RoutesHelper
     end
   end
 
-  def new_admin_event_path
+  def new_admin_event_path *args
     if @workshop
-      new_admin_workshop_path
+      new_admin_workshop_path args
     else
       super
     end
