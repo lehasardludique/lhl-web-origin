@@ -40,7 +40,7 @@ class Event < ApplicationRecord
   attr_accessor :new_artist_ids, :new_partner_ids, :category
 
   default_scope { where.not(workshop: true).order(published_at: :desc) }
-  scope :workshop, -> { unscoped.where(workshop: true).order(workshop_rank: :asc, title: :asc ) }
+  scope :workshop, -> { unscope(where: :workshop).where(workshop: true).reorder(workshop_rank: :asc, title: :asc ) }
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   scope :next, -> { visible.where("end_time >= ?", Time.now) }
 
