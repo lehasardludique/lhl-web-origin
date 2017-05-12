@@ -1,6 +1,10 @@
 //= Mixins
 
 =colored_page_to($color: $lhl-yellow)
+    .carousel-indicators .active
+        background-color: $color
+    .carousel-indicators li
+        border-color: $color
     .socials > a
         background-image: svg_to_data('bg_social', $color)
     > menu
