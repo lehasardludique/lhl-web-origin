@@ -10,30 +10,6 @@ class Ability
 
     else
 
-    ## EVENT
-    
-      # can :manage, Event do |event|
-      #   event.user == user
-      # end
-
-    ## FOCUS
-    
-      # can :manage, Focus if user.admin?
-
-    ## RESOURCE
-      can [:read], Resource unless user.new_record?
-      can [:create, :update, :delete], Resource do |resource|
-        resource.user == user
-      end
-
-    ## PAGE
-      can [:read], Page do |page|
-        page.published? or page.user == user
-      end
-      can [:create, :update, :delete], Page do |page|
-        page.user == user
-      end
-
     ## ARTICLE
       can [:read], Article do |article|
         article.published? or article.user == user
@@ -50,10 +26,49 @@ class Ability
         artist.user == user
       end
 
+    ## EVENT
+      can [:read], Event do |event|
+        event.published? or event.user == user
+      end
+      can [:create, :update, :delete], Event do |event|
+        event.user == user
+      end
+
+    ## FOCUS
+      can [:read], Focus unless user.new_record?
+
     ## GALLERY
       can [:read], Gallery unless user.new_record?
       can [:create, :update, :delete], Gallery do |gallery|
         resource.user == user
+      end
+
+    ## HOMECAROUSELLINK
+      can [:read], HomeCarouselLink unless user.new_record?
+
+    ## PAGE
+      can [:read], Page do |page|
+        page.published? or page.user == user
+      end
+      can [:create, :update, :delete], Page do |page|
+        page.user == user
+      end
+
+    ## PARTNER
+      can [:read], Partner unless user.new_record?
+      can [:create, :update, :delete], Partner do |partner|
+        partner.user == user
+      end
+
+    ## RESOURCE
+      can [:read], Resource unless user.new_record?
+      can [:create, :update, :delete], Resource do |resource|
+        resource.user == user
+      end
+
+    ## USER
+      can [:read, :update, :update_password], User do |edited_user|
+        edited_user == user
       end
 
     end
