@@ -46,6 +46,34 @@
             <%= @festival.content.html_safe %>
         </div>
     </section>
+    <% if @festival.events.all_kinds.visible.any? %>
+    <section id="events">
+        <% if @festival.events.visible.any? %>
+        <h3>
+            <div class="container">Évènements</div>
+        </h3>
+        <div class="container">
+            <div class="large-row">
+            <% @festival.events.visible.each do |event| %>
+            <%= render 'events/wrapped_in_page_event_card', event: event %>
+            <% end %>
+            </div>
+        </div>
+        <% end %>
+        <% if @festival.events.workshop.visible.any? %>
+        <h3>
+            <div class="container">Activités</div>
+        </h3>
+        <div class="container">
+            <div class="large-row">
+            <% @festival.events.workshop.visible.each do |event| %>
+            <%= render 'events/wrapped_in_page_event_card', event: event %>
+            <% end %>
+            </div>
+        </div>
+        <% end %>
+    <% end %>
+    </section>
     <% if @festival.final_gallery.present? %>
     <section class="gray">
         <div class="container">

@@ -162,7 +162,8 @@ class Festival < ApplicationRecord
 
     def set_events
       if self.new_event_ids.is_a? Array and self.new_workshop_ids.is_a? Array
-        self.events = Event.all_kinds.where(id: self.new_event_ids + self.new_workshop_ids)
+        self.festival_event_links.delete_all
+        self.events = Event.all_kinds.where(id: (self.new_event_ids + self.new_workshop_ids).uniq)
       end
     end
 end

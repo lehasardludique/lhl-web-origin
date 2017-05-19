@@ -123,6 +123,21 @@ body.page
             &.more
                 margin-top: $margin-base
 
+            &#events
+                margin-bottom: -$margin-base
+                text-align: center
+            
+                > h3
+                    background-color: $lhl-black
+                    color: white
+                    height: 40px
+                    line-height: 40px
+                    font-size: $font-size-h2-small
+                    margin: 0 0 $margin-base
+
+                a.event_card
+                    margin-bottom: $margin-base
+
             &#artists
                 background-color: $lhl-yellow
                 overflow: hidden
@@ -251,6 +266,10 @@ body.page
                     margin: 0 $margin-base
 
             > section
+                &#events
+                    > h3
+                        text-align: left
+
                 &#artists
 
                     > .container
