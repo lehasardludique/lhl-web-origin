@@ -22,7 +22,7 @@
         <td><%= article.title %></td>
         <td><%= article.digest %></td>
         <td><span class="preview" style="background-image: url('<%= article.main_picture.thumb_url if defined? article.main_picture.thumb_url %>')"></span></td>
-        <td><%= link_to article.slug, article.slug, target: :_blank %></td>
+        <td><%= link_to article.path, article.path, target: :_blank %></td>
         <td><%= l article.created_at, format: :sortable %></td>
         <td><%= l article.updated_at, format: :sortable %></td>
         <td><%= article.user.real_name %></td>

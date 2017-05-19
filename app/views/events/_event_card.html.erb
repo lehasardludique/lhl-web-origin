@@ -1,4 +1,4 @@
-<a class="event_card <%= event.category %><%= " focused" if event.focus.present? and event.focus = @focus %>" href="<%= event.slug %>">
+<a class="event_card <%= event.category %><%= " focused" if event.focus.present? and event.focus = @focus %>" href="<%= event.path %>">
     <div class="image" style="background-image: url('<%= event.main_picture.url %>')" ></div>
     <div class="content">
         <%= content_tag :span, "Focus", class: 'focus' if event.focus.present? and event.focus = @focus %>

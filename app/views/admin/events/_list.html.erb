@@ -28,7 +28,7 @@
         <td><%= l event.start_time, format: :sortable if event.start_time.present? %></td>
         <td><%= l event.end_time, format: :sortable if event.end_time.present? %></td>
         <td><%= event.display_date %></td>
-        <td><%= link_to event.slug, event.slug, target: :_blank %></td>
+        <td><%= link_to event.path, event.path, target: :_blank %></td>
         <td><%= l event.updated_at, format: :sortable %></td>
         <td><%= event.user.real_name %></td>
         <td><%= t("event.statuses.#{event.status}") %></td>

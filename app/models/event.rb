@@ -31,7 +31,7 @@ class Event < ApplicationRecord
   validates :aside_link_2_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :retargeting_pixel_id, allow_blank: true, numericality: { only_integer: true }
+  validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
 
   before_save :set_display_date
   after_save :set_artists, :set_partners
@@ -41,7 +41,7 @@ class Event < ApplicationRecord
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :slug, :full_url, :main_picture, :digest, :category_slug, :categories, :form_path
+  attr_reader :path, :full_url, :main_picture, :digest, :category_slug, :categories, :form_path
   attr_accessor :new_artist_ids, :new_partner_ids, :category
 
   default_scope { where.not(workshop: true).order(published_at: :desc) }
@@ -114,12 +114,12 @@ class Event < ApplicationRecord
   def form_path
     @form_path ||= get_form_path
   end
-  
-  def slug
+
+  def path
     if self.workshop?
-      @slug ||= Rails.application.routes.url_helpers.workshop_path(category: self.category_slug, slug: self.title_slug) if self.title_slug.present?
+      @path ||= Rails.application.routes.url_helpers.workshop_path(category: self.category_slug, slug: self.title_slug) if self.title_slug.present?
     else
-      @slug ||= Rails.application.routes.url_helpers.event_path(category: self.category_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
+      @path ||= Rails.application.routes.url_helpers.event_path(category: self.category_slug, date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
     end
   end
 
@@ -185,7 +185,7 @@ class Event < ApplicationRecord
 
     def slug_is_reserved
       begin
-        path = Rails.application.routes.recognize_path(self.slug, { :method => :get })
+        path = Rails.application.routes.recognize_path(self.path, { :method => :get })
         errors.add(:slug, "Cette url est réservée.") unless (path[:controller] == 'events' and path[:action] == 'show')
       rescue
         return

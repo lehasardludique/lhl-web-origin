@@ -4,7 +4,7 @@ class HomeCarouselLink < ApplicationRecord
 
   enum status: { draft: 0, published: 1 }
 
-  attr_reader :final_title, :final_subtitle, :final_resource, :slug
+  attr_reader :final_title, :final_subtitle, :final_resource, :path
   attr_accessor :form
 
   validates :home_linkable_type, presence: true
@@ -30,8 +30,8 @@ class HomeCarouselLink < ApplicationRecord
     @final_resource ||= get_final_resource()
   end
 
-  def slug
-    @slug ||= get_final_slug()
+  def path
+    @path ||= get_final_path()
   end
 
   private
@@ -59,8 +59,8 @@ class HomeCarouselLink < ApplicationRecord
       end
     end
 
-    def get_final_slug
-     (defined? self.home_linkable.slug) ? self.home_linkable.slug : '#'
+    def get_final_path
+     (defined? self.home_linkable.path) ? self.home_linkable.path : '#'
     end
 
     def check_rank_consistency

@@ -20,15 +20,19 @@ class Page < ApplicationRecord
   validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :retargeting_pixel_id, numericality: { only_integer: true }
+  validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :full_url, :main_picture, :digest
+  attr_reader :path, :full_url, :main_picture, :digest
 
   scope :visible, -> { published }
+
+  def path
+    @path ||= Rails.application.routes.url_helpers.page_path(slug: self.slug) if self.slug.present?
+  end
 
   def full_url
     @full_url ||= Rails.application.routes.url_helpers.page_url(slug: self.slug, host: LHL_URL) if self.slug.present?
@@ -79,7 +83,7 @@ class Page < ApplicationRecord
 
     def slug_is_reserved
       begin
-        path = Rails.application.routes.recognize_path(self.slug, { :method => :get })
+        path = Rails.application.routes.recognize_path(self.path, { :method => :get })
         errors.add(:slug, "Cette url est réservée.") unless (path[:controller] == 'pages' and path[:action] == 'show')
       rescue
         return

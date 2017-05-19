@@ -21,7 +21,7 @@
         <td><%= festival.title %></td>
         <td><%= festival.digest %></td>
         <td><span class="preview" style="background-image: url('<%= festival.main_picture.thumb_url if defined? festival.main_picture.thumb_url %>')"></span></td>
-        <td><%= link_to "/#{festival.slug}", festival_path(festival.slug), target: :_blank %></td>
+        <td><%= link_to festival.path, festival.path, target: :_blank %></td>
         <td><%= l festival.created_at, format: :sortable %></td>
         <td><%= l festival.updated_at, format: :sortable %></td>
         <td><%= festival.user.real_name %></td>

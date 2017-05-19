@@ -21,13 +21,13 @@ class Article < ApplicationRecord
   validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :retargeting_pixel_id, numericality: { only_integer: true }
+  validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :slug, :full_url, :main_picture, :digest
+  attr_reader :path, :full_url, :main_picture, :digest
 
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   default_scope { order(published_at: :desc) }
@@ -40,8 +40,8 @@ class Article < ApplicationRecord
     media_link_fbk.present? or media_link_isg.present? or media_link_twt.present? or media_link_msk.present? or media_link_vid.present? or media_link_www.present?
   end
   
-  def slug
-    @slug ||= Rails.application.routes.url_helpers.article_path(date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
+  def path
+    @path ||= Rails.application.routes.url_helpers.article_path(date: self.date_slug, slug: self.title_slug) if self.date_slug.present? and self.title_slug.present?
   end
 
   def full_url
@@ -96,7 +96,7 @@ class Article < ApplicationRecord
 
     def slug_is_reserved
       begin
-        path = Rails.application.routes.recognize_path(self.slug, { :method => :get })
+        path = Rails.application.routes.recognize_path(self.path, { :method => :get })
         errors.add(:slug, "Cette url est réservée.") unless (path[:controller] == 'articles' and path[:action] == 'show')
       rescue
         return

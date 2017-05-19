@@ -88,14 +88,14 @@ module ApplicationHelper
         case link_object.first
         when 'Article'
           object = Article.find_by id: link_object.last.to_i
-          object_path = article_path object.slug
+          object_path = object.path
         when 'Fichier'
           object = Resource.find_by id: link_object.last.to_i
           object_path = object.url
           object_target = :_blank
         when 'Page'
           object = Page.find_by id: link_object.last.to_i
-          object_path = page_path object.slug
+          object_path = object.path
         end
         link_to link_title, object_path, target: object_target, class: (css.any? ? css.join(' ') : nil) if object
       

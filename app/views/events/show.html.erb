@@ -5,7 +5,7 @@
     <h2>
         <div class="container">
             <div>
-                <%= link_to "Focus", @event.focus.article.slug, class: 'focus' if @event.focus.present? and @event.focus.article.present? %>
+                <%= link_to "Focus", @event.focus.article.path, class: 'focus' if @event.focus.present? and @event.focus.article.present? %>
                 <%= content_tag :span, "##{@event.topic}" if @event.topic.present? %>
             </div>
             <%= @event.title %>

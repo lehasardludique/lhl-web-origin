@@ -10,7 +10,7 @@
             <button data-filter="focus" data-focus="<%= @focus.id %>" data-target="#is_container" class="<%= "active" if @active_focus %>"><span class="focus">F</span>ocus<%= " du moment" if @focus.current? %></button>
             <p>
                 <%= @focus.title %>
-                <%= link_to "+ d'info", @focus.article.slug if @focus.article.present? and @focus.article.visible? %>
+                <%= link_to "+ d'info", @focus.article.path if @focus.article.present? and @focus.article.visible? %>
             </p>
         </div>
         <% end %>
