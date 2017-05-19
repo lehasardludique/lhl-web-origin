@@ -45,7 +45,7 @@ module ApplicationHelper
 
   def set_meta_og(object)
     @og ||= {}
-    if object.is_a? Page or object.is_a? Article
+    if object.class.in? [ Page, Article, Festival ]
       @og[:url] = object.full_url
       @og[:title] = object.title
       @og[:description] = object.digest
@@ -54,7 +54,7 @@ module ApplicationHelper
   end
 
   def render_header object
-    if object.class.in? [ Page, Article, Event ]
+    if object.class.in? [ Page, Festival, Article, Event ]
       if object.main_gallery.present?
         render_gallery object.main_gallery, :diaporama
       elsif object.resource.present?
