@@ -21,6 +21,9 @@ class Event < ApplicationRecord
   enum place: { station: 1, hall: 4, studio: 2, dock: 3, outside: 0 }
   enum status: { draft: 0, published: 1, restricted: 2 }
 
+  attr_reader :path, :full_url, :main_picture, :digest, :category_slug, :categories, :form_path
+  attr_accessor :new_artist_ids, :new_partner_ids, :category
+
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
 
   validates :title, presence: true
@@ -40,9 +43,6 @@ class Event < ApplicationRecord
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
-
-  attr_reader :path, :full_url, :main_picture, :digest, :category_slug, :categories, :form_path
-  attr_accessor :new_artist_ids, :new_partner_ids, :category
 
   default_scope { where.not(workshop: true).order(published_at: :desc) }
   scope :workshop, -> { unscope(where: :workshop).where(workshop: true).reorder(workshop_rank: :asc, title: :asc ) }

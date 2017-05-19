@@ -21,10 +21,11 @@
       <%= f.input :final_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @festival.final_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
     </div>
     <hr />
-    <h3 class="collapsed" data-toggle="collapse" data-target="#events">Évènements & Activités</h3>
+    <h3 class="collapsed" data-toggle="collapse" data-target="#events">Évènements, Activités & Partenaires</h3>
     <div class="collapse" id="events">
       <%= f.input :new_event_ids, collection: @events_list.collect { |s| [s.title, s.id] }, input_html: { multiple: true, class: "select2" } %>
       <%= f.input :new_workshop_ids, collection: @workshops_list.collect { |s| [s.title, s.id] }, input_html: { multiple: true, class: "select2" } %>
+      <%= f.input :new_partner_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, include_blank: false, input_html: { multiple: true, class: "select2" } if Partner.all.size > 0  %>
     </div>
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#booking">Réservation</h3>
