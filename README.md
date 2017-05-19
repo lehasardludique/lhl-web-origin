@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.13
-* staging : v0.13
-* prod. : v0.11
+* dev : v0.14
+* staging : v0.14
+* prod. : v0.13
 
 ---
 
@@ -71,6 +71,23 @@ n/a
 ---
 
 ## Release notes
+
+### v0.14 (Festivals)
+
+* Festivals:
+    * create model, controllers & abilities
+    * admin controller, list & delete (views & methods)
+    * home slide integration
+    * front integartion & controller
+    * event/workshop & partners associations
+* Abilities: check & improvements
+* Workshops: wording
+* Improvements & Recette:
+    * carousel: indicators thematic color
+    * Event/Workshop/Gallery: fix dependencies warning (auto-delete links)
+    * update o rails 5.0.3
+    * staging: log to access
+    * change `object.slug()` >> `object.path` method
 
 ### v0.13 (WorkShop)
 
