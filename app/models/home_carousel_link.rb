@@ -15,7 +15,7 @@ class HomeCarouselLink < ApplicationRecord
   after_save :check_rank_consistency
 
   def self.types
-    [ Article, Page, Event ]
+    [ Article, Page, Event, Festival ]
   end
 
   def final_title

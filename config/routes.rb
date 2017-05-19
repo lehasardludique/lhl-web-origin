@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'articles/:date/*slug' => 'articles#show', as: :article
   get ':category/:date/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized }, as: :event
   get ':category/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized(:workshop) }, as: :workshop, workshop: true
+  get 'festival/*slug' => 'festivals#show', as: :festival
 
   # La-Fabrique redirection
   get '/la-fabrique' => 'pages#redirect'
