@@ -67,7 +67,7 @@ class Admin::FestivalsController < AdminController
     end
 
     def festival_params
-      permitted_params = [:main_gallery_id, :resource_id, :weez_event_id, :title, :subtitle, :content, :final_gallery_id, :exergue, :aside_link_1_data, :aside_link_2_data, :event_link_data, :info_link_data, :social_block, :slug, :status, :retargeting_pixel_id, {:new_event_ids => []}, {:new_workshop_ids => []}]
+      permitted_params = [:main_gallery_id, :resource_id, :weez_event_id, :topic, :title, :subtitle, :content, :final_gallery_id, :exergue, :aside_link_1_data, :aside_link_2_data, :event_link_data, :info_link_data, :social_block, :slug, :status, :retargeting_pixel_id, {:new_event_ids => []}, {:new_workshop_ids => []}]
       permitted_params << :user_id if current_user.admin?
       params.require(:festival).permit(permitted_params)
     end

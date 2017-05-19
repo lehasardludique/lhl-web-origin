@@ -23,7 +23,6 @@ class Festival < ApplicationRecord
   validate :slug_is_reserved
   validates :aside_link_1_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :aside_link_2_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
