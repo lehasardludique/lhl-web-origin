@@ -159,7 +159,7 @@ fr:
     start_time: Date/Heure de début
     end_time: Date/Heure de fin
     weez_event_id: WeezEvent
-    new_artist_ids: Artistes
+    new_artist_ids: Artistes / Intervenants
     new_partner_ids: Partenaires
     categories:
       family: Famille
