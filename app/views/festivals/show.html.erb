@@ -90,4 +90,16 @@
         </div>
     </section>
     <% end %>
+    <% if @festival.partners.any? %>
+    <section id="partners" class="more">
+        <div class="container">
+            <h3>Partenaires</h3>
+            <ul>
+            <% @festival.partners.each do |partner| %>
+                <li title="<%= partner.name %>" style="background-image: url('<%= partner.resource.url %>')"></li>
+            <% end %>
+            </ul>
+        </div>
+    </section>
+    <% end %>
 </article>
