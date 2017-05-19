@@ -12,8 +12,8 @@ class Admin::GalleriesController < AdminController
   end
 
   def new
-    authorize! :create, @gallery
     @gallery = Gallery.new(user: current_user)
+    authorize! :create, @gallery
     set_users
   end
 
@@ -43,10 +43,12 @@ class Admin::GalleriesController < AdminController
   end
 
   def images
+    authorize! :edit, @gallery
     set_gallery_resources
   end
 
   def images_update
+    authorize! :edit, @gallery
     begin
       if defined? params[:gallery][:resource_new_rank] and params[:gallery][:resource_new_rank].to_i > 0
         image_ship = ImageShip.find params[:gallery][:resource_new_rank]
@@ -66,6 +68,7 @@ class Admin::GalleriesController < AdminController
 
   def images_delete
     is = ImageShip.find params[:id]
+    authorize! :edit, is.gallery
     is.delete
     redirect_to admin_gallery_images_path(is.gallery), notice: 'Galerie mise à jour avec succès.'
   end
