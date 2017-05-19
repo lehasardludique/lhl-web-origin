@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170519132731) do
+ActiveRecord::Schema.define(version: 20170519143037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -133,6 +133,14 @@ ActiveRecord::Schema.define(version: 20170519132731) do
     t.integer "event_id"
     t.index ["event_id"], name: "index_festival_event_links_on_event_id", using: :btree
     t.index ["festival_id"], name: "index_festival_event_links_on_festival_id", using: :btree
+  end
+
+  create_table "festival_partner_links", force: :cascade do |t|
+    t.integer "festival_id"
+    t.integer "partner_id"
+    t.integer "rank",        default: 0
+    t.index ["festival_id"], name: "index_festival_partner_links_on_festival_id", using: :btree
+    t.index ["partner_id"], name: "index_festival_partner_links_on_partner_id", using: :btree
   end
 
   create_table "festivals", force: :cascade do |t|
@@ -310,6 +318,8 @@ ActiveRecord::Schema.define(version: 20170519132731) do
   add_foreign_key "events", "weez_events"
   add_foreign_key "festival_event_links", "events"
   add_foreign_key "festival_event_links", "festivals"
+  add_foreign_key "festival_partner_links", "festivals"
+  add_foreign_key "festival_partner_links", "partners"
   add_foreign_key "festivals", "galleries", column: "final_gallery_id"
   add_foreign_key "festivals", "galleries", column: "main_gallery_id"
   add_foreign_key "festivals", "resources"

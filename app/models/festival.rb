@@ -9,14 +9,17 @@ class Festival < ApplicationRecord
   has_one :home_carousel_link, as: :home_linkable
   has_many :festival_event_links
   has_many :events, through: :festival_event_links
+  has_many :festival_partner_links
+  has_many :partners, -> { reorder(name: :asc) }, through: :festival_partner_links
+
 
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   attr_reader :path, :full_url, :main_picture, :digest, :form_path
-  attr_accessor :new_event_ids, :new_workshop_ids
+  attr_accessor :new_event_ids, :new_workshop_ids, :new_partner_ids
 
-  before_validation :check_slug, :check_event_ids
-  before_destroy :check_dependencies
+  before_validation :check_slug, :check_event_ids, :check_partner_ids
+  before_destroy :check_dependencies, :delete_links
 
   validates :title, presence: true
   validates :slug, uniqueness: true, presence: true
@@ -31,7 +34,7 @@ class Festival < ApplicationRecord
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  after_save :set_events
+  after_save :set_events, :set_partners
 
   scope :visible, -> { published }
 
@@ -61,6 +64,10 @@ class Festival < ApplicationRecord
 
   def new_workshop_ids
     @new_workshop_ids ||= self.events.workshop.pluck(:id)
+  end
+
+  def new_partner_ids
+    @new_partner_ids ||= self.partner_ids
   end
 
   def exchange_data weez_event
@@ -160,10 +167,29 @@ class Festival < ApplicationRecord
       self.new_workshop_ids = nil if self.new_workshop_ids - workshop_ids == workshop_ids - self.new_workshop_ids
     end
 
+    def check_partner_ids
+      self.new_partner_ids ||= []
+      self.new_partner_ids = (self.new_partner_ids - [""]).uniq
+      self.partner_ids ||= []
+      self.new_partner_ids = nil if self.new_partner_ids - self.partner_ids == self.partner_ids - self.new_partner_ids
+    end
+
     def set_events
       if self.new_event_ids.is_a? Array and self.new_workshop_ids.is_a? Array
         self.festival_event_links.delete_all
         self.events = Event.all_kinds.where(id: (self.new_event_ids + self.new_workshop_ids).uniq)
       end
+    end
+
+    def set_partners
+      if self.new_partner_ids.is_a? Array
+        self.festival_partner_links.delete_all
+        self.partners = Partner.where(id: self.new_partner_ids)
+      end
+    end
+
+    def delete_links
+      self.festival_event_links.delete_all
+      self.festival_partner_links.delete_all
     end
 end

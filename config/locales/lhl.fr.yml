@@ -80,6 +80,7 @@ fr:
     date_slug: URL relative (partie Date)
     topic: Tag (thème principal)
     weez_event_id: WeezEvent
+    new_partner_ids: Partenaires
   media_links: &media_links
     media_link_fbk: Page FaceBook
     media_link_twt: Page Twitter
@@ -108,7 +109,6 @@ fr:
     start_time: Date/Heure de début
     end_time: Date/Heure de fin
     new_artist_ids: Artistes / Intervenants
-    new_partner_ids: Partenaires
     categories:
       family: Famille
       concert: Concert
