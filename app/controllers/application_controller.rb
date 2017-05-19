@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action :set_opening_time, :set_menu_and_footer
+  before_action :authorize if Rails.env.staging?
   after_action :store_location
 
   def not_found!
@@ -65,5 +66,12 @@ class ApplicationController < ActionController::Base
       @footer_2_links = {
         "Privatisation" => "/privatiser-le-hasard-ludique"
       }
+    end
+
+    def authorize
+      unless logged_in?
+        store_location
+        redirect_to login_path and return
+      end
     end
 end

@@ -1,4 +1,5 @@
 class UserSessionsController < ApplicationController
+  skip_before_action :authorize if Rails.env.staging?
   skip_after_action :store_location
   
   def new
