@@ -79,6 +79,7 @@ fr:
     title_slug: URL relative (partie Titre)
     date_slug: URL relative (partie Date)
     topic: Tag (thème principal)
+    weez_event_id: WeezEvent
   media_links: &media_links
     media_link_fbk: Page FaceBook
     media_link_twt: Page Twitter
@@ -86,50 +87,6 @@ fr:
     media_link_msk: Page Musique
     media_link_vid: Page Vidéo
     media_link_www: Page Web
-
-  # User
-  user: &user
-    <<: *default_attributes
-    first_name: Prénom
-    last_name: Nom
-    password: Mot de passe
-    password_confirmation: Confirmation
-    role: Rôle
-    roles:
-      editor: Rédacteur
-      admin: Administrateur
-    statuses:
-      disabled: Désactivé
-      active: Actif
-
-  # Resource
-  resource: &resource
-    <<: *default_attributes
-    notes: Notes
-    handle: Fichier
-    categories:
-      gallery: Galerie
-      global: Indépendante
-
-  # Gallery
-  gallery: &gallery
-    <<: *default_attributes
-    categories:
-      event: Évènement
-      article: Article
-      global: Général
-    new_resource_id: Ajouter une nouvelle image
-    new_resource_rank: Place
-
-  # Page
-  page: &page
-    <<: *default_attributes
-    <<: *pages_articles_attributes
-
-  # Festival
-  festival: &festival
-    <<: *default_attributes
-    <<: *pages_articles_attributes
 
   # Article
   article: &article
@@ -143,19 +100,6 @@ fr:
     <<: *default_attributes
     <<: *media_links
 
-  # HomeCarouselLink
-  home_carousel_link: &home_carousel_link
-    <<: *default_attributes
-    home_linkable_type: Lien vers (type d'objet)
-    home_linkable_id: Titre de l'objet
-
-  # Focus
-  focus: &focus
-    <<: *default_attributes
-    start: Date de début
-    end: Date de fin
-    article_id: Article lié
-
   # Event
   event: &event
     <<: *default_attributes
@@ -163,7 +107,6 @@ fr:
     display_date: Date affichée
     start_time: Date/Heure de début
     end_time: Date/Heure de fin
-    weez_event_id: WeezEvent
     new_artist_ids: Artistes / Intervenants
     new_partner_ids: Partenaires
     categories:
@@ -187,6 +130,41 @@ fr:
     workshop: Atelier
     workshop_rank: Priorité
 
+  # Festival
+  festival: &festival
+    <<: *default_attributes
+    <<: *pages_articles_attributes
+    new_event_ids: Évènements
+    new_workshop_ids: Ateliers (Activités)
+
+  # Focus
+  focus: &focus
+    <<: *default_attributes
+    start: Date de début
+    end: Date de fin
+    article_id: Article lié
+
+  # Gallery
+  gallery: &gallery
+    <<: *default_attributes
+    categories:
+      event: Évènement
+      article: Article
+      global: Général
+    new_resource_id: Ajouter une nouvelle image
+    new_resource_rank: Place
+
+  # HomeCarouselLink
+  home_carousel_link: &home_carousel_link
+    <<: *default_attributes
+    home_linkable_type: Lien vers (type d'objet)
+    home_linkable_id: Titre de l'objet
+
+  # Page
+  page: &page
+    <<: *default_attributes
+    <<: *pages_articles_attributes
+
   # Partner
   partner: &partner
     <<: *default_attributes
@@ -194,30 +172,54 @@ fr:
       unspecified_category: Non spécifiée
     link: Url
 
+  # Resource
+  resource: &resource
+    <<: *default_attributes
+    notes: Notes
+    handle: Fichier
+    categories:
+      gallery: Galerie
+      global: Indépendante
+
+  # User
+  user: &user
+    <<: *default_attributes
+    first_name: Prénom
+    last_name: Nom
+    password: Mot de passe
+    password_confirmation: Confirmation
+    role: Rôle
+    roles:
+      editor: Rédacteur
+      admin: Administrateur
+    statuses:
+      disabled: Désactivé
+      active: Actif
+
   # Models
   activerecord:
     models: &models
       <<: *models
     attributes:
-      user:
-        <<: *user
-      resource:
-        <<: *resource
-      gallery:
-        <<: *gallery
       page:
         <<: *page
-      festival:
-        <<: *festival
       article:
         <<: *article
       artist:
         <<: *artist
-      home_carousel_link:
-        <<: *home_carousel_link
-      focus:
-        <<: *focus
       event:
         <<: *event
+      festival:
+        <<: *festival
+      focus:
+        <<: *focus
+      gallery:
+        <<: *gallery
+      home_carousel_link:
+        <<: *home_carousel_link
       partner:
         <<: *partner
+      resource:
+        <<: *resource
+      user:
+        <<: *user

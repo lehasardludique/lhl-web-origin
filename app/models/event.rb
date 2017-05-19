@@ -46,6 +46,7 @@ class Event < ApplicationRecord
 
   default_scope { where.not(workshop: true).order(published_at: :desc) }
   scope :workshop, -> { unscope(where: :workshop).where(workshop: true).reorder(workshop_rank: :asc, title: :asc ) }
+  scope :all_kinds, -> { unscope(where: :workshop).unscope(:order) }
   scope :visible, -> { published.where("published_at <= ?", Time.now) }
   scope :next, -> { visible.where("end_time >= ?", Time.now) }
 

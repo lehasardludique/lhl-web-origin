@@ -16,12 +16,23 @@
       <% end %>
       <%= f.input :title %>
       <%= f.input :subtitle %>
-      <%= f.input :content, input_html: { data: { ckeditor: 'custom_config_festival' }} %>
+      <%= f.input :content, input_html: { data: { ckeditor: 'custom_config_page' }} %>
       <%= f.input :final_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @festival.final_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
     </div>
     <hr />
+    <h3 class="collapsed" data-toggle="collapse" data-target="#events">Évènements & Activités</h3>
+    <div class="collapse" id="events">
+      <%= f.input :new_event_ids, collection: @events_list.collect { |s| [s.title, s.id] }, input_html: { multiple: true, class: "select2" } %>
+      <%= f.input :new_workshop_ids, collection: @workshops_list.collect { |s| [s.title, s.id] }, input_html: { multiple: true, class: "select2" } %>
+    </div>
+    <hr />
+    <h3 class="collapsed" data-toggle="collapse" data-target="#booking">Réservation</h3>
+    <div class="collapse" id="booking">
+      <%= f.input :weez_event_id, collection: WeezEvent.all.collect { |s| [s.title, s.id] }, include_blank: true, input_html: { multiple: false, class: "select2" } if WeezEvent.all.size > 0  %>
+    </div>
+    <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#aside_info">Infos. complémentaires</h3>
-     <div class="collapse" id="aside_info">
+    <div class="collapse" id="aside_info">
       <%= f.input :exergue, input_html: { data: { ckeditor: 'custom_config_exergue' }} %>
       <h4>Liens Complémentaires</h4>
       <p class="help">

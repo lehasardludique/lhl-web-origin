@@ -11,7 +11,10 @@ class Festival < ApplicationRecord
 
   enum status: { draft: 0, published: 1, restricted: 2 }
 
-  before_validation :check_slug
+  attr_reader :path, :full_url, :main_picture, :digest, :form_path
+  attr_accessor :new_event_ids, :new_workshop_ids
+
+  before_validation :check_slug, :check_event_ids
   before_destroy :check_dependencies
 
   validates :title, presence: true
@@ -22,14 +25,13 @@ class Festival < ApplicationRecord
   validates :aside_link_3_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :event_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
   validates :info_link_data, allow_blank: true, format: { with: INTERNAL_LINK_FORMAT }
-  validates :retargeting_pixel_id, numericality: { only_integer: true }
+  validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :path, :full_url, :main_picture, :digest, :form_path
-  attr_accessor :new_event_ids, :new_workshop_ids
+  after_save :set_events
 
   scope :visible, -> { published }
 
@@ -116,6 +118,25 @@ class Festival < ApplicationRecord
     def check_dependencies
       if self.home_carousel_link.present?
         raise DependencyDestructionError.new "Ce festival est liée à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
+      end
+    end
+
+    def check_event_ids
+      # Event
+      self.new_event_ids ||= []
+      self.new_event_ids = (self.new_event_ids - [""]).uniq
+      event_ids = self.events.pluck(:id)
+      self.new_event_ids = nil if self.new_event_ids - event_ids == event_ids - self.new_event_ids
+      # Workshop
+      self.new_workshop_ids ||= []
+      self.new_workshop_ids = (self.new_workshop_ids - [""]).uniq
+      workshop_ids = self.events.workshop.pluck(:id)
+      self.new_workshop_ids = nil if self.new_workshop_ids - workshop_ids == workshop_ids - self.new_workshop_ids
+    end
+
+    def set_events
+      if self.new_event_ids.is_a? Array and self.new_workshop_ids.is_a? Array
+        self.events = Event.all_kinds.where(id: self.new_event_ids + self.new_workshop_ids)
       end
     end
 end
