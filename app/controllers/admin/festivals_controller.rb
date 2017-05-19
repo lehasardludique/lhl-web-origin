@@ -4,7 +4,7 @@ class Admin::FestivalsController < AdminController
   before_action :set_event_list, only: [:edit]
 
   def index
-    authorize! :read, Festival.new
+    authorize! :list, Festival.new
     @festivals = Festival.all
   end
 

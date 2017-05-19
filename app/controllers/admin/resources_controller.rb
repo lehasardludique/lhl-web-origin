@@ -3,7 +3,7 @@ class Admin::ResourcesController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Resource.new
+    authorize! :list, Resource.new
     @resources = Resource.all
   end
 

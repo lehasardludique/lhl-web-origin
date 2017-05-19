@@ -2,7 +2,7 @@ class Admin::UsersController < AdminController
   before_action :set_user, only: [:show, :edit, :update, :password, :password_update, :destroy]
 
   def index
-    authorize! :read, User.new
+    authorize! :list, User.new
     @users = User.all
   end
 

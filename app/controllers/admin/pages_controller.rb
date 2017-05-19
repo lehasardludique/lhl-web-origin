@@ -3,7 +3,7 @@ class Admin::PagesController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Page.new
+    authorize! :list, Page.new
     @pages = Page.all
   end
 

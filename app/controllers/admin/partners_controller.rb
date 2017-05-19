@@ -3,7 +3,7 @@ class Admin::PartnersController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Partner.new
+    authorize! :list, Partner.new
     @partners = Partner.all
   end
 

@@ -2,7 +2,7 @@ class Admin::FocusController < AdminController
   before_action :set_focus, only: [:show, :edit, :update, :destroy]
 
   def index
-    authorize! :read, Focus.new
+    authorize! :list, Focus.new
     @focuses = Focus.all
   end
 

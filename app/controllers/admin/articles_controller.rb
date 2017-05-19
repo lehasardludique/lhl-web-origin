@@ -3,7 +3,7 @@ class Admin::ArticlesController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Article.new
+    authorize! :list, Article.new
     @articles = Article.all
   end
 

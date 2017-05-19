@@ -11,6 +11,7 @@ class Ability
     else
 
     ## ARTICLE
+      can [:list], Article unless user.new_record?
       can [:read], Article do |article|
         article.published? or article.user == user
       end
@@ -19,6 +20,7 @@ class Ability
       end
 
     ## ARTIST
+      can [:list], Artist unless user.new_record?
       can [:read], Artist do |artist|
         artist.published? or artist.user == user
       end
@@ -27,6 +29,7 @@ class Ability
       end
 
     ## EVENT
+      can [:list], Event unless user.new_record?
       can [:read], Event do |event|
         event.published? or event.user == user
       end
@@ -35,6 +38,7 @@ class Ability
       end
 
     ## FESTIVAL
+      can [:list], Festival unless user.new_record?
       can [:read], Festival do |festival|
         festival.published? or festival.user == user
       end
@@ -43,18 +47,19 @@ class Ability
       end
 
     ## FOCUS
-      can [:read], Focus unless user.new_record?
+      can [:list, :read], Focus unless user.new_record?
 
     ## GALLERY
-      can [:read], Gallery unless user.new_record?
+      can [:list, :read], Gallery unless user.new_record?
       can [:create, :update, :delete], Gallery do |gallery|
-        resource.user == user
+        gallery.user == user
       end
 
     ## HOMECAROUSELLINK
-      can [:read], HomeCarouselLink unless user.new_record?
+      can [:list, :read], HomeCarouselLink unless user.new_record?
 
     ## PAGE
+      can [:list], Page unless user.new_record?
       can [:read], Page do |page|
         page.published? or page.user == user
       end
@@ -63,18 +68,19 @@ class Ability
       end
 
     ## PARTNER
-      can [:read], Partner unless user.new_record?
+      can [:list, :read], Partner unless user.new_record?
       can [:create, :update, :delete], Partner do |partner|
         partner.user == user
       end
 
     ## RESOURCE
-      can [:read], Resource unless user.new_record?
+      can [:list, :read], Resource unless user.new_record?
       can [:create, :update, :delete], Resource do |resource|
         resource.user == user
       end
 
     ## USER
+      can [:list], User unless user.new_record?
       can [:read, :update, :update_password], User do |edited_user|
         edited_user == user
       end

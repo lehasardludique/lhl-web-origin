@@ -3,7 +3,7 @@ class Admin::HomeCarouselLinksController < AdminController
   before_action :set_list_and_max_range, only: [:index, :new, :edit]
 
   def index
-    authorize! :read, HomeCarouselLink.new
+    authorize! :list, HomeCarouselLink.new
   end
 
   def show

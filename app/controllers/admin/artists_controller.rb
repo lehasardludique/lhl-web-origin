@@ -3,7 +3,7 @@ class Admin::ArtistsController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Artist.new
+    authorize! :list, Artist.new
     @artists = Artist.all
   end
 

@@ -4,7 +4,7 @@ class Admin::EventsController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Event.new
+    authorize! :list, Event.new
     @events = @workshop ? Event.workshop : Event.all
   end
 

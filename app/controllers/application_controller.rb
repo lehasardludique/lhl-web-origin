@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
     flash[:error] = exception.to_s
     redirect_back fallback_location: admin_root_path
   end
+  rescue_from CanCan::AccessDenied do |exception|
+    flash[:error] = "Vous n'êtes pas autorisé à accéder ou modifier cette resource."
+    redirect_back fallback_location: admin_root_path
+  end
 
   before_action :set_opening_time, :set_menu_and_footer
   after_action :store_location

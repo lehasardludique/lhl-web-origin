@@ -3,7 +3,7 @@ class Admin::GalleriesController < AdminController
   before_action :set_users, only: [:edit, :update]
 
   def index
-    authorize! :read, Gallery.new
+    authorize! :list, Gallery.new
     @galleries = Gallery.all
   end
 
