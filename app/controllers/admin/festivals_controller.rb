@@ -1,7 +1,7 @@
 class Admin::FestivalsController < AdminController
   before_action :set_festival, only: [:show, :edit, :update, :destroy]
   before_action :set_users, only: [:edit, :update]
-  before_action :set_event_list, only: [:new, :edit]
+  before_action :set_event_list, only: [:edit]
 
   def index
     authorize! :read, Festival.new
@@ -15,6 +15,7 @@ class Admin::FestivalsController < AdminController
   def new
     @festival = Festival.new(user: current_user)
     authorize! :create, @festival
+    set_event_list
     set_users
   end
 
@@ -51,15 +52,15 @@ class Admin::FestivalsController < AdminController
     redirect_to admin_festivals_path, notice: 'Festival supprimé avec succès.'
   end
 
-  def set_event_list
-    @events_list = (@festival.events + Event.where('start_time > ?', Time.now.midnight - 1.month)).uniq
-    @workshops_list = (@festival.events.workshop + Event.workshop.where('end_time > ?', Time.now.midnight - 1.month)).uniq
-  end
-
   private
     def set_festival
       @festival = Festival.find(params[:id])
       authorize! :read, @festival
+    end
+
+    def set_event_list
+      @events_list = (@festival.events + Event.where('start_time > ?', Time.now.midnight - 1.month)).uniq
+      @workshops_list = (@festival.events.workshop + Event.workshop.where('end_time > ?', Time.now.midnight - 1.month)).uniq
     end
 
     def set_users
