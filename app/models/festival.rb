@@ -6,6 +6,8 @@ class Festival < ApplicationRecord
   belongs_to :resource
   belongs_to :final_gallery, class_name: 'Gallery'
   has_one :home_carousel_link, as: :home_linkable
+  has_many :festival_event_links
+  has_many :events, through: :festival_event_links
 
   enum status: { draft: 0, published: 1, restricted: 2 }
 
@@ -27,6 +29,7 @@ class Festival < ApplicationRecord
   end
 
   attr_reader :path, :full_url, :main_picture, :digest, :form_path
+  attr_accessor :new_event_ids, :new_workshop_ids
 
   scope :visible, -> { published }
 
@@ -48,6 +51,14 @@ class Festival < ApplicationRecord
 
   def digest
     @digest ||= get_digest
+  end
+
+  def new_event_ids
+    @new_event_ids ||= self.events.pluck(:id)
+  end
+
+  def new_workshop_ids
+    @new_workshop_ids ||= self.events.workshop.pluck(:id)
   end
 
   def facebook_url

@@ -13,6 +13,8 @@ class Event < ApplicationRecord
   has_many :artists, -> { reorder(name: :asc) }, through: :artist_event_links
   has_many :event_partner_links
   has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
+  has_many :festival_event_links
+  has_many :festivals, through: :festival_event_links
 
   enum pure_category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
   enum workshop_category: { take_care: 1, connect: 2, creative: 3, diy: 4, brain: 0 }
