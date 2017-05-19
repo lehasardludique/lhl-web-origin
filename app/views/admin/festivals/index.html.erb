@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_festival_path, title: 'Ajouter un nouveau festival' %>
+  </nav>
+  Liste des festivals
+</h2>
+
+<%= render 'list', festivals: @festivals %>
+
+<br>

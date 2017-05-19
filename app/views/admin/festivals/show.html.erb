@@ -1,0 +1,25 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_festival_path(@festival), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_festivals_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @festival.id %></span> Festival <em><%= @festival.title %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @festival.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "festival.#{k}" %></dt>
+    <dd><%= @festival.user.real_name %></dd>
+  <% elsif @festival.defined_enums? and k.in? @festival.defined_enums %>
+    <dt><%= t "festival.#{k}" %></dt>
+    <dd><%= t "festival.#{k.pluralize}.#{v}" %></dd>
+  <% elsif v.class.in? [ NilClass, TrueClass, FalseClass] %>
+    <% fa_css = case v; when NilClass then 'ban'; when TrueClass then 'check-square-o'; when FalseClass then 'square-o'; end %>
+    <dt><%= t "event.#{k}" %></dt>
+    <dd><i class="fa fa-<%= fa_css %>" aria-hidden="true"></i></dd>
+  <% else %>
+    <dt><%= t "festival.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v.to_s.html_safe %></dd>
+  <% end %>
+<% end %>
+</dl>

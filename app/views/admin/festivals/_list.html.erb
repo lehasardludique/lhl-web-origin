@@ -1,0 +1,37 @@
+<table class="sortable" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Résumé</th>
+      <th>Illustration<br />principale</th>
+      <th>Url</th>
+      <th>Création</th>
+      <th>Mise à jour</th>
+      <th>Utilisateur</th>
+      <th>Statut</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% festivals.each do |festival| %>
+      <tr>
+        <td><span class="badge"><%= festival.id %></span></td>
+        <td><%= festival.title %></td>
+        <td><%= festival.digest %></td>
+        <td><span class="preview" style="background-image: url('<%= festival.main_picture.thumb_url if defined? festival.main_picture.thumb_url %>')"></span></td>
+        <td><%= link_to "/#{festival.slug}", festival_path(festival.slug), target: :_blank %></td>
+        <td><%= l festival.created_at, format: :sortable %></td>
+        <td><%= l festival.updated_at, format: :sortable %></td>
+        <td><%= festival.user.real_name %></td>
+        <td><%= t("festival.statuses.#{festival.status}") %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_festival_path(festival), title: "Détails" if can? :read, festival %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_festival_path(festival), title: "Éditer" if can? :edit, festival %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_festival_path(festival), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if can? :delete, festival %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
