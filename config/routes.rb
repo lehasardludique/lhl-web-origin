@@ -25,6 +25,7 @@ Rails.application.routes.draw do
     resources :home_carousel_links
     resources :resources
     resources :pages
+    resources :festivals
     resources :artists
     resources :articles
     resources :focus

@@ -34,6 +34,14 @@ class Ability
         event.user == user
       end
 
+    ## FESTIVAL
+      can [:read], Festival do |festival|
+        festival.published? or festival.user == user
+      end
+      can [:create, :update, :delete], Festival do |festival|
+        festival.user == user
+      end
+
     ## FOCUS
       can [:read], Focus unless user.new_record?
 
