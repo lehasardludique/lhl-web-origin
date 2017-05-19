@@ -20,7 +20,6 @@ class Event < ApplicationRecord
   enum status: { draft: 0, published: 1, restricted: 2 }
 
   before_validation :check_slug, :check_artist_ids, :check_partner_ids
-  before_destroy :check_dependencies
 
   validates :title, presence: true
   validates :title_slug, uniqueness: { scope: :workshop}, presence: true, if: :workshop?
@@ -34,6 +33,7 @@ class Event < ApplicationRecord
 
   before_save :set_display_date
   after_save :set_artists, :set_partners
+  before_destroy :check_dependencies, :delete_links
 
   with_options :unless => :main_gallery_present? do |u|
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
@@ -276,5 +276,10 @@ class Event < ApplicationRecord
       if self.home_carousel_link.present?
         raise DependencyDestructionError.new "Cet évènement est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
       end
+    end
+
+    def delete_links
+      self.artist_event_links.delete_all
+      self.event_partner_links.delete_all
     end
 end
