@@ -11,15 +11,15 @@
     <aside>
         <div>
             <% if @festival.exergue.present? %>
-            <div class="exergue_edited">
+            <div class="exergue_edited">    
                 <%= @festival.exergue.html_safe %>
             </div>
             <% end %>
-            <% if @festival.aside_link_1_data.present? or @festival.aside_link_2_data.present? or @festival.aside_link_3_data.present? %>
+            <% if @festival.weez_event.present? or @festival.aside_link_1_data.present? or @festival.aside_link_2_data.present? %>
             <nav>
+                <%= link_to "Réserver", "#reservation" if @festival.weez_event.present? %>
                 <%= link_from @festival.aside_link_1_data if @festival.aside_link_1_data.present? %>
                 <%= link_from @festival.aside_link_2_data if @festival.aside_link_2_data.present? %>
-                <%= link_from @festival.aside_link_3_data if @festival.aside_link_3_data.present? %>
             </nav>
             <% end %>
             <% if @festival.social_block.present? or @festival.event_link_data.present? or @festival.info_link_data.present? %>
@@ -48,6 +48,14 @@
         <div class="container">
             <h3><%= @festival.final_gallery.name %></h3>
             <%= render_gallery @festival.final_gallery%>
+        </div>
+    </section>
+    <% end %>
+    <% if @festival.weez_event.present? %>
+    <section id="reservation" class="more">
+        <div class="container">
+            <h3>Réservation</h3>
+            <iframe src="<%= @festival.booking_iframe_url %>"></iframe>
         </div>
     </section>
     <% end %>

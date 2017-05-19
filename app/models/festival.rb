@@ -2,6 +2,7 @@ class Festival < ApplicationRecord
   include ExtendedErrors
   
   belongs_to :user
+  belongs_to :weez_event
   belongs_to :main_gallery, class_name: 'Gallery'
   belongs_to :resource
   belongs_to :final_gallery, class_name: 'Gallery'
@@ -63,6 +64,16 @@ class Festival < ApplicationRecord
     @new_workshop_ids ||= self.events.workshop.pluck(:id)
   end
 
+  def exchange_data weez_event
+    if weez_event.is_a? WeezEvent
+      self.weez_event_id = weez_event.id
+      self.title = weez_event.data['title'] if weez_event.data['title'].present?
+      # self.subtitle =
+      self.content = weez_event.data['description'] if weez_event.data['description'].present?
+      self.exergue = set_exergue_from weez_event
+    end
+  end
+
   def facebook_url
     data = {
       u: self.full_url,
@@ -81,7 +92,23 @@ class Festival < ApplicationRecord
     "https://twitter.com/intent/tweet?#{URI.encode_www_form(data)}"
   end
 
+  def booking_iframe_url
+    if self.weez_event.present?
+      "https://www.weezevent.com/widget_billeterie.php?id_evenement=#{self.weez_event.wid}&lg_billetterie=1&width_auto=1&color_primary=fff482".html_safe
+    end
+  end
+
   private
+    def set_exergue_from weez_event
+      if weez_event.is_a? WeezEvent and weez_event.data.present?
+        exergue_data = { start: self.start_time, place: nil, full_price: nil, reduced_price: nil }
+        exergue_data[:place] = weez_event.data['venue']['name'] if defined? weez_event.data['venue']['name']
+        exergue_data[:full_price] = weez_event.data['price']['max'].gsub(/\./, ',') if defined? weez_event.data['price']['max']
+        exergue_data[:reduced_price] = weez_event.data['price']['min'].gsub(/\./, ',') if defined? weez_event.data['price']['min']
+        ApplicationController.new.render_to_string "events/exergue", layout: false, locals: { exergue_data: exergue_data }
+      end
+    end
+
     def get_main_picture
       if self.main_gallery.present?
         self.main_gallery.resources.first
