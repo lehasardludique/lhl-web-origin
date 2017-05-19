@@ -26,12 +26,16 @@ class Festival < ApplicationRecord
     u.validates :resource_id, presence: true, numericality: { only_integer: true }
   end
 
-  attr_reader :path, :full_url, :main_picture, :digest
+  attr_reader :path, :full_url, :main_picture, :digest, :form_path
 
   scope :visible, -> { published }
 
   def path
     @path ||= Rails.application.routes.url_helpers.festival_path(slug: self.slug) if self.slug.present?
+  end
+
+  def form_path
+    @form_path ||= self.new_record? ? Rails.application.routes.url_helpers.admin_festivals_path : Rails.application.routes.url_helpers.admin_festival_path(self)
   end
 
   def full_url

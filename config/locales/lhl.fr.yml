@@ -126,6 +126,11 @@ fr:
     <<: *default_attributes
     <<: *pages_articles_attributes
 
+  # Festival
+  festival: &festival
+    <<: *default_attributes
+    <<: *pages_articles_attributes
+
   # Article
   article: &article
     <<: *pages_articles_attributes
@@ -202,6 +207,8 @@ fr:
         <<: *gallery
       page:
         <<: *page
+      festival:
+        <<: *festival
       article:
         <<: *article
       artist:
