@@ -41,6 +41,7 @@ fr:
     event: Évènement
     artist: Artiste
     partner: Partenaire
+    info_message: Message d'information
     
   attributes: &default_attributes
     id: ID
@@ -160,6 +161,16 @@ fr:
     home_linkable_type: Lien vers (type d'objet)
     home_linkable_id: Titre de l'objet
 
+  # InfoMessage
+  info_message: &info_message
+    <<: *default_attributes
+    start_at: Début
+    end_at: Fin
+    modal: Modale
+    modal_content: Contenu de la modale
+    opening: Horaire/message d'ouverture
+    opening_content: Contenu du message d'ouverture
+
   # Page
   page: &page
     <<: *default_attributes
@@ -217,6 +228,8 @@ fr:
         <<: *gallery
       home_carousel_link:
         <<: *home_carousel_link
+      info_message:
+        <<: *info_message
       partner:
         <<: *partner
       resource:
