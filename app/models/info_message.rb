@@ -10,7 +10,7 @@ class InfoMessage < ApplicationRecord
 
   scope :modal, -> { where(modal: true) }
   scope :opening, -> { where(opening: true) }
-  default_scope { order(end_at: :desc) }
+  default_scope { order(id: :desc) }
 
   def modal?
     self.modal || false

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: admin_root_path
   end
 
-  before_action :set_opening_time, :set_menu_and_footer
+  before_action :set_modal, :set_opening_time, :set_menu_and_footer
   before_action :authorize if Rails.env.staging?
   after_action :store_location
 
@@ -37,6 +37,20 @@ class ApplicationController < ActionController::Base
   private
     def store_location
       session[:return_to] = request.fullpath unless request.fullpath =~ /^\/api\//
+    end
+
+    def set_modal
+      Time.zone = 'Paris'
+      now = Time.zone.now
+      im = InfoMessage.published.modal.where('start_at <= ?', now).where('end_at >= ?', now).first
+      cookies.delete :info if "quelles-sont-les-news".in? params.keys
+      if im.present?
+        Rails.logger.info "----> COOKIE: #{cookies[:info]} | MESSAGE: IM-#{im.id}"
+        if not cookies[:info] == "IM-#{im.id}"
+          cookies[:info] = { value: "IM-#{im.id}", expires: im.end_at }
+          @info_modal = im
+        end
+      end
     end
 
     def set_opening_time

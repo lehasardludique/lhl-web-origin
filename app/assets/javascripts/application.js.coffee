@@ -258,6 +258,10 @@ init = ->
                 LHL.slideFlash()
             ), 300
 
+    # Modal
+    if $('#InfoMessage').length
+        $('#InfoMessage').modal()
+
     # Galleries
     if $('body').hasClass 'gallery'
         $('button[data-slide-to][data-carousel]').off('click').click ->
