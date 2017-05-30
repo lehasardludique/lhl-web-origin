@@ -9,7 +9,7 @@
     <%= f.input :modal_content  %>
     <hr />
     <%= f.input :opening  %>
-    <%= f.input :opening_content  %>
+    <%= f.input :opening_content, hint: "L'<strong>HTML</strong> est possible pour mieux gérer la mise en forme , par exemple :<br /><code>".html_safe + "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>00H00" + "</code>".html_safe %>
     <hr />
     <h3>Réglages</h3>
     <%= f.input :start_at  %>
