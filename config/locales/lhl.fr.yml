@@ -166,9 +166,9 @@ fr:
     <<: *default_attributes
     start_at: Début
     end_at: Fin
-    modal: Modale
+    modal: Activer la Modale
     modal_content: Contenu de la modale
-    opening: Horaire/message d'ouverture
+    opening: Afficher en message d'ouverture (Horaires)
     opening_content: Contenu du message d'ouverture
 
   # Page

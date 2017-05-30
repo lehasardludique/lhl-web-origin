@@ -4,12 +4,14 @@
   <div class="form-inputs">
     <h3>Contenu</h3>
     <%= f.input :title  %>
+    <hr />
+    <%= f.input :modal  %>
     <%= f.input :modal_content  %>
+    <hr />
+    <%= f.input :opening  %>
     <%= f.input :opening_content  %>
     <hr />
     <h3>Réglages</h3>
-    <%= f.input :modal  %>
-    <%= f.input :opening  %>
     <%= f.input :start_at  %>
     <%= f.input :end_at  %>
     <%= f.input :status, collection: InfoMessage.statuses.collect { |s| [t("info_message.statuses.#{s.first}"), s.first] }, include_blank: false %>
