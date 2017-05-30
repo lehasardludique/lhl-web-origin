@@ -1,0 +1,25 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_info_message_path(@info_message), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_info_messages_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @info_message.id %></span> Message <em><%= @info_message.title %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @info_message.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "info_message.#{k}" %></dt>
+    <dd><%= @info_message.user.real_name %></dd>
+  <% elsif @info_message.defined_enums? and k.in? @info_message.defined_enums %>
+    <dt><%= t "info_message.#{k}" %></dt>
+    <dd><%= t "info_message.#{k.pluralize}.#{v}" %></dd>
+  <% elsif v.class.in? [ NilClass, TrueClass, FalseClass] %>
+    <% fa_css = case v; when NilClass then 'ban'; when TrueClass then 'check-square-o'; when FalseClass then 'square-o'; end %>
+    <dt><%= t "info_message.#{k}" %></dt>
+    <dd><i class="fa fa-<%= fa_css %>" aria-hidden="true"></i></dd>
+  <% else %>
+    <dt><%= t "info_message.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v.to_s.html_safe %></dd>
+  <% end %>
+<% end %>
+</dl>

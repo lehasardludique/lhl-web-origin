@@ -1,0 +1,22 @@
+<%= simple_form_for @info_message, url: url = (@info_message.new_record?) ? admin_info_messages_path : admin_info_message_path(@info_message) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <h3>Contenu</h3>
+    <%= f.input :title  %>
+    <%= f.input :modal_content  %>
+    <%= f.input :opening_content  %>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :modal  %>
+    <%= f.input :opening  %>
+    <%= f.input :start_at  %>
+    <%= f.input :end_at  %>
+    <%= f.input :status, collection: InfoMessage.statuses.collect { |s| [t("info_message.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>

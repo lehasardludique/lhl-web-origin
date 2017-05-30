@@ -1,0 +1,30 @@
+<% hide_sorting_tools ||= false; undeletable ||= false %>
+<table class="<%= hide_sorting_tools ? '' : 'sortable' %>" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Début</th>
+      <th>Fin</th>
+      <th>Statut</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% info_messages.each do |info_message| %>
+      <tr>
+        <td><span class="badge"><%= info_message.id %></span></td>
+        <td><%= info_message.title %></td>
+        <td><%= l info_message.start_at, format: :sortable %></td>
+        <td><%= l info_message.end_at, format: :sortable %></td>
+        <td><%= t("info_message.statuses.#{info_message.status}") %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_info_message_path(info_message), title: "Détails" if can? :read, info_message %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_info_message_path(info_message), title: "Éditer" if can? :edit, info_message %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_info_message_path(info_message), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if not undeletable and can? :delete, info_message %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

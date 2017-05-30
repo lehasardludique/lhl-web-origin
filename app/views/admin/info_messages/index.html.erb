@@ -1,0 +1,10 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_info_message_path, title: 'Ajouter un nouveau message à caractère informatif' %>
+  </nav>
+  Liste des messages à caractère informatif
+</h2>
+
+<%= render 'list', info_messages: @info_messages %>
+
+<br>
