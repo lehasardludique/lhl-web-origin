@@ -1,6 +1,7 @@
 class UserSessionsController < ApplicationController
   skip_before_action :authorize if Rails.env.staging?
-  skip_before_action :set_modal, :set_opening_time, :set_menu_and_footer, :store_location
+  skip_before_action :set_modal, :set_opening_time, :set_menu_and_footer
+  skip_after_action :store_location
   
   def new
     @no_menu = true
