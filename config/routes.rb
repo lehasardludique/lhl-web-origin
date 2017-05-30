@@ -17,24 +17,25 @@ Rails.application.routes.draw do
   # Administration
   namespace :admin do
     root  'pages#home'
-    resources :users do
-      get 'password' => 'users#password', as: :password
-      patch 'password' => 'users#password_update'
-    end
     # get 'home' => 'home_carousel_links#home', as: :home
-    resources :home_carousel_links
-    resources :resources
-    resources :pages
-    resources :festivals
     resources :artists
     resources :articles
-    resources :focus
     resources :events
     resources :events, path: :workshops, as: :workshops, workshop: true
-    resources :partners
+    resources :festivals
+    resources :focus
     resources :galleries do
       get 'images' => 'galleries#images', as: :images
       patch 'images' => 'galleries#images_update'
+    end
+    resources :home_carousel_links
+    resources :info_messages
+    resources :pages
+    resources :partners
+    resources :resources
+    resources :users do
+      get 'password' => 'users#password', as: :password
+      patch 'password' => 'users#password_update'
     end
     delete 'image_ships/:id' => 'galleries#images_delete', as: :image_ship_delete
     get 'get_weezevents' => 'weez_events#get_items', as: :get_weezevents
