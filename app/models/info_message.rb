@@ -1,5 +1,5 @@
 class InfoMessage < ApplicationRecord
-  enum status: { draft: 0, published: 1, restricted: 2 }
+  enum status: { draft: 0, published: 1 }
 
   validates :modal_content, presence: true, if: :modal?
   validates :opening_content, presence: true, if: :opening?
