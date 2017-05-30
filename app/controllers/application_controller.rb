@@ -54,17 +54,23 @@ class ApplicationController < ActionController::Base
     end
 
     def set_opening_time
-      opening_messages = [
-        OPENING_MSG_SUNDAY,
-        OPENING_MSG_MONDAY,
-        OPENING_MSG_TUESDAY,
-        OPENING_MSG_WEDNESDAY,
-        OPENING_MSG_THURSDAY,
-        OPENING_MSG_FRIDAY,
-        OPENING_MSG_SATURDAY
-      ]
       Time.zone = 'Paris'
-      @opening = opening_messages[Time.zone.now.wday].html_safe
+      now = Time.zone.now
+      im = InfoMessage.published.opening.where('start_at <= ?', now).where('end_at >= ?', now).first
+      if im.present? and im.opening_content.present?
+        @opening = im.opening_content.html_safe
+      else
+        opening_messages = [
+          OPENING_MSG_SUNDAY,
+          OPENING_MSG_MONDAY,
+          OPENING_MSG_TUESDAY,
+          OPENING_MSG_WEDNESDAY,
+          OPENING_MSG_THURSDAY,
+          OPENING_MSG_FRIDAY,
+          OPENING_MSG_SATURDAY
+        ]
+        @opening = opening_messages[now.wday].html_safe
+      end
     end
 
     def set_menu_and_footer

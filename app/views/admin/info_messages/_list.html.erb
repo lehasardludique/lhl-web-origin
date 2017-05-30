@@ -4,6 +4,8 @@
     <tr>
       <th>ID</th>
       <th>Titre</th>
+      <th><i class="fa fa-window-maximize" aria-hidden="true" title="Modale"></i></th>
+      <th><i class="fa fa-clock-o" aria-hidden="true" title="Horaires"></i></th>
       <th>Début</th>
       <th>Fin</th>
       <th>Statut</th>
@@ -16,6 +18,8 @@
       <tr>
         <td><span class="badge"><%= info_message.id %></span></td>
         <td><%= info_message.title %></td>
+        <td><i class="fa fa-<%= info_message.modal? ? 'check-square-o' : 'square-o' %>" aria-hidden="true"><%= "<span>Modale</span>".html_safe if info_message.modal? %></i></td>
+        <td><i class="fa fa-<%= info_message.opening? ? 'check-square-o' : 'square-o' %>" aria-hidden="true"><%= "<span>Horaires</span>".html_safe if info_message.opening? %></i></td>
         <td><%= l info_message.start_at, format: :sortable %></td>
         <td><%= l info_message.end_at, format: :sortable %></td>
         <td><%= t("info_message.statuses.#{info_message.status}") %></td>
