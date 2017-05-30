@@ -45,7 +45,7 @@ class Admin::InfoMessagesController < AdminController
   def destroy
     authorize! :delete, @info_message
     @info_message.destroy
-    redirect_to admin_info_message_path, notice: 'Message supprimé avec succès.'
+    redirect_to admin_info_messages_path, notice: 'Message supprimé avec succès.'
   end
 
   private
