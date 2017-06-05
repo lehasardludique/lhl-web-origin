@@ -1,13 +1,16 @@
-<a class="event_card <%= event.category %><%= " focused" if event.focus.present? and event.focus = @focus %>" href="<%= event.path %>">
+<% trailer ||= false %>
+<a class="event_card <%= event.category %><%= ' trailer' if trailer %><%= " focused" if event.focus.present? and event.focus = @focus %>" href="<%= event.path %>">
     <div class="image" style="background-image: url('<%= event.main_picture.url %>')" ></div>
     <div class="content">
-        <%= content_tag :span, "Focus", class: 'focus' if event.focus.present? and event.focus = @focus %>
+        <%= content_tag :span, "Focus", class: 'focus' if event.focus.present? and event.focus = @focus and not trailer %>
         <div>
-            <%= content_tag :span, "##{event.topic}" if event.topic.present? %>
+            <%= content_tag :span, "##{event.topic}" if event.topic.present? and not trailer %>
             <h3><%= event.title %></h3>
             <p>
-                <strong><%= event.display_date if event.display_date.present? %></strong>
+                <strong><%= event.format_display_date(trailer) %></strong>
+                <% unless trailer %>
                 <span class="place"><i class="fa fa-map-marker" aria-hidden="true"></i> <%= t("event.places.#{event.place}") %></span>
+                <% end %>
             </p>
         </div>
     </div>

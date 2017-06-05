@@ -141,7 +141,20 @@ a.event_card
     position: relative
     color: white
     text-align: center!important
-    
+    overflow: hidden
+
+    &.trailer
+        height: 140px
+
+        > div.content
+            > div
+                > h3
+                    min-height: auto
+                    line-height: 0.9
+                    margin: 5px 0!important
+                > p
+                    margin-bottom: 0
+
     > div
         position: absolute
         width: 100%
@@ -238,3 +251,16 @@ a.event_card
                 z-index: 22
                 width: 940px
                 max-width: calc(100% - 360px)
+
+    a.event_card
+        &.trailer
+
+            > div.content
+                > div
+                    > h3
+                        // font-weight: normal!important
+                        font-size: 20px
+
+                    > p
+                        > strong
+                            font-size: 14px
