@@ -32,16 +32,17 @@ fr:
 
   # Common models & attributes
   models: &models
-    user: Utilisateur
-    resource: Fichier
-    gallery: Galerie
-    page: Page
     article: Article
-    focus: Focus
-    event: Évènement
     artist: Artiste
-    partner: Partenaire
+    event: Évènement
+    focus: Focus
+    gallery: Galerie
     info_message: Message d'information
+    menu_link: Lien
+    page: Page
+    partner: Partenaire
+    resource: Fichier
+    user: Utilisateur
     
   attributes: &default_attributes
     id: ID
@@ -171,6 +172,16 @@ fr:
     opening: Afficher en message d'ouverture (Horaires)
     opening_content: Contenu du message d'ouverture
 
+  # MenuLink
+  menu_link: &menu_link
+    <<: *default_attributes
+    link_content: Objet ou adresse du lien
+    place: Emplacement
+    places:
+      menu: Menu principal
+      footer_left: Footer (colonne gauche)
+      footer_right: Footer (colonne droite)
+
   # Page
   page: &page
     <<: *default_attributes
@@ -230,6 +241,8 @@ fr:
         <<: *home_carousel_link
       info_message:
         <<: *info_message
+      menu_link:
+        <<: *menu_link
       partner:
         <<: *partner
       resource:
