@@ -38,7 +38,7 @@ class Event < ApplicationRecord
   validates :retargeting_pixel_id, allow_nil: true, numericality: { only_integer: true }
 
   before_save :set_display_date
-  after_save :set_artists, :set_partners
+  after_save :set_artists, :set_partners, :menu_links_cache_management
   before_destroy :check_dependencies, :delete_links
 
   with_options :unless => :main_gallery_present? do |u|
@@ -287,6 +287,12 @@ class Event < ApplicationRecord
         self.new_record? ? Rails.application.routes.url_helpers.admin_workshops_path : Rails.application.routes.url_helpers.admin_workshop_path(self)
       else
         self.new_record? ? Rails.application.routes.url_helpers.admin_events_path : Rails.application.routes.url_helpers.admin_event_path(self)
+      end
+    end
+
+    def menu_links_cache_management
+      if self.menu_links.any?
+        MenuLink.delete_cache
       end
     end
 

@@ -93,9 +93,15 @@ class ApplicationController < ActionController::Base
     end
 
     def get_menu_and_footer
-      @menu_links = set_menu()
-      @footer_1_links = set_footer_left()
-      @footer_2_links = set_footer_right()
+      @menu_links = Rails.cache.fetch(:menu_links, expires_in: 24.hours) do
+        set_menu()
+      end
+      @footer_1_links = Rails.cache.fetch(:footer_1_links, expires_in: 24.hours) do
+        set_footer_left()
+      end
+      @footer_2_links = Rails.cache.fetch(:footer_2_links, expires_in: 24.hours) do
+        set_footer_right()
+      end
     end
 
     def authorize

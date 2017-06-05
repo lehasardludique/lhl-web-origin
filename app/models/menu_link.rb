@@ -8,8 +8,15 @@ class MenuLink < ApplicationRecord
   validates :link_content, presence: true
 
   before_save :set_object_and_path
+  after_save :delete_cache
 
   default_scope { order(rank: :asc) }
+
+  def self.delete_cache
+    Rails.cache.delete(:menu_links)
+    Rails.cache.delete(:footer_1_links)
+    Rails.cache.delete(:footer_2_links)
+  end
 
   private
     def set_object_and_path
@@ -35,5 +42,9 @@ class MenuLink < ApplicationRecord
       else
         self.path = ('/' + self.link_content).gsub(/^(\/\/)/, '/')
       end
+    end
+
+    def delete_cache
+      MenuLink.delete_cache
     end
 end

@@ -12,6 +12,7 @@ class Page < ApplicationRecord
 
   before_validation :check_slug
   before_destroy :check_dependencies
+  after_save :menu_links_cache_management
 
   validates :title, presence: true
   validates :slug, uniqueness: true, presence: true
@@ -97,6 +98,12 @@ class Page < ApplicationRecord
 
     def main_gallery_present?
       self.main_gallery.present?
+    end
+
+    def menu_links_cache_management
+      if self.menu_links.any?
+        MenuLink.delete_cache
+      end
     end
 
     def check_dependencies

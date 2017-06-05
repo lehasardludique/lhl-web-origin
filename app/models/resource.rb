@@ -17,6 +17,7 @@ class Resource < ApplicationRecord
   enum category: { gallery: 0, global: 1 }
 
   before_destroy :check_dependencies
+  after_save :menu_links_cache_management
 
   validates :handle, :presence => true
   validate :handle_size_validation
@@ -58,6 +59,12 @@ class Resource < ApplicationRecord
       else
         # file icon
         ActionController::Base.helpers.image_url 'file_icon.svg'
+      end
+    end
+
+    def menu_links_cache_management
+      if self.menu_links.any?
+        MenuLink.delete_cache
       end
     end
 
