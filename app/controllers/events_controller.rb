@@ -4,11 +4,9 @@ class EventsController < ApplicationController
   before_action :get_events, only: [:index, :api_events]
 
   def index
-    unless @workshop
-      @months_list = ['par mois']
-      for i in 1..3
-        @months_list << l(Time.now.at_beginning_of_month + i.month, format: "%B")
-      end
+    @months_list = ['par mois']
+    for i in 1..3
+      @months_list << l(Time.now.at_beginning_of_month + i.month, format: "%B")
     end
     body_classes 'events'
     body_classes 'workshop' if @workshop
@@ -75,14 +73,12 @@ class EventsController < ApplicationController
         @active_categories = @categories
       end
 
-      unless @workshop
-        # date
-        if params[:month] and params[:month].to_i > 0
-          @month = params[:month].to_i
-          scope = scope.in_month(@month)
-        else
-          @month = 0
-        end
+      # date
+      if params[:month] and params[:month].to_i > 0
+        @month = params[:month].to_i
+        scope = scope.in_month(@month)
+      else
+        @month = 0
       end
 
       @events_count = scope.count

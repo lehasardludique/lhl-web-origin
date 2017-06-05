@@ -96,7 +96,6 @@ LHL.getApiItems = (apiUrl, encodedParams) ->
             LHL.progressBar('end')
             if data.meta.count == 0 and !!data.message
                 htmlResult = data.message
-                console.log '----> No events !'
             else
                 htmlResult = ''
                 for i of data.items
