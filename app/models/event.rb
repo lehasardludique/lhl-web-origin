@@ -107,6 +107,20 @@ class Event < ApplicationRecord
     end
   end
 
+  def format_display_date(with_today_option = false)
+    if with_today_option
+      day_before_event = (Date.parse(self.start_time.to_s) - Date.today).to_i
+      case day_before_event
+      when 0 then "AUJOURD'HUI, #{self.start_time.to_s(:time_h)}"
+      when 1 then "DEMAIN, #{self.start_time.to_s(:time_h)}"
+      else
+        self.display_date if self.display_date.present?
+      end
+    elsif self.display_date.present?
+      self.display_date
+    end
+  end
+
   def media_links?
     media_link_fbk.present? or media_link_isg.present? or media_link_twt.present? or media_link_msk.present? or media_link_vid.present? or media_link_www.present?
   end
