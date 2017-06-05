@@ -24,3 +24,14 @@
       </div>
     </div>
 </header>
+<% if @events.any? %>
+<div class="container-fluid unpadded">
+  <div class="collapsed-row">
+  <% @events.each_with_index do |event, i| %>
+    <div class="col-xs-12 col-sm-3 col-lg-2<%= ' visible-lg-block' if i > 3 %>">
+      <%= render 'events/event_card', event: event, trailer: true %>
+    </div>
+  <% end %>
+  </div>
+</div>
+<% end %>
