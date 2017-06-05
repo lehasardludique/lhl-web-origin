@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.14
-* staging : v0.14
-* prod. : v0.13
+* dev : v0.16
+* staging : v0.16
+* prod. : v0.14
 
 ---
 
@@ -71,6 +71,22 @@ n/a
 ---
 
 ## Release notes
+
+### v0.16 (Modale, InfoMessages & Event Home)
+
+* InfoMessages:
+    * create model, controllers & abilities
+    * admin controller, routes & views
+    * modal implementation
+    * openning messages implementation
+* Events:
+    * trailer card version integration
+    * `format_display_date` method (for today & tomorrow events)
+* Home:
+    * Event trailer cards implementation & responsive
+    * Style: gutter-less grid
+* Newsletter modal
+
 
 ### v0.14 (Festivals)
 
