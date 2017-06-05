@@ -259,8 +259,8 @@ init = ->
             ), 300
 
     # Modal
-    if $('#InfoMessage').length
-        $('#InfoMessage').modal()
+    if $('div.modal.open').length
+        $('div.modal.open').modal()
 
     # Galleries
     if $('body').hasClass 'gallery'
