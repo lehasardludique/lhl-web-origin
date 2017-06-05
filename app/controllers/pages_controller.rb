@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     @home_carousels_links = HomeCarouselLink.published
-    @events = Event.next.limit(6)
+    @events = Event.next.limit(6).reorder(end_time: :asc)
     @retargeting_pixel_id = ENV['KLOX_HOME_PIXEL'] if ENV['KLOX_HOME_PIXEL']
     body_classes 'home'
   end
