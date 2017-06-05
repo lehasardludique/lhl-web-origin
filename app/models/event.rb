@@ -15,6 +15,7 @@ class Event < ApplicationRecord
   has_many :partners, -> { reorder(name: :asc) }, through: :event_partner_links
   has_many :festival_event_links
   has_many :festivals, through: :festival_event_links
+  has_many :menu_links, as: :object
 
   enum pure_category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
   enum workshop_category: { take_care: 1, connect: 2, creative: 3, diy: 4, brain: 0 }
@@ -291,7 +292,9 @@ class Event < ApplicationRecord
 
     def check_dependencies
       if self.home_carousel_link.present?
-        raise DependencyDestructionError.new "Cet évènement est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
+        raise DependencyDestructionError.new "Cet évènement/atelier est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
+      elsif self.menu_links.any?
+        raise DependencyDestructionError.new "Cet évènement/atelier est l'objet d'un ou plusieurs liens du menu ou du footer (#{self.menu_links.pluck(:id).join(', ')})<br />Merci de le(s) supprimer en premier."
       end
     end
 

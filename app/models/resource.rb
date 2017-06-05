@@ -10,6 +10,7 @@ class Resource < ApplicationRecord
   has_many :home_carousel_links
   has_many :partners
   has_many :pages
+  has_many :menu_links, as: :object
 
   mount_uploader :handle, ResourceUploader
 
@@ -71,6 +72,9 @@ class Resource < ApplicationRecord
         model_list << "partenaire(s) (#{self.partners.pluck(:id).join(', ')})" if self.partners.any?
         model_list << "page(s) (#{self.pages.pluck(:id).join(', ')})" if self.pages.any?
         raise DependencyDestructionError.new "Cette resource est encore liée à certains objets : #{model_list.join(', ')}<br />Merci de supprimer ces objets ou leur liaison avec l'image en premier."
+        if self.menu_links.any?
+          raise DependencyDestructionError.new "Cette resource est l'objet d'un ou plusieurs liens du menu ou du footer (#{self.menu_links.pluck(:id).join(', ')})<br />Merci de le(s) supprimer en premier."
+        end
       end
     end
 end

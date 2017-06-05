@@ -7,6 +7,7 @@ class Article < ApplicationRecord
   belongs_to :final_gallery, class_name: 'Gallery'
   has_one :home_carousel_link, as: :home_linkable
   has_many :focuses, class_name: 'Focus'
+  has_many :menu_links, as: :object
 
   enum status: { draft: 0, published: 1, restricted: 2 }
 
@@ -114,6 +115,8 @@ class Article < ApplicationRecord
     def check_dependencies
       if self.home_carousel_link.present?
         raise DependencyDestructionError.new "Cet article est lié à un slide de Home (#{self.home_carousel_link.id})<br />Merci de le supprimer en premier."
+      elsif self.menu_links.any?
+        raise DependencyDestructionError.new "Cet article est l'objet d'un ou plusieurs liens du menu ou du footer (#{self.menu_links.pluck(:id).join(', ')})<br />Merci de le(s) supprimer en premier."
       end
     end
 end
