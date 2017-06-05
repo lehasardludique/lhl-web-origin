@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170530154822) do
+ActiveRecord::Schema.define(version: 20170605165205) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,21 @@ ActiveRecord::Schema.define(version: 20170530154822) do
     t.integer  "status"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "menu_links", force: :cascade do |t|
+    t.string   "title"
+    t.string   "link_content"
+    t.integer  "rank",         default: 10
+    t.string   "object_type"
+    t.integer  "object_id"
+    t.boolean  "target_blank", default: false
+    t.string   "path"
+    t.integer  "place"
+    t.integer  "status"
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["object_type", "object_id"], name: "index_menu_links_on_object_type_and_object_id", using: :btree
   end
 
   create_table "pages", force: :cascade do |t|
