@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
     redirect_back fallback_location: admin_root_path
   end
 
-  before_action :set_modal, :set_opening_time, :set_menu_and_footer
+  before_action :set_modal, :set_opening_time, :get_menu_and_footer
   before_action :authorize if Rails.env.staging?
   after_action :store_location
 
@@ -92,25 +92,64 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    def set_menu_and_footer
-      @menu_links = {
-        "Programmation" => events_path,
-        "Billetterie" => "/billetterie",
-        "Activités" => workshops_path,
-        "Infos pratiques" => "/infos-pratiques"
-      }
-      @footer_1_links = {
-        "Mentions légales" => "/mentions-legales"
-      }
-      @footer_2_links = {
-        "Privatisation" => "/privatiser-le-hasard-ludique"
-      }
+    def get_menu_and_footer
+      @menu_links = set_menu()
+      @footer_1_links = set_footer_left()
+      @footer_2_links = set_footer_right()
     end
 
     def authorize
       unless logged_in?
         store_location
         redirect_to login_path and return
+      end
+    end
+
+    def set_menu
+      links_menu = MenuLink.published.menu
+      if links_menu.any?
+        links = {}
+        links_menu.each do |link|
+          links[link.title] = link.path
+        end
+        links
+      else
+        {
+          "Programmation" => events_path,
+          "Billetterie" => "/billetterie",
+          "Activités" => workshops_path,
+          "Infos pratiques" => "/infos-pratiques"
+        }
+      end
+    end
+
+    def set_footer_left
+      links_menu = MenuLink.published.footer_left
+      if links_menu.any?
+        links = {}
+        links_menu.each do |link|
+          links[link.title] = link.path
+        end
+        links
+      else
+        {
+          "Mentions légales" => "/mentions-legales"
+        }
+      end
+    end
+
+    def set_footer_right
+      links_menu = MenuLink.published.footer_right
+      if links_menu.any?
+        links = {}
+        links_menu.each do |link|
+          links[link.title] = link.path
+        end
+        links
+      else
+        {
+          "Privatisation" => "/privatiser-le-hasard-ludique"
+        }
       end
     end
 end

@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   before_action :authorize
-  skip_before_action :set_modal, :set_opening_time, :set_menu_and_footer
+  skip_before_action :set_modal, :set_opening_time, :get_menu_and_footer
 
   private
     def authorize
