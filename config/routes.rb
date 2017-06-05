@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     end
     resources :home_carousel_links
     resources :info_messages
+    resources :menu_links
     resources :pages
     resources :partners
     resources :resources
