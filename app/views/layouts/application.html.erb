@@ -24,7 +24,7 @@
 <%= render 'layouts/footer' unless @no_footer %>
 <% if @info_modal.present? %>
 <!-- Modal -->
-<div class="modal fade padded" id="InfoMessage" tabindex="-1" role="dialog" aria-labelledby="InfoMessageLabel">
+<div class="modal fade padded open" id="InfoMessage" tabindex="-1" role="dialog" aria-labelledby="InfoMessageLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -33,6 +33,22 @@
       </div>
       <div class="modal-body">
         <%= simple_format @info_modal.modal_content if @info_modal.modal_content.present? %>
+      </div>
+    </div>
+  </div>
+</div>
+<% elsif @newletter_modal.present? %>
+<!-- Modal -->
+<div class="modal fade padded open" id="NewsLetterInvitation" tabindex="-1" role="dialog" aria-labelledby="NewsLetterInvitationLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times" aria-hidden="true"></i></button>
+        <h4 class="modal-title" id="NewsLetterInvitationLabel">Inscrivez-vous à notre newsletter !</h4>
+      </div>
+      <div class="modal-body">
+        <p>Renseignez vos centres d'intérêt pour des messages 100% personnalisés...<br /><br /></p>
+        <%= link_to "S'abonner", "http://lehasardludique.us6.list-manage1.com/subscribe?u=b3a692d96340f437820c48197&id=f48e82baf0", target: :_blank, class: 'btn yellow-mask' %>
       </div>
     </div>
   </div>

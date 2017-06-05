@@ -226,6 +226,25 @@ div.resource
     text-transform: uppercase
     +transition(background-color 300ms ease)
 
+    &.yellow-mask
+        background-image: image_url('bg_aside_odd_link.svg')
+        color: $lhl-black
+        text-align: center
+        display: block
+        width: 240px
+        height: 70px
+        margin: 10px auto
+        text-transform: uppercase
+        text-decoration: none
+        font-weight: $bold
+        background-size: 100% 100%
+        background-repeat: no-repeat
+        line-height: 20px
+        padding: 25px $padding-base
+        
+        &:hover
+            text-decoration: none
+
 .btn-white
     +button-variant($lhl-black, white, white)
 

@@ -40,17 +40,36 @@ class ApplicationController < ActionController::Base
     end
 
     def set_modal
+      # INFO MODAL
       Time.zone = 'Paris'
       now = Time.zone.now
       im = InfoMessage.published.modal.where('start_at <= ?', now).where('end_at >= ?', now).first
       cookies.delete :info if "quelles-sont-les-news".in? params.keys
       if im.present?
-        Rails.logger.info "----> COOKIE: #{cookies[:info]} | MESSAGE: IM-#{im.id}"
         if not cookies[:info] == "IM-#{im.id}"
           cookies[:info] = { value: "IM-#{im.id}", expires: im.end_at }
           @info_modal = im
         end
       end
+
+      # NEWSLETTER MODAL
+      newsletter_modal_forced = "la-newsletter".in? params.keys
+      if newsletter_modal_forced or not cookies[:newsletter]
+        session[:pages_count] ||= 0
+        session[:pages_count] += 1
+        if (newsletter_modal_forced or session[:pages_count] > 3) and not @info_modal
+          @newletter_modal = true
+          cookies[:newsletter] = true unless newsletter_modal_forced
+        end
+      end
+
+      # RESET COOKIES
+      if "reset-cookies".in? params.keys
+        cookies.delete :info
+        cookies.delete :newsletter
+        session[:pages_count] = nil
+      end
+
     end
 
     def set_opening_time
