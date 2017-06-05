@@ -6,6 +6,7 @@
       <th>Titre</th>
       <th>Résumé</th>
       <th>Illustration<br />principale</th>
+      <th>Publication</th>
       <th>Date<br />Début</th>
       <th>Date<br />Fin</th>
       <th>Date Affichée</th>
@@ -25,6 +26,7 @@
         <td><%= event.title %></td>
         <td><%= event.digest %></td>
         <td><% if event.main_picture.present? %><span class="preview" style="background-image: url('<%= event.main_picture.thumb_url %>')"></span><% end %></td>
+        <td><%= l event.published_at, format: :sortable if event.published_at.present? %></td>
         <td><%= l event.start_time, format: :sortable if event.start_time.present? %></td>
         <td><%= l event.end_time, format: :sortable if event.end_time.present? %></td>
         <td><%= event.display_date %></td>
