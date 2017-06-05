@@ -1,0 +1,38 @@
+<%= simple_form_for @menu_link, url: url = (@menu_link.new_record?) ? admin_menu_links_path : admin_menu_link_path(@menu_link) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <h3>Contenu</h3>
+    <div class="collapsed-row">
+      <div class="col-xs-5">
+        <%= f.input :title  %>
+      </div>
+      <div class="col-xs-1 tac">
+        <br /><br /><strong>></strong>
+      </div>
+      <div class="col-xs-6">
+        <%= f.input :link_content  %>
+      </div>
+      <p class="help">
+      <em>Pour les liens, il faut préciser le titre du lien et son objet séparément. Par exemple :</em>
+<pre>Programmation > /programmation
+Activités > /activites
+Mentions légales > Page:4
+Le menu du Bistrot (pdf) > Fichier:8
+Les news d'avril > Article:45
+Une page fixe > /url-de-ma-page
+La Villette > https://lavillette.com/</pre>
+    </p>
+    </div>
+    <hr />
+    <h3>Réglages</h3>
+    <%= f.input :rank, hint: "<em>Le lien avec la priorité 1 s'affichera en premier.</em>".html_safe %>
+    <%= f.input :place, collection: MenuLink.places.collect { |s| [t("menu_link.places.#{s.first}"), s.first] }, include_blank: false %>
+    <%= f.input :status, collection: MenuLink.statuses.collect { |s| [t("menu_link.statuses.#{s.first}"), s.first] }, include_blank: false %>
+  </div>
+  <hr />
+  <div class="form-actions">
+    <%= link_to 'Annuler', url, class: 'btn btn-default' %>
+    <%= f.button :submit, 'Enregistrer' %>
+  </div>
+<% end %>

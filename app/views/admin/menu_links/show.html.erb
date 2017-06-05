@@ -1,0 +1,25 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-pencil-square"></i>'.html_safe, edit_admin_menu_link_path(@menu_link), title: "Éditer" %>
+    <%= link_to '<i class="fa fa-th-list"></i>'.html_safe, admin_menu_links_path, title: "Retour à la liste" %>
+  </nav>
+  <span class="id"><%= @menu_link.id %></span> Lien <em><%= @menu_link.title %></em>
+</h2>
+<dl class="dl-horizontal borderd-list">
+<% @menu_link.attributes.each do |k,v| %>
+  <% if k == 'user_id' %>
+    <dt><%= t "menu_link.#{k}" %></dt>
+    <dd><%= @menu_link.user.real_name %></dd>
+  <% elsif @menu_link.defined_enums? and k.in? @menu_link.defined_enums %>
+    <dt><%= t "menu_link.#{k}" %></dt>
+    <dd><%= t "menu_link.#{k.pluralize}.#{v}" %></dd>
+  <% elsif v.class.in? [ NilClass, TrueClass, FalseClass] %>
+    <% fa_css = case v; when NilClass then 'ban'; when TrueClass then 'check-square-o'; when FalseClass then 'square-o'; end %>
+    <dt><%= t "event.#{k}" %></dt>
+    <dd><i class="fa fa-<%= fa_css %>" aria-hidden="true"></i></dd>
+  <% else %>
+    <dt><%= t "menu_link.#{k}" %></dt>
+    <dd><%= (v.is_a? Time) ? l(v) : v %></dd>
+  <% end %>
+<% end %>
+</dl>

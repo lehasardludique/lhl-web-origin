@@ -1,0 +1,16 @@
+<h2>
+  <nav>
+    <%= link_to '<i class="fa fa-plus-circle"></i>'.html_safe, new_admin_menu_link_path, title: 'Ajouter un nouveau menu_link' %>
+  </nav>
+  Menu & footer : liste des liens
+</h2>
+<h3>Menu principal</h3>
+<%= render 'list', menu_links: @menu_links.menu %>
+<hr />
+<h3>Footer (colonne gauche)</h3>
+<%= render 'list', menu_links: @menu_links.footer_left %>
+<hr />
+<h3>Footer (colonne droite)</h3>
+<%= render 'list', menu_links: @menu_links.footer_right %>
+<hr />
+<br>

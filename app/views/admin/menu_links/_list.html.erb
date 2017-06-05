@@ -1,0 +1,32 @@
+<% hide_sorting_tools ||= false; undeletable ||= false %>
+<table class="<%= hide_sorting_tools ? '' : 'sortable' %>" data-order='[[4  , "asc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Lien</th>
+      <th><i class="fa fa-window-maximize" aria-hidden="true" title="Nouvelle fenêtre"></i></th>
+      <th>Priorité</th>
+      <th>Statut</th>
+      <th data-orderable="false"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% menu_links.each do |menu_link| %>
+      <tr>
+        <td><span class="badge"><%= menu_link.id %></span></td>
+        <td><%= menu_link.title %></td>
+        <td><%= link_to menu_link.path, menu_link.path, target: :_blank %></td>
+        <td><i class="fa fa-<%= menu_link.target_blank ? 'check-square-o' : 'square-o' %>" aria-hidden="true"><%= "<span>Nouvelle fenêtre</span>".html_safe %></i></td>
+        <td><%= menu_link.rank %></td>
+        <td><%= t("menu_link.statuses.#{menu_link.status}") %></td>
+        <td class="action">
+          <%= link_to '<i class="fa fa-eye"></i>'.html_safe, admin_menu_link_path(menu_link), title: "Détails" if can? :read, menu_link %>
+          <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_admin_menu_link_path(menu_link), title: "Éditer" if can? :edit, menu_link %>
+          <%= link_to '<i class="fa fa-trash"></i>'.html_safe,  admin_menu_link_path(menu_link), method: :delete, data: { confirm: 'Cette action est irréversible, êtes vous sur ?' }, title: "Supprimer" if not undeletable and can? :delete, menu_link %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
