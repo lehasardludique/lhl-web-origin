@@ -126,6 +126,6 @@ module ApplicationHelper
   def active_link_to title, href, css = nil
     css = css.to_s.split " "
     css << 'active' if request.fullpath =~ /^#{Regexp.quote(href)}/
-    link_to title, href, class: css.join(" "), target: /^http/.match(href) ? :_blank : nil
+    link_to title.html_safe, href, class: css.join(" "), target: /^http/.match(href) ? :_blank : nil
   end
 end
