@@ -73,16 +73,15 @@ body > menu
         
         > a
             display: block
-            height: 25px
-            line-height: 15px
+            min-height: 25px
+            line-height: 13px
             text-transform: uppercase
             color: $lhl-gray
             font-weight: $bold
-            padding: 5px $margin-base
+            padding: 6px $margin-base/2 6px $margin-base
             +transition(color 300ms ease)
-            white-space: nowrap
 
-            &:hover,
+            &:hover, 
             &.active
                 color: $lhl-black
 
