@@ -57,7 +57,7 @@ class ApplicationController < ActionController::Base
       if newsletter_modal_forced or not cookies[:newsletter]
         session[:pages_count] ||= 0
         session[:pages_count] += 1
-        if (newsletter_modal_forced or session[:pages_count] > 3) and not @info_modal
+        if (newsletter_modal_forced or session[:pages_count] > 2) and not @info_modal
           @newletter_modal = true
           cookies[:newsletter] = true unless newsletter_modal_forced
         end
