@@ -32,6 +32,7 @@ class PagesController < ApplicationController
     @section_1_partners = Partner.where(id: @partners_page.section_1_ids)
     @section_2_partners = Partner.where(id: @partners_page.section_2_ids)
     @section_3_partners = Partner.where(id: @partners_page.section_3_ids)
+    meta_title "Les partenaires"
     body_classes 'page partners'
   end
 end
