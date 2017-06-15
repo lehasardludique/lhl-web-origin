@@ -43,6 +43,7 @@ fr:
     partner: Partenaire
     resource: Fichier
     user: Utilisateur
+    partners_page: Page partenaires
     
   attributes: &default_attributes
     id: ID
@@ -67,6 +68,7 @@ fr:
     resource_id: Image
     slug: URL relative
     retargeting_pixel_id: ID du pixel de “retargeting”
+
   pages_articles_attributes: &pages_articles_attributes
     main_gallery_id: Galerie principale (header)
     resource: Image principale
@@ -83,6 +85,7 @@ fr:
     topic: Tag (thème principal)
     weez_event_id: WeezEvent
     new_partner_ids: Partenaires
+
   media_links: &media_links
     media_link_fbk: Page FaceBook
     media_link_twt: Page Twitter
@@ -194,6 +197,12 @@ fr:
       unspecified_category: Non spécifiée
     link: Url
 
+  # Partners Page
+  partners_page: &partners_page
+    base_line: Sous-titres
+    title: Titre de séction
+    partner_ids: Partenaires
+
   # Resource
   resource: &resource
     <<: *default_attributes
@@ -245,6 +254,8 @@ fr:
         <<: *menu_link
       partner:
         <<: *partner
+      partners_page:
+        <<: *partners_page
       resource:
         <<: *resource
       user:
