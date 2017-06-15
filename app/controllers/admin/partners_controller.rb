@@ -80,7 +80,7 @@ class Admin::PartnersController < AdminController
     end
 
     def partners_page_params
-      permitted_params = [:base_line, :section_1, {:section_1_ids => []}, :section_2, {:section_2_ids => []}, :section_3, {:section_3_ids => []}, :exergue, :aside_link_1_data, :aside_link_2_data]
+      permitted_params = [:main_gallery_id, :resource_id, :subtitle, :section_1, {:section_1_ids => []}, :section_2, {:section_2_ids => []}, :section_3, {:section_3_ids => []}, :exergue, :aside_link_1_data, :aside_link_2_data]
       params.require(:partners_page).permit(permitted_params)
     end
 end
