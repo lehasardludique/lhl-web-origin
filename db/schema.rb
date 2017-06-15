@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170615091201) do
+ActiveRecord::Schema.define(version: 20170615184011) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -118,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170615091201) do
     t.boolean  "workshop",             default: false
     t.integer  "workshop_category"
     t.integer  "workshop_rank",        default: 10
+    t.integer  "event_alert",          default: 0
     t.index ["date_slug"], name: "index_events_on_date_slug", using: :btree
     t.index ["final_gallery_id"], name: "index_events_on_final_gallery_id", using: :btree
     t.index ["focus_id"], name: "index_events_on_focus_id", using: :btree
