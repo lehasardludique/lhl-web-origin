@@ -1,0 +1,54 @@
+<header>
+    <%= render_header @partners_page %>
+</header>
+<article>
+    <h2>
+        <div class="container">
+            Les partenaires
+            <%= content_tag :small, @partners_page.subtitle if @partners_page.subtitle %>
+        </div>
+    </h2>
+    <aside>
+        <div>
+            <% if @partners_page.exergue.present? %>
+            <div class="exergue_edited">
+                <%= @partners_page.exergue.html_safe %>
+            </div>
+            <% end %>
+            <% if @partners_page.aside_link_1_data.present? or @partners_page.aside_link_2_data.present? %>
+            <nav>
+                <%= link_from @partners_page.aside_link_1_data if @partners_page.aside_link_1_data.present? %>
+                <%= link_from @partners_page.aside_link_2_data if @partners_page.aside_link_2_data.present? %>
+            </nav>
+            <% end %>
+        </div>
+    </aside>
+    <section id="partners">
+        <div class="container">
+            <% if @section_1_partners.any? %>
+            <%= content_tag :h3, @partners_page.section_1 if @partners_page.section_1.present? %>
+            <ul>
+                <% @section_1_partners.each do |partner| %>
+                    <li title="<%= partner.name %>" style="background-image: url('<%= partner.resource.url %>')"></li>
+                <% end %>
+            </ul>
+            <% end %>
+            <% if @section_2_partners.any? %>
+            <%= content_tag :h3, @partners_page.section_2 if @partners_page.section_2.present? %>
+            <ul>
+                <% @section_2_partners.each do |partner| %>
+                    <li title="<%= partner.name %>" style="background-image: url('<%= partner.resource.url %>')"></li>
+                <% end %>
+            </ul>
+            <% end %>
+            <% if @section_3_partners.any? %>
+            <%= content_tag :h3, @partners_page.section_3 if @partners_page.section_3.present? %>
+            <ul>
+                <% @section_3_partners.each do |partner| %>
+                    <li title="<%= partner.name %>" style="background-image: url('<%= partner.resource.url %>')"></li>
+                <% end %>
+            </ul>
+            <% end %>
+        </div>
+    </section>
+</article>
