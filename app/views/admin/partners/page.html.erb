@@ -17,6 +17,20 @@
     <h3>Section 3</h3>
     <%= f.input :section_3, label: t('partners_page.title') %>
     <%= f.input :section_3_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
+    <hr />
+    <h3>Infos. complémentaires</h3>
+    <%= f.input :exergue, as: :text, input_html: { data: { ckeditor: 'custom_config_exergue' }}, label: t("page.exergue") %>
+    <h4>Liens Complémentaires</h4>
+    <p class="help">
+      <em>Pour les liens, il faut préciser le titre du lien et son objet séparé d'un “>”. Par exemple :</em>
+<pre>Mentions légales > Page:4
+Le menu > Fichier:8
+Les news d'avril > Article:45
+Une page fixe > /url-de-ma-page
+La Villette > https://lavillette.com/</pre>
+    </p>
+    <%= f.input :aside_link_1_data, label: t("page.aside_link_1_data") %>
+    <%= f.input :aside_link_2_data, label: t("page.aside_link_2_data") %>
   </div>
   <hr />
   <div class="form-actions">
