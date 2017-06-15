@@ -4,17 +4,25 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :base_line, label: t('partners_page.base_line') %>
-    <hr />
-    <h3>Section 1</h3>
+    <h3>Contenu</h3>
+    <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
+    <%= content_tag :em, "Aucune galerie “Général“ n'est disponible.<br />Pour ajouter une galerie à une page, il faut au préalable la créer (choisir la catégorie “Géneral”).<br /><br />".html_safe  if Gallery.global.size == 0 %>
+    <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
+      <select class="form-control select optional select2" data-template="image" name="page[resource_id]" id="page_resource_id">
+        <option value="">À défaut de galerie principale, choisir une image</option>
+        <% Resource.global.each do |resource| %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @partners_page.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
+        <% end %>
+      </select>
+    <% end %>
+    <%= f.input :subtitle, label: t('page.subtitle') %>
+    <h4>Section 1</h4>
     <%= f.input :section_1, label: t('partners_page.title') %>
     <%= f.input :section_1_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
-    <hr />
-    <h3>Section 2</h3>
+    <h4>Section 2</h4>
     <%= f.input :section_2, label: t('partners_page.title') %>
     <%= f.input :section_2_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
-    <hr />
-    <h3>Section 3</h3>
+    <h4>Section 3</h4>
     <%= f.input :section_3, label: t('partners_page.title') %>
     <%= f.input :section_3_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
     <hr />
