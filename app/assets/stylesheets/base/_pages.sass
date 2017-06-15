@@ -22,6 +22,13 @@ body.page
                         text-transform: lowercase
                         font-weight: $bold
 
+                    strong
+                        font-size: $font-size-h2-small
+                        text-transform: uppercase
+                        color: $lhl-black
+                        float: right
+                        margin-left: $padding-base
+
                     a.focus
                         margin-right: 10px
                         margin-top: -10px
@@ -250,7 +257,11 @@ body.page
             position: relative
 
             > h2
-
+                > div.container
+                    > div
+                        strong
+                            font-size: $font-size-h2-small-desk
+                            
             > aside
                 position: absolute
                 top: 0

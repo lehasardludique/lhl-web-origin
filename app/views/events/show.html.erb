@@ -7,6 +7,7 @@
             <div>
                 <%= link_to "Focus", @event.focus.article.path, class: 'focus' if @event.focus.present? and @event.focus.article.present? %>
                 <%= content_tag :span, "##{@event.topic}" if @event.topic.present? %>
+                <%= content_tag :strong, t("event.event_alerts.#{@event.event_alert}") unless @event.ongoing? %>
             </div>
             <%= @event.title %>
             <%= content_tag :small, @event.subtitle if @event.subtitle.present? %>
