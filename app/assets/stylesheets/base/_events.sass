@@ -143,6 +143,28 @@ a.event_card
     text-align: center!important
     overflow: hidden
 
+    > div.alert
+        position: absolute
+        padding: 0
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+        background-color: rgba($lhl-black, 0.65)
+        z-index: 1
+
+        > strong
+            display: block
+            width: 100%
+            text-align: center
+            position: absolute
+            top: 50%
+            left: 0
+            transform: translateY(-50%)
+            color: white
+            text-transform: uppercase
+            font-size: $font-size-h2-small-desk
+
     &.trailer
         height: 140px
 
@@ -259,6 +281,9 @@ a.event_card
 
     a.event_card
         &.trailer
+            > div.alert
+                > strong
+                    font-size: $font-size-h2-small
 
             > div.content
                 > div
