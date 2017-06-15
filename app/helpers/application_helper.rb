@@ -54,7 +54,7 @@ module ApplicationHelper
   end
 
   def render_header object
-    if object.class.in? [ Page, Festival, Article, Event ]
+    if object.class.in? [ Page, Festival, Article, Event , PartnersPage ]
       if object.main_gallery.present?
         render_gallery object.main_gallery, :diaporama
       elsif object.resource.present?
