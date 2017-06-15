@@ -42,6 +42,19 @@ class Admin::PartnersController < AdminController
     end
   end
 
+  def page
+    @partners_page = PartnersPage.new
+  end
+
+  def page_update
+    if PartnersPage.new.update(partners_page_params)
+      flash.notice = 'Page partenaire mise à jour avec succès !'
+    else
+      flash.alert = 'Impossible de mettre à jour la page partenaire.'
+    end
+    redirect_to admin_partners_page_path
+  end
+
   def destroy
     authorize! :delete, @partner
     @partner.destroy
@@ -62,5 +75,10 @@ class Admin::PartnersController < AdminController
       permitted_params = [:name, :resource_id, :link, :notes, :category]
       permitted_params << :user_id if current_user.admin?
       params.require(:partner).permit(permitted_params)
+    end
+
+    def partners_page_params
+      permitted_params = [:base_line, :section_1, {:section_1_ids => []}, :section_2, {:section_2_ids => []}, :section_3, {:section_3_ids => []}]
+      params.require(:partners_page).permit(permitted_params)
     end
 end

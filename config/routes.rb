@@ -32,6 +32,8 @@ Rails.application.routes.draw do
     resources :info_messages
     resources :menu_links
     resources :pages
+    get 'partners_page' => 'partners#page', as: :partners_page
+    patch 'partners_page' => 'partners#page_update'
     resources :partners
     resources :resources
     resources :users do
