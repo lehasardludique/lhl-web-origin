@@ -11,7 +11,7 @@
       <select class="form-control select optional select2" data-template="image" name="partners_page[resource_id]" id="partners_page_resource_id" %>">
         <option value="">À défaut de galerie principale, choisir une image</option>
         <% Resource.global.each do |resource| %>
-          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @partners_page.resource_id.to_i) ? true : nil, data: {img: resource.thumb_url}} %>
+          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @partners_page.resource_id.to_s.to_i) ? true : nil, data: {img: resource.thumb_url}} %>
         <% end %>
       </select>
     <% end %>
