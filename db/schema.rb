@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170605165205) do
+ActiveRecord::Schema.define(version: 20170615091201) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -293,6 +293,14 @@ ActiveRecord::Schema.define(version: 20170605165205) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.index ["user_id"], name: "index_resources_on_user_id", using: :btree
+  end
+
+  create_table "single_data", force: :cascade do |t|
+    t.string   "k"
+    t.jsonb    "v",          default: []
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["k"], name: "index_single_data_on_k", using: :btree
   end
 
   create_table "users", force: :cascade do |t|
