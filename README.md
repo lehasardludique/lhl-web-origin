@@ -2,9 +2,9 @@
 
 ## Current versions
 
-* dev : v0.16
-* staging : v0.16
-* prod. : v0.14
+* dev : v0.17
+* staging : v0.17
+* prod. : v0.17
 
 ---
 
@@ -71,6 +71,26 @@ n/a
 ---
 
 ## Release notes
+
+### v0.17 (Partners)
+
+* MenuLinks: 
+    * create model & controllers
+    * admin controller, routes & views
+    * association & dependencies
+    * front integration & cache management
+* SingleData
+    * create model
+* PartnerPage
+    * create model, inc. single_data, & local.
+    * admin routes, controller & form
+    * cache management
+    * front routes & controller
+    * front integration
+* Events:
+    * add `event_alert` attribute
+    * front page : display event_alert
+    * card (home & gallery) display event_alert
 
 ### v0.16 (Modale, InfoMessages & Event Home)
 
