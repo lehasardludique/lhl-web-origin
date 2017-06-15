@@ -30,10 +30,8 @@ class PartnersPage
         @success *= SingleData.send("partners_#{attribute.to_s}".to_sym).update(v: attributes[attribute]) ? 1 : 0
       end
     end
-
-    @success = @success == 1 ? true : false
-    Rails.cache.delete(:partners_page) if @success
-    @success
+    Rails.cache.delete(:partners_page)
+    @success == 1 ? true : false
   end
 
   def save
@@ -41,8 +39,7 @@ class PartnersPage
     ATTR_ACCESSOR_LIST.each do |attribute|
       @success *= SingleData.send("partners_#{attribute.to_s}".to_sym).update(v: self.send(attribute)) ? 1 : 0
     end
-    @success = @success == 1 ? true : false
-    Rails.cache.delete(:partners_page) if @success
-    @success
+    Rails.cache.delete(:partners_page)
+    @success == 1 ? true : false
   end
 end 

@@ -43,7 +43,9 @@ class Admin::PartnersController < AdminController
   end
 
   def page
-    @partners_page = PartnersPage.new
+    @partners_page = Rails.cache.fetch(:partners_page, expires_in: 24.hours) do
+      PartnersPage.new
+    end
   end
 
   def page_update
