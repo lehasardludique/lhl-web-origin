@@ -50,6 +50,7 @@ Rails.application.routes.draw do
 
   # Front
   get 'programmation' => 'events#index', as: :events
+  get 'les-partenaires' => 'pages#partners', as: :partners
   get 'activites' => 'events#index', as: :workshops, workshop: true
   get 'articles/:date/*slug' => 'articles#show', as: :article
   get ':category/:date/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized }, as: :event

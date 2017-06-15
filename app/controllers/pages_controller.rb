@@ -24,4 +24,14 @@ class PagesController < ApplicationController
     @retargeting_pixel_id = @page.retargeting_pixel_id
     body_classes 'page'
   end
+
+  def partners
+    @partners_page = Rails.cache.fetch(:partners_page, expires_in: 24.hours) do
+      PartnersPage.new
+    end
+    @section_1_partners = Partner.where(id: @partners_page.section_1_ids)
+    @section_2_partners = Partner.where(id: @partners_page.section_2_ids)
+    @section_3_partners = Partner.where(id: @partners_page.section_3_ids)
+    body_classes 'page partners'
+  end
 end

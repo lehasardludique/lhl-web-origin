@@ -200,7 +200,7 @@ fr:
   # Partners Page
   partners_page: &partners_page
     base_line: Sous-titres
-    title: Titre de séction
+    title: Titre de section
     partner_ids: Partenaires
 
   # Resource
