@@ -1,6 +1,7 @@
 class PartnersPage
   include ActiveModel::Model
 
+  attr_accessor :main_gallery, :resource
   ATTR_ACCESSOR_LIST = :main_gallery_id,
     :resource_id,
     :subtitle,
@@ -20,6 +21,14 @@ class PartnersPage
     ATTR_ACCESSOR_LIST.each do |attribute|
       self.send("#{attribute.to_s}=", SingleData.send("partners_#{attribute.to_s}".to_sym).v) if self.send("#{attribute.to_s}").nil?
     end
+  end
+
+  def main_gallery
+    @main_gallery ||= Gallery.find_by(id: self.main_gallery_id)
+  end
+
+  def resource
+    @resource ||= Resource.find_by(id: self.resource_id)
   end
 
   def update(attributes={})
