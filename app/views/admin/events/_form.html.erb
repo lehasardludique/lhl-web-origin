@@ -25,6 +25,7 @@
     <h3 class="collapsed" data-toggle="collapse" data-target="#booking">Réservation</h3>
     <div class="collapse" id="booking">
       <%= f.input :weez_event_id, collection: WeezEvent.all.collect { |s| [s.title, s.id] }, selected: @event.weez_event_id, include_blank: true, input_html: { multiple: false, class: "select2" } if WeezEvent.all.size > 0  %>
+      <%= f.input :event_alert, collection: Event.event_alerts.collect { |s| [t("event.event_alerts.#{s.first}"), s.first] }, include_blank: false %>
     </div>
     <hr />
     <h3 class="collapsed" data-toggle="collapse" data-target="#editorial_params">Paramètres éditoraux</h3>
