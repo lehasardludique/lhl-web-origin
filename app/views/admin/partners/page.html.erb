@@ -5,7 +5,7 @@
 
   <div class="form-inputs">
     <h3>Contenu</h3>
-    <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
+    <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, include_blank: true, input_html: { multiple: false, class: "select2" }, label: t("page.main_gallery_id") if Gallery.global.size > 0  %>
     <%= content_tag :em, "Aucune galerie “Général“ n'est disponible.<br />Pour ajouter une galerie à une page, il faut au préalable la créer (choisir la catégorie “Géneral”).<br /><br />".html_safe  if Gallery.global.size == 0 %>
     <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
       <select class="form-control select optional select2" data-template="image" name="page[resource_id]" id="page_resource_id">
@@ -16,13 +16,14 @@
       </select>
     <% end %>
     <%= f.input :subtitle, label: t('page.subtitle') %>
-    <h4>Section 1</h4>
+    <hr />
+    <h4>• Section 1</h4>
     <%= f.input :section_1, label: t('partners_page.title') %>
     <%= f.input :section_1_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
-    <h4>Section 2</h4>
+    <h4>• Section 2</h4>
     <%= f.input :section_2, label: t('partners_page.title') %>
     <%= f.input :section_2_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
-    <h4>Section 3</h4>
+    <h4>• Section 3</h4>
     <%= f.input :section_3, label: t('partners_page.title') %>
     <%= f.input :section_3_ids, collection: Partner.all.collect { |s| [s.name, s.id] }, input_html: { multiple: true, class: "select2" }, label: t('partners_page.partner_ids') %>
     <hr />
