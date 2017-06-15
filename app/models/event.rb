@@ -17,6 +17,7 @@ class Event < ApplicationRecord
   has_many :festivals, through: :festival_event_links
   has_many :menu_links, as: :object
 
+  enum event_alert: { ongoing: 0, full: 1, rescheduled: 2, canceled: 10}
   enum pure_category: { family: 1, concert: 2, animations: 3, show: 4, other: 0 }
   enum workshop_category: { take_care: 1, connect: 2, creative: 3, diy: 4, brain: 0 }
   enum place: { station: 1, hall: 4, studio: 2, dock: 3, outside: 0 }

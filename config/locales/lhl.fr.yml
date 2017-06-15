@@ -114,6 +114,12 @@ fr:
     start_time: Date/Heure de début
     end_time: Date/Heure de fin
     new_artist_ids: Artistes / Intervenants
+    event_alert: Alerte
+    event_alerts:
+      ongoing: Rien à signaler
+      full: Complet
+      rescheduled: Reporté
+      canceled: Annulé  
     categories:
       family: Famille
       concert: Concert
