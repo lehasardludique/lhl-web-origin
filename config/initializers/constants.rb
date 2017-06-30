@@ -1,4 +1,4 @@
-LHL_URL = "#{ENV["PROTOCOL"]||"http://"}" + "#{ENV["HOST"]||"www.lehasardludique.paris"}"
+LHL_URL = "#{ENV["PROTOCOL"]||"https://"}" + "#{ENV["HOST"]||"www.lehasardludique.paris"}"
 INTERNAL_LINK_FORMAT = /(\ >\ )((Page:\d)|(Article:\d)|(Fichier:\d)|(\/)|(http(s)?:\/\/))/
 OPENING_MSG_MONDAY = "#{ENV["OPENING_MSG_MONDAY"] || "FERMÉ <i>Aujourd’hui</i>"}"
 OPENING_MSG_TUESDAY = "#{ENV["OPENING_MSG_TUESDAY"] || "OUVERT <i>Aujourd’hui</i><br /><br />12H00<br />-<br>00H00"}"
