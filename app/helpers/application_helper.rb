@@ -45,7 +45,7 @@ module ApplicationHelper
 
   def set_meta_og(object)
     @og ||= {}
-    if object.class.in? [ Page, Article, Festival ]
+    if object.class.in? [ Page, Article, Festival, Event ]
       @og[:url] = object.full_url
       @og[:title] = object.title
       @og[:description] = object.digest
