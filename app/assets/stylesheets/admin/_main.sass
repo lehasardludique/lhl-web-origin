@@ -149,17 +149,24 @@ table
     td
         &.breakable
             word-break: break-all
-        
-        &.action
-            padding-left: 0
+
+        > div.action
             padding-right: 0
+
+        &.action
+            padding-right: 10px
+        
+        &.action,
+        > div.action
+            padding-left: 0
             text-align: right
             white-space: nowrap
             font-size: 0
-            padding-right: 10px
-            word-spacing: 5px
 
             > a 
+                display: inline-block
+                margin-left: 5px
+
                 > i.fa
                     width: 30px
                     height: 30px
