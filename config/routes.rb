@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   scope 'api', as: :api do
     get 'events' => 'events#api_events', as: :events
     get 'workshops' => 'events#api_events', as: :workshops, workshop: true
+    get 'resources' => 'resources#api_resources', as: :resources
   end
 
   # UserSessions

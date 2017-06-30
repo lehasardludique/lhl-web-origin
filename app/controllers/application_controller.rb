@@ -111,6 +111,10 @@ class ApplicationController < ActionController::Base
       end
     end
 
+    def require_login
+      render json: {success: false, error: "Forbidden, you must be logged in."}, status: :forbidden unless logged_in?
+    end
+
     def set_menu
       links_menu = MenuLink.published.menu
       if links_menu.any?
