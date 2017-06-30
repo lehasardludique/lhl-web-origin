@@ -17,12 +17,13 @@ class Resource < ApplicationRecord
   enum category: { gallery: 0, global: 1 }
 
   before_destroy :check_dependencies
-  after_save :menu_links_cache_management
+  after_save :menu_links_cache_management, :store_file_name
 
   validates :handle, :presence => true
-  validate :handle_size_validation
+  validate :handle_size_validation, on: :create
 
   attr_reader :url, :thumb_url, :title
+  attr_accessor :file_name_stored
 
   default_scope { order(updated_at: :desc) }
 
@@ -36,6 +37,10 @@ class Resource < ApplicationRecord
 
   def thumb_url
     @thumb_url || get_version_url(:thumb)
+  end
+
+  def file_name_stored
+    @file_name_stored ||= false
   end
 
   private
@@ -82,6 +87,13 @@ class Resource < ApplicationRecord
         if self.menu_links.any?
           raise DependencyDestructionError.new "Cette resource est l'objet d'un ou plusieurs liens du menu ou du footer (#{self.menu_links.pluck(:id).join(', ')})<br />Merci de le(s) supprimer en premier."
         end
+      end
+    end
+
+    def store_file_name
+      if not self.file_name_stored
+        self.update(file_name: self.handle_identifier) if not self.file_name == self.handle_identifier
+        self.file_name_stored = true
       end
     end
 end
