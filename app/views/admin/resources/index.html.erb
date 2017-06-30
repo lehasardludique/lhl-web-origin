@@ -5,6 +5,21 @@
   Liste des fichiers/images
 </h2>
 
-<%= render 'list', resources: @resources %>
+<table id="async_ressources" data-async="<%= api_resources_path %>" class="" data-order='[[3  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th data-searchable="false" data-orderable="false">Aperu</th>
+      <th>Nom/Légende</th>
+      <th>Fichier</th>
+      <th data-orderable="false">Url</th>
+      <th data-searchable="false">Date d'ajout</th>
+      <th>Catégorie</th>
+      <th>Notes</th>
+      <th data-searchable="false" data-orderable="false">Utilisateur</th>
+      <th data-searchable="false" data-orderable="false"></th>
+    </tr>
+  </thead>
+</table>
 
 <br>
