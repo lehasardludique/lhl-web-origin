@@ -48,8 +48,8 @@ module ApplicationHelper
     if object.class.in? [ Page, Article, Festival, Event ]
       @og[:url] = object.full_url
       @og[:title] = object.title
-      @og[:description] = object.digest
       @og[:image] = object.main_picture.present? ? object.main_picture.url : ActionController::Base.helpers.image_url('logo_le-hasard-ludique_600.png', host: LHL_URL)
+      @og[:description] = object.digest
     end
   end
 
