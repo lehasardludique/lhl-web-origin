@@ -47,12 +47,13 @@ class ResourcesController < ApplicationController
       end
     end
 
+    @filtred_resources_count = scope.size
     scope = scope.offset(start).limit(length)
 
     result = {
       draw: page,
       recordsTotal: @resources_count,
-      recordsFiltered: @resources_count,
+      recordsFiltered: @filtred_resources_count,
       data: scope.map{ |r| resource_to_json(r) }
     }
     render json: result, status: :ok
