@@ -5,15 +5,22 @@ Rails.application.routes.draw do
   
   # API
   scope 'api', as: :api do
+
+    # Select2 Ajax Remote
+    scope 's2', as: :s2 do
+      get 'resources(/:scope)' => 'resources#api_s2_resources', as: :resources
+    end
+
+    # DataTable Ajax Remote
+    scope 'dt', as: :dt do
+      get 'resources(/:scope)' => 'resources#api_dt_resources', as: :resources
+    end
+
+    # LHL
     get 'events' => 'events#api_events', as: :events
     get 'workshops' => 'events#api_events', as: :workshops, workshop: true
-    get 'resources' => 'resources#api_resources', as: :resources
   end
 
-  # Select2 Ajax Remote
-  scope 's2', as: :s2 do
-    get 'resources(/:scope)' => 'resources#s2_resources', as: :resources
-  end
 
   # UserSessions
   get 'connexion' => 'user_sessions#new', as: :login

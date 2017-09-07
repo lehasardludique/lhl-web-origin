@@ -4,7 +4,7 @@
   <div class="form-inputs">
     <%= f.input :name  %>
     <%= f.input :resource_id, as: :select do  %>
-      <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="partner[resource_id]" id="partner_resource_id">
+      <select class="form-control select optional select2" data-remote="<%= api_s2_resources_path(scope: 'global') %>" name="partner[resource_id]" id="partner_resource_id">
         <%= content_tag :option, @partner.resource.name || @partner.resource.handle_identifier, {value: @partner.resource.id, selected: true, data: {img: @partner.resource.thumb_url}} if @partner.resource.present? %>
         <% end %>
       </select>

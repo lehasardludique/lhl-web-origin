@@ -1,7 +1,7 @@
 class ResourcesController < ApplicationController
   before_action :require_login
 
-  def api_resources
+  def api_dt_resources
     authorize! :list, Resource.new
 
     @resources_count = Resource.all.size
@@ -59,7 +59,7 @@ class ResourcesController < ApplicationController
     render json: result, status: :ok
   end
 
-  def s2_resources
+  def api_s2_resources
     authorize! :list, Resource.new
 
     @resources_count = Resource.all.size

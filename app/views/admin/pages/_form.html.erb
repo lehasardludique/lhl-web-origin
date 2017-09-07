@@ -6,7 +6,7 @@
     <%= f.input :main_gallery_id, collection: Gallery.global.collect { |s| [s.name, s.id] }, selected: @page.main_gallery_id, hint: "À défaut de galerie principale, choisir une image", include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.global.size > 0  %>
     <%= content_tag :em, "Aucune galerie “Général“ n'est disponible.<br />Pour ajouter une galerie à une page, il faut au préalable la créer (choisir la catégorie “Géneral”).<br />À défaut de galerie principale, choisir une image<br /><br />".html_safe  if Gallery.global.size == 0 %>
     <%= f.input :resource_id, as: :select do  %>
-      <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="page[resource_id]" id="page_resource_id">
+      <select class="form-control select optional select2" data-remote="<%= api_s2_resources_path(scope: 'global') %>" name="page[resource_id]" id="page_resource_id">
         <%= content_tag :option, @page.resource.name || @page.resource.handle_identifier, {value: @page.resource.id, selected: true, data: {img: @page.resource.thumb_url}} if @page.resource.present? %>
       </select>
     <% end %>

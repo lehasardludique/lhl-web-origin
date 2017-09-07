@@ -190,7 +190,7 @@ init = ->
         language: LHL.dataTableLocal
         processing: true
         serverSide: true
-        ajax: $('#async_ressources').data('async')
+        ajax: $('#async_ressources').data('remote')
         'columns': [
             { 'data': 'id' }
             { 'data': 'preview' }

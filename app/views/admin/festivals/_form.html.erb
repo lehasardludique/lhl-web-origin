@@ -7,7 +7,7 @@
       <%= f.input :main_gallery_id, collection: Gallery.event.collect { |s| [s.name, s.id] }, selected: @festival.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" }, hint: "À défaut de galerie principale, choisir une image" if Gallery.event.size > 0  %>
       <%= content_tag :em, "Aucune galerie “Évènement“ n'est disponible.<br />Pour ajouter une galerie à un festival, il faut au préalable la créer (choisir la catégorie “Évènement“).<br />À défaut de galerie principale, choisir une image<br /><br />".html_safe  if Gallery.event.size == 0 %>
       <%= f.input :resource_id, as: :select do  %>
-        <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="festival[resource_id]" id="festival_resource_id">
+        <select class="form-control select optional select2" data-remote="<%= api_s2_resources_path(scope: 'global') %>" name="festival[resource_id]" id="festival_resource_id">
           <%= content_tag :option, @festival.resource.name || @festival.resource.handle_identifier, {value: @festival.resource.id, selected: true, data: {img: @festival.resource.thumb_url}} if @festival.resource.present? %>
         </select>
       <% end %>

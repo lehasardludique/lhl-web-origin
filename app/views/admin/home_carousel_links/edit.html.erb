@@ -14,7 +14,7 @@
     <%= f.input :home_linkable_id, collection: link_class.visible.collect { |n| [n.title, n.id] }, include_blank: true, input_html: { multiple: false, class: "select2", disabled: (@home_carousel_link.home_linkable_type == link_class.to_s ? false : true ) }, wrapper_html: { class: link_class, style: "display: #{@home_carousel_link.home_linkable_type == link_class.to_s ? 'block' : 'none'}" }, required: false %>
     <% end %>
     <%= f.input :resource_id, as: :select, hint: "Laisser vide pour prendre l'image principale de l'objet du lien" do  %>
-      <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="home_carousel_link[resource_id]" id="home_carousel_link_resource_id">
+      <select class="form-control select optional select2" data-remote="<%= api_s2_resources_path(scope: 'global') %>" name="home_carousel_link[resource_id]" id="home_carousel_link_resource_id">
         <%= content_tag :option, @home_carousel_link.resource.name || @home_carousel_link.resource.handle_identifier, {value: @home_carousel_link.resource.id, selected: true, data: {img: @home_carousel_link.resource.thumb_url}} if @home_carousel_link.resource.present? %>
       </select>
     <% end %>
