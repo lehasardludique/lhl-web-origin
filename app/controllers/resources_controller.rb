@@ -31,20 +31,20 @@ class ResourcesController < ApplicationController
     if defined? params["search"]["value"] and params["search"]["value"].present?
       q = params["search"]["value"]
       return if q.size < 3
-      scope = scope.where('name ILIKE ?', "%#{q}%")
-      begin
-        columns = params["columns"]
-        first_search = true
-        columns.each do |column|
-          column = column.values.first
-          if column["searchable"] == "true"
-            attribute = column["data"]
-            scope = scope.or(where("#{attribute} ILIKE ?", "%#{q}%")) if attribute.in? resources_attributes
-          end
-        end
-      rescue
-        Rails.logger.warn "====> ResourcesController::api_resources() SEARCH QUERY ERROR for #{columns}"
-      end
+      scope = scope.where('name ILIKE ? OR notes ILIKE ? OR file_name ILIKE ?', "%#{q}%", "%#{q}%", "%#{q}%")
+      # begin
+      #   columns = params["columns"]
+      #   first_search = true
+      #   columns.each do |column|
+      #     column = column.values.first
+      #     if column["searchable"] == "true"
+      #       attribute = column["data"]
+      #       scope = scope.or(where("#{attribute} ILIKE ?", "%#{q}%")) if attribute.in? resources_attributes
+      #     end
+      #   end
+      # rescue
+      #   Rails.logger.warn "====> ResourcesController::api_dt_resources() SEARCH QUERY ERROR for #{columns}"
+      # end
     end
 
     @filtred_resources_count = scope.size
@@ -54,7 +54,7 @@ class ResourcesController < ApplicationController
       draw: page,
       recordsTotal: @resources_count,
       recordsFiltered: @filtred_resources_count,
-      data: scope.map{ |r| resource_to_json(r) }
+      data: scope.map{ |r| resource_to_dt_json(r) }
     }
     render json: result, status: :ok
   end
@@ -90,7 +90,7 @@ class ResourcesController < ApplicationController
   end
 
   private
-    def resource_to_json resource
+    def resource_to_dt_json resource
       {
         id: "<span class=\"badge\">#{resource.id}</span>".html_safe,  
         preview: get_preview_to_html(resource),
