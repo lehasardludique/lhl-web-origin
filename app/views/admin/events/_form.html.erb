@@ -4,14 +4,11 @@
   <div class="form-inputs">
     <h3 class="collapsed" data-toggle="collapse" data-target="#content">Contenu</h3>
     <div class="collapse" id="content">
-        <%= f.input :main_gallery_id, collection: Gallery.event.collect { |s| [s.name, s.id] }, selected: @event.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.event.size > 0  %>
-        <%= content_tag :em, "Aucune galerie “Évènement“ n'est disponible.<br />Pour ajouter une galerie à un évènemnt, il faut au préalable la créer (choisir la catégorie “Évènement“).<br /><br />".html_safe  if Gallery.event.size == 0 %>
-        <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
-          <select class="form-control select optional select2" data-template="image" name="event[resource_id]" id="event_resource_id">
-            <option value="">À défaut de galerie principale, choisir une image</option>
-            <% Resource.global.each do |resource| %>
-              <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @event.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
-            <% end %>
+        <%= f.input :main_gallery_id, collection: Gallery.event.collect { |s| [s.name, s.id] }, selected: @event.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" }, hint: "À défaut de galerie principale, choisir une image." if Gallery.event.size > 0  %>
+        <%= content_tag :em, "Aucune galerie “Évènement“ n'est disponible.<br />Pour ajouter une galerie à un évènemnt, il faut au préalable la créer (choisir la catégorie “Évènement“).<br />À défaut de galerie principale, choisir une image.<br /><br />".html_safe  if Gallery.event.size == 0 %>
+        <%= f.input :resource_id, as: :select do  %>
+          <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="event[resource_id]" id="event_resource_id">
+            <%= content_tag :option, @event.resource.name || @event.resource.handle_identifier, {value: @event.resource.id, selected: true, data: {img: @event.resource.thumb_url}} if @event.resource.present? %>
           </select>
         <% end %>
         <%= f.input :topic %>
