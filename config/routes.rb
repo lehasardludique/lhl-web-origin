@@ -13,7 +13,9 @@ Rails.application.routes.draw do
 
     # DataTable Ajax Remote
     scope 'dt', as: :dt do
-      get 'resources(/:scope)' => 'resources#api_dt_resources', as: :resources
+      get 'resources' => 'resources#api_dt_resources', as: :resources
+      get 'events' => 'events#api_dt_events', as: :events
+      get 'workshops' => 'events#api_dt_events', as: :worshops, workshop: true
     end
 
     # LHL
