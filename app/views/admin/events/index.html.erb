@@ -5,6 +5,25 @@
   Liste des <%= "#{@workshop ? 'ateliers' : 'évènements'}" %>
 </h2>
 
-<%= render 'list', events: @events %>
+<table id="async_events" data-remote="<%= @workshop ? api_dt_worshops_path : api_dt_events_path %>" class="" data-order='[[4  , "desc"]]'>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Titre</th>
+      <th>Alerte</th>
+      <th>Illustration<br />principale</th>
+      <th>Publication</th>
+      <th>Date<br />Début</th>
+      <th>Date<br />Fin</th>
+      <th>Date Affichée</th>
+      <th>Url</th>
+      <th>Mise à jour</th>
+      <th>Utilisateur</th>
+      <th>Statut</th>
+      <th data-orderable="false" class="action">WeezEvent</th>
+      <th data-orderable="false" class="action"></th>
+    </tr>
+  </thead>
+</table>
 
 <br>

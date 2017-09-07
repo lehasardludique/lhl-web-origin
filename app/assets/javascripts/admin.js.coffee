@@ -203,6 +203,27 @@ init = ->
             { 'data': 'user' }
             { 'data': 'actions' }
         ]
+    $('#async_events').dataTable
+        language: LHL.dataTableLocal
+        processing: true
+        serverSide: true
+        ajax: $('#async_events').data('remote')
+        'columns': [
+            { 'data': 'id' }
+            { 'data': 'title' }
+            { 'data': 'event_alert' }
+            { 'data': 'preview' }
+            { 'data': 'published_at' }
+            { 'data': 'start_time' }
+            { 'data': 'end_time' }
+            { 'data': 'display_date' }
+            { 'data': 'url' }
+            { 'data': 'updated_at' }
+            { 'data': 'user' }
+            { 'data': 'status' }
+            { 'data': 'weez_event' }
+            { 'data': 'actions' }
+        ]
             
     # cKEditor
     $('textarea[data-ckeditor]').each ->
