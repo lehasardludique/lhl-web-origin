@@ -87,6 +87,15 @@ LHL.formatWithPreview = (state) ->
     $state = $('<span><i style="background-image: url(' + $(state.element).data('img') + ')" class="preview"></i> ' + state.text + '</span>')
     $state
 
+LHL.formatAjaxReturnWithPreview = (state) ->
+    if !state.id
+        return state.text
+    $state = $('<span><i style="background-image: url(' + state.url + ')" class="preview"></i> ' + state.text + '</span>')
+    $state
+
+LHL.formatAjaxReturnWithPreviewSelection = (state) ->
+    return state.text
+
 LHL.progressBar = (event) ->
     if(Turbolinks.supported)
         if !Turbolinks.controller.adapter.progressBar.visible
@@ -143,8 +152,35 @@ init = ->
     # Form: init select2 plugin
     if !!$('select.select2').length
         $('select.select2').each ->
-            if $( this ).data('template') and $( this ).data('template') == 'image'
+            if $( this ).data('remote')
+                templateResult = $( this ).data('template') or 'LHL.formatAjaxReturnWithPreview'
+                $( this ).select2
+                    ajax:
+                        url: $( this ).data('remote')
+                        dataType: 'json'
+                        delay: 250
+                        data: (params) ->
+                            {
+                                q: params.term
+                                page: params.page
+                            }
+                        processResults: (data, params) ->
+                            params.page = params.page or 1
+                            {
+                                results: data.items
+                                pagination: more: params.page * 30 < data.total_count
+                            }
+                        cache: true
+                    escapeMarkup: (markup) ->
+                        markup
+                    minimumInputLength: 1
+                    templateResult: eval(templateResult)
+                    templateSelection: eval(templateResult + 'Selection')
+                    language: "fr"
+
+            else if $( this ).data('template') and $( this ).data('template') == 'image'
                 $( this ).select2 templateResult: LHL.formatWithPreview
+
             else
                 $( this ).select2()
 
