@@ -15,12 +15,12 @@ Rails.application.routes.draw do
     scope 'dt', as: :dt do
       get 'resources' => 'resources#api_dt_resources', as: :resources
       get 'events' => 'events#api_dt_events', as: :events
-      get 'workshops' => 'events#api_dt_events', as: :worshops, workshop: true
+      get 'workshops' => 'events#api_dt_events', workshop: true, as: :workshops
     end
 
     # LHL
     get 'events' => 'events#api_events', as: :events
-    get 'workshops' => 'events#api_events', as: :workshops, workshop: true
+    get 'workshops' => 'events#api_events', workshop: true, as: :workshops
   end
 
 
@@ -35,8 +35,8 @@ Rails.application.routes.draw do
     # get 'home' => 'home_carousel_links#home', as: :home
     resources :artists
     resources :articles
-    resources :events
-    resources :events, path: :workshops, as: :workshops, workshop: true
+    resources :events, as: :events
+    resources :events, path: :workshops, workshop: true, as: :workshops
     resources :festivals
     resources :focus
     resources :galleries do
@@ -66,10 +66,10 @@ Rails.application.routes.draw do
   # Front
   get 'programmation' => 'events#index', as: :events
   get 'les-partenaires' => 'pages#partners', as: :partners
-  get 'activites' => 'events#index', as: :workshops, workshop: true
+  get 'activites' => 'events#index', workshop: true, as: :workshops
   get 'articles/:date/*slug' => 'articles#show', as: :article
   get ':category/:date/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized }, as: :event
-  get ':category/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized(:workshop) }, as: :workshop, workshop: true
+  get ':category/*slug' => 'events#show', constraints: proc { |req| req.params[:category].in? Event.categories_urlized(:workshop) }, workshop: true, as: :workshop
   get 'festival/*slug' => 'festivals#show', as: :festival
 
   # La-Fabrique redirection

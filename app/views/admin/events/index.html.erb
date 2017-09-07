@@ -5,7 +5,7 @@
   Liste des <%= "#{@workshop ? 'ateliers' : 'évènements'}" %>
 </h2>
 
-<table id="async_events" data-remote="<%= @workshop ? api_dt_worshops_path : api_dt_events_path %>" class="" data-order='[[4  , "desc"]]'>
+<table id="async_events" data-remote="<%= @workshop ? api_dt_workshops_path : api_dt_events_path %>" class="" data-order='[[4  , "desc"]]'>
   <thead>
     <tr>
       <th>ID</th>
