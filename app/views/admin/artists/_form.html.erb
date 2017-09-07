@@ -5,11 +5,8 @@
     <h3>Contenu</h3>
     <%= f.input :name  %>
     <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
-      <select class="form-control select optional select2" data-template="image" name="artist[resource_id]" id="artist_resource_id">
-        <option value=""></option>
-        <% Resource.global.each do |resource| %>
-          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @artist.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
-        <% end %>
+      <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="artist[resource_id]" id="artist_resource_id">
+        <%= content_tag :option, @artist.resource.name || @artist.resource.handle_identifier, {value: @artist.resource.id, selected: true, data: {img: @artist.resource.thumb_url}} if @artist.resource.present? %>
       </select>
     <% end %>
     <%= f.input :content %>
