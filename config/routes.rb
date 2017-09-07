@@ -10,6 +10,11 @@ Rails.application.routes.draw do
     get 'resources' => 'resources#api_resources', as: :resources
   end
 
+  # Select2 Ajax Remote
+  scope 's2', as: :s2 do
+    get 'resources(/:scope)' => 'resources#s2_resources', as: :resources
+  end
+
   # UserSessions
   get 'connexion' => 'user_sessions#new', as: :login
   post 'connexion' => 'user_sessions#create'

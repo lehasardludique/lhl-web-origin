@@ -59,6 +59,36 @@ class ResourcesController < ApplicationController
     render json: result, status: :ok
   end
 
+  def s2_resources
+    authorize! :list, Resource.new
+
+    @resources_count = Resource.all.size
+
+    scope = Resource
+    # Scope
+    if params[:scope].present? and Resource.respond_to? params[:scope].to_sym
+      scope = scope.send(params[:scope].to_sym)
+    end
+    # Search
+    q = params["q"]
+    if q.present?
+      scope = scope.where('name ILIKE ? OR notes ILIKE ? OR file_name ILIKE ?', "%#{q}%", "%#{q}%", "%#{q}%")
+    end
+
+    @filtred_resources_count = scope.size
+
+    page = params["page"] || 1
+    scope = scope.offset((page - 1).abs * 30).limit(30)
+
+    result = {
+      page: page,
+      recordsTotal: @resources_count,
+      recordsFiltered: @filtred_resources_count,
+      items: scope.map{ |r| resource_to_s2_json(r) }
+    }
+    render json: result, status: :ok
+  end
+
   private
     def resource_to_json resource
       {
@@ -72,6 +102,14 @@ class ResourcesController < ApplicationController
         notes: resource.notes.truncate(90, separator: ' '),
         user: resource.user.real_name,
         actions: get_actions_button(resource)
+      }
+    end
+
+    def resource_to_s2_json resource
+      {
+        id: resource.id,  
+        text: resource.name,
+        url: resource.thumb_url,
       }
     end
 
