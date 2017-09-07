@@ -3,14 +3,11 @@
 
   <div class="form-inputs">
     <h3>Contenu</h3>
-    <%= f.input :main_gallery_id, collection: Gallery.article.collect { |s| [s.name, s.id] }, selected: @article.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" } if Gallery.article.size > 0  %>
-    <%= content_tag :em, "Aucune galerie “Article“ n'est disponible.<br />Pour ajouter une galerie à un article, il faut au préalable la créer (choisir la catégorie “Article”).<br /><br />".html_safe  if Gallery.article.size == 0 %>
-    <%= f.input :resource_id, as: :select, wrapper_html: { class: 'test' } do  %>
-      <select class="form-control select optional select2" data-template="image" name="article[resource_id]" id="article_resource_id">
-        <option value="">À défaut de galerie principale, choisir une image</option>
-        <% Resource.global.each do |resource| %>
-          <%= content_tag :option, resource.name || resource.handle_identifier, {value: resource.id, selected: (resource.id == @article.resource_id) ? true : nil, data: {img: resource.thumb_url}} %>
-        <% end %>
+    <%= f.input :main_gallery_id, collection: Gallery.article.collect { |s| [s.name, s.id] }, selected: @article.main_gallery_id, include_blank: true, input_html: { multiple: false, class: "select2" }, hint: "À défaut de galerie principale, choisir une image." if Gallery.article.size > 0  %>
+    <%= content_tag :em, "Aucune galerie “Article“ n'est disponible.<br />Pour ajouter une galerie à un article, il faut au préalable la créer (choisir la catégorie “Article”).<br />À défaut de galerie principale, choisir une image.<br /><br />".html_safe  if Gallery.article.size == 0 %>
+    <%= f.input :resource_id, as: :select do  %>
+      <select class="form-control select optional select2" data-remote="<%= s2_resources_path(scope: 'global') %>" name="article[resource_id]" id="article_resource_id">
+        <%= content_tag :option, @article.resource.name || @article.resource.handle_identifier, {value: @article.resource.id, selected: true, data: {img: @article.resource.thumb_url}} if @article.resource.present? %>
       </select>
     <% end %>
     <%= f.input :topic %>
